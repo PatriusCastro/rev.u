@@ -1,0 +1,15 @@
+topic: differential-equations/basics
+title: Eliminating two constants
+answer: C
+hint: Each exponential $e^{rx}$ comes from a root $r$ of the characteristic equation.
+
+Which differential equation has $y = Ae^{2x} + Be^{-5x}$ as its general solution, where $A$ and $B$ are arbitrary constants?
+
+A. $y'' - 3y' - 10y = 0$    B. $y'' + 3y' + 10y = 0$    C. $y'' + 3y' - 10y = 0$    D. $y'' - 7y' + 10y = 0$
+
+## Solution
+The exponents are the roots: $r_1 = 2$ and $r_2 = -5$.
+---
+Characteristic equation: $r^2 - (r_1 + r_2)r + r_1r_2 = r^2 + 3r - 10 = 0$.
+---
+So the DE is $y'' + 3y' - 10y = 0$.

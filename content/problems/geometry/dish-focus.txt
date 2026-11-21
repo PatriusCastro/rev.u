@@ -1,0 +1,15 @@
+topic: geometry/plane-solid-analytic
+title: Focus of a satellite dish
+answer: C
+hint: Write the dish as $x^2 = 4fy$ with the vertex at the origin, and use a point on the rim.
+
+A parabolic satellite dish is 1.8 m across the rim and 0.3 m deep at the centre. How far from the vertex should the receiver be placed, at the focus?
+
+A. 1.350 m    B. 2.700 m    C. 0.675 m    D. 0.338 m
+
+## Solution
+A rim point is $x = 0.9$, $y = 0.3$ (half the width, full depth).
+---
+$x^2 = 4fy$: $0.81 = 4f(0.3) = 1.2f$.
+---
+$f = \dfrac{0.81}{1.2} = 0.675$ m.

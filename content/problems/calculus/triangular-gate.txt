@@ -1,0 +1,15 @@
+topic: calculus/applications
+title: Force on a triangular gate
+answer: B
+hint: Find the width of the plate at depth $h$. Pressure grows with depth, so do not assume the force acts at half the height.
+
+A vertical plate in the wall of a water tank is an isosceles triangle with its 3 m base lying along the water surface and its vertex pointing straight down, 2 m below the surface. Find the total water force on one face of the plate. Use 1000 kg/m³ for water and $g = 9.81$ m/s².
+
+A. 29.43 kN    B. 19.62 kN    C. 39.24 kN    D. 9.81 kN
+
+## Solution
+At depth $h$ the width is $w = 3\left(1 - \dfrac{h}{2}\right)$.
+---
+$F = 9810\displaystyle\int_0^2 h \cdot 3\left(1 - \dfrac{h}{2}\right)dh = 9810 \cdot 3\left[\dfrac{h^2}{2} - \dfrac{h^3}{6}\right]_0^2 = 9810 \cdot 3 \cdot \dfrac{2}{3}$.
+---
+$F = 19{,}620$ N $= 19.62$ kN. Check: area 3 m², centroid $\tfrac{2}{3}$ m deep, $9810(3)\left(\tfrac{2}{3}\right) = 19.62$ kN.

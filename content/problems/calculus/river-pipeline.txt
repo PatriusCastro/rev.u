@@ -1,0 +1,17 @@
+topic: calculus/applications
+title: Pipeline across the river
+answer: C
+hint: Let the pipe reach the far bank $x$ metres downstream. Write the total cost and set its derivative to zero.
+
+A water district runs a pipe from a pumping station on one bank of a straight river 600 m wide to a town on the opposite bank, 2000 m downstream. Pipe laid under the water costs ₱5,000 per metre and pipe laid along the far bank costs ₱3,000 per metre. The pipe crosses in a straight line, then follows the bank. What is the least total cost?
+
+A. ₱10.44 million    B. ₱9.00 million    C. ₱8.40 million    D. ₱8.44 million
+
+## Solution
+If the pipe lands $x$ m downstream: $C = 5000\sqrt{600^2 + x^2} + 3000(2000 - x)$.
+---
+$\dfrac{dC}{dx} = \dfrac{5000x}{\sqrt{600^2 + x^2}} - 3000 = 0$, so $\dfrac{x}{\sqrt{600^2 + x^2}} = 0.6$.
+---
+That gives $x = 450$ m, and the crossing is $\sqrt{600^2 + 450^2} = 750$ m long.
+---
+$C = 5000(750) + 3000(1550) = 8{,}400{,}000$, or ₱8.40 million.

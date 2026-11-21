@@ -1,0 +1,15 @@
+topic: algebra/word-problems
+title: Total path of a bouncing ball
+answer: A
+hint: The first drop happens once. Every rebound goes up and comes back down.
+
+A ball is dropped from a height of 12 m. Each time it hits the floor it rebounds to $\dfrac{3}{5}$ of the height it fell from. What total distance does it travel before coming to rest?
+
+A. 48.00 m    B. 30.00 m    C. 60.00 m    D. 36.00 m
+
+## Solution
+The rebound heights form an infinite geometric series: first term $12 \times \dfrac{3}{5} = 7.2$ m, ratio $\dfrac{3}{5}$.
+---
+Sum of rebound heights: $\dfrac{7.2}{1 - 0.6} = 18$ m. Each is travelled up and down: $2 \times 18 = 36$ m.
+---
+Total: $12 + 36 = 48.00$ m.

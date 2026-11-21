@@ -1,0 +1,15 @@
+topic: differential-equations/basics
+title: Equation from a damped solution
+answer: D
+hint: Read the roots of the characteristic equation off the exponential and the cosine.
+
+Which differential equation has the general solution $y = e^{-x}(C_1\cos 2x + C_2\sin 2x)$?
+
+A. $y'' - 2y' + 5y = 0$    B. $y'' + 2y' + 3y = 0$    C. $y'' + y' + 4y = 0$    D. $y'' + 2y' + 5y = 0$
+
+## Solution
+The roots are $r = -1 \pm 2i$.
+---
+Sum of roots $= -2$, product $= (-1)^2 + 2^2 = 5$.
+---
+$r^2 + 2r + 5 = 0$, so the DE is $y'' + 2y' + 5y = 0$.

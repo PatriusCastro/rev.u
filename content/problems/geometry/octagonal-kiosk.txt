@@ -1,0 +1,15 @@
+topic: geometry/plane-solid-analytic
+title: Octagonal kiosk floor
+answer: A
+hint: The distance from the centre to the middle of a side is the apothem. Split the floor into 8 triangles.
+
+The floor of a kiosk in a Quezon City park is a regular octagon. The distance from its centre to the midpoint of any side is 2.5 m. What is the floor area?
+
+A. 20.71 m²    B. 17.68 m²    C. 19.63 m²    D. 10.36 m²
+
+## Solution
+Each of the 8 triangles has height $a = 2.5$ m and a central angle of $45°$.
+---
+Half a side: $2.5\tan 22.5° = 1.0355$ m, so a side is $s = 2.071$ m.
+---
+$A = \tfrac{1}{2}(8)(2.071)(2.5) = 20.71$ m².

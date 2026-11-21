@@ -1,0 +1,15 @@
+topic: algebra/word-problems
+title: Number with reversed digits
+answer: B
+hint: Write the number as 10t + u and its reverse as 10u + t.
+
+The digits of a two-digit number add up to 11. When the digits are reversed, the new number is 27 more than the original. What is the original number?
+
+A. 74    B. 47    C. 38    D. 56
+
+## Solution
+Let the number be $10t + u$, with $t + u = 11$.
+---
+$(10u + t) - (10t + u) = 27$, so $9(u - t) = 27$ and $u - t = 3$.
+---
+Adding to $t + u = 11$: $u = 7$, $t = 4$. The number is 47.

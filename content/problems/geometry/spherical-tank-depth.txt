@@ -1,0 +1,15 @@
+topic: geometry/plane-solid-analytic
+title: Water in a spherical tank
+answer: D
+hint: The water fills a segment of the sphere. Its height is the water depth.
+
+A spherical water tank has an inside radius of 3 m. The water in it is 1.2 m deep at the lowest point. How much water is in the tank?
+
+A. 35.29 m³    B. 22.62 m³    C. 56.55 m³    D. 11.76 m³
+
+## Solution
+Segment volume: $V = \dfrac{\pi h^2(3R - h)}{3}$ with $R = 3$, $h = 1.2$.
+---
+$V = \dfrac{\pi(1.44)(9 - 1.2)}{3} = \dfrac{\pi(1.44)(7.8)}{3}$.
+---
+$V = 11.76$ m³.

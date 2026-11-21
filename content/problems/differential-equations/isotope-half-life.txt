@@ -1,0 +1,13 @@
+topic: differential-equations/basics
+title: Half-life of an isotope
+answer: D
+hint: After 30 days, 80% of the sample is left, not 20%.
+
+A radioactive tracer used in a groundwater study loses 20% of its mass in 30 days. Assuming the decay rate is proportional to the mass present, what is its half-life?
+
+A. 75.00 days    B. 114.05 days    C. 150.00 days    D. 93.19 days
+
+## Solution
+$m = m_0e^{-kt}$. After 30 days, $0.80 = e^{-30k}$, so $k = \dfrac{\ln(1/0.80)}{30} = 0.007438$ per day.
+---
+$t_{1/2} = \dfrac{\ln 2}{k} = \dfrac{0.6931}{0.007438} = 93.19$ days.

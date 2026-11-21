@@ -1,0 +1,15 @@
+topic: algebra/word-problems
+title: List price behind a receipt
+answer: A
+hint: The discount and the VAT each multiply the price. Undo them by dividing, in reverse order.
+
+A hardware store gives a 10% discount on the list price of a power drill, then adds 12% VAT to the discounted price. The customer pays ₱2,419.20. What is the list price?
+
+A. ₱2,400.00    B. ₱2,371.76    C. ₱2,160.00    D. ₱2,341.79
+
+## Solution
+Amount paid $= 1.12 \times 0.90 \times P = 1.008P$.
+---
+$P = \dfrac{2419.20}{1.008}$.
+---
+$P = ₱2{,}400.00$.

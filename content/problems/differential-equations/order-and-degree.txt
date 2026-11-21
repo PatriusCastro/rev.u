@@ -1,0 +1,13 @@
+topic: differential-equations/basics
+title: Order and degree
+answer: B
+hint: Find the highest derivative first, then look at the power it is raised to.
+
+What are the order and degree of $\left(\dfrac{d^3y}{dx^3}\right)^2 + 5\left(\dfrac{dy}{dx}\right)^4 = xy$?
+
+A. order 3, degree 4    B. order 3, degree 2    C. order 4, degree 3    D. order 1, degree 4
+
+## Solution
+The highest derivative is $\dfrac{d^3y}{dx^3}$, so the order is 3.
+---
+That derivative is raised to the power 2, so the degree is 2. The power 4 belongs to a lower derivative and does not count.

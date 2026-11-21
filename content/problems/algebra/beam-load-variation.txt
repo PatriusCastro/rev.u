@@ -1,0 +1,15 @@
+topic: algebra/word-problems
+title: Safe load on a timber beam
+answer: B
+hint: Write the load as k times width times depth squared over length, then divide the two cases so k cancels.
+
+The safe load on a simply supported timber beam varies jointly as its width and the square of its depth, and inversely as its length. A beam 100 mm wide, 200 mm deep and 4 m long carries 12 kN. What load can a beam 150 mm wide, 250 mm deep and 5 m long carry?
+
+A. 18.00 kN    B. 22.50 kN    C. 35.16 kN    D. 28.13 kN
+
+## Solution
+$P = k\dfrac{bd^2}{L}$, so $\dfrac{P_2}{P_1} = \dfrac{b_2}{b_1}\left(\dfrac{d_2}{d_1}\right)^2\dfrac{L_1}{L_2}$.
+---
+$P_2 = 12 \times \dfrac{150}{100} \times \left(\dfrac{250}{200}\right)^2 \times \dfrac{4}{5} = 12 \times 1.5 \times 1.5625 \times 0.8$.
+---
+$P_2 = 22.50$ kN.

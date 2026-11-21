@@ -1,0 +1,15 @@
+topic: differential-equations/basics
+title: Cooling cup of coffee
+answer: C
+hint: Work with the difference between the coffee and the room, not the coffee temperature itself.
+
+A cup of coffee at 90°C is left in a room at 30°C. After 5 minutes it is at 70°C. Using Newton's law of cooling, how long after it was poured will it reach 50°C?
+
+A. 10.00 min    B. 8.55 min    C. 13.55 min    D. 15.00 min
+
+## Solution
+$T - 30 = 60e^{-kt}$.
+---
+At $t = 5$: $40 = 60e^{-5k}$, so $e^{-5k} = \dfrac{2}{3}$ and $k = \dfrac{\ln 1.5}{5}$.
+---
+At 50°C: $20 = 60e^{-kt}$, so $t = \dfrac{\ln 3}{k} = \dfrac{5\ln 3}{\ln 1.5} = 13.55$ min.

@@ -1,0 +1,17 @@
+topic: calculus/applications
+title: Centroid between a line and a parabola
+answer: C
+hint: Find where the curves meet, then the area. For $\bar{y}$, integrate half the difference of the squares of the two curves.
+
+A region is bounded by the parabola $y = x^2$ and the line $y = 2x$. Find the $y$-coordinate of its centroid.
+
+A. 0.80    B. 1.00    C. 1.60    D. 3.20
+
+## Solution
+The curves meet at $x = 0$ and $x = 2$. The line is on top.
+---
+Area: $A = \displaystyle\int_0^2 (2x - x^2)\,dx = 4 - \dfrac{8}{3} = \dfrac{4}{3}$.
+---
+Moment: $\displaystyle\int_0^2 \tfrac{1}{2}\left(4x^2 - x^4\right)dx = \tfrac{1}{2}\left(\dfrac{32}{3} - \dfrac{32}{5}\right) = \dfrac{32}{15}$.
+---
+$\bar{y} = \dfrac{32/15}{4/3} = 1.60$.
