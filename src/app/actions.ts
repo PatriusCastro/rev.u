@@ -1,6 +1,6 @@
 'use server';
 import { redirect } from 'next/navigation';
-import { cookies } from 'next/headers';
+import { cookies, headers } from 'next/headers';
 import { db, session } from '@/lib/supabase';
 import { revoke, savedAccounts, writeSaved } from '@/lib/saved';
 import { revalidatePath } from 'next/cache';
@@ -27,6 +27,13 @@ const AUTH_ERRORS: Record<string, string> = {
   over_email_send_rate_limit: 'Too many emails sent. Wait a minute, then try again.',
 };
 const authError = (code?: string, message?: string) => (code && AUTH_ERRORS[code]) ?? message ?? 'Something went wrong. Try again.';
+// Where Supabase's own email link returns to (its default templates link through Supabase, then here with a ?code=).
+// Supabase only follows addresses on its allow list, so a forged Origin header cannot send the link elsewhere.
+async function linkBack(type?: 'recovery') {
+  const h = await headers();
+  const origin = h.get('origin') ?? `https://${h.get('host')}`;
+  return `${origin}/auth/confirm${type ? '?type=' + type : ''}`;
+}
 const validEmail = (email: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
 // Remembered so the sign-in form is filled in next time, including after signing out. Read by /login.
@@ -71,7 +78,7 @@ export async function emailCode(_: AuthState, form: FormData): Promise<AuthState
   if (!validEmail(email)) return { email, error: 'Enter a valid email address.' };
   const supabase = await db();
   if (form.get('intent') === 'send') {
-    const { error } = await supabase.auth.signInWithOtp({ email, options: { shouldCreateUser: true } });
+    const { error } = await supabase.auth.signInWithOtp({ email, options: { shouldCreateUser: true, emailRedirectTo: await linkBack() } });
     if (error) return { email, error: authError(error.code, error.message) };
     return { email, sent: true };
   }
@@ -88,7 +95,7 @@ export async function sendReset(_: AuthState, form: FormData): Promise<AuthState
   const email = String(form.get('email') ?? '').trim();
   if (!validEmail(email)) return { email, error: 'Enter a valid email address.' };
   const supabase = await db();
-  const { error } = await supabase.auth.resetPasswordForEmail(email);
+  const { error } = await supabase.auth.resetPasswordForEmail(email, { redirectTo: await linkBack('recovery') });
   if (error?.code?.startsWith('over_')) return { email, error: authError(error.code) };
   return { email, sent: true };
 }
