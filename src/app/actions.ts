@@ -11,7 +11,7 @@ const back = (path: string, msg: string) => redirect(`${path}?msg=${encodeURICom
 export async function signIn(form: FormData) {
   const supabase = await db();
   const { error } = await supabase.auth.signInWithPassword({ email: String(form.get('email')), password: String(form.get('password')) });
-  if (error) back('/login', error.message);
+  if (error) back('/login', error.code === 'invalid_credentials' ? 'That email and password do not match. Check them, or create an account.' : error.message);
   redirect('/');
 }
 
@@ -110,11 +110,14 @@ export async function submitAnswer(attemptId: string, questionId: string, choice
   const { data: rep } = await supabase.from('repeats').select('interval, due, misses, cleared_at').eq('question_id', questionId).maybeSingle();
   const active = rep && !rep.cleared_at;
   const next = nextStage(active ? (rep.interval as Interval) : null, correct, active ? rep.due <= today : false);
-  if (next === 'cleared') {
-    await supabase.from('repeats').update({ cleared_at: new Date().toISOString() }).eq('question_id', questionId);
-  } else if (next !== null) {
-    await supabase.from('repeats').upsert({ question_id: questionId, interval: next, due: addDays(today, next), cleared_at: null, misses: (rep?.misses ?? 0) + (correct ? 0 : 1) });
-  }
+  // shortcut: the answer and the notebook update are two writes, not one transaction; move both into a
+  // Postgres function if partial failures show up. Until then a failed update is reported, not swallowed.
+  const write = next === 'cleared'
+    ? await supabase.from('repeats').update({ cleared_at: new Date().toISOString() }).eq('question_id', questionId)
+    : next !== null
+      ? await supabase.from('repeats').upsert({ question_id: questionId, interval: next, due: addDays(today, next), cleared_at: null, misses: (rep?.misses ?? 0) + (correct ? 0 : 1) })
+      : { error: null };
+  if (write.error) return { error: 'Your answer is saved, but the notebook did not update. Try the next problem; this one may not come back on schedule.' };
 
   const { count } = await supabase.from('answers').select('id', { count: 'exact', head: true }).eq('attempt_id', attemptId);
   if (count === attempt.question_ids.length) await supabase.from('attempts').update({ finished_at: new Date().toISOString() }).eq('id', attemptId);

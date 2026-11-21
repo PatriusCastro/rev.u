@@ -41,7 +41,7 @@ export function Problem(p: ProblemProps) {
       <div className="vh">
         <Link className="ib" href="/" aria-label="Back to Today"><ChevronLeft {...ic} /></Link>
         <div className="mid">
-          <span className="t">{MODE_LABEL[p.mode]} {p.index + 1} of {p.count}</span>
+          <h1 className="t" style={{ margin: 0, fontSize: 'inherit' }}>{MODE_LABEL[p.mode]} {p.index + 1} of {p.count}</h1>
           <div className="segs" role="img" aria-label={`Problem ${p.index + 1} of ${p.count}`}>
             {Array.from({ length: p.count }, (_, i) => <i key={i} className={i < p.index ? 'd' : i === p.index ? 'c' : undefined} />)}
           </div>
@@ -58,7 +58,7 @@ export function Problem(p: ProblemProps) {
           <div className="grp">
             <div className="opts">
               {p.choices.map((c) => (
-                <button key={c.key} className={state(c.key) || undefined} disabled={!!result || pending} aria-pressed={mock ? picked === c.key : undefined} onClick={() => choose(c.key)}>
+                <button key={c.key} className={state(c.key) || (pending && picked === c.key ? 'saving' : undefined)} disabled={!!result || pending} aria-busy={pending && picked === c.key} aria-pressed={mock ? picked === c.key : undefined} onClick={() => choose(c.key)}>
                   <i>{c.key}</i><span dangerouslySetInnerHTML={{ __html: c.html }} />
                   {state(c.key) === 'wrong' ? <CircleX {...ic} className="st" /> : <CircleCheck {...ic} className="st" />}
                   {state(c.key) && <span className="sr-only">{state(c.key) === 'right' ? ', correct answer' : ', your answer'}</span>}

@@ -35,7 +35,7 @@ button { cursor: pointer; border: 0; background: none; padding: 0; }
 a { color: inherit; text-decoration: none; }
 
 /* App shell */
-.pa { position: relative; height: 100dvh; display: grid; grid-template-rows: minmax(0, 1fr) auto; background: linear-gradient(180deg, var(--color-green-soft) 0, var(--color-bg) 200px); }
+.pa { position: relative; height: 100dvh; display: grid; grid-template-rows: minmax(0, 1fr) auto; grid-template-columns: minmax(0, 1fr); background: linear-gradient(180deg, var(--color-green-soft) 0, var(--color-bg) 200px); }
 .view { min-height: 0; display: flex; flex-direction: column; animation: rise .28s var(--ease); }
 .vh { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: max(24px, env(safe-area-inset-top)) 20px 0; }
 .scroll { flex: 1; min-height: 0; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 20px; }
@@ -94,7 +94,7 @@ h1.title { margin: 0; font-size: 28px; font-weight: 700; line-height: 1.15; lett
 .prog { position: relative; width: 48px; height: 48px; flex: none; } .prog svg { width: 100%; height: 100%; transform: rotate(-90deg); }
 .prog circle { fill: none; stroke-width: 5; stroke: var(--color-line); }
 .prog .v { stroke: var(--color-green); stroke-linecap: round; stroke-dasharray: 132; stroke-dashoffset: var(--o); animation: draw .9s var(--ease) .15s backwards; }
-.prog b { position: absolute; inset: 0; display: grid; place-items: center; font-weight: 600; font-size: 12px; font-variant-numeric: tabular-nums; }
+.prog b { position: absolute; inset: 0; display: grid; place-items: center; font-weight: 600; font-size: 11px; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
 .wk { padding: 16px; display: flex; flex-direction: column; gap: 12px; }
 .bars, .days { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; }
 .bars { align-items: end; height: 72px; } .days { font-size: 11px; color: var(--color-ink-2); text-align: center; }
@@ -122,6 +122,9 @@ h1.title { margin: 0; font-size: 28px; font-weight: 700; line-height: 1.15; lett
 .opts .wrong { border-color: var(--color-red); background: var(--color-red-soft); color: var(--color-red); font-weight: 600; animation: shake .32s; } .opts .wrong i { background: var(--color-red); color: #fff; }
 .opts .right .st, .opts .wrong .st { visibility: visible; }
 .opts button:disabled { cursor: default; }
+.opts .saving { border-color: var(--color-green); box-shadow: inset 0 0 0 1px var(--color-green); }
+.opts .saving i { background: var(--color-green-soft); color: var(--color-green); animation: pulse 1s var(--ease) infinite; }
+@keyframes pulse { 50% { opacity: .4; } }
 .hint { font-size: 14px; background: var(--color-amber-soft); color: var(--color-amber-ink); border-radius: 14px; padding: 12px 14px; animation: rise .25s var(--ease); }
 .fb { display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 10px; align-items: center; border-radius: 14px; padding: 12px 14px; font-weight: 600; animation: rise .25s var(--ease); }
 .fb.good { background: var(--color-green-soft); color: var(--color-green); } .fb.bad { background: var(--color-red-soft); color: var(--color-red); }
@@ -174,7 +177,7 @@ h1.title { margin: 0; font-size: 28px; font-weight: 700; line-height: 1.15; lett
 /* Forms */
 .field { display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 600; color: var(--color-ink-2); }
 .field input, .field select { min-height: 48px; padding: 0 14px; border: 1px solid var(--color-line-strong); border-radius: 14px; background: var(--color-surface); font-size: 15px; font-weight: 400; color: var(--color-ink); }
-.field input[type="file"] { padding: 10px 14px; }
+.field input[type="file"] { padding: 10px 14px; min-width: 0; width: 100%; }
 .form { padding: 20px; display: flex; flex-direction: column; gap: 16px; }
 
 /* Lesson text */

@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { ArrowRight, CircleCheck, CircleX } from 'lucide-react';
+import { ArrowRight, CircleCheck, CircleX, Minus } from 'lucide-react';
 import { session } from '@/lib/supabase';
 import { inline } from '@/lib/math';
 import { daysBetween, dayOf } from '@/lib/schedule';
@@ -54,8 +54,9 @@ export default async function Attempt({ params }: PageProps<'/attempt/[id]'>) {
   const score = Math.round((100 * right) / ids.length);
   const today = dayOf();
   const next = (qid: string) => {
+    if (!answered.has(qid)) return 'Not answered';
     const r = repOf.get(qid);
-    if (!r) return answered.get(qid) ? 'Correct' : 'Not answered';
+    if (!r) return 'Correct';
     if (r.cleared_at) return 'Cleared';
     const d = daysBetween(today, r.due);
     return d <= 0 ? 'Due today' : d === 1 ? 'Comes back tomorrow' : `Comes back in ${d} days`;
@@ -75,13 +76,14 @@ export default async function Attempt({ params }: PageProps<'/attempt/[id]'>) {
         <div className="card rows">
           {ids.map((qid) => {
             const ok = answered.get(qid);
+            const skipped = ok === undefined;
             const q = topicOf.get(qid);
             return (
               <div className="item" key={qid}>
-                <span className={'tile' + (ok ? '' : ' w')}>{q ? <AreaIcon topicId={q.topic_id} /> : null}</span>
+                <span className={'tile' + (ok || skipped ? '' : ' w')}>{q ? <AreaIcon topicId={q.topic_id} /> : null}</span>
                 <span><span className="t">{problemTitle(qid)}</span><span className="sub">{(q?.topics as unknown as { name: string } | null)?.name}</span></span>
-                <span className="stage" style={{ color: ok ? 'var(--color-green)' : 'var(--color-red)' }}>
-                  {ok ? <CircleCheck {...ic} /> : <CircleX {...ic} />}{next(qid)}
+                <span className="stage" style={{ color: skipped ? undefined : ok ? 'var(--color-green)' : 'var(--color-red)' }}>
+                  {skipped ? <Minus {...ic} /> : ok ? <CircleCheck {...ic} /> : <CircleX {...ic} />}{next(qid)}
                 </span>
               </div>
             );

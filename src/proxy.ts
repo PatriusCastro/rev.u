@@ -15,9 +15,10 @@ export async function proxy(request: NextRequest) {
       },
     },
   });
-  const { data } = await supabase.auth.getUser();
+  // getClaims verifies the token (locally with asymmetric signing keys) and refreshes it when it is about to expire.
+  const { data } = await supabase.auth.getClaims();
   const open = ['/login', '/auth/'].some((p) => request.nextUrl.pathname.startsWith(p));
-  if (!data.user && !open) {
+  if (!data?.claims && !open) {
     return NextResponse.redirect(new URL('/login', request.url));
   }
   return response;

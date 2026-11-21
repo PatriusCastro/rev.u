@@ -19,10 +19,10 @@ export async function db() {
   });
 }
 
-/** The signed-in user and a client, or a redirect to sign in. */
+/** The signed-in user's id and a client, or a redirect to sign in. The token is verified, not just decoded. */
 export async function session() {
   const supabase = await db();
-  const { data } = await supabase.auth.getUser();
-  if (!data.user) redirect('/login');
-  return { supabase, user: data.user };
+  const { data } = await supabase.auth.getClaims();
+  if (!data?.claims?.sub) redirect('/login');
+  return { supabase, user: { id: data.claims.sub } };
 }

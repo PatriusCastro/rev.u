@@ -21,5 +21,7 @@ export function rich(text: string): string {
     if (b.startsWith('## ')) return `<h2>${inline(b.slice(3))}</h2>`;
     if (/^- /.test(b)) return `<ul>${b.split(/\n(?=- )/).map((li) => `<li>${inline(li.slice(2))}</li>`).join('')}</ul>`;
     return `<p>${inline(b)}</p>`;
-  }).join('');
+  }).join('')
+    // Wide formulas scroll sideways inside their box; tabindex lets keyboard users scroll them too.
+    .replace(/<span class="katex-display">/g, '<span class="katex-display" tabindex="0">');
 }
