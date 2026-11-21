@@ -123,7 +123,9 @@ export async function submitAnswer(attemptId: string, questionId: string, choice
   if (count === attempt.question_ids.length) await supabase.from('attempts').update({ finished_at: new Date().toISOString() }).eq('id', attemptId);
 
   const stage = next === null ? (active ? String(rep.interval) : null) : String(next);
-  const message = !correct ? 'Not yet. It comes back tomorrow.'
+  // An empty choice is "Show me how": a miss, so it comes back like any other.
+  const message = choice === '' ? 'Here is how it is solved. It comes back tomorrow.'
+    : !correct ? 'Not yet. It comes back tomorrow.'
     : next === 'cleared' ? 'Correct. It is cleared from your notebook.'
     : next !== null ? `Correct. It comes back in ${next} days.`
     : 'Correct.';

@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import { useEffect, useState, useTransition } from 'react';
 import { useRouter } from 'next/navigation';
-import { ArrowRight, ChevronLeft, CircleCheck, CircleX, Clock, Lightbulb, Repeat } from 'lucide-react';
+import { ArrowRight, BookOpen, ChevronLeft, CircleCheck, CircleX, Clock, Lightbulb, Repeat } from 'lucide-react';
 import { submitAnswer, finishAttempt, type AnswerResult } from '@/app/actions';
 import { ScratchPad } from './scratch-pad';
 import { ScheduleTracker, ic } from './ui';
@@ -67,7 +67,10 @@ export function Problem(p: ProblemProps) {
             </div>
             {!mock && !result && (
               <>
-                <button className="btn txt" onClick={() => setHint(!hint)} aria-expanded={hint}><Lightbulb {...ic} />{hint ? 'Hide the hint' : 'Show a hint'}</button>
+                <div style={{ display: 'flex', flexWrap: 'wrap', columnGap: 16 }}>
+                  <button className="btn txt" onClick={() => setHint(!hint)} aria-expanded={hint}><Lightbulb {...ic} />{hint ? 'Hide the hint' : 'Show a hint'}</button>
+                  <button className="btn txt" disabled={pending} onClick={() => send('')}><BookOpen {...ic} />Show me how</button>
+                </div>
                 {hint && <div className="hint" dangerouslySetInnerHTML={{ __html: p.hintHtml }} />}
               </>
             )}
@@ -75,8 +78,9 @@ export function Problem(p: ProblemProps) {
           </div>
           {error && <p className="err" role="alert">{error}</p>}
           {result && (
-            <div className={'fb ' + (result.correct ? 'good' : 'bad')} role="status">
-              {result.correct ? <CircleCheck {...ic} /> : <CircleX {...ic} />}<span>{result.message}</span>
+            // No pick means "Show me how": a calm amber note, not a red miss.
+            <div className={'fb ' + (result.correct ? 'good' : picked ? 'bad' : 'how')} role="status">
+              {result.correct ? <CircleCheck {...ic} /> : picked ? <CircleX {...ic} /> : <BookOpen {...ic} />}<span>{result.message}</span>
             </div>
           )}
           {!mock && <ScheduleTracker stage={result ? result.stage : p.stage} />}

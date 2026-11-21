@@ -127,6 +127,7 @@ h1.title { margin: 0; font-size: 28px; font-weight: 700; line-height: 1.15; lett
 @keyframes pulse { 50% { opacity: .4; } }
 .hint { font-size: 14px; background: var(--color-amber-soft); color: var(--color-amber-ink); border-radius: 14px; padding: 12px 14px; animation: rise .25s var(--ease); }
 .fb { display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 10px; align-items: center; border-radius: 14px; padding: 12px 14px; font-weight: 600; animation: rise .25s var(--ease); }
+.fb.how { background: var(--color-amber-soft); color: var(--color-amber-ink); }
 .fb.good { background: var(--color-green-soft); color: var(--color-green); } .fb.bad { background: var(--color-red-soft); color: var(--color-red); }
 .sched { padding: 14px 16px 12px; display: flex; flex-direction: column; gap: 12px; }
 .trk { display: grid; grid-template-columns: repeat(4, 1fr); position: relative; font-size: 12px; text-align: center; color: var(--color-ink-2); }
