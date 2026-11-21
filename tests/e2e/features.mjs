@@ -78,6 +78,27 @@ await t.click('button:has-text("Save problem")'); await t.waitForURL('**/review/
 check('instructor: problem saved, review shows the solution', await t.isVisible('text=Force on a plate') && await t.locator('.steps li').count() === 1);
 await t.screenshot({ path: shots + 'f-teacher-review.png', fullPage: true });
 
+// Quiz: one problem written before, one written from the quiz.
+await t.goto(BASE + '/write'); await t.click('text=New quiz'); await t.waitForURL('**/write/quiz');
+await t.locator('label:has-text("Title") input').fill('Pressure quiz');
+await t.selectOption('label:has-text("Who sees it") select', { label: 'Class: Batch Test' });
+await t.locator('label:has-text("Time limit") input').fill('10');
+await t.selectOption('label:has-text("Add a problem you wrote before") select', { label: 'Force on a plate, Pressure basics' });
+check('quiz: adds a problem written before', await t.locator('.qlist li').count() === 1);
+await t.click('button:has-text("Write a new problem for this quiz")'); await t.waitForURL('**/write/problem?quiz=**');
+check('quiz: new problem takes the quiz audience', await t.locator('select >> nth=1').isDisabled());
+await t.selectOption('label:has-text("Topic") select', { index: 1 });
+await t.locator('label:has-text("Title") input').fill('Gauge pressure');
+await t.locator('label:has-text("Problem") textarea').fill('Absolute pressure is 150 kPa and the air is 100 kPa. Find the gauge pressure.');
+await t.fill('input[aria-label="Choice A"]', '50 kPa'); await t.fill('input[aria-label="Choice B"]', '250 kPa');
+await t.check('input[aria-label="A is correct"]');
+await t.locator('label:has-text("Hint") textarea').fill('Gauge is absolute minus air.');
+await t.fill('textarea[aria-label="Step 1"]', '150 - 100 = 50 kPa.');
+await t.click('button:has-text("Save problem")'); await t.waitForURL('**/write/quiz?id=**');
+check('quiz: problem written from the quiz is added to it', await t.locator('.qlist li').count() === 2);
+await t.click('button:has-text("Save quiz")'); await t.waitForURL(BASE + '/write');
+check('quiz: listed under Your quizzes', await t.isVisible('text=2 problems, 10 minutes, Batch Test'));
+
 const outsider = await newUser('outsider');
 await outsider.goto(lessonUrl);
 check('someone outside the class cannot open the lesson', await outsider.isVisible('text=not found') || (await outsider.title()).toLowerCase().includes('not found') || !(await outsider.isVisible('h1:has-text("Pressure basics")')));
@@ -102,8 +123,18 @@ await t.click('button:has-text("Done")'); await t.waitForLoadState('networkidle'
 check('instructor: resolves the report', !(await t.isVisible('text=Units should be kPa?')));
 await t.screenshot({ path: shots + 'f-write.png', fullPage: true });
 
+// Student takes the class quiz, exam style.
+await s.goto(BASE + '/subjects');
+check('student: class quiz appears in Subjects', await s.isVisible('text=Pressure quiz'));
+await s.click('button:has-text("Pressure quiz")'); await s.waitForURL('**/attempt/**');
+check('student: quiz shows its title and timer', await s.isVisible('h1:has-text("Pressure quiz 1 of 2")') && await s.isVisible('[role=timer]'));
+await s.click('.opts button >> nth=1'); await s.click('button:has-text("Save and next")'); await s.waitForSelector('h1:has-text("Pressure quiz 2 of 2")');
+await s.click('.opts button >> nth=0'); await s.click('button:has-text("Save and finish")');
+await s.waitForSelector('h1:has-text("%")', { timeout: 15000 });
+check('student: quiz ends with a score', (await s.textContent('.vh .sub')).includes('in Pressure quiz'), await s.textContent('h1'));
+
 // 3. Pages render without overflow on a phone.
-for (const [p, path] of [[t, '/write'], [t, '/write/problem'], [t, '/classes'], [s, '/subjects'], [s, '/']]) {
+for (const [p, path] of [[t, '/write'], [t, '/write/problem'], [t, '/write/quiz'], [t, '/classes'], [s, '/subjects'], [s, '/']]) {
   await p.goto(BASE + path);
   const over = await p.evaluate(() => document.documentElement.scrollWidth > innerWidth);
   check(`no sideways scroll on ${path}`, !over);

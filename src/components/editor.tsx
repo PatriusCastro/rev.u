@@ -1,8 +1,8 @@
 'use client';
 import { useState, useTransition } from 'react';
 import { useRouter } from 'next/navigation';
-import { Plus, Trash2 } from 'lucide-react';
-import { saveProblem, saveTopic, type ProblemInput, type TopicInput } from '@/app/actions';
+import { ArrowUp, Plus, Trash2 } from 'lucide-react';
+import { saveProblem, saveQuiz, saveTopic, type ProblemInput, type QuizInput, type TopicInput } from '@/app/actions';
 import { ic } from './ui';
 
 type Option = { id: string; name: string };
@@ -25,11 +25,11 @@ function useSave<T>(save: (v: T) => Promise<{ error: string } | { id: string }>,
 
 export function ProblemEditor({ initial, topics, classes }: { initial: ProblemInput; topics: TopicOption[]; classes: Option[] }) {
   const [v, setV] = useState(initial);
-  const { error, pending, submit } = useSave(saveProblem, (id) => `/review/${id}`);
+  const { error, pending, submit } = useSave(saveProblem, (id) => (initial.quiz_id ? `/write/quiz?id=${initial.quiz_id}` : `/review/${id}`));
   const set = (patch: Partial<ProblemInput>) => setV({ ...v, ...patch });
   const topic = topics.find((t) => t.id === v.topic_id);
   // A problem under your own lesson always shares that lesson's audience.
-  const classId = topic?.own ? topic.class_id ?? '' : v.class_id;
+  const classId = topic?.own ? topic.class_id ?? '' : initial.quiz_id ? initial.class_id : v.class_id;
 
   return (
     <form className="card form" onSubmit={(e) => { e.preventDefault(); submit({ ...v, class_id: classId }); }}>
@@ -40,11 +40,11 @@ export function ProblemEditor({ initial, topics, classes }: { initial: ProblemIn
         </select>
       </label>
       <label className="field">Who sees it
-        <select value={classId} disabled={topic?.own} onChange={(e) => set({ class_id: e.target.value })}>
+        <select value={classId} disabled={topic?.own || !!initial.quiz_id} onChange={(e) => set({ class_id: e.target.value })}>
           <option value="">Only me</option>
           {classes.map((c) => <option key={c.id} value={c.id}>Class: {c.name}</option>)}
         </select>
-        {topic?.own && <span className="sub tip">Set by the lesson this problem belongs to.</span>}
+        {topic?.own ? <span className="sub tip">Set by the lesson this problem belongs to.</span> : initial.quiz_id && <span className="sub tip">Set by the quiz this problem is for.</span>}
       </label>
       <label className="field">Title<input value={v.title} maxLength={120} onChange={(e) => set({ title: e.target.value })} placeholder="Short name, for example: Tower from two points" /></label>
       <label className="field">Problem
@@ -108,6 +108,65 @@ export function LessonEditor({ initial, subjects, classes }: { initial: TopicInp
       </label>
       {error && <p className="err" role="alert" style={{ margin: 0 }}>{error}</p>}
       <button className="btn pri full" disabled={pending} aria-busy={pending}>{pending ? 'Saving…' : 'Save lesson'}</button>
+    </form>
+  );
+}
+
+type MyProblem = { id: string; title: string; topic: string; class_id: string | null };
+
+/** A quiz: title, audience, optional time limit, and an ordered list of the author's problems with that audience. */
+export function QuizEditor({ initial, problems, classes }: { initial: QuizInput; problems: MyProblem[]; classes: Option[] }) {
+  const router = useRouter();
+  const [v, setV] = useState(initial);
+  const [error, setError] = useState<string | null>(null);
+  const [pending, start] = useTransition();
+  const set = (patch: Partial<QuizInput>) => setV({ ...v, ...patch });
+  const byId = new Map(problems.map((p) => [p.id, p]));
+  // Only problems with the quiz's audience can go in, so the people taking it can see every one.
+  const fits = problems.filter((p) => (p.class_id ?? '') === v.class_id && !v.question_ids.includes(p.id));
+  const save = (then: (id: string) => string) => start(async () => {
+    const r = await saveQuiz(v);
+    if ('error' in r) return setError(r.error);
+    router.push(then(r.id));
+  });
+
+  return (
+    <form className="card form" onSubmit={(e) => { e.preventDefault(); save(() => '/write'); }}>
+      <label className="field">Title<input required maxLength={120} value={v.title} onChange={(e) => set({ title: e.target.value })} placeholder="For example: Hydraulics quiz 1" /></label>
+      <label className="field">Who sees it
+        <select value={v.class_id} onChange={(e) => set({ class_id: e.target.value, question_ids: v.question_ids.filter((id) => (byId.get(id)?.class_id ?? '') === e.target.value) })}>
+          <option value="">Only me</option>
+          {classes.map((c) => <option key={c.id} value={c.id}>Class: {c.name}</option>)}
+        </select>
+      </label>
+      <label className="field">Time limit in minutes
+        <input type="number" min={1} max={300} inputMode="numeric" value={v.minutes} onChange={(e) => set({ minutes: e.target.value })} placeholder="Leave empty for no time limit" />
+      </label>
+      <fieldset className="field" style={{ border: 0, padding: 0, margin: 0 }}>
+        <legend style={{ marginBottom: 6 }}>Problems, in order ({v.question_ids.length})</legend>
+        {v.question_ids.length ? (
+          <ol className="qlist">
+            {v.question_ids.map((id, i) => (
+              <li key={id}>
+                <span><span className="t">{byId.get(id)?.title ?? id}</span><span className="sub">{byId.get(id)?.topic}</span></span>
+                <button type="button" className="ib" aria-label={`Move problem ${i + 1} up`} disabled={i === 0} onClick={() => set({ question_ids: v.question_ids.map((x, j) => (j === i - 1 ? id : j === i ? v.question_ids[i - 1] : x)) })}><ArrowUp {...ic} /></button>
+                <button type="button" className="ib" aria-label={`Remove problem ${i + 1}`} onClick={() => set({ question_ids: v.question_ids.filter((x) => x !== id) })}><Trash2 {...ic} /></button>
+              </li>
+            ))}
+          </ol>
+        ) : <span className="sub tip">No problems yet. Write new ones, or add ones you wrote before.</span>}
+        <button type="button" className="btn sec full" disabled={pending} onClick={() => save((id) => `/write/problem?quiz=${id}`)}><Plus {...ic} />Write a new problem for this quiz</button>
+        {fits.length > 0 && (
+          <label className="field" style={{ marginTop: 12 }}>Add a problem you wrote before
+            <select value="" onChange={(e) => e.target.value && set({ question_ids: [...v.question_ids, e.target.value] })}>
+              <option value="">Choose a problem</option>
+              {fits.map((p) => <option key={p.id} value={p.id}>{p.title}, {p.topic}</option>)}
+            </select>
+          </label>
+        )}
+      </fieldset>
+      {error && <p className="err" role="alert" style={{ margin: 0 }}>{error}</p>}
+      <button className="btn pri full" disabled={pending} aria-busy={pending}>{pending ? 'Saving…' : 'Save quiz'}</button>
     </form>
   );
 }

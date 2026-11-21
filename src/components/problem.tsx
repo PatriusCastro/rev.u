@@ -13,6 +13,8 @@ export type ProblemProps = {
   hintHtml: string; stage: string | null; deadline: number | null;
   /** Mock only: the saved choice for this problem, and which problems in the set have an answer. */
   saved?: string | null; answered?: boolean[];
+  /** A quiz's title, shown in place of the mode name. */
+  label?: string;
 };
 
 const MODE_LABEL = { practice: 'Practice', repeat: 'Repeat', mock: 'Mock exam' };
@@ -51,7 +53,7 @@ export function Problem(p: ProblemProps) {
       <div className="vh">
         <Link className="ib" href="/" aria-label="Back to Today"><ChevronLeft {...ic} /></Link>
         <div className="mid">
-          <h1 className="t" style={{ margin: 0, fontSize: 'inherit' }}>{MODE_LABEL[p.mode]} {p.index + 1} of {p.count}</h1>
+          <h1 className="t" style={{ margin: 0, fontSize: 'inherit' }}>{p.label ?? MODE_LABEL[p.mode]} {p.index + 1} of {p.count}</h1>
           <div className="segs" role="img" aria-label={`Problem ${p.index + 1} of ${p.count}`}>
             {Array.from({ length: p.count }, (_, i) => <i key={i} className={i === p.index ? 'c' : (mock ? p.answered?.[i] : i < p.index) ? 'd' : undefined} />)}
           </div>

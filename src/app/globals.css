@@ -266,6 +266,18 @@ h1.title { margin: 0; font-size: 28px; font-weight: 700; line-height: 1.15; lett
   .solve { grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); }
 }
 
+
+/* Write: new problem / quiz / lesson tiles, and the quiz's problem list */
+.makes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.makes .card { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; padding: 14px; min-height: 44px; }
+.makes .tile { margin-bottom: 6px; }
+@media (hover: hover) { .makes .card { transition: box-shadow .15s; } .makes .card:hover { box-shadow: var(--shadow-float); } }
+.qlist { list-style: none; margin: 0 0 12px; padding: 0; counter-reset: q; display: flex; flex-direction: column; border: 1px solid var(--color-line); border-radius: 14px; }
+.qlist li { counter-increment: q; display: grid; grid-template-columns: 24px minmax(0, 1fr) 44px 44px; gap: 4px 8px; align-items: center; padding: 6px 6px 6px 12px; font-weight: 400; color: var(--color-ink); }
+.qlist li + li { border-top: 1px solid var(--color-line); }
+.qlist li::before { content: counter(q); font-size: 12px; font-weight: 600; color: var(--color-ink-2); }
+.qlist .ib { box-shadow: none; background: none; }
+
 @keyframes rise { from { opacity: 0; transform: translateY(8px); } }
 @keyframes draw { from { stroke-dashoffset: 132; } }
 @keyframes grow { from { transform: scaleY(0); } }

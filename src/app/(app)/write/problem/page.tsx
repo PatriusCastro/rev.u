@@ -7,27 +7,30 @@ import { ProblemEditor } from '@/components/editor';
 import { ic } from '@/components/ui';
 
 export default async function WriteProblem({ searchParams }: PageProps<'/write/problem'>) {
-  const { id, topic } = await searchParams;
+  const { id, topic, quiz: quizId } = await searchParams;
   const { supabase, user } = await session();
-  const [{ data: topics }, { data: classes }, { data: q }] = await Promise.all([
+  const [{ data: topics }, { data: classes }, { data: q }, { data: quiz }] = await Promise.all([
     // Built-in topics and your own; row rules would also show class topics you cannot add to.
     supabase.from('topics').select('id, name, owner_id, class_id').or(`owner_id.is.null,owner_id.eq.${user.id}`).order('sort'),
     supabase.from('classes').select('id, name').eq('owner_id', user.id).order('name'),
     typeof id === 'string'
       ? supabase.from('questions').select('id, topic_id, class_id, title, body, choices, answer, hint, steps').eq('id', id).eq('owner_id', user.id).maybeSingle()
       : Promise.resolve({ data: null }),
+    typeof quizId === 'string' && !id
+      ? supabase.from('quizzes').select('id, title, class_id').eq('id', quizId).eq('owner_id', user.id).maybeSingle()
+      : Promise.resolve({ data: null }),
   ]);
-  if (id && !q) notFound();
+  if ((id && !q) || (quizId && !id && !quiz)) notFound();
 
   const initial: ProblemInput = q
     ? { id: q.id, topic_id: q.topic_id, class_id: q.class_id ?? '', title: q.title ?? '', body: q.body, choices: q.choices, answer: q.answer, hint: q.hint, steps: q.steps }
-    : { topic_id: typeof topic === 'string' ? topic : '', class_id: '', title: '', body: '', choices: [], answer: 'A', hint: '', steps: [''] };
+    : { quiz_id: quiz?.id, topic_id: typeof topic === 'string' ? topic : '', class_id: quiz?.class_id ?? '', title: '', body: '', choices: [], answer: 'A', hint: '', steps: [''] };
 
   return (
     <main className="view">
       <div className="vh">
-        <Link className="ib" href="/write" aria-label="Back to Write"><ChevronLeft {...ic} /></Link>
-        <div className="mid"><h1 className="t" style={{ margin: 0, fontSize: 'inherit' }}>{q ? 'Edit problem' : 'New problem'}</h1></div>
+        <Link className="ib" href={quiz ? `/write/quiz?id=${quiz.id}` : '/write'} aria-label={quiz ? 'Back to the quiz' : 'Back to Write'}><ChevronLeft {...ic} /></Link>
+        <div className="mid"><h1 className="t" style={{ margin: 0, fontSize: 'inherit' }}>{q ? 'Edit problem' : 'New problem'}</h1>{quiz && <span className="sub">For {quiz.title}</span>}</div>
       </div>
       <div className="scroll"><div className="narrow">
         <ProblemEditor initial={initial} classes={classes ?? []}

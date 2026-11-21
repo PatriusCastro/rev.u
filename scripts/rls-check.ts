@@ -63,7 +63,15 @@ assert.equal((await b.c.from('questions').select('id').eq('id', `u/rls-${a.id}`)
 assert.equal((await b.c.from('questions').update({ answer: 'B' }).eq('id', `u/rls-${a.id}`).select()).data?.length ?? 0, 0, 'a member edited the class problem');
 assert.ifError((await b.c.from('flags').insert({ question_id: `u/rls-${a.id}`, note: 'step 1 is wrong' })).error);
 assert.equal((await a.c.from('flags').select('note').eq('question_id', `u/rls-${a.id}`)).data?.length, 1, 'the author cannot see a report');
+// Quizzes follow the same rules.
+const { data: privQuiz } = await a.c.from('quizzes').insert({ title: 'A private', question_ids: [`u/rls-${a.id}`] }).select('id').single();
+const { data: classQuiz } = await a.c.from('quizzes').insert({ title: 'A class', class_id: cls!.id, question_ids: [`u/rls-${a.id}`] }).select('id').single();
+assert.equal((await b.c.from('quizzes').select('id').eq('id', privQuiz!.id)).data?.length, 0, 'B can see A’s private quiz');
+assert.equal((await b.c.from('quizzes').select('id').eq('id', classQuiz!.id)).data?.length, 1, 'a class member cannot see the class quiz');
+assert.equal((await b.c.from('quizzes').update({ title: 'hacked' }).eq('id', classQuiz!.id).select()).data?.length ?? 0, 0, 'a member edited the class quiz');
+assert.ok((await b.c.from('quizzes').insert({ title: 'B in A class', class_id: cls!.id })).error, 'B put a quiz in A’s class');
 await b.c.from('class_members').delete().eq('class_id', cls!.id).eq('user_id', b.id);
 assert.equal((await b.c.from('questions').select('id').eq('id', `u/rls-${a.id}`)).data?.length, 0, 'B still sees the problem after leaving');
+assert.equal((await b.c.from('quizzes').select('id').eq('id', classQuiz!.id)).data?.length, 0, 'B still sees the class quiz after leaving');
 
 console.log('Access rules hold: user B could not read or change user A’s rows, files, or private content; class sharing works.');
