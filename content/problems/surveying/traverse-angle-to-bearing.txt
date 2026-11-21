@@ -1,0 +1,15 @@
+topic: surveying/traverse-areas
+title: Bearing from a measured angle
+answer: D
+hint: Turn the angle clockwise from the azimuth of BA, then reduce the azimuth to a bearing.
+
+At station B of a traverse, the azimuth of line BA is 220°30′, measured clockwise from north. The angle turned clockwise from BA to BC is 105°10′. What is the bearing of BC?
+
+A. S 64°40′ E    B. N 55°40′ W    C. S 34°20′ E    D. N 34°20′ W
+
+## Solution
+Azimuth of BC $=$ azimuth of BA $+$ clockwise angle $= 220°30′ + 105°10′ = 325°40′$.
+---
+325°40′ lies between 270° and 360°, so the line is in the NW quadrant.
+---
+Bearing angle $= 360° - 325°40′ = 34°20′$. BC bears N 34°20′ W.

@@ -1,0 +1,17 @@
+topic: surveying/traverse-areas
+title: Missing side of a lot
+answer: B
+hint: Find the latitude and departure of each known course. The closing course must cancel both sums.
+
+A four-sided lot ABCD in Pampanga is surveyed as a closed traverse. The known courses are: AB, 180.00 m, N 30°00′ E; BC, 220.00 m, S 70°00′ E; CD, 150.00 m, S 20°00′ W. Course DA was not measured. How long is DA?
+
+A. 305.74 m    B. 252.73 m    C. 353.22 m    D. 445.74 m
+
+## Solution
+Latitudes: AB $= 180\cos 30° = +155.88$, BC $= -220\cos 70° = -75.24$, CD $= -150\cos 20° = -140.95$. Sum $= -60.31$ m.
+---
+Departures: AB $= 180\sin 30° = +90.00$, BC $= 220\sin 70° = +206.73$, CD $= -150\sin 20° = -51.30$. Sum $= +245.43$ m.
+---
+DA must cancel these: Lat $= +60.31$ m, Dep $= -245.43$ m.
+---
+$DA = \sqrt{60.31^2 + 245.43^2} = 252.73$ m. Its bearing is N 76°12′ W, since $\tan^{-1}\left(\dfrac{245.43}{60.31}\right) = 76°12′$.

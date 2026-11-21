@@ -1,0 +1,15 @@
+topic: surveying/measurements
+title: Seeing a light over the sea
+answer: D
+hint: The line of sight grazes the sea somewhere between the two. Find the distance from each height to that point.
+
+A fisherman's eye is 1.6 m above the sea. A light on a small island sits 20 m above the sea. Using the combined curvature and refraction correction $h = 0.0675K^2$ (h in m, K in km), how far apart are they when the light first comes into view?
+
+A. 17.21 km    B. 12.35 km    C. 17.89 km    D. 22.08 km
+
+## Solution
+From the eye: $K_1 = \sqrt{\dfrac{1.6}{0.0675}} = 4.87$ km.
+---
+From the light: $K_2 = \sqrt{\dfrac{20}{0.0675}} = 17.21$ km.
+---
+Total $= 4.87 + 17.21 = 22.08$ km.

@@ -1,0 +1,17 @@
+topic: surveying/measurements
+title: Pacing a lot boundary
+answer: B
+hint: Get the length of one pace from the known course, using the average count. Then use the average count on the unknown line.
+
+A student walks an 80 m course four times and counts 106, 108, 105 and 107 paces. She then paces a lot boundary three times and counts 512, 515 and 510 paces. What is the length of the boundary?
+
+A. 682.0 m    B. 384.9 m    C. 96.2 m    D. 1154.6 m
+
+## Solution
+Average on the course $= \dfrac{106 + 108 + 105 + 107}{4} = 106.5$ paces.
+---
+Pace factor $= \dfrac{80}{106.5} = 0.7512$ m per pace.
+---
+Average on the boundary $= \dfrac{512 + 515 + 510}{3} = 512.33$ paces.
+---
+Length $= 512.33 \times 0.7512 = 384.9$ m.

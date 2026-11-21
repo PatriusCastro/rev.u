@@ -1,0 +1,15 @@
+topic: transportation/traffic
+title: Space-mean speed from spot speeds
+answer: D
+hint: Space-mean speed is not the plain average of the spot speeds. Work with the reciprocals.
+
+Six cars pass a radar point on a provincial road with spot speeds 48, 62, 75, 54, 81 and 66 km/h. Find the space-mean speed.
+
+A. 64.33 km/h    B. 51.91 km/h    C. 60.28 km/h    D. 62.30 km/h
+
+## Solution
+Space-mean speed is the harmonic mean: $v_s = \dfrac{n}{\sum \frac{1}{v_i}}$.
+---
+$\sum \dfrac{1}{v_i} = \dfrac{1}{48} + \dfrac{1}{62} + \dfrac{1}{75} + \dfrac{1}{54} + \dfrac{1}{81} + \dfrac{1}{66} = 0.09631$ h/km.
+---
+$v_s = \dfrac{6}{0.09631} = 62.30$ km/h. It is below the time-mean speed of 64.33 km/h, as it should be.

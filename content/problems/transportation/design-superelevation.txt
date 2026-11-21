@@ -1,0 +1,13 @@
+topic: transportation/highway-design
+title: Superelevation for a design speed
+answer: B
+hint: Friction and superelevation share the job of holding the car on the curve. Keep the speed in km/h for this form of the formula.
+
+A curve of radius 250 m on a national highway in Pangasinan is designed for 80 km/h. Side friction is taken as $f = 0.14$. Using $e + f = \dfrac{v^2}{127R}$ with $v$ in km/h and $R$ in m, find the required superelevation rate.
+
+A. 0.2016    B. 0.0616    C. 0.3416    D. 0.1008
+
+## Solution
+$e + f = \dfrac{80^2}{127(250)} = \dfrac{6400}{31{,}750} = 0.2016$.
+---
+$e = 0.2016 - 0.14 = 0.0616$ m/m, about 6.2%.

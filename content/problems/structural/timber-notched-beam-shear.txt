@@ -1,0 +1,15 @@
+topic: structural/timber
+title: Reaction allowed at a notched support
+answer: B
+hint: The notch reduces the depth and also adds a stress-raising factor of d over the remaining depth.
+
+An apitong joist is dressed 100 mm wide and 300 mm deep. At one support its bottom (tension) face is notched so that 240 mm of depth remains. Allowable shear stress $F_v = 1.0$ MPa. Use $f_v = \dfrac{3V}{2bd_n}\left(\dfrac{d}{d_n}\right)$. Find the largest end reaction it can take.
+
+A. 16.00 kN    B. 12.80 kN    C. 10.24 kN    D. 20.00 kN
+
+## Solution
+Solve for $V$: $V = \dfrac{2F_v b d_n}{3}\left(\dfrac{d_n}{d}\right)$.
+---
+$V = \dfrac{2(1.0)(100)(240)}{3}\left(\dfrac{240}{300}\right) = 16\,000(0.8) = 12\,800$ N.
+---
+$V = 12.80$ kN.

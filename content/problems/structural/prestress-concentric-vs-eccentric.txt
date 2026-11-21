@@ -1,0 +1,17 @@
+topic: structural/prestressed
+title: Concentric versus eccentric prestress
+answer: B
+hint: For each case find the moment that just brings the bottom fibre to zero stress, then turn that moment into a uniform load on the span.
+
+Two identical simply supported beams, each 300 mm wide and 600 mm deep and spanning 10 m, carry an effective prestress of 1200 kN. In beam 1 the tendon is at the centroid. In beam 2 it is straight, 180 mm below the centroid. No tension is allowed at the bottom fibre. How much more total uniform load (self-weight included) can beam 2 carry than beam 1?
+
+A. 26.88 kN/m    B. 17.28 kN/m    C. 9.60 kN/m    D. 8.64 kN/m
+
+## Solution
+For a rectangle the kern distance is $h/6 = 100$ mm.
+---
+Beam 1: $M = P(h/6) = 1200(0.10) = 120$ kN·m, so $w = \dfrac{8M}{L^2} = \dfrac{8(120)}{10^2} = 9.60$ kN/m.
+---
+Beam 2: $M = P(h/6 + e) = 1200(0.28) = 336$ kN·m, so $w = \dfrac{8(336)}{10^2} = 26.88$ kN/m.
+---
+Difference $= 26.88 - 9.60 = 17.28$ kN/m.

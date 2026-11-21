@@ -1,9 +1,9 @@
-import { Sigma, SquareFunction, ChartSpline, TriangleRight, Layers, Dices, Shapes, TrendingUp, Droplets, Mountain, Building2 } from 'lucide-react';
+import { Sigma, SquareFunction, ChartSpline, TriangleRight, Layers, Dices, Shapes, TrendingUp, Droplets, Mountain, Building2, Compass, Route } from 'lucide-react';
 
 /** Icon props from the design system: 20px, 1.75 stroke, always beside a text label. */
 export const ic = { size: 20, strokeWidth: 1.75, 'aria-hidden': true } as const;
 
-const AREA_ICONS: Record<string, typeof Sigma> = { trigonometry: TriangleRight, algebra: Sigma, 'analytic-geometry': ChartSpline, calculus: SquareFunction, probability: Dices, geometry: Shapes, 'differential-equations': TrendingUp, hydraulics: Droplets, geotechnical: Mountain, structural: Building2 };
+const AREA_ICONS: Record<string, typeof Sigma> = { trigonometry: TriangleRight, algebra: Sigma, 'analytic-geometry': ChartSpline, calculus: SquareFunction, probability: Dices, geometry: Shapes, 'differential-equations': TrendingUp, hydraulics: Droplets, geotechnical: Mountain, structural: Building2, surveying: Compass, transportation: Route };
 export function AreaIcon({ topicId }: { topicId: string }) {
   const Icon = AREA_ICONS[topicId.split('/')[0]] ?? Layers;
   return <Icon {...ic} />;

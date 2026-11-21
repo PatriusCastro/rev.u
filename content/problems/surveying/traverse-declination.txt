@@ -1,0 +1,15 @@
+topic: surveying/traverse-areas
+title: Retracing an old property line
+answer: B
+hint: Convert the old magnetic bearing to a true bearing first. The true bearing of the line never changes.
+
+A 1998 title survey of a lot in Batangas gives a boundary line a magnetic bearing of N 25°40′ E, taken when the magnetic declination was 1°10′ W. Today the declination at the site is 0°20′ E. What magnetic bearing should the compass read today along the same line?
+
+A. N 24°50′ E    B. N 24°10′ E    C. N 27°10′ E    D. N 26°30′ E
+
+## Solution
+With a west declination, magnetic north lies west of true north, so for a NE line the true bearing is smaller: $25°40′ - 1°10′ = 24°30′$. True bearing N 24°30′ E.
+---
+Today magnetic north lies 0°20′ east of true north, so the magnetic bearing of a NE line is smaller than the true one: $24°30′ - 0°20′ = 24°10′$.
+---
+Magnetic bearing today: N 24°10′ E.

@@ -1,0 +1,15 @@
+topic: transportation/highway-design
+title: Station of the PT
+answer: C
+hint: Back off from the PI by the tangent length to reach the PC, then travel along the curve, not the tangent.
+
+A simple curve of radius 300 m joins two tangents of a bypass road. The tangents meet at the PI, station 10+250.00, with an intersection angle of 42°. Find the station of the PT.
+
+A. 10+365.16    B. 10+134.84    C. 10+354.75    D. 10+469.91
+
+## Solution
+$T = 300\tan 21° = 115.16$ m, so PC = 10+250.00 − 115.16 = 10+134.84.
+---
+$L_c = \dfrac{\pi(300)(42°)}{180°} = 219.91$ m.
+---
+PT = 10+134.84 + 219.91 = 10+354.75.

@@ -1,0 +1,15 @@
+topic: transportation/traffic
+title: Concrete slab for a corner load
+answer: A
+hint: Keep the load in newtons and the stress in MPa, so the thickness comes out in millimetres.
+
+A concrete pavement for a port access road must carry a wheel load of 60 kN at a slab corner. The allowable flexural stress of the concrete is 2.4 MPa. Using the corner load formula $t = \sqrt{\dfrac{3W}{f}}$, find the required slab thickness.
+
+A. 274 mm    B. 158 mm    C. 474 mm    D. 194 mm
+
+## Solution
+$W = 60{,}000$ N and $f = 2.4$ MPa $= 2.4$ N/mm².
+---
+$t = \sqrt{\dfrac{3(60{,}000)}{2.4}} = \sqrt{75{,}000}$.
+---
+$t = 273.9 \approx 274$ mm.

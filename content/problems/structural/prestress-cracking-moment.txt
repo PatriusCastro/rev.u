@@ -1,0 +1,17 @@
+topic: structural/prestressed
+title: Cracking moment of a prestressed beam
+answer: D
+hint: Cracking starts when the bottom fibre tension reaches the modulus of rupture. The prestress compression must be cancelled first.
+
+A rectangular prestressed beam is 300 mm wide and 650 mm deep. The effective prestress is 1000 kN at 200 mm below the centroid. Concrete has $f'_c = 35$ MPa and modulus of rupture $f_r = 0.62\sqrt{f'_c}$. Take compression as negative. Find the moment that cracks the bottom fibre.
+
+A. 308.3 kN·m    B. 185.8 kN·m    C. 169.2 kN·m    D. 385.8 kN·m
+
+## Solution
+$f_r = 0.62\sqrt{35} = 3.668$ MPa. $A = 195\,000$ mm², $S = \dfrac{300(650)^2}{6} = 21.13 \times 10^6$ mm³.
+---
+At cracking: $-\dfrac{P}{A} - \dfrac{Pe}{S} + \dfrac{M_{cr}}{S} = f_r$.
+---
+$M_{cr} = S\left(f_r + \dfrac{P}{A}\right) + Pe = 21.13 \times 10^6(3.668 + 5.128) + 1\,000\,000(200)$
+---
+$M_{cr} = 185.8 \times 10^6 + 200 \times 10^6 = 385.8$ kN·m.

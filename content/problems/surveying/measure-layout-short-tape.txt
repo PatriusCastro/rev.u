@@ -1,0 +1,15 @@
+topic: surveying/measurements
+title: Laying out with a short tape
+answer: B
+hint: When laying out, the true distance is fixed and you need the tape reading. A short tape reads too much.
+
+A 30 m tape is actually 29.992 m long. A contractor must stake a building line exactly 240.00 m long using this tape. Compared with 240.00 m, what should the tape reading be?
+
+A. 64 mm less    B. 64 mm more    C. 8 mm more    D. 6.4 mm more
+
+## Solution
+Each 30 m on the tape covers only 29.992 m on the ground.
+---
+Tape reading $= 240.00 \times \dfrac{30}{29.992} = 240.064$ m.
+---
+So read 64 mm more than 240.00 m.

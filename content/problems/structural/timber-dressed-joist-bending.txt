@@ -1,0 +1,15 @@
+topic: structural/timber
+title: Bending stress in a dressed apitong joist
+answer: B
+hint: Use the dressed dimensions, not the nominal ones. The depth is the one that gets squared.
+
+A floor joist of apitong has a nominal size of 50 mm × 200 mm and a dressed size of 45 mm × 190 mm, set with the 190 mm side vertical. It spans 4.0 m, simply supported, and carries a uniform load of 2.5 kN/m including its own weight. Find the actual bending stress.
+
+A. 15.00 MPa    B. 18.47 MPa    C. 36.94 MPa    D. 77.97 MPa
+
+## Solution
+$M = \dfrac{wL^2}{8} = \dfrac{2.5(4.0)^2}{8} = 5.0$ kN·m.
+---
+Use the dressed size: $b = 45$ mm, $d = 190$ mm.
+---
+$f_b = \dfrac{6M}{bd^2} = \dfrac{6(5.0 \times 10^6)}{45(190)^2} = 18.47$ MPa.

@@ -1,0 +1,15 @@
+topic: transportation/highway-design
+title: Tangent length from the degree of curve
+answer: A
+hint: Get the radius from the degree of curve first. The tangent uses half the intersection angle.
+
+A provincial road in Bukidnon turns through an intersection angle of 38° on a simple curve with a degree of curve of 4°30'. The degree of curve is defined on a 20 m arc, so $D = \dfrac{1145.916}{R}$. Find the tangent length.
+
+A. 87.68 m    B. 198.95 m    C. 168.89 m    D. 438.41 m
+
+## Solution
+$D = 4.5°$, so $R = \dfrac{1145.916}{4.5} = 254.65$ m.
+---
+$T = R\tan\dfrac{I}{2} = 254.65\tan 19°$.
+---
+$T = 254.65(0.34433) = 87.68$ m.

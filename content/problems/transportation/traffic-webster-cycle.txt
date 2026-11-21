@@ -1,0 +1,15 @@
+topic: transportation/traffic
+title: Optimum cycle for a three-phase signal
+answer: B
+hint: Find each phase's flow ratio and add them to get $Y$. The lost time is for the whole cycle.
+
+A three-phase signal in Davao City has critical lane flows of 540, 396 and 324 veh/h for its three phases. The saturation flow is 1800 veh/h for each, and the lost time is 4 s per phase. Find the optimum cycle length using Webster's formula $C_o = \dfrac{1.5L + 5}{1 - Y}$.
+
+A. 32.9 s    B. 76.7 s    C. 56.7 s    D. 36.7 s
+
+## Solution
+Flow ratios: $\dfrac{540}{1800} = 0.30$, $\dfrac{396}{1800} = 0.22$, $\dfrac{324}{1800} = 0.18$. So $Y = 0.70$.
+---
+Total lost time: $L = 3 \times 4 = 12$ s.
+---
+$C_o = \dfrac{1.5(12) + 5}{1 - 0.70} = \dfrac{23}{0.30} = 76.7$ s.

@@ -1,0 +1,15 @@
+topic: surveying/measurements
+title: Pull and sag together
+answer: D
+hint: Two conditions differ from standardization: the pull and the support. Find each correction with the pull actually used.
+
+A 50 m steel tape is correct when fully supported under a pull of 50 N. It is used to measure one full 50 m span held only at its two ends, with a pull of 80 N. The tape has cross-sectional area 3 mm², $E = 200$ GPa and weighs 0.25 N/m. Temperature is at standard. What is the total correction for this span?
+
+A. +53.4 mm    B. −53.4 mm    C. −127.7 mm    D. −48.4 mm
+
+## Solution
+Pull correction: $C_p = \dfrac{(80 - 50)(50)}{(3\times10^{-6})(200\times10^{9})} = +0.0025$ m.
+---
+Sag correction with the 80 N pull: $C_s = -\dfrac{(0.25)^2(50)^3}{24(80)^2} = -0.0509$ m.
+---
+Total $= 0.0025 - 0.0509 = -0.0484$ m $= -48.4$ mm.

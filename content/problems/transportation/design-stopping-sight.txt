@@ -1,0 +1,15 @@
+topic: transportation/highway-design
+title: Stopping sight distance on a downgrade
+answer: D
+hint: Add the distance travelled before the brakes act to the braking distance. Decide whether going downhill helps or hurts the brakes.
+
+A car travels at 90 km/h down a 3% grade on Kennon Road. The driver's perception-reaction time is 2.5 s and the coefficient of friction is 0.30. Using $S = \dfrac{vt}{3.6} + \dfrac{v^2}{254(f \pm G)}$ with $v$ in km/h, find the stopping sight distance.
+
+A. 159.14 m    B. 168.80 m    C. 118.11 m    D. 180.61 m
+
+## Solution
+Reaction distance: $\dfrac{90(2.5)}{3.6} = 62.50$ m.
+---
+Downgrade, so $f - G = 0.30 - 0.03 = 0.27$. Braking distance: $\dfrac{90^2}{254(0.27)} = \dfrac{8100}{68.58} = 118.11$ m.
+---
+$S = 62.50 + 118.11 = 180.61$ m.

@@ -1,0 +1,17 @@
+topic: surveying/traverse-areas
+title: Lot area from coordinates
+answer: D
+hint: List the corners in order around the lot and repeat the first one at the end.
+
+The corners of a lot in Cavite have these coordinates in metres (x east, y north), listed in order around the boundary: A (0.00, 0.00), B (86.40, 12.50), C (94.20, 71.80), D (18.60, 63.00). What is the area of the lot?
+
+A. 9,625.14 m²    B. 6,069.06 m²    C. 2,406.29 m²    D. 4,812.57 m²
+
+## Solution
+Shoelace: $2A = \sum (x_i y_{i+1} - x_{i+1} y_i)$.
+---
+A to B: $0(12.50) - 86.40(0) = 0$. B to C: $86.40(71.80) - 94.20(12.50) = 6203.52 - 1177.50 = 5026.02$.
+---
+C to D: $94.20(63.00) - 18.60(71.80) = 5934.60 - 1335.48 = 4599.12$. D to A: $18.60(0) - 0(63.00) = 0$.
+---
+$2A = 9625.14$, so $A = 4812.57$ m².

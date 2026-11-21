@@ -1,0 +1,17 @@
+topic: transportation/highway-design
+title: Sight distance on a crest curve
+answer: A
+hint: Get the curve length from the rate of change of grade first. Then solve the given formula for $S$ and confirm it is shorter than the curve.
+
+A crest vertical curve joins a +3.5% grade to a −2.5% grade. The grade changes at 0.4% per 20 m station. Assuming the sight distance is shorter than the curve, use $L = \dfrac{AS^2}{658}$, with $A$ the algebraic difference of grades in percent, to find the available sight distance.
+
+A. 181.38 m    B. 40.56 m    C. 444.30 m    D. 128.26 m
+
+## Solution
+$A = 3.5 - (-2.5) = 6$ percent.
+---
+$L = \dfrac{6}{0.4} \times 20 = 300$ m.
+---
+$S = \sqrt{\dfrac{658L}{A}} = \sqrt{\dfrac{658(300)}{6}} = \sqrt{32{,}900} = 181.38$ m.
+---
+$S = 181.38$ m is less than $L = 300$ m, so the formula applies.

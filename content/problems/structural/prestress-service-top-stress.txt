@@ -1,0 +1,19 @@
+topic: structural/prestressed
+title: Top fibre stress at service after losses
+answer: B
+hint: Reduce the initial force by the losses first, and include the girder's own weight in the service moment.
+
+A post-tensioned roof girder is 350 mm wide and 750 mm deep and spans 12 m, simply supported. The initial prestress is 1800 kN and total losses are 18%. The tendon sits 250 mm below the centroid along the whole span. Besides its own weight (concrete 23.5 kN/m³), the girder carries a superimposed service load of 22 kN/m. Take compression as negative. Find the top fibre stress at midspan under full service load.
+
+A. 8.60 MPa compression    B. 9.83 MPa compression    C. 6.45 MPa compression    D. 14.22 MPa compression
+
+## Solution
+Effective prestress: $P_e = 1800(1 - 0.18) = 1476$ kN.
+---
+$A = 262\,500$ mm², $S = \dfrac{350(750)^2}{6} = 32.81 \times 10^6$ mm³.
+---
+Self-weight $= 23.5(0.35)(0.75) = 6.17$ kN/m. Total $w = 28.17$ kN/m, so $M = \dfrac{28.17(12)^2}{8} = 507.0$ kN·m.
+---
+$f_{top} = -\dfrac{1\,476\,000}{262\,500} + \dfrac{1\,476\,000(250)}{32.81 \times 10^6} - \dfrac{507.0 \times 10^6}{32.81 \times 10^6} = -5.62 + 11.25 - 15.45$
+---
+$f_{top} = -9.83$ MPa, which is 9.83 MPa compression.

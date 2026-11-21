@@ -1,0 +1,15 @@
+topic: transportation/traffic
+title: Capacity of an expressway lane
+answer: C
+hint: Read the free-flow speed and the jam density from the equation. At capacity both speed and density are half their limits.
+
+Speed studies on one lane of an expressway in Laguna fit the Greenshields relation $v = 90 - 0.6k$, with $v$ in km/h and $k$ in veh/km. What is the capacity of the lane?
+
+A. 6750 veh/h    B. 13500 veh/h    C. 3375 veh/h    D. 1688 veh/h
+
+## Solution
+Free-flow speed: $v_f = 90$ km/h. Jam density: $0 = 90 - 0.6k_j$, so $k_j = 150$ veh/km.
+---
+At capacity $k = 75$ veh/km and $v = 45$ km/h.
+---
+$q_{max} = kv = 75 \times 45 = 3375$ veh/h. Check: $\dfrac{v_f k_j}{4} = \dfrac{90(150)}{4} = 3375$.

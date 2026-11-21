@@ -1,0 +1,15 @@
+topic: surveying/traverse-areas
+title: Compass rule on one course
+answer: C
+hint: The correction is shared in proportion to course length, and it works against the error.
+
+A five-course closed traverse has a perimeter of 1,480.0 m. The departures add up to +0.42 m. Using the compass (Bowditch) rule, what correction should be applied to the departure of course CD, which is 312.4 m long?
+
+A. +0.089 m    B. −0.084 m    C. −0.089 m    D. −0.420 m
+
+## Solution
+Compass rule: $c_{\text{dep}} = -\sum\text{Dep}\cdot\dfrac{L}{P}$.
+---
+$c_{\text{dep}} = -0.42 \times \dfrac{312.4}{1480.0} = -0.42 \times 0.2111 = -0.0887$ m.
+---
+The correction is −0.089 m. It is negative because the departures add up to too much.

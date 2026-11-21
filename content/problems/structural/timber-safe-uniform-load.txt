@@ -1,0 +1,19 @@
+topic: structural/timber
+title: Safe uniform load on an apitong beam
+answer: D
+hint: Find the load allowed by bending, by shear and by deflection separately. The beam can only carry the smallest.
+
+An apitong beam has a nominal size of 100 mm × 300 mm and a dressed size of 90 mm × 290 mm, with the 290 mm side vertical. It spans 5.0 m, simply supported. Allowable bending stress $F_b = 16.5$ MPa, allowable shear stress $F_v = 1.6$ MPa, $E = 9500$ MPa, and deflection is limited to $L/360$. Ignoring self-weight, find the safe uniform load.
+
+A. 6.66 kN/m    B. 11.14 kN/m    C. 4.45 kN/m    D. 2.97 kN/m
+
+## Solution
+Bending: $S = \dfrac{bd^2}{6} = 1.2615 \times 10^6$ mm³, $M = F_b S = 20.81$ kN·m, so $w = \dfrac{8M}{L^2} = 6.66$ kN/m.
+---
+Shear: $V = \dfrac{2F_v bd}{3} = \dfrac{2(1.6)(90)(290)}{3} = 27.84$ kN, so $w = \dfrac{2V}{L} = 11.14$ kN/m.
+---
+Deflection: $I = \dfrac{90(290)^3}{12} = 182.92 \times 10^6$ mm⁴ and $\Delta = \dfrac{5000}{360} = 13.89$ mm.
+---
+$w = \dfrac{384EI\Delta}{5L^4} = \dfrac{384(9500)(182.92 \times 10^6)(13.89)}{5(5000)^4} = 2.97$ kN/m.
+---
+The smallest governs: safe load $= 2.97$ kN/m (deflection).

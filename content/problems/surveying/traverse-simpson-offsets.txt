@@ -1,0 +1,17 @@
+topic: surveying/traverse-areas
+title: Area between a creek and a fence
+answer: B
+hint: Count the intervals first. In Simpson's rule the weights go 1, 4, 2, 4, ..., 4, 1.
+
+A straight fence runs along one side of a farm lot in Nueva Ecija, and a creek curves away from it. Offsets from the fence to the creek, taken every 12 m, are 0, 5.6, 8.9, 9.8, 8.1, 4.7 and 0 m. Find the area between the fence and the creek by Simpson's one-third rule.
+
+A. 445.20 m²    B. 457.60 m²    C. 432.80 m²    D. 228.80 m²
+
+## Solution
+Seven offsets give six intervals, an even number, so Simpson's one-third rule applies.
+---
+Odd offsets (weight 4): $5.6 + 9.8 + 4.7 = 20.1$. Even inner offsets (weight 2): $8.9 + 8.1 = 17.0$.
+---
+$A = \dfrac{12}{3}\left[0 + 4(20.1) + 2(17.0) + 0\right] = 4(80.4 + 34.0) = 4(114.4)$.
+---
+$A = 457.60$ m². The trapezoidal rule gives 445.20 m², a little less for this curved edge.

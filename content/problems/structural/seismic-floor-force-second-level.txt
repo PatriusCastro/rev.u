@@ -1,0 +1,15 @@
+topic: structural/seismic
+title: Lateral force at the second floor
+answer: D
+hint: Check the period to see whether $F_t$ applies, then distribute by weight times height.
+
+A 3-storey concrete moment frame has a design base shear $V = 540$ kN. Its levels are: level 1, $w = 1800$ kN at 3.5 m; level 2, $w = 1800$ kN at 7.0 m; roof, $w = 1300$ kN at 10.5 m. Use $T = 0.0731 h_n^{3/4}$ and, per NSCP 2015, $F_t = 0.07TV$ only when $T > 0.7$ s. Find the lateral force at level 2 using $F_x = \dfrac{(V - F_t) w_x h_x}{\sum w_i h_i}$.
+
+A. 198.4 kN    B. 226.5 kN    C. 104.5 kN    D. 209.0 kN
+
+## Solution
+$T = 0.0731(10.5)^{3/4} = 0.426$ s $\le 0.7$ s, so $F_t = 0$.
+---
+$\sum w_i h_i = 1800(3.5) + 1800(7.0) + 1300(10.5) = 32\,550$ kN·m.
+---
+$F_2 = \dfrac{540(1800)(7.0)}{32\,550} = 209.0$ kN.

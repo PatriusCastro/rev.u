@@ -1,0 +1,15 @@
+topic: transportation/highway-design
+title: Middle ordinate of a curve
+answer: B
+hint: The middle ordinate runs from the midpoint of the long chord to the midpoint of the arc. Work in the right triangle at the centre with half the intersection angle.
+
+A curve on an expressway interchange ramp has a radius of 450 m and an intersection angle of 36°. Find the middle ordinate, the distance from the midpoint of the long chord to the midpoint of the curve.
+
+A. 23.16 m    B. 22.02 m    C. 85.94 m    D. 139.06 m
+
+## Solution
+$M = R\left(1 - \cos\dfrac{I}{2}\right)$.
+---
+$M = 450(1 - \cos 18°) = 450(1 - 0.95106)$.
+---
+$M = 22.02$ m. The external distance, $R(\sec 18° - 1) = 23.16$ m, is a different length.

@@ -1,0 +1,15 @@
+topic: transportation/traffic
+title: Spacing from flow and speed
+answer: A
+hint: Get the density from $q = kv$ first, then turn vehicles per kilometre into metres per vehicle.
+
+A counting station on a lane of SLEX records a flow of 1800 veh/h. The space mean speed of the same stream is 72 km/h. What is the average spacing between vehicles?
+
+A. 40 m    B. 25 m    C. 20 m    D. 72 m
+
+## Solution
+Density: $k = \dfrac{q}{v} = \dfrac{1800}{72} = 25$ veh/km.
+---
+Spacing: $s = \dfrac{1000}{k} = \dfrac{1000}{25} = 40$ m.
+---
+Check: headway $= \dfrac{3600}{1800} = 2$ s, and $72$ km/h $= 20$ m/s, so $20 \times 2 = 40$ m.

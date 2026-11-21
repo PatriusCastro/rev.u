@@ -1,0 +1,13 @@
+topic: structural/timber
+title: Horizontal shear in a yakal beam
+answer: A
+hint: The maximum shear in a simple span is at the support. A rectangle's peak shear stress is higher than the average.
+
+A yakal beam, dressed 75 mm wide and 250 mm deep, spans 5.0 m simply supported and carries a uniform load of 8 kN/m. Find the maximum horizontal shear stress.
+
+A. 1.600 MPa    B. 1.067 MPa    C. 3.200 MPa    D. 2.133 MPa
+
+## Solution
+$V = \dfrac{wL}{2} = \dfrac{8(5.0)}{2} = 20$ kN.
+---
+$f_v = \dfrac{3V}{2bd} = \dfrac{3(20\,000)}{2(75)(250)} = 1.600$ MPa.

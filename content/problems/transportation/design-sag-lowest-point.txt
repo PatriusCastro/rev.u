@@ -1,0 +1,15 @@
+topic: transportation/highway-design
+title: Lowest point of a sag curve
+answer: C
+hint: The lowest point is where the grade along the curve becomes zero. Measure its distance from the PVC, not from the PVI.
+
+A symmetrical parabolic sag curve 200 m long joins a −3% grade to a +2% grade. The PVI is at station 5+400.00, elevation 120.000 m. Find the station and elevation of the lowest point of the curve.
+
+A. 5+380.00, 121.400 m    B. 5+400.00, 121.250 m    C. 5+420.00, 121.200 m    D. 5+400.00, 120.000 m
+
+## Solution
+The PVC is 100 m back: station 5+300.00, elevation $120.000 + 0.03(100) = 123.000$ m.
+---
+Lowest point: $x = \dfrac{-g_1L}{g_2 - g_1} = \dfrac{0.03(200)}{0.05} = 120$ m from the PVC, so station 5+420.00.
+---
+$y = 123.000 - 0.03(120) + \dfrac{0.05}{2(200)}(120)^2 = 123.000 - 3.600 + 1.800 = 121.200$ m.

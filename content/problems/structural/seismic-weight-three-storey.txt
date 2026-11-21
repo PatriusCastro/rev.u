@@ -1,0 +1,17 @@
+topic: structural/seismic
+title: Seismic weight of a three-storey building
+answer: D
+hint: Add every level above the base, and count the partitions only on the levels that have them.
+
+A 3-storey dormitory in Davao has a plan of 18 m by 12 m at every level. The 2nd and 3rd floors each carry a dead load of 6.2 kPa plus partitions of 1.0 kPa. The roof carries a dead load of 4.8 kPa and no partitions. The ground floor is a slab on grade and is not counted. Find the seismic weight $W$, taken as the dead load plus partitions.
+
+A. 3715.2 kN    B. 4665.6 kN    C. 3110.4 kN    D. 4147.2 kN
+
+## Solution
+Floor area: $18 \times 12 = 216$ m².
+---
+2nd and 3rd floors: $2(6.2 + 1.0)(216) = 3110.4$ kN.
+---
+Roof: $4.8(216) = 1036.8$ kN.
+---
+$W = 3110.4 + 1036.8 = 4147.2$ kN.

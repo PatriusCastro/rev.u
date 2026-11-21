@@ -1,0 +1,15 @@
+topic: structural/prestressed
+title: Load balanced by a parabolic tendon
+answer: B
+hint: Balancing uses the force that remains after losses, and the sag measured at midspan from the line joining the tendon ends.
+
+A post-tensioned slab band spans 15 m, simply supported. Its tendon is parabolic, at the centroid at both supports and 200 mm below the centroid at midspan. The jacking force is 1800 kN and long-term losses total 300 kN. What uniform upward load does the tendon exert on the concrete at service?
+
+A. 5.33 kN/m    B. 10.67 kN/m    C. 12.80 kN/m    D. 21.33 kN/m
+
+## Solution
+Effective force: $P_e = 1800 - 300 = 1500$ kN.
+---
+Sag $e = 0.20$ m at midspan.
+---
+$w_b = \dfrac{8P_e e}{L^2} = \dfrac{8(1500)(0.20)}{15^2} = 10.67$ kN/m.

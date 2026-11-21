@@ -1,0 +1,15 @@
+topic: structural/prestressed
+title: Design flexural strength with given fps
+answer: A
+hint: Treat the tendon like tension steel stressed to fps. Find the depth of the stress block, then the lever arm.
+
+A bonded post-tensioned rectangular beam is 350 mm wide. The tendon area is 990 mm² at a depth of 640 mm from the top. Take $f'_c = 35$ MPa and the tendon stress at nominal strength $f_{ps} = 1680$ MPa. The section is tension-controlled, so $\phi = 0.90$. Find the design moment strength $\phi M_n$.
+
+A. 838.5 kN·m    B. 718.9 kN·m    C. 931.6 kN·m    D. 958.0 kN·m
+
+## Solution
+$a = \dfrac{A_{ps}f_{ps}}{0.85 f'_c b} = \dfrac{990(1680)}{0.85(35)(350)} = 159.7$ mm.
+---
+$M_n = A_{ps}f_{ps}\left(d_p - \dfrac{a}{2}\right) = 990(1680)(640 - 79.9) = 931.6 \times 10^6$ N·mm.
+---
+$\phi M_n = 0.90(931.6) = 838.5$ kN·m.

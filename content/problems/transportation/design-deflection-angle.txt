@@ -1,0 +1,15 @@
+topic: transportation/highway-design
+title: Deflection angle to a curve station
+answer: D
+hint: Find the arc length from the PC to the point. The deflection angle is half the central angle that arc subtends.
+
+A simple curve of radius 200 m begins at the PC, station 2+120.00. A surveyor sets up a total station at the PC, sighted along the back tangent extended forward. What deflection angle should be turned to set the stake at station 2+200.00?
+
+A. 22°55'06"    B. 5°43'46"    C. 2°51'53"    D. 11°27'33"
+
+## Solution
+Arc length from the PC: $s = 2200.00 - 2120.00 = 80.00$ m.
+---
+Central angle: $\dfrac{s}{R} = \dfrac{80}{200} = 0.4$ rad $= 22.918°$.
+---
+The deflection angle is half: $\delta = 11.459° = 11°27'33"$.
