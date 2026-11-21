@@ -83,6 +83,7 @@ await step('new user Today: no repeats, practice is the main action', async () =
 // 2. Lesson then practice from it
 timings.subjects = await go('/subjects'); await audit('subjects-phone');
 await step('subjects -> lesson -> practice', async () => {
+  await page.click('a[href="/subjects/math"]'); await page.waitForURL('**/subjects/math');
   await page.click('a[href="/lesson/trigonometry/angles-of-elevation"]'); await page.waitForURL('**/lesson/**');
   timings.lessonKatex = await page.locator('.katex').count();
   await audit('lesson-phone'); await shot('03-lesson');
@@ -100,7 +101,7 @@ await step('practice: hint, answer, every step, through to summary', async () =>
     await page.waitForSelector('.fb');
     (await page.getAttribute('.fb', 'class')).includes('good') ? correctSeen++ : wrongSeen++;
     expect(await opts.locator('.right').count() + await page.locator('.opts .right').count() >= 1, 'correct answer not shown');
-    while (await page.isEnabled('button:has-text("Show next step")').catch(() => false)) await page.click('button:has-text("Show next step")');
+    while (await page.locator('button:has-text("Show next step")').count()) await page.click('button:has-text("Show next step")');
     expect(await page.isVisible('text=All steps shown'), 'steps did not finish');
     if (i === 0) await shot('05-solution');
     const next = page.locator('button:has-text("Next problem"), button:has-text("See how the set went")');
@@ -164,7 +165,7 @@ await step('repeat answered right moves to 3 days; a 7-day repeat right clears i
 
 // 4. Mock exam: refresh, time up
 await step('mock exam: answer, refresh keeps time, time-up shows results', async () => {
-  await go('/subjects'); await page.click('text=Take a mock exam'); await page.waitForURL('**/attempt/**');
+  await go('/subjects/math'); await page.click('text=Take a mock exam'); await page.waitForURL('**/attempt/**');
   await shot('09-mock'); await audit('mock-phone');
   expect(!(await page.isVisible('text=Show a hint')), 'mock shows hints');
   await page.locator('.opts button').first().click(); await page.click('text=Save and next'); await page.waitForTimeout(800);
@@ -183,9 +184,11 @@ await step('library: non-PDF refused, PDF uploads, opens, deletes', async () => 
   await page.setInputFiles('input[type=file]', join(dir, 'notes.txt'));
   await page.click('button:has-text("Upload a PDF")');
   expect(await page.isVisible('[role=alert]'), 'text file not refused');
+  writeFileSync(join(dir, 'tiny.pdf'), '%PDF-1.4\n1 0 obj<</Type/Catalog>>endobj\ntrailer<</Root 1 0 R>>\n%%EOF\n');
   await page.setInputFiles('input[type=file]', join(dir, 'tiny.pdf'));
   await page.click('button:has-text("Upload a PDF")'); await page.waitForSelector('.rows a.item');
   await page.click('.rows a.item'); await page.waitForURL('**/library/**'); await shot('11-reader');
+  page.once('dialog', (d) => d.accept());
   await page.click('button:has-text("Delete")'); await page.waitForURL(BASE + '/library');
   expect(await page.isVisible('text=No files yet'), 'not deleted');
 });

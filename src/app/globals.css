@@ -170,7 +170,9 @@ h1.title { margin: 0; font-size: 28px; font-weight: 700; line-height: 1.15; lett
 .stage { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; font-size: 12px; color: var(--color-ink-2); }
 .dots { display: flex; gap: 4px; } .dots i { width: 8px; height: 8px; border-radius: 50%; background: var(--color-line-strong); } .dots .f { background: var(--color-green); }
 .cards { display: grid; gap: 20px; align-items: start; }
-.subj { display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 12px; align-items: center; padding: 16px; } .subj .prog { width: 44px; height: 44px; }
+.subj { display: grid; grid-template-columns: 44px minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 16px; } .subj .prog { width: 44px; height: 44px; }
+/* Phone: subjects list shows headers only; each opens its own page of topics. */
+@media (max-width: 599px) { .subjcard > :not(.subj) { display: none; } }
 .topic { display: grid; grid-template-columns: 20px minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 12px 16px; border-top: 1px solid var(--color-line); color: var(--color-ink-2); min-height: 44px; }
 .topic .t { color: var(--color-ink); font-weight: 500; } .topic b { font-weight: 600; color: var(--color-ink); font-variant-numeric: tabular-nums; }
 .bar { display: block; height: 4px; border-radius: 9px; background: var(--color-line); margin-top: 6px; overflow: hidden; }
@@ -178,14 +180,39 @@ h1.title { margin: 0; font-size: 28px; font-weight: 700; line-height: 1.15; lett
 .topic.w b { color: var(--color-red); } .topic.w .bar i { background: var(--color-red); }
 .subtopics { display: flex; flex-wrap: wrap; gap: 8px; padding: 0 16px 14px 48px; }
 .chip { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 0 14px; border-radius: 999px; border: 1px solid var(--color-line-strong); font-size: 13px; font-weight: 600; color: var(--color-green); }
-.foot { display: flex; gap: 8px; padding: 2px 12px; border-top: 1px solid var(--color-line); }
+.foot { display: flex; align-items: center; gap: 8px; padding: 2px 16px 2px 12px; border-top: 1px solid var(--color-line); }
+.foot .sub { margin-left: auto; text-align: right; } .foot.top { border-top: 0; }
 .cnt { display: inline-grid; place-items: center; min-width: 20px; height: 20px; padding: 0 6px; margin-left: 4px; border-radius: 999px; font-size: 12px; font-weight: 600; font-variant-numeric: tabular-nums; background: var(--color-surface); color: var(--color-ink-2); }
 .seg a[aria-current="page"] .cnt { background: var(--color-green-soft); color: var(--color-green); }
-.split { display: grid; gap: 20px; align-items: start; width: 100%; max-width: 640px; }
+.split { display: grid; grid-template-columns: minmax(0, 100%); gap: 20px; align-items: start; width: 100%; max-width: 640px; }
+.split > * { min-width: 0; }
+/* Answered: the Next button docks at the bottom and the scratch pad button moves up above it. */
+.solve:has(.dock) .scroll { padding-bottom: 16px; } .solve:has(.dock) .fab { bottom: 92px; }
+.acts { display: flex; align-items: center; gap: 8px; } .acts .ib { color: var(--color-ink-2); }
+.note { margin: 0; padding: 12px 14px; border-radius: 14px; background: var(--color-green-soft); color: var(--color-green); font-weight: 600; max-width: 640px; }
+
+/* Library */
+.quota { display: grid; grid-template-columns: 1fr auto; align-items: baseline; gap: 0 12px; padding: 0 4px; }
+.quota .bar { grid-column: 1 / -1; } .bar .full { background: var(--color-red); }
+.empty.blank { display: grid; grid-template-columns: 36px minmax(0, 1fr); gap: 12px; align-items: center; }
+.drop { position: relative; display: grid; justify-items: center; gap: 4px; padding: 24px 16px; border: 1.5px dashed var(--color-line-strong); border-radius: 16px; text-align: center; color: var(--color-green); background: var(--color-bg); transition: border-color .2s, background-color .2s; }
+.drop input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+.drop .t { color: var(--color-ink); overflow-wrap: anywhere; } .drop svg { width: 28px; height: 28px; margin-bottom: 4px; }
+.drop:focus-within { outline: 2px solid var(--color-green); outline-offset: 2px; }
+.drop.has, .drop:hover { border-color: var(--color-green); background: var(--color-green-soft); }
+
+/* Today extras */
+.done { background: var(--color-green-soft); box-shadow: none; } .done .tile { background: var(--color-green); color: #fff; }
+.wk .hrow { font-size: inherit; }
+.days .n { color: var(--color-green); font-weight: 700; }
+.bento a.card .sub { display: flex; align-items: center; gap: 4px; }
+
+/* Lesson: practice button docked to the bottom while reading */
+.dock { position: sticky; bottom: 0; z-index: 1; margin: 0 -4px; padding: 16px 4px 4px; background: linear-gradient(transparent, var(--color-bg) 16px); }
 
 /* Forms */
 .field { display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 600; color: var(--color-ink-2); }
-.field input, .field select { min-height: 48px; padding: 0 14px; border: 1px solid var(--color-line-strong); border-radius: 14px; background: var(--color-surface); font-size: 15px; font-weight: 400; color: var(--color-ink); }
+.field input, .field select { min-width: 0; width: 100%; min-height: 48px; padding: 0 14px; border: 1px solid var(--color-line-strong); border-radius: 14px; background: var(--color-surface); font-size: 15px; font-weight: 400; color: var(--color-ink); }
 .field textarea { padding: 12px 14px; border: 1px solid var(--color-line-strong); border-radius: 14px; background: var(--color-surface); font-size: 15px; font-weight: 400; line-height: 1.5; color: var(--color-ink); resize: vertical; min-height: 96px; }
 .field .tip { font-weight: 400; }
 .field input[type="radio"] { min-height: 0; width: 22px; height: 22px; padding: 0; accent-color: var(--color-green); }
@@ -209,6 +236,7 @@ h1.title { margin: 0; font-size: 28px; font-weight: 700; line-height: 1.15; lett
   .vh { padding: 28px 28px 0; } .scroll { padding: 24px 28px; }
   .cols { grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 24px; }
   .cards { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+  .subjcard .subj .chev { display: none; }
   .solve { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
   .solve .scroll { padding-bottom: 24px; }
   .pad:not(.full), .pad.open:not(.full) { position: static; height: auto; transform: none; transition: none; margin: 24px 24px 24px 0; border-radius: 24px; box-shadow: var(--shadow-card); overflow: hidden; }
@@ -220,11 +248,13 @@ h1.title { margin: 0; font-size: 28px; font-weight: 700; line-height: 1.15; lett
   .nav .brand { display: block; padding: 8px 14px 12px; font-size: 18px; font-weight: 700; letter-spacing: -.01em; }
   .vh { padding: 32px 36px 0; } .scroll { padding: 28px 36px; }
   .split { max-width: 1040px; grid-template-columns: minmax(0, 1.4fr) minmax(300px, 1fr); }
+  .split.even { grid-template-columns: 1fr 1fr; }
 }
 /* Hover feedback only where there is a pointer; touch keeps the press scale. */
 @media (hover: hover) {
   .card.item, .rows > .item, .topic, .chip, .seg a { transition: background-color .15s, border-color .15s, color .15s; }
-  .card.item:hover, .rows > .item:hover, .rows > form > .item:hover, .topic:hover { background-color: #fafcfb; }
+  .card.item:hover, .rows > .item:hover, .rows > form > .item:hover, .topic:hover, .subj:hover { background-color: #fafcfb; }
+  .bento a.card:hover { box-shadow: var(--shadow-float); }
   .card.item:hover .chev, .rows > .item:hover .chev { color: var(--color-green); }
   .nav a:not([aria-current="page"]):hover { background: var(--color-bg); color: var(--color-ink); }
   .opts button:not(:disabled):hover { border-color: var(--color-green); }

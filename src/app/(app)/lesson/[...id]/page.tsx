@@ -27,7 +27,8 @@ export default async function Lesson({ params }: PageProps<'/lesson/[...id]'>) {
         <h1 className="title">{topic.name}</h1>
         <article className="prose" dangerouslySetInnerHTML={{ __html: rich(topic.lesson) }} />
         {count ? (
-          <form action={startPractice.bind(null, id)}>
+          // Sticks to the bottom while reading, so practice is one tap away at any point in the lesson.
+          <form className="dock" action={startPractice.bind(null, id)}>
             <Submit className="btn pri full" pendingText="Starting…">Practise {Math.min(10, count)} problems<ArrowRight {...ic} className="mv" /></Submit>
           </form>
         ) : <p className="sub">Problems for this topic are on the way.</p>}

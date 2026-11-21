@@ -109,10 +109,15 @@ export function Problem(p: ProblemProps) {
             <div className="grp">
               <h2 className="label">Solution</h2>
               <ol className="steps">{result.steps.slice(0, shown).map((s, i) => <li key={i}><span dangerouslySetInnerHTML={{ __html: s }} /></li>)}</ol>
-              <button className="btn pri full" disabled={shown >= result.steps.length} onClick={() => setShown(shown + 1)}>
-                {shown >= result.steps.length ? 'All steps shown' : 'Show next step'}
-              </button>
-              <button className="btn txt" onClick={() => router.refresh()}>{last ? 'See how the set went' : 'Next problem'}<ArrowRight {...ic} className="mv" /></button>
+              {shown < result.steps.length
+                ? <button className="btn sec full" onClick={() => setShown(shown + 1)}>Show next step ({shown} of {result.steps.length})</button>
+                : <p className="sub" style={{ margin: 0, textAlign: 'center' }}>All steps shown</p>}
+            </div>
+          )}
+          {/* Docked to the bottom once answered, so the way forward is always in view. */}
+          {result && (
+            <div className="dock">
+              <button className="btn pri full next" onClick={() => router.refresh()}>{last ? 'See how the set went' : 'Next problem'}<ArrowRight {...ic} className="mv" /></button>
             </div>
           )}
         </div>

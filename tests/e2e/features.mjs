@@ -21,7 +21,7 @@ async function newUser(tag) {
 
 // 1. Mock exam: answer, skip, go back, finish with an unanswered problem.
 const s = await newUser('student');
-await s.goto(BASE + '/subjects'); await s.click('text=Take a mock exam'); await s.waitForURL('**/attempt/**');
+await s.goto(BASE + '/subjects/math'); await s.click('text=Take a mock exam'); await s.waitForURL('**/attempt/**');
 const mockUrl = s.url().split('?')[0];
 await s.click('.opts button >> nth=1'); await s.click('button:has-text("Save and next")'); await s.waitForSelector('h1:has-text("Mock exam 2 of")');
 check('mock: save and next moves to problem 2', s.url().endsWith('?q=1'));
@@ -85,7 +85,7 @@ check('someone outside the class cannot open the lesson', await outsider.isVisib
 await s.goto(BASE + '/classes'); await s.fill('input[name=code]', code.toLowerCase()); await s.click('button:has-text("Join class")');
 await s.waitForSelector('text=You joined Batch Test');
 check('student: joins with the code (any case)', true);
-await s.goto(BASE + '/subjects');
+await s.goto(BASE + '/subjects/math');
 check('student: class lesson appears in Subjects', await s.isVisible('text=Pressure basics'));
 await s.click('text=Pressure basics'); await s.waitForURL('**/lesson/**');
 await s.click('button:has-text("Practise 1 problems"), button:has-text("Practise 1")'); await s.waitForURL('**/attempt/**');

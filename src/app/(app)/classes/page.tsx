@@ -23,8 +23,9 @@ export default async function Classes({ searchParams }: PageProps<'/classes'>) {
         <Link className="ib" href="/subjects" aria-label="Back to Subjects"><ChevronLeft {...ic} /></Link>
         <div className="mid"><h1 className="t" style={{ margin: 0, fontSize: 'inherit' }}>Classes</h1></div>
       </div>
-      <div className="scroll"><div className="narrow">
-        {msg && <p className="sub" role="status" style={{ margin: 0 }}>{msg}</p>}
+      <div className="scroll">
+        {msg && <p className="note" role="status">{msg}</p>}
+        <div className="split even">
 
         <section className="grp">
           <h2 className="label">Join a class</h2>
@@ -54,7 +55,7 @@ export default async function Classes({ searchParams }: PageProps<'/classes'>) {
                 <div className="item" key={c.id}>
                   <span className="tile"><Users {...ic} /></span>
                   <span><span className="t">{c.name}</span><span className="sub">Code <b style={{ letterSpacing: 1, color: 'var(--color-ink)' }}>{c.code}</b>, {size(c.id)} {size(c.id) === 1 ? 'student' : 'students'}</span></span>
-                  <form action={deleteClass.bind(null, c.id)}><button className="btn txt" style={{ color: 'var(--color-red)' }} aria-label={`Delete class ${c.name}`}>Delete</button></form>
+                  <form action={deleteClass.bind(null, c.id)}><Submit className="btn txt" style={{ color: 'var(--color-red)' }} aria-label={`Delete class ${c.name}`} confirmText={`Delete ${c.name}? Students lose its lessons and problems.`}>Delete</Submit></form>
                 </div>
               ))}
             </div>
