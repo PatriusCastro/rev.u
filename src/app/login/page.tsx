@@ -26,7 +26,7 @@ const NOTICES: Record<string, string> = {
   signed_out: 'You’re signed out. See you next session.',
   saved: 'You’re signed out. Your account is saved here, so one tap signs you back in.',
   saved_expired: 'That saved sign-in has ended. Sign in once more with your password or a code.',
-  expired: 'That link has expired or was already used. Try again below.',
+  expired: 'That link has expired, was already used, or was opened on another device or browser. Try again below.',
 };
 
 export default async function Login({ searchParams }: PageProps<'/login'>) {

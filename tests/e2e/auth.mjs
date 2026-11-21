@@ -2,6 +2,7 @@
 import { chromium } from 'playwright-core';
 const BASE = process.env.BASE ?? 'http://localhost:3000';
 const MAIL = process.env.MAIL ?? 'http://127.0.0.1:54324';
+const API = process.env.SUPABASE_URL ?? 'http://127.0.0.1:54321';
 const KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? (await import('node:fs')).readFileSync(import.meta.dirname + '/../../.env.local', 'utf8').match(/NEXT_PUBLIC_SUPABASE_ANON_KEY=(.*)/)[1].trim();
 const browser = await chromium.launch({ executablePath: process.env.CHROME_PATH ?? 'C:/Program Files/Google/Chrome/Application/chrome.exe' });
 const results = [];
@@ -102,6 +103,29 @@ await step('one-tap sign-in', async () => {
   await p.click(`button[aria-label="Remove ${email} from this device"]`); await p.waitForURL(BASE + '/login');
   check('removed account leaves the list, showing the normal form', (await p.locator('input[name=password]').count()) === 1);
   check('removing it ends that session on the server', !(await refreshWorks(token2)));
+  errors.push(...p.errors); await p.context().close();
+});
+
+// 6. Supabase's default emails (what production sends until custom SMTP is set up) link through Supabase,
+//    which then returns ?code=… to /auth/confirm. Built here from the token in our email, as Supabase builds it.
+//    Each link works once, and only in the browser that asked for it.
+await step('default email links', async () => {
+  const viaSupabase = (tokenHash, type, back) => `${API}/auth/v1/verify?token=${tokenHash}&type=${type}&redirect_to=${encodeURIComponent(BASE + back)}`;
+  const tokenOf = (m) => m.HTML.match(/token_hash=([^&"]+)/)[1];
+  const pause = () => new Promise((ok) => setTimeout(ok, 6000)); // Supabase spaces out emails to one address
+  const p = await fresh(), who = `link-${Date.now()}@revu.test`;
+  const askCode = async () => { await p.goto(BASE + '/login?mode=code'); await p.fill('input[name=email]', who); await p.click('button:has-text("Email me a code")'); await p.waitForSelector('input[name=code]'); return tokenOf(await mail(who, 'sign-in')); };
+  const other = await fresh(); await other.goto(viaSupabase(await askCode(), 'magiclink', '/auth/confirm')); await other.waitForURL(/msg=expired/);
+  check('default link opened in another browser explains why it failed', (await other.textContent('[role=status]')).includes('another device'));
+  errors.push(...other.errors); await other.context().close();
+  await pause(); const second = await askCode();
+  await p.goto(viaSupabase(second, 'magiclink', '/auth/confirm')); await p.waitForURL(/\/(setup)?$/);
+  check('default sign-in link signs in', !p.url().includes('/login'));
+  await p.goto(BASE + '/setup'); await p.fill('input[name=exam_date]', ymd(90)); await p.click('text=Save exam date'); await p.waitForURL(BASE + '/');
+  await signOutNow(p); await p.waitForURL(/\/login/); await pause();
+  await p.goto(BASE + '/login?mode=reset'); await p.fill('input[name=email]', who); await p.click('button:has-text("Send reset link")'); await p.waitForSelector('text=Check your email');
+  await p.goto(viaSupabase(tokenOf(await mail(who, 'Reset')), 'recovery', '/auth/confirm?type=recovery')); await p.waitForURL(/reset-password|login/);
+  check('default reset link opens set-new-password', p.url().endsWith('/reset-password'), p.url());
   errors.push(...p.errors); await p.context().close();
 });
 
