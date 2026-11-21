@@ -1,15 +1,19 @@
 import Link from 'next/link';
-import { Timer, Users } from 'lucide-react';
-import { Submit } from '@/components/submit';
+import { ChevronRight, ListChecks, Users } from 'lucide-react';
 import { session } from '@/lib/supabase';
 import { topicStats } from '@/lib/data';
-import { MIN_ANSWERS } from '@/lib/plan';
-import { startMock } from '@/app/actions';
-import { AreaIcon, Ring, ic, pct } from '@/components/ui';
+import { startQuiz } from '@/app/actions';
+import { Submit } from '@/components/submit';
+import { SubjectCard } from '@/components/subject-card';
+import { ic } from '@/components/ui';
 
 export default async function Subjects() {
-  const { supabase } = await session();
-  const { topics, subjects, stats } = await topicStats(supabase);
+  const { supabase, user } = await session();
+  const [{ topics, subjects, stats }, { data: quizzes }] = await Promise.all([
+    topicStats(supabase),
+    // Row rules return your own quizzes and those of classes you are in.
+    supabase.from('quizzes').select('id, title, minutes, question_ids, owner_id, classes(name)').neq('question_ids', '{}').order('created_at', { ascending: false }),
+  ]);
   const started = [...stats.values()].filter((s) => s.answered > 0).length;
 
   return (
@@ -21,41 +25,27 @@ export default async function Subjects() {
         </div>
         <Link className="btn txt" href="/classes"><Users {...ic} />Classes</Link>
       </div>
-      <div className="scroll"><div className="cards">
-        {subjects.map((subject) => {
-          const own = topics.filter((t) => t.subject_id === subject.id);
-          const tally = own.reduce((a, t) => { const s = stats.get(t.id); return { answered: a.answered + (s?.answered ?? 0), correct: a.correct + (s?.correct ?? 0) }; }, { answered: 0, correct: 0 });
-          return (
-            <section className="card" key={subject.id} aria-label={subject.name}>
-              <div className="subj">
-                <Ring value={tally.answered ? tally.correct / tally.answered : 0} label={tally.answered ? `${pct(tally.correct, tally.answered)}%` : '–'} />
-                <span><span className="t">{subject.name}</span><span className="sub">{own.length ? `${own.filter((t) => stats.get(t.id)?.answered).length} of ${own.length} topics started` : 'No topics yet'}</span></span>
-              </div>
-              {own.map((t) => {
-                const s = stats.get(t.id)!;
-                const p = pct(s.correct, s.answered);
-                const weak = s.answered >= MIN_ANSWERS && p < 50;
-                return (
-                  <Link className={'topic' + (weak ? ' w' : '')} key={t.id} href={`/lesson/${t.id}`}>
-                    <AreaIcon topicId={t.id} />
-                    <span>
-                      <span className="t">{t.name}</span>
-                      <span className="sub">{t.area}{s.answered ? `, ${s.answered} answered` : ', not started'}{weak ? ', weak topic' : ''}</span>
-                      <span className="bar"><i style={{ width: `${p}%` }} /></span>
-                    </span>
-                    <b>{s.answered ? `${p}%` : ''}</b>
-                  </Link>
-                );
-              })}
-              {own.length > 0 && (
-                <form className="foot" action={startMock.bind(null, subject.id)}>
-                  <Submit className="btn txt" pendingText="Starting…"><Timer {...ic} />Take a mock exam</Submit>
+      <div className="scroll">
+        {!!quizzes?.length && (
+          <section className="grp" style={{ maxWidth: 640 }}>
+            <h2 className="label">Quizzes</h2>
+            <div className="card rows">
+              {quizzes.map((z) => (
+                <form key={z.id} action={startQuiz.bind(null, z.id)}>
+                  <Submit className="item" pendingText="Starting…">
+                    <span className="tile"><ListChecks {...ic} /></span>
+                    <span><span className="t">{z.title}</span><span className="sub">{z.question_ids.length} {z.question_ids.length === 1 ? 'problem' : 'problems'}, {z.minutes ? `${z.minutes} minutes` : 'no time limit'}, {z.owner_id === user.id ? 'yours' : (z.classes as unknown as { name: string } | null)?.name}</span></span>
+                    <ChevronRight {...ic} className="chev" />
+                  </Submit>
                 </form>
-              )}
-            </section>
-          );
-        })}
-      </div></div>
+              ))}
+            </div>
+          </section>
+        )}
+        <div className="cards">
+          {subjects.map((subject) => <SubjectCard key={subject.id} subject={subject} topics={topics} stats={stats} />)}
+        </div>
+      </div>
     </main>
   );
 }

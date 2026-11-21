@@ -1,12 +1,13 @@
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
-import { ArrowRight, BookOpen, ChevronRight, CircleCheck, Clock, Flame } from 'lucide-react';
+import { ArrowRight, BookOpen, ChevronRight, CircleCheck, Clock, Flame, Pencil } from 'lucide-react';
 import { Submit } from '@/components/submit';
 import { session } from '@/lib/supabase';
 import { topicStats } from '@/lib/data';
 import { rankTopics, dailyTarget, streak, weekDays, MIN_ANSWERS } from '@/lib/plan';
 import { dayOf, addDays, daysBetween } from '@/lib/schedule';
-import { signOut, startPractice, startRepeats } from '@/app/actions';
+import { startPractice, startRepeats } from '@/app/actions';
+import { SignOut } from '@/components/sign-out';
 import { AreaIcon, Ring, ic } from '@/components/ui';
 
 const MINUTES_PER_PROBLEM = 2;
@@ -34,6 +35,8 @@ export default async function Today() {
   const counts = days.map((d) => perDay.get(d) ?? 0);
   const top = Math.max(1, target, ...counts);
   const run = streak(new Set(perDay.keys()), today, addDays);
+  const weekTotal = counts.reduce((a, b) => a + b, 0);
+  const examDay = new Intl.DateTimeFormat('en-PH', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' }).format(new Date(profile.exam_date));
 
   // Repeats card: a started set continues, otherwise a new set starts.
   const cont = open?.[0] && open[0].question_ids.length - (open[0].answers as unknown as { count: number }[])[0].count;
@@ -57,7 +60,10 @@ export default async function Today() {
           <h1 className="title">Today</h1>
           <span className="sub">{new Intl.DateTimeFormat('en-PH', { weekday: 'long', day: 'numeric', month: 'long', timeZone: 'Asia/Manila' }).format(new Date())}</span>
         </div>
-        {run > 0 && <span className="pill"><Flame {...ic} />{run} {run === 1 ? 'day' : 'days'}</span>}
+        <div className="acts">
+          {run > 0 && <span className="pill"><Flame {...ic} />{run} {run === 1 ? 'day' : 'days'}</span>}
+          <span className="signout"><SignOut variant="icon" /></span>
+        </div>
       </div>
       <div className="scroll"><div className="cols">
         <div className="grp" style={{ gap: 20 }}>
@@ -74,7 +80,7 @@ export default async function Today() {
                 : <form action={startRepeats}><Submit className="btn inv full" pendingText="Starting…">Start repeats<ArrowRight {...ic} className="mv" /></Submit></form>}
             </section>
           ) : done ? (
-            <div className="card item"><span className="tile"><CircleCheck {...ic} /></span><span><span className="t">Done for today</span><span className="sub">You worked {doneToday} {doneToday === 1 ? 'problem' : 'problems'}. Anything more is extra.</span></span><span /></div>
+            <div className="card item done"><span className="tile"><CircleCheck {...ic} /></span><span><span className="t">Done for today</span><span className="sub">You worked {doneToday} {doneToday === 1 ? 'problem' : 'problems'}. Anything more is extra.</span></span><span /></div>
           ) : (
             <div className="card item"><span className="tile"><Clock {...ic} /></span><span><span className="t">No repeats due today</span><span className="sub">Problems you miss come back here on their day.</span></span><span /></div>
           )}
@@ -113,19 +119,18 @@ export default async function Today() {
         <div className="grp" style={{ gap: 20 }}>
           <div className="bento">
             <div className="card"><Ring value={doneToday / target} label={`${Math.round((100 * doneToday) / Math.max(1, target))}%`} /><div><span className="t">{doneToday} of {target}</span><span className="sub">problems today</span></div></div>
-            <div className="card"><div className="num">{daysLeft}</div><div><span className="t">{daysLeft === 1 ? 'day' : 'days'}</span><span className="sub">to the exam</span></div></div>
+            <Link className="card" href="/setup" aria-label={`${daysLeft} days to the exam on ${examDay}. Change exam date`}>
+              <div className="num">{daysLeft}</div>
+              <div><span className="t">{daysLeft === 1 ? 'day' : 'days'} to the exam</span><span className="sub">{examDay} <Pencil {...ic} size={13} className="chev" /></span></div>
+            </Link>
           </div>
           <div className="card wk">
-            <h2 className="label">Problems solved this week</h2>
+            <div className="hrow"><h2 className="label">Problems solved this week</h2><span className="sub">{weekTotal} total</span></div>
             <div className="bars" role="img" aria-label={`Problems solved each day this week: ${counts.slice(0, days.indexOf(today) + 1).join(', ')} so far today`}>
               {counts.map((c, i) => <i key={i} className={days[i] === today ? 'n' : undefined} style={{ height: `${(100 * c) / top}%` }} />)}
             </div>
-            <div className="days" aria-hidden>{['M', 'T', 'W', 'T', 'F', 'S', 'S'].map((d, i) => <span key={i}>{d}</span>)}</div>
+            <div className="days" aria-hidden>{['M', 'T', 'W', 'T', 'F', 'S', 'S'].map((d, i) => <span key={i} className={days[i] === today ? 'n' : undefined}>{d}</span>)}</div>
           </div>
-          <form action={signOut} style={{ display: 'flex', gap: 16 }}>
-            <Link className="btn txt" href="/setup">Change exam date</Link>
-            <button className="btn txt">Sign out</button>
-          </form>
         </div>
       </div></div>
     </main>

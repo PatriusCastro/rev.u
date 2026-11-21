@@ -14,7 +14,7 @@ export default async function Attempt({ params, searchParams }: PageProps<'/atte
   const [{ id }, { q: qParam }] = await Promise.all([params, searchParams]);
   const { supabase } = await session();
   const [{ data: attempt }, { data: answers }] = await Promise.all([
-    supabase.from('attempts').select('id, mode, question_ids, minutes, started_at, finished_at').eq('id', id).maybeSingle(),
+    supabase.from('attempts').select('id, mode, question_ids, minutes, started_at, finished_at, quizzes(title)').eq('id', id).maybeSingle(),
     supabase.from('answers').select('question_id, choice, correct').eq('attempt_id', id),
   ]);
   if (!attempt) notFound();
@@ -22,7 +22,9 @@ export default async function Attempt({ params, searchParams }: PageProps<'/atte
   const ids: string[] = attempt.question_ids;
   const answered = new Map((answers ?? []).map((a) => [a.question_id as string, a]));
   const mock = attempt.mode === 'mock';
-  const deadline = mock ? Date.parse(attempt.started_at) + attempt.minutes * 60_000 : null;
+  const quiz = (attempt.quizzes as unknown as { title: string } | null)?.title;
+  // A quiz can have no time limit; a mock exam always has one.
+  const deadline = mock && attempt.minutes ? Date.parse(attempt.started_at) + attempt.minutes * 60_000 : null;
   // Server component rendered once per request, so reading the clock here is safe.
   // eslint-disable-next-line react-hooks/purity
   const expired = deadline !== null && Date.now() > deadline;
@@ -44,7 +46,7 @@ export default async function Attempt({ params, searchParams }: PageProps<'/atte
         key={q.id} attemptId={attempt.id} mode={attempt.mode} index={index} count={ids.length}
         questionId={q.id} bodyHtml={inline(q.body)} figure={q.figure} hintHtml={inline(q.hint)}
         choices={(q.choices as { key: string; text: string }[]).map((c) => ({ key: c.key, html: inline(c.text) }))}
-        stage={rep && !rep.cleared_at ? String(rep.interval) : null} deadline={deadline}
+        stage={rep && !rep.cleared_at ? String(rep.interval) : null} deadline={deadline} label={quiz}
         saved={mock ? answered.get(q.id)?.choice ?? null : undefined}
         answered={mock ? ids.map((x) => answered.has(x)) : undefined}
       />
@@ -78,7 +80,9 @@ export default async function Attempt({ params, searchParams }: PageProps<'/atte
       <div className="vh"><div>
         <h1 className="title">{mock ? `${score}%` : `${right} of ${ids.length} right`}</h1>
         <span className="sub">
-          {mock
+          {quiz
+            ? `${right} of ${ids.length} right in ${quiz}. Missed problems are in your notebook.`
+            : mock
             ? `${right} of ${ids.length} right. The pass mark is ${PASS_MARK}% average, with no subject under 50%. Missed problems are in your notebook.`
             : right === ids.length ? 'Every one right. Nothing new goes into your notebook.' : 'The ones you missed are in your notebook and come back tomorrow.'}
         </span>

@@ -1,4 +1,5 @@
 import { saveExamDate } from '@/app/actions';
+import { Logo } from '@/components/ui';
 import { session } from '@/lib/supabase';
 import { addDays, dayOf } from '@/lib/schedule';
 
@@ -9,6 +10,7 @@ export default async function Setup({ searchParams }: PageProps<'/setup'>) {
     <main className="pa" style={{ display: 'block' }}>
       <div className="scroll" style={{ alignItems: 'center', paddingTop: 64 }}>
         <div className="narrow" style={{ maxWidth: 420 }}>
+          <Logo size={32} />
           <div>
             <h1 className="title">When is your exam?</h1>
             <span className="sub">Rev.U spreads the problems you have left over the days until then.</span>

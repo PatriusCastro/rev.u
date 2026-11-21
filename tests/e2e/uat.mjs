@@ -41,7 +41,7 @@ async function audit(label) {
     return res.violations.map((v) => ({ id: v.id, impact: v.impact, n: v.nodes.length, help: v.help, target: v.nodes[0]?.target?.join(' ') }));
   });
   const overflow = await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth + 1);
-  const smallTaps = await page.evaluate(() => [...document.querySelectorAll('a, button, input, select')].filter((el) => { const b = el.getBoundingClientRect(); return b.width && b.height && (b.height < 44 || b.width < 44) && getComputedStyle(el).visibility !== 'hidden'; }).map((el) => `${el.tagName.toLowerCase()} "${(el.textContent || el.getAttribute('aria-label') || el.name || '').trim().slice(0, 30)}" ${Math.round(el.getBoundingClientRect().width)}x${Math.round(el.getBoundingClientRect().height)}`));
+  const smallTaps = await page.evaluate(() => [...document.querySelectorAll('a, button, input, select')].filter((el) => { const b = (/^(checkbox|radio)$/.test(el.type) && el.closest('label') || el).getBoundingClientRect(); /* a label toggles its box, so it is the tap area */ return b.width && b.height && (b.height < 44 || b.width < 44) && getComputedStyle(el).visibility !== 'hidden'; }).map((el) => `${el.tagName.toLowerCase()} "${(el.textContent || el.getAttribute('aria-label') || el.name || '').trim().slice(0, 30)}" ${Math.round(el.getBoundingClientRect().width)}x${Math.round(el.getBoundingClientRect().height)}`));
   audits[label] = { axe: r, overflow, smallTaps };
 }
 
@@ -51,18 +51,25 @@ const email = `uat-${Date.now()}@revu.test`, pw = 'uat-password-1';
 await step('signed-out visitor is sent to sign in', async () => { await go('/subjects'); expect(page.url().endsWith('/login'), 'not redirected: ' + page.url()); });
 await step('wrong password shows a clear message', async () => {
   await page.fill('input[name=email]', 'nobody@revu.test'); await page.fill('input[name=password]', 'wrong-password');
-  await page.click('button:has-text("Sign in")'); await page.waitForURL(/msg=/);
-  const msg = await page.textContent('[role=status]'); note('info', 'Sign in', `Wrong password message reads: "${msg}"`);
+  await page.click('button:has-text("Sign in")'); await page.waitForSelector('p.alert');
+  const msg = await page.textContent('p.alert'); note('info', 'Sign in', `Wrong password message reads: "${msg}"`);
+  expect(await page.inputValue('input[name=email]') === 'nobody@revu.test', 'email was cleared after the error');
 });
 await step('short password is blocked before sending', async () => {
+  await page.click('nav.seg a:has-text("Create account")'); await page.waitForURL(/mode=signup/);
   await page.fill('input[name=email]', email); await page.fill('input[name=password]', 'short');
-  await page.click('button:has-text("Create an account")');
+  await page.click('button:has-text("Create account")');
   expect(page.url().includes('/login'), 'left the login page');
   expect(await page.evaluate(() => !document.querySelector('input[name=password]').checkValidity()), 'browser validation did not catch it');
 });
+await step('the server refuses a short password too', async () => {
+  await page.evaluate(() => document.querySelector('input[name=password]').removeAttribute('minlength'));
+  await page.click('button:has-text("Create account")'); await page.waitForSelector('p.alert');
+  expect((await page.textContent('p.alert')).includes('at least 8'), 'no message about length');
+});
 await audit('login-phone'); await shot('01-login');
 await step('sign up goes to exam date', async () => {
-  await page.fill('input[name=password]', pw); await page.click('button:has-text("Create an account")'); await page.waitForURL('**/setup');
+  await page.fill('input[name=password]', pw); await page.click('button:has-text("Create account")'); await page.waitForURL('**/setup');
 });
 await step('a past exam date is refused', async () => {
   await page.evaluate(() => document.querySelector('input[name=exam_date]').removeAttribute('min'));
@@ -77,12 +84,13 @@ await step('a valid exam date opens Today', async () => {
 timings.today = await go('/'); await shot('02-today-new'); await audit('today-new-phone');
 await step('new user Today: no repeats, practice is the main action', async () => {
   expect(await page.isVisible('text=No repeats due today'), 'missing empty repeats card');
-  expect(await page.locator('.btn.pri').count() === 1, `${await page.locator('.btn.pri').count()} primary buttons`);
+  expect(await page.locator('.btn.pri:visible').count() === 1, `${await page.locator('.btn.pri:visible').count()} primary buttons`);
 });
 
 // 2. Lesson then practice from it
 timings.subjects = await go('/subjects'); await audit('subjects-phone');
 await step('subjects -> lesson -> practice', async () => {
+  await page.click('a[href="/subjects/math"]'); await page.waitForURL('**/subjects/math');
   await page.click('a[href="/lesson/trigonometry/angles-of-elevation"]'); await page.waitForURL('**/lesson/**');
   timings.lessonKatex = await page.locator('.katex').count();
   await audit('lesson-phone'); await shot('03-lesson');
@@ -100,7 +108,7 @@ await step('practice: hint, answer, every step, through to summary', async () =>
     await page.waitForSelector('.fb');
     (await page.getAttribute('.fb', 'class')).includes('good') ? correctSeen++ : wrongSeen++;
     expect(await opts.locator('.right').count() + await page.locator('.opts .right').count() >= 1, 'correct answer not shown');
-    while (await page.isEnabled('button:has-text("Show next step")').catch(() => false)) await page.click('button:has-text("Show next step")');
+    while (await page.locator('button:has-text("Show next step")').count()) await page.click('button:has-text("Show next step")');
     expect(await page.isVisible('text=All steps shown'), 'steps did not finish');
     if (i === 0) await shot('05-solution');
     const next = page.locator('button:has-text("Next problem"), button:has-text("See how the set went")');
@@ -164,7 +172,7 @@ await step('repeat answered right moves to 3 days; a 7-day repeat right clears i
 
 // 4. Mock exam: refresh, time up
 await step('mock exam: answer, refresh keeps time, time-up shows results', async () => {
-  await go('/subjects'); await page.click('text=Take a mock exam'); await page.waitForURL('**/attempt/**');
+  await go('/subjects/math'); await page.click('text=Take a mock exam'); await page.waitForURL('**/attempt/**');
   await shot('09-mock'); await audit('mock-phone');
   expect(!(await page.isVisible('text=Show a hint')), 'mock shows hints');
   await page.locator('.opts button').first().click(); await page.click('text=Save and next'); await page.waitForTimeout(800);
@@ -183,9 +191,11 @@ await step('library: non-PDF refused, PDF uploads, opens, deletes', async () => 
   await page.setInputFiles('input[type=file]', join(dir, 'notes.txt'));
   await page.click('button:has-text("Upload a PDF")');
   expect(await page.isVisible('[role=alert]'), 'text file not refused');
+  writeFileSync(join(dir, 'tiny.pdf'), '%PDF-1.4\n1 0 obj<</Type/Catalog>>endobj\ntrailer<</Root 1 0 R>>\n%%EOF\n');
   await page.setInputFiles('input[type=file]', join(dir, 'tiny.pdf'));
   await page.click('button:has-text("Upload a PDF")'); await page.waitForSelector('.rows a.item');
   await page.click('.rows a.item'); await page.waitForURL('**/library/**'); await shot('11-reader');
+  page.once('dialog', (d) => d.accept());
   await page.click('button:has-text("Delete")'); await page.waitForURL(BASE + '/library');
   expect(await page.isVisible('text=No files yet'), 'not deleted');
 });

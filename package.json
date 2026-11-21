@@ -11,7 +11,7 @@
     "check:content": "node --experimental-strip-types --no-warnings scripts/import.ts --check",
     "import": "node --env-file-if-exists=.env.local --experimental-strip-types --no-warnings scripts/import.ts",
     "check:rls": "node --env-file-if-exists=.env.local --experimental-strip-types --no-warnings scripts/rls-check.ts",
-    "test:e2e": "node tests/e2e/uat.mjs && node tests/e2e/features.mjs",
+    "test:e2e": "node tests/e2e/uat.mjs && node tests/e2e/features.mjs && node tests/e2e/auth.mjs",
     "check:repeats": "node --env-file-if-exists=.env.local --experimental-strip-types --no-warnings scripts/repeat-check.ts"
   },
   "dependencies": {

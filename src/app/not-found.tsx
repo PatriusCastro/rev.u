@@ -1,10 +1,12 @@
 import Link from 'next/link';
+import { Logo } from '@/components/ui';
 
 export default function NotFound() {
   return (
     <main className="pa" style={{ display: 'block' }}>
       <div className="scroll" style={{ alignItems: 'center', paddingTop: 96 }}>
         <div className="narrow" style={{ maxWidth: 420 }}>
+          <Logo size={32} />
           <div>
             <h1 className="title">Nothing here</h1>
             <span className="sub">This link points to a page that does not exist, or to something that belongs to another account.</span>

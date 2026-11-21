@@ -1,0 +1,7 @@
+<div style="font-family: system-ui, sans-serif; max-width: 440px; margin: 0 auto; padding: 24px; color: #14201c;">
+  <p style="font-size: 18px; font-weight: 700; margin: 0 0 16px;">Rev<span style="color: #e9a100;">.</span>U</p>
+  <p style="margin: 0 0 8px;">Your sign-in code:</p>
+  <p style="font-size: 32px; font-weight: 700; letter-spacing: 8px; margin: 0 0 16px;">{{ .Token }}</p>
+  <p style="margin: 0 0 24px;">Type it on the sign-in page, or <a href="{{ .SiteURL }}/auth/confirm?token_hash={{ .TokenHash }}&type=email" style="color: #0f7a5c;">sign in with this link</a>. It works once and expires in an hour.</p>
+  <p style="color: #5b6b65; font-size: 13px; margin: 0;">If you did not ask for this, you can ignore this email.</p>
+</div>

@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { createBrowserClient } from '@supabase/ssr';
-import { Upload as UploadIcon } from 'lucide-react';
+import { FileText, Upload as UploadIcon } from 'lucide-react';
 import { recordDocument } from '@/app/actions';
 import { ic } from './ui';
 
@@ -14,6 +14,7 @@ export function Upload({ userId, topics }: { userId: string; topics: { id: strin
   const router = useRouter();
   const [busy, setBusy] = useState(false);
   const [msg, setMsg] = useState<string | null>(null);
+  const [file, setFile] = useState<File | null>(null);
 
   async function submit(form: FormData) {
     const file = form.get('file') as File;
@@ -29,13 +30,21 @@ export function Upload({ userId, topics }: { userId: string; topics: { id: strin
     setBusy(false);
     if (res.error) return setMsg(res.error);
     (document.getElementById('upload') as HTMLFormElement).reset();
+    setFile(null);
     router.refresh();
   }
 
   return (
     <form id="upload" className="card form" action={submit}>
-      <label className="field">PDF file<input name="file" type="file" accept="application/pdf,.pdf" required /></label>
-      <label className="field">Title<input name="title" maxLength={120} placeholder="Uses the file name if left empty" /></label>
+      <h2 className="label">Add a PDF</h2>
+      {/* The file input covers the whole zone, so a click or a dropped file both land on it. */}
+      <label className={'drop' + (file ? ' has' : '')}>
+        <input name="file" type="file" accept="application/pdf,.pdf" required aria-label="PDF file" onChange={(e) => { setFile(e.target.files?.[0] ?? null); setMsg(null); }} />
+        {file ? <FileText {...ic} /> : <UploadIcon {...ic} />}
+        <span className="t">{file ? file.name : 'Choose a PDF'}</span>
+        <span className="sub">{file ? `${(file.size / 1048576).toFixed(1)} MB. Tap to choose another.` : `Or drop it here. Up to ${MAX_MB} MB.`}</span>
+      </label>
+      <label className="field">Title<input name="title" maxLength={120} placeholder={file ? file.name.replace(/\.pdf$/i, '') : 'Uses the file name if left empty'} /></label>
       <label className="field">Topic
         <select name="topic" defaultValue="">
           <option value="">No topic</option>

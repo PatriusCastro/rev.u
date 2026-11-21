@@ -9,6 +9,23 @@ export function AreaIcon({ topicId }: { topicId: string }) {
   return <Icon {...ic} />;
 }
 
+/** The Rev.U mark: a U drawn as a U-turn arrow (going back over what you missed), with an amber dot.
+ *  Same shapes as src/app/icon.svg and apple-icon.tsx. */
+export const MARK_PATHS = { u: 'M40 17v17a10 10 0 0 1-20 0V22', arrow: 'M13.5 27.5 20 20l6.5 7.5' };
+export function Mark({ size = 36 }: { size?: number }) {
+  return (
+    <span className="mark" style={{ width: size, height: size }} aria-hidden>
+      <svg viewBox="0 0 64 64">
+        <g fill="none" stroke="#fff" strokeWidth="6.5" strokeLinecap="round" strokeLinejoin="round"><path d={MARK_PATHS.u} /><path d={MARK_PATHS.arrow} /></g>
+        <circle cx="49" cy="45" r="4.5" fill="#f5b21a" />
+      </svg>
+    </span>
+  );
+}
+export function Logo({ size = 36 }: { size?: number }) {
+  return <span className="logo" style={{ fontSize: size * 0.62 }}><Mark size={size} /><span>Rev<i>.</i>U</span></span>;
+}
+
 /** Progress ring; `value` is 0 to 1. */
 export function Ring({ value, label }: { value: number; label: string }) {
   const o = Math.round(132 * (1 - Math.max(0, Math.min(1, value))));

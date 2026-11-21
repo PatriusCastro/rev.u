@@ -1,6 +1,8 @@
 'use server';
 import { redirect } from 'next/navigation';
+import { cookies } from 'next/headers';
 import { db, session } from '@/lib/supabase';
+import { revoke, savedAccounts, writeSaved } from '@/lib/saved';
 import { revalidatePath } from 'next/cache';
 import { dayOf } from '@/lib/schedule';
 import { inline } from '@/lib/math';
@@ -10,24 +12,137 @@ const back = (path: string, msg: string) => redirect(`${path}?msg=${encodeURICom
 
 // Sign in and setup
 
-export async function signIn(form: FormData) {
+export type AuthState = { email: string; error?: string; sent?: boolean };
+const MIN_PASSWORD = 8;
+const SHORT_PASSWORD = `Use a longer password: at least ${MIN_PASSWORD} characters.`;
+const AUTH_ERRORS: Record<string, string> = {
+  invalid_credentials: 'That email and password do not match. Check them, or create an account.',
+  user_already_exists: 'An account with this email already exists. Sign in instead.',
+  email_exists: 'An account with this email already exists. Sign in instead.',
+  email_not_confirmed: 'Confirm your email first: open the link we sent you.',
+  weak_password: SHORT_PASSWORD,
+  same_password: 'That is your current password. Choose a new one.',
+  otp_expired: 'That code is wrong or has expired. Check the email, or send a new code.',
+  over_request_rate_limit: 'Too many tries. Wait a minute, then try again.',
+  over_email_send_rate_limit: 'Too many emails sent. Wait a minute, then try again.',
+};
+const authError = (code?: string, message?: string) => (code && AUTH_ERRORS[code]) ?? message ?? 'Something went wrong. Try again.';
+const validEmail = (email: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+// Remembered so the sign-in form is filled in next time, including after signing out. Read by /login.
+async function rememberEmail(email: string) {
+  (await cookies()).set('revu_email', email, { httpOnly: true, sameSite: 'lax', maxAge: 60 * 60 * 24 * 365, path: '/' });
+}
+
+// Return the form's state instead of redirecting on errors, so the email stays filled in.
+function readAuthForm(form: FormData) {
+  const email = String(form.get('email') ?? '').trim();
+  const password = String(form.get('password') ?? '');
+  const error = !validEmail(email) ? 'Enter a valid email address.' : !password ? 'Enter your password.' : undefined;
+  return { email, password, error };
+}
+
+export async function signIn(_: AuthState, form: FormData): Promise<AuthState> {
+  const { email, password, error: bad } = readAuthForm(form);
+  if (bad) return { email, error: bad };
   const supabase = await db();
-  const { error } = await supabase.auth.signInWithPassword({ email: String(form.get('email')), password: String(form.get('password')) });
-  if (error) back('/login', error.code === 'invalid_credentials' ? 'That email and password do not match. Check them, or create an account.' : error.message);
+  const { error } = await supabase.auth.signInWithPassword({ email, password });
+  if (error) return { email, error: authError(error.code, error.message) };
+  await rememberEmail(email);
   redirect('/');
 }
 
-export async function signUp(form: FormData) {
+export async function signUp(_: AuthState, form: FormData): Promise<AuthState> {
+  const { email, password, error: bad } = readAuthForm(form);
+  if (bad) return { email, error: bad };
+  // Checked here too: the browser's minLength is only a hint, and the auth server allows shorter.
+  if (password.length < MIN_PASSWORD) return { email, error: SHORT_PASSWORD };
   const supabase = await db();
-  const { data, error } = await supabase.auth.signUp({ email: String(form.get('email')), password: String(form.get('password')) });
-  if (error) back('/login', error.message);
-  if (!data.session) back('/login', 'Check your email for a link to confirm your account.');
+  const { data, error } = await supabase.auth.signUp({ email, password });
+  if (error) return { email, error: authError(error.code, error.message) };
+  if (!data.session) return { email, sent: true };
+  await rememberEmail(email);
   redirect('/setup');
 }
 
-export async function signOut() {
+/** Sign in, or create an account, with a 6-digit code sent by email. The form's button says which step. */
+export async function emailCode(_: AuthState, form: FormData): Promise<AuthState> {
+  const email = String(form.get('email') ?? '').trim();
+  if (!validEmail(email)) return { email, error: 'Enter a valid email address.' };
   const supabase = await db();
-  await supabase.auth.signOut();
+  if (form.get('intent') === 'send') {
+    const { error } = await supabase.auth.signInWithOtp({ email, options: { shouldCreateUser: true } });
+    if (error) return { email, error: authError(error.code, error.message) };
+    return { email, sent: true };
+  }
+  const token = String(form.get('code') ?? '').replace(/\D/g, '');
+  if (token.length !== 6) return { email, sent: true, error: 'Enter the 6-digit code from the email.' };
+  const { error } = await supabase.auth.verifyOtp({ email, token, type: 'email' });
+  if (error) return { email, sent: true, error: authError(error.code, error.message) };
+  await rememberEmail(email);
+  redirect('/'); // Today sends new accounts on to the exam date.
+}
+
+/** Always reports success, so the form does not reveal which emails have accounts. */
+export async function sendReset(_: AuthState, form: FormData): Promise<AuthState> {
+  const email = String(form.get('email') ?? '').trim();
+  if (!validEmail(email)) return { email, error: 'Enter a valid email address.' };
+  const supabase = await db();
+  const { error } = await supabase.auth.resetPasswordForEmail(email);
+  if (error?.code?.startsWith('over_')) return { email, error: authError(error.code) };
+  return { email, sent: true };
+}
+
+/** After the reset link: the link signed the user in, so this only sets the new password. */
+export async function setPassword(_: AuthState, form: FormData): Promise<AuthState> {
+  const { supabase } = await session();
+  const password = String(form.get('password') ?? '');
+  if (password.length < MIN_PASSWORD) return { email: '', error: SHORT_PASSWORD };
+  const { error } = await supabase.auth.updateUser({ password });
+  if (error) return { email: '', error: authError(error.code, error.message) };
+  redirect('/');
+}
+
+/** Sign out of this device. With "save" ticked the session is kept for one-tap sign-in instead of ended. */
+export async function signOut(form: FormData) {
+  const supabase = await db();
+  if (form.get('save') === 'on') {
+    const { data: { session: s } } = await supabase.auth.getSession();
+    if (s?.refresh_token && s.user.email) {
+      const list = await savedAccounts();
+      const old = list.find((a) => a.email === s.user.email);
+      if (old && old.token !== s.refresh_token) await revoke(old.token);
+      await writeSaved([{ email: s.user.email, token: s.refresh_token }, ...list.filter((a) => a.email !== s.user.email)]);
+      // Drop this browser's session cookies without ending the session on the server, so one tap can resume it.
+      const store = await cookies();
+      store.getAll().filter((c) => c.name.startsWith('sb-') && c.name.includes('-auth-token')).forEach((c) => store.delete(c.name));
+      redirect('/login?msg=saved');
+    }
+  }
+  // This device only: signing out on a shared computer should not end the session on the user's phone.
+  await supabase.auth.signOut({ scope: 'local' });
+  redirect('/login?msg=signed_out');
+}
+
+/** One-tap sign-in with an account saved on this browser. */
+export async function continueAs(email: string) {
+  const list = await savedAccounts();
+  const account = list.find((a) => a.email === email);
+  await writeSaved(list.filter((a) => a.email !== email)); // in use now; signing out with "save" saves it again
+  await rememberEmail(email);
+  if (account) {
+    const { error } = await (await db()).auth.refreshSession({ refresh_token: account.token });
+    if (!error) redirect('/');
+  }
+  redirect('/login?add=1&msg=saved_expired');
+}
+
+/** Remove a saved account from this browser and end its session. */
+export async function forgetAccount(email: string) {
+  const list = await savedAccounts();
+  const account = list.find((a) => a.email === email);
+  await writeSaved(list.filter((a) => a.email !== email));
+  if (account) await revoke(account.token);
   redirect('/login');
 }
 
@@ -83,6 +198,16 @@ export async function startMock(subjectId: string) {
   // Fewer problems than a full mock gets a proportional time limit.
   const minutes = Math.max(1, Math.ceil((subject!.mock_minutes * ids.length) / subject!.mock_items));
   await startAttempt('mock', ids, { subject_id: subjectId, minutes });
+}
+
+export async function startQuiz(quizId: string) {
+  const { supabase } = await session();
+  const { data: quiz } = await supabase.from('quizzes').select('id, minutes, question_ids').eq('id', quizId).maybeSingle();
+  if (!quiz) back('/subjects', 'That quiz is no longer available.');
+  // Row rules hide problems this reviewer cannot see; the author's order is kept.
+  const { data: qs } = await supabase.from('questions').select('id').in('id', quiz!.question_ids);
+  const visible = new Set((qs ?? []).map((q) => q.id as string));
+  await startAttempt('mock', quiz!.question_ids.filter((id: string) => visible.has(id)), { quiz_id: quiz!.id, minutes: quiz!.minutes });
 }
 
 // Answering: one database call each (submit_answer, finish_attempt), so an answer and its notebook update
@@ -141,7 +266,7 @@ export async function deleteDocument(id: string) {
 
 // Writing content. Anyone can write; row rules make it private to the author unless placed in a class they own.
 
-export type ProblemInput = { id?: string; topic_id: string; class_id: string; title: string; body: string; choices: { key: string; text: string }[]; answer: string; hint: string; steps: string[] };
+export type ProblemInput = { id?: string; quiz_id?: string; topic_id: string; class_id: string; title: string; body: string; choices: { key: string; text: string }[]; answer: string; hint: string; steps: string[] };
 export type TopicInput = { id?: string; subject_id: string; class_id: string; area: string; name: string; minutes: number; lesson: string };
 type Saved = { error: string } | { id: string };
 
@@ -163,12 +288,49 @@ export async function saveProblem(input: ProblemInput): Promise<Saved> {
   if (long) return { error: `${long} is too long.` };
   if (steps.length > 20) return { error: 'Use 20 steps or fewer.' };
   const row = { topic_id: input.topic_id, class_id: input.class_id || null, title: input.title.trim() || null, body: input.body.trim(), choices, answer: input.answer, hint: input.hint.trim(), steps, owner_id: user.id };
+  const { data: quiz } = input.quiz_id
+    ? await supabase.from('quizzes').select('question_ids, class_id').eq('id', input.quiz_id).eq('owner_id', user.id).maybeSingle()
+    : { data: null };
+  if (quiz && quiz.class_id !== row.class_id) return { error: 'Not saved: a problem in this quiz needs the same Who sees it as the quiz.' };
   const { error } = input.id
     ? await supabase.from('questions').update(row).eq('id', input.id).eq('owner_id', user.id)
     : await supabase.from('questions').insert({ id: (input.id = newId()), ...row });
   if (error) return { error: rowError(error.code, error.message) };
+  // Written from a quiz: add it to the end of that quiz.
+  if (quiz && !quiz.question_ids.includes(input.id)) await supabase.from('quizzes').update({ question_ids: [...quiz.question_ids, input.id] }).eq('id', input.quiz_id!);
   revalidatePath('/write');
   return { id: input.id };
+}
+
+export type QuizInput = { id?: string; class_id: string; title: string; minutes: string; question_ids: string[] };
+
+export async function saveQuiz(input: QuizInput): Promise<Saved> {
+  const { supabase, user } = await session();
+  const title = input.title.trim();
+  if (!title) return { error: 'Not saved: give the quiz a title.' };
+  if (title.length > 120) return { error: 'Title is too long.' };
+  const minutes = input.minutes.trim() ? Math.round(Number(input.minutes)) : null;
+  if (minutes !== null && !(minutes >= 1 && minutes <= 300)) return { error: 'Not saved: the time limit is 1 to 300 minutes, or leave it empty for none.' };
+  const ids = [...new Set(input.question_ids)].slice(0, 100);
+  // Every problem must be one the quiz's audience can see: the author's own with the same audience, or built-in.
+  const { data: qs } = await supabase.from('questions').select('id, owner_id, class_id').in('id', ids.length ? ids : ['']);
+  const ok = new Set((qs ?? []).filter((q) => q.owner_id === null || (q.owner_id === user.id && (q.class_id ?? '') === input.class_id)).map((q) => q.id));
+  const bad = ids.filter((id) => !ok.has(id));
+  if (bad.length) return { error: `Not saved: ${bad.length === 1 ? 'one problem has' : `${bad.length} problems have`} a different audience from the quiz. Change the problem's Who sees it, or remove it.` };
+  const row = { title, class_id: input.class_id || null, minutes, question_ids: ids, owner_id: user.id };
+  const { data, error } = input.id
+    ? await supabase.from('quizzes').update(row).eq('id', input.id).eq('owner_id', user.id).select('id').single()
+    : await supabase.from('quizzes').insert(row).select('id').single();
+  if (error || !data) return { error: rowError(error?.code, error?.message) };
+  revalidatePath('/write'); revalidatePath('/subjects');
+  return { id: data.id };
+}
+
+export async function deleteQuiz(id: string) {
+  const { supabase, user } = await session();
+  // The problems stay; only the quiz goes.
+  await supabase.from('quizzes').delete().eq('id', id).eq('owner_id', user.id);
+  redirect('/write');
 }
 
 export async function saveTopic(input: TopicInput): Promise<Saved> {
