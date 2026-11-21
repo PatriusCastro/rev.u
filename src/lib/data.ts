@@ -21,8 +21,9 @@ export async function topicStats(supabase: SupabaseClient) {
   return { topics: (topics ?? []) as Topic[], subjects: (subjects ?? []) as Subject[], stats };
 }
 
-/** "tower-two-points" from "trigonometry/tower-two-points" becomes "Tower two points". */
-export function problemTitle(id: string) {
+/** The problem's title, or its file name made readable: "trigonometry/tower-two-points" becomes "Tower two points". */
+export function problemTitle(id: string, title?: string | null) {
+  if (title) return title;
   const s = id.split('/').pop()!.replace(/-/g, ' ');
   return s.charAt(0).toUpperCase() + s.slice(1);
 }

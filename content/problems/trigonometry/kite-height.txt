@@ -1,0 +1,13 @@
+topic: trigonometry/angles-of-elevation
+title: Height of a kite
+answer: B
+hint: The string is the hypotenuse, and the height is across from the angle.
+
+A kite is flying on a straight string 80 m long that makes an angle of 40° with the level ground. How high is the kite above the ground?
+
+A. 61.28 m    B. 51.42 m    C. 67.13 m    D. 95.34 m
+
+## Solution
+The string is the hypotenuse (80 m) and the height $h$ is opposite the 40° angle, so $\sin 40° = \dfrac{h}{80}$.
+---
+$h = 80 \sin 40° = 80(0.6428) = 51.42$ m.

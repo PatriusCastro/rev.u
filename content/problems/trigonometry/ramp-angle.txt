@@ -1,0 +1,15 @@
+topic: trigonometry/angles-of-elevation
+title: Angle of a ramp
+answer: B
+hint: Rise and run are the opposite and adjacent sides. Which ratio uses those two?
+
+A ramp rises 1.2 m over a horizontal run of 14 m. What angle does it make with the ground?
+
+A. 4.92°    B. 4.90°    C. 85.10°    D. 9.80°
+
+## Solution
+The rise (1.2 m) is opposite the angle and the run (14 m) is adjacent, so $\tan\theta = \dfrac{1.2}{14} = 0.0857$.
+---
+$\theta = \tan^{-1}(0.0857) = 4.90°$.
+---
+Using sine instead gives 4.92°, which treats the 14 m as the ramp's length. The run is horizontal, so tangent is the right ratio.

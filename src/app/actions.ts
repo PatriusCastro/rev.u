@@ -1,8 +1,10 @@
 'use server';
 import { redirect } from 'next/navigation';
 import { db, session } from '@/lib/supabase';
-import { nextStage, dayOf, addDays, type Interval } from '@/lib/schedule';
+import { revalidatePath } from 'next/cache';
+import { dayOf } from '@/lib/schedule';
 import { inline } from '@/lib/math';
+import { checkProblem } from '@/lib/content';
 
 const back = (path: string, msg: string) => redirect(`${path}?msg=${encodeURIComponent(msg)}`);
 
@@ -83,60 +85,32 @@ export async function startMock(subjectId: string) {
   await startAttempt('mock', ids, { subject_id: subjectId, minutes });
 }
 
-// Answering
+// Answering: one database call each (submit_answer, finish_attempt), so an answer and its notebook update
+// succeed or fail together.
 
-export type AnswerResult = { correct: boolean; answer: string; steps: string[]; stage: string | null; message: string } | { error: string };
-
-const GRACE_MS = 30_000;
+export type AnswerResult =
+  | { correct: boolean; answer: string; steps: string[]; stage: string | null; message: string }
+  | { saved: true }
+  | { error: string; over?: boolean };
 
 export async function submitAnswer(attemptId: string, questionId: string, choice: string): Promise<AnswerResult> {
   const { supabase } = await session();
-  const { data: attempt } = await supabase.from('attempts').select('mode, question_ids, minutes, started_at, finished_at').eq('id', attemptId).single();
-  if (!attempt || !attempt.question_ids.includes(questionId)) return { error: 'This problem is not part of this set.' };
-  if (attempt.finished_at) return { error: 'This set is already finished.' };
-  if (attempt.mode === 'mock' && Date.now() > Date.parse(attempt.started_at) + attempt.minutes * 60_000 + GRACE_MS) {
-    await supabase.from('attempts').update({ finished_at: new Date().toISOString() }).eq('id', attemptId);
-    return { error: 'Time is up. Your answers so far are saved.' };
-  }
-  const { data: q } = await supabase.from('questions').select('answer, steps').eq('id', questionId).single();
-  if (!q) return { error: 'Problem not found.' };
-  const correct = q.answer === choice;
-
-  const { error } = await supabase.from('answers').insert({ attempt_id: attemptId, question_id: questionId, choice, correct });
-  if (error) return { error: error.code === '23505' ? 'You already answered this one.' : error.message };
-
-  // Spaced repeat rule (src/lib/schedule.ts). Mock mistakes enter the notebook the same way.
-  const today = dayOf();
-  const { data: rep } = await supabase.from('repeats').select('interval, due, misses, cleared_at').eq('question_id', questionId).maybeSingle();
-  const active = rep && !rep.cleared_at;
-  const next = nextStage(active ? (rep.interval as Interval) : null, correct, active ? rep.due <= today : false);
-  // shortcut: the answer and the notebook update are two writes, not one transaction; move both into a
-  // Postgres function if partial failures show up. Until then a failed update is reported, not swallowed.
-  const write = next === 'cleared'
-    ? await supabase.from('repeats').update({ cleared_at: new Date().toISOString() }).eq('question_id', questionId)
-    : next !== null
-      ? await supabase.from('repeats').upsert({ question_id: questionId, interval: next, due: addDays(today, next), cleared_at: null, misses: (rep?.misses ?? 0) + (correct ? 0 : 1) })
-      : { error: null };
-  if (write.error) return { error: 'Your answer is saved, but the notebook did not update. Try the next problem; this one may not come back on schedule.' };
-
-  const { count } = await supabase.from('answers').select('id', { count: 'exact', head: true }).eq('attempt_id', attemptId);
-  if (count === attempt.question_ids.length) await supabase.from('attempts').update({ finished_at: new Date().toISOString() }).eq('id', attemptId);
-
-  const stage = next === null ? (active ? String(rep.interval) : null) : String(next);
+  const { data, error } = await supabase.rpc('submit_answer', { p_attempt: attemptId, p_question: questionId, p_choice: choice });
+  if (error) return { error: 'Your answer could not be saved. Check your connection and try again.' };
+  if (data.error || data.saved) return data;
   // An empty choice is "Show me how": a miss, so it comes back like any other.
   const message = choice === '' ? 'Here is how it is solved. It comes back tomorrow.'
-    : !correct ? 'Not yet. It comes back tomorrow.'
-    : next === 'cleared' ? 'Correct. It is cleared from your notebook.'
-    : next !== null ? `Correct. It comes back in ${next} days.`
+    : !data.correct ? 'Not yet. It comes back tomorrow.'
+    : data.stage === 'cleared' ? 'Correct. It is cleared from your notebook.'
+    : data.moved ? `Correct. It comes back in ${data.stage} days.`
     : 'Correct.';
-  return { correct, answer: q.answer, steps: (q.steps as string[]).map(inline), stage, message };
+  return { correct: data.correct, answer: data.answer, steps: (data.steps as string[]).map(inline), stage: data.stage, message };
 }
 
 export async function finishAttempt(attemptId: string) {
   const { supabase } = await session();
-  await supabase.from('attempts').update({ finished_at: new Date().toISOString() }).eq('id', attemptId).is('finished_at', null);
+  await supabase.rpc('finish_attempt', { p_attempt: attemptId });
 }
-
 // Library
 
 export async function recordDocument(path: string, title: string, topicId: string): Promise<{ error?: string }> {
@@ -163,4 +137,105 @@ export async function deleteDocument(id: string) {
     await supabase.from('documents').delete().eq('id', id);
   }
   redirect('/library');
+}
+
+// Writing content. Anyone can write; row rules make it private to the author unless placed in a class they own.
+
+export type ProblemInput = { id?: string; topic_id: string; class_id: string; title: string; body: string; choices: { key: string; text: string }[]; answer: string; hint: string; steps: string[] };
+export type TopicInput = { id?: string; subject_id: string; class_id: string; area: string; name: string; minutes: number; lesson: string };
+type Saved = { error: string } | { id: string };
+
+const newId = () => 'u/' + crypto.randomUUID().replace(/-/g, '').slice(0, 12);
+const tooLong = (fields: [string, string, number][]) => fields.find(([, v, max]) => v.length > max)?.[0];
+const rowError = (code?: string, message?: string) =>
+  code === '42501' ? 'You can only add content to your own classes, under a built-in topic or your own topic with the same audience.' : message ?? 'Could not save.';
+
+export async function saveProblem(input: ProblemInput): Promise<Saved> {
+  const { supabase, user } = await session();
+  const choices = input.choices.map((c) => ({ key: c.key, text: c.text.trim() })).filter((c) => c.text);
+  const steps = input.steps.map((s) => s.trim()).filter(Boolean);
+  try {
+    checkProblem({ topic: input.topic_id, title: input.title, answer: input.answer, hint: input.hint, body: input.body, choices, steps });
+  } catch (e) {
+    return { error: 'Not saved: ' + (e as Error).message.replace(/"(\w+):"/, '$1') + '.' };
+  }
+  const long = tooLong([['Problem', input.body, 4000], ['Hint', input.hint, 1000], ['Title', input.title, 120], ...steps.map((s, i): [string, string, number] => [`Step ${i + 1}`, s, 2000]), ...choices.map((c): [string, string, number] => [`Choice ${c.key}`, c.text, 300])]);
+  if (long) return { error: `${long} is too long.` };
+  if (steps.length > 20) return { error: 'Use 20 steps or fewer.' };
+  const row = { topic_id: input.topic_id, class_id: input.class_id || null, title: input.title.trim() || null, body: input.body.trim(), choices, answer: input.answer, hint: input.hint.trim(), steps, owner_id: user.id };
+  const { error } = input.id
+    ? await supabase.from('questions').update(row).eq('id', input.id).eq('owner_id', user.id)
+    : await supabase.from('questions').insert({ id: (input.id = newId()), ...row });
+  if (error) return { error: rowError(error.code, error.message) };
+  revalidatePath('/write');
+  return { id: input.id };
+}
+
+export async function saveTopic(input: TopicInput): Promise<Saved> {
+  const { supabase, user } = await session();
+  if (!input.name.trim() || !input.area.trim() || !input.lesson.trim()) return { error: 'Not saved: give the lesson an area, a name and some text.' };
+  const long = tooLong([['Name', input.name, 120], ['Area', input.area, 60], ['Lesson', input.lesson, 20000]]);
+  if (long) return { error: `${long} is too long.` };
+  const row = { subject_id: input.subject_id, class_id: input.class_id || null, area: input.area.trim(), name: input.name.trim(), minutes: Math.min(120, Math.max(1, Math.round(input.minutes) || 8)), lesson: input.lesson.trim(), sort: 1000, owner_id: user.id };
+  const { error } = input.id
+    ? await supabase.from('topics').update(row).eq('id', input.id).eq('owner_id', user.id)
+    : await supabase.from('topics').insert({ id: (input.id = newId()), ...row });
+  if (error) return { error: rowError(error.code, error.message) };
+  revalidatePath('/write');
+  return { id: input.id };
+}
+
+export async function deleteContent(kind: 'questions' | 'topics', id: string) {
+  const { supabase, user } = await session();
+  // Deleting a lesson also deletes its problems, and everyone's answers and repeats for them.
+  await supabase.from(kind).delete().eq('id', id).eq('owner_id', user.id);
+  redirect('/write');
+}
+
+// Classes
+
+export async function createClass(form: FormData) {
+  const { supabase } = await session();
+  const name = String(form.get('name') ?? '').trim();
+  if (!name || name.length > 80) back('/classes', 'Give the class a name of up to 80 characters.');
+  const { error } = await supabase.from('classes').insert({ name });
+  if (error) back('/classes', error.message);
+  redirect('/classes');
+}
+
+export async function joinClass(form: FormData) {
+  const { supabase } = await session();
+  const { data, error } = await supabase.rpc('join_class', { p_code: String(form.get('code') ?? '') });
+  if (error || !data) back('/classes', 'No class has that code. Check it with your instructor.');
+  back('/classes', `You joined ${data}. Its lessons and problems now appear in Subjects.`);
+}
+
+export async function leaveClass(classId: string) {
+  const { supabase, user } = await session();
+  await supabase.from('class_members').delete().eq('class_id', classId).eq('user_id', user.id);
+  redirect('/classes');
+}
+
+export async function deleteClass(classId: string) {
+  const { supabase, user } = await session();
+  // Its lessons and problems stay, private to their author.
+  await supabase.from('classes').delete().eq('id', classId).eq('owner_id', user.id);
+  redirect('/classes');
+}
+
+// Reports
+
+export async function reportProblem(questionId: string, note: string): Promise<{ error?: string }> {
+  const { supabase } = await session();
+  const text = note.trim();
+  if (!text) return { error: 'Say what looks wrong.' };
+  if (text.length > 500) return { error: 'Keep it under 500 characters.' };
+  const { error } = await supabase.from('flags').insert({ question_id: questionId, note: text });
+  return error ? { error: 'Could not send the report. Try again.' } : {};
+}
+
+export async function resolveReport(flagId: string) {
+  const { supabase } = await session();
+  await supabase.from('flags').update({ resolved_at: new Date().toISOString() }).eq('id', flagId);
+  redirect('/write');
 }

@@ -1,0 +1,15 @@
+topic: trigonometry/angles-of-elevation
+title: Building seen from a window
+answer: D
+hint: Find the distance between the buildings from the angle of depression first. Then use it for the part above the window.
+
+From a window 12 m above the ground, the angle of elevation of the top of a building across the street is 35°, and the angle of depression of its foot is 20°. How tall is the building?
+
+A. 23.09 m    B. 32.97 m    C. 41.29 m    D. 35.09 m
+
+## Solution
+The window is 12 m above the foot of the building. With the angle of depression 20°, the distance between the buildings is $d = \dfrac{12}{\tan 20°} = \dfrac{12}{0.3640} = 32.97$ m.
+---
+The part of the building above the window is $d \tan 35° = 32.97(0.7002) = 23.09$ m.
+---
+Height $= 23.09 + 12 = 35.09$ m.

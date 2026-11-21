@@ -1,0 +1,15 @@
+topic: trigonometry/angles-of-elevation
+title: Two ships seen from a plane
+answer: A
+hint: Find each ship's horizontal distance from the point below the plane, then subtract.
+
+A plane flying at an altitude of 2000 m sees two ships directly ahead, on the same side and in line with it. The angles of depression of the ships are 30° and 45°. How far apart are the ships?
+
+A. 1464.10 m    B. 2000.00 m    C. 3464.10 m    D. 1154.70 m
+
+## Solution
+For each ship, the altitude is opposite the angle and the horizontal distance is adjacent: $d = \dfrac{2000}{\tan\theta}$.
+---
+Far ship: $d_1 = \dfrac{2000}{\tan 30°} = 3464.10$ m. Near ship: $d_2 = \dfrac{2000}{\tan 45°} = 2000.00$ m.
+---
+Distance apart $= 3464.10 - 2000.00 = 1464.10$ m.

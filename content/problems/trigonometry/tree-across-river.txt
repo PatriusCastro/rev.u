@@ -1,0 +1,15 @@
+topic: trigonometry/sine-cosine-law
+title: Tree across a river
+answer: D
+hint: Find the third angle first. Then pair each side with the angle across from it.
+
+Two surveyors stand at points A and B, 100 m apart along a straight riverbank. A tree C stands on the far bank. Angle CAB is 58° and angle CBA is 72°. How far is the tree from A?
+
+A. 110.70 m    B. 80.55 m    C. 130.47 m    D. 124.15 m
+
+## Solution
+Angle $C = 180° - 58° - 72° = 50°$. Side AB = 100 m is opposite C.
+---
+AC is opposite angle B, so by the sine law $\dfrac{AC}{\sin 72°} = \dfrac{100}{\sin 50°}$.
+---
+$AC = \dfrac{100(0.9511)}{0.7660} = 124.15$ m.

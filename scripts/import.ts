@@ -35,7 +35,7 @@ const questions = files(join(root, 'problems'), '.txt').flatMap((f) => {
       if (!existsSync(fig)) throw new Error(`figure "${p.figure}" not found`);
       figure = readFileSync(fig, 'utf8').trim();
     }
-    return [{ id: idOf(join(root, 'problems'), f, '.txt'), topic_id: p.topic, body: p.body, choices: p.choices, answer: p.answer, hint: p.hint, steps: p.steps, figure }];
+    return [{ id: idOf(join(root, 'problems'), f, '.txt'), topic_id: p.topic, title: p.title ?? null, body: p.body, choices: p.choices, answer: p.answer, hint: p.hint, steps: p.steps, figure }];
   } catch (e) { errors.push(`${relative(root, f)}: ${(e as Error).message}`); return []; }
 });
 

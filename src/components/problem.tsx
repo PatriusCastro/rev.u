@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import { useEffect, useState, useTransition } from 'react';
 import { useRouter } from 'next/navigation';
-import { ArrowRight, BookOpen, ChevronLeft, CircleCheck, CircleX, Clock, Lightbulb, Repeat } from 'lucide-react';
+import { ArrowRight, BookOpen, ChevronLeft, CircleCheck, CircleX, Clock, Flag, Lightbulb, Repeat } from 'lucide-react';
 import { submitAnswer, finishAttempt, type AnswerResult } from '@/app/actions';
 import { ScratchPad } from './scratch-pad';
 import { ScheduleTracker, ic } from './ui';
@@ -11,6 +11,8 @@ export type ProblemProps = {
   attemptId: string; mode: 'practice' | 'repeat' | 'mock'; index: number; count: number;
   questionId: string; bodyHtml: string; figure: string | null; choices: { key: string; html: string }[];
   hintHtml: string; stage: string | null; deadline: number | null;
+  /** Mock only: the saved choice for this problem, and which problems in the set have an answer. */
+  saved?: string | null; answered?: boolean[];
 };
 
 const MODE_LABEL = { practice: 'Practice', repeat: 'Repeat', mock: 'Mock exam' };
@@ -18,7 +20,7 @@ const MODE_LABEL = { practice: 'Practice', repeat: 'Repeat', mock: 'Mock exam' }
 export function Problem(p: ProblemProps) {
   const router = useRouter();
   const [pending, start] = useTransition();
-  const [picked, setPicked] = useState<string | null>(null);
+  const [picked, setPicked] = useState<string | null>(p.saved ?? null);
   const [result, setResult] = useState<Extract<AnswerResult, { correct: boolean }> | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [hint, setHint] = useState(false);
@@ -26,10 +28,18 @@ export function Problem(p: ProblemProps) {
   const mock = p.mode === 'mock';
   const last = p.index + 1 === p.count;
 
-  const send = (choice: string) => start(async () => {
+  // Mock problems are reached by position (?q=), so a reviewer can skip ahead and come back.
+  const goTo = (i: number) => router.push(`?q=${i}`);
+  const unanswered = (p.answered ?? []).filter((a, i) => !a && !(i === p.index && picked)).length;
+  const finish = async () => {
+    if (unanswered && !window.confirm(`${unanswered} ${unanswered === 1 ? 'problem has' : 'problems have'} no answer. Finish the exam anyway?`)) return;
+    await finishAttempt(p.attemptId);
+    router.refresh();
+  };
+  const send = (choice: string, then?: () => void | Promise<void>) => start(async () => {
     const r = await submitAnswer(p.attemptId, p.questionId, choice);
-    if ('error' in r) { setError(r.error); router.refresh(); return; }
-    if (mock) { router.refresh(); return; }
+    if ('error' in r) { setError(r.error); if (r.over) router.refresh(); return; }
+    if ('saved' in r) { setError(null); if (then) await then(); else router.refresh(); return; }
     setResult(r);
   });
   const choose = (key: string) => { setPicked(key); if (!mock) send(key); };
@@ -43,7 +53,7 @@ export function Problem(p: ProblemProps) {
         <div className="mid">
           <h1 className="t" style={{ margin: 0, fontSize: 'inherit' }}>{MODE_LABEL[p.mode]} {p.index + 1} of {p.count}</h1>
           <div className="segs" role="img" aria-label={`Problem ${p.index + 1} of ${p.count}`}>
-            {Array.from({ length: p.count }, (_, i) => <i key={i} className={i < p.index ? 'd' : i === p.index ? 'c' : undefined} />)}
+            {Array.from({ length: p.count }, (_, i) => <i key={i} className={i === p.index ? 'c' : (mock ? p.answered?.[i] : i < p.index) ? 'd' : undefined} />)}
           </div>
         </div>
         {p.deadline ? <Timer attemptId={p.attemptId} deadline={p.deadline} />
@@ -74,7 +84,18 @@ export function Problem(p: ProblemProps) {
                 {hint && <div className="hint" dangerouslySetInnerHTML={{ __html: p.hintHtml }} />}
               </>
             )}
-            {mock && <button className="btn pri full" disabled={!picked || pending} onClick={() => picked && send(picked)}>{last ? 'Save and finish' : 'Save and next'}<ArrowRight {...ic} className="mv" /></button>}
+            {mock && (
+              <>
+                <button className="btn pri full" disabled={!picked || pending} aria-busy={pending} onClick={() => picked && send(picked, last ? finish : () => goTo(p.index + 1))}>
+                  {last ? 'Save and finish' : 'Save and next'}<ArrowRight {...ic} className="mv" />
+                </button>
+                <div style={{ display: 'flex', flexWrap: 'wrap', columnGap: 16 }}>
+                  {p.index > 0 && <button className="btn txt" disabled={pending} onClick={() => goTo(p.index - 1)}><ChevronLeft {...ic} />Previous</button>}
+                  {!last && <button className="btn txt" disabled={pending} onClick={() => goTo(p.index + 1)}>Skip for now</button>}
+                  <button className="btn txt" disabled={pending} onClick={() => start(finish)}><Flag {...ic} />Finish exam</button>
+                </div>
+              </>
+            )}
           </div>
           {error && <p className="err" role="alert">{error}</p>}
           {result && (
@@ -113,5 +134,6 @@ function Timer({ attemptId, deadline }: { attemptId: string; deadline: number })
     if (left === 0) finishAttempt(attemptId).then(() => router.refresh());
   }, [left, attemptId, router]);
   const m = Math.floor(left / 60000), s = Math.floor((left % 60000) / 1000);
-  return <span className="pill timer" role="timer" aria-label={`${m} minutes left`}><Clock {...ic} />{m}:{String(s).padStart(2, '0')}</span>;
+  // The server and the browser read the clock a moment apart, so the first render can differ by a second.
+  return <span className="pill timer" role="timer" aria-label={`${m} minutes left`} suppressHydrationWarning><Clock {...ic} />{m}:{String(s).padStart(2, '0')}</span>;
 }

@@ -1,0 +1,15 @@
+topic: probability/counting-and-probability
+title: Weak concrete cylinders
+answer: A
+hint: Turn 25 MPa into a z-score, then find the area to its left.
+
+The compressive strength of a concrete mix is normally distributed with a mean of 30 MPa and a standard deviation of 3 MPa. What percentage of cylinders test below 25 MPa?
+
+A. 4.78%    B. 9.56%    C. 15.87%    D. 47.80%
+
+## Solution
+$z = \dfrac{25 - 30}{3} = -1.67$.
+---
+The area to the left of $z = -1.67$ is $1 - 0.9522 = 0.0478$.
+---
+About 4.78% of cylinders test below 25 MPa.

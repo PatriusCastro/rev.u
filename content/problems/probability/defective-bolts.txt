@@ -1,0 +1,15 @@
+topic: probability/counting-and-probability
+title: Two defective bolts
+answer: C
+hint: Without replacing, the second draw has one fewer bolt and one fewer defective.
+
+A box holds 12 bolts, 3 of them defective. Two bolts are drawn at random without replacement. What is the probability that both are defective?
+
+A. 1/16    B. 1/11    C. 1/22    D. 3/22
+
+## Solution
+First bolt defective: $\dfrac{3}{12}$.
+---
+Second bolt defective, given the first was: $\dfrac{2}{11}$.
+---
+$P = \dfrac{3}{12} \times \dfrac{2}{11} = \dfrac{6}{132} = \dfrac{1}{22}$.

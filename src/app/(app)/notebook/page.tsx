@@ -4,6 +4,7 @@ import { session } from '@/lib/supabase';
 import { problemTitle } from '@/lib/data';
 import { dayOf, daysBetween } from '@/lib/schedule';
 import { startRepeats } from '@/app/actions';
+import { Submit } from '@/components/submit';
 import { AreaIcon, StageDots, ic } from '@/components/ui';
 
 const TABS = [
@@ -16,11 +17,16 @@ export default async function Notebook({ searchParams }: PageProps<'/notebook'>)
   const { tab = 'today' } = await searchParams;
   const { supabase } = await session();
   const [{ data: open }, { count: cleared }] = await Promise.all([
-    supabase.from('repeats').select('question_id, interval, due, misses, questions(topic_id, topics(area))').is('cleared_at', null).order('due'),
+    supabase.from('repeats').select('question_id, interval, due, misses, questions(topic_id, title, topics(area))').is('cleared_at', null).order('due'),
     supabase.from('repeats').select('question_id', { count: 'exact', head: true }).not('cleared_at', 'is', null),
   ]);
   const today = dayOf();
-  const rows = (open ?? []).map((r) => ({ ...r, inDays: daysBetween(today, r.due), q: r.questions as unknown as { topic_id: string; topics: { area: string } } }));
+  type Q = { topic_id: string; title: string | null; topics: { area: string } | null };
+  // A problem the reviewer can no longer see (its author hid it, or they left the class) drops out.
+  const rows = (open ?? []).flatMap((r) => {
+    const q = r.questions as unknown as Q | null;
+    return q ? [{ ...r, q, inDays: daysBetween(today, r.due) }] : [];
+  });
   const active = TABS.find((t) => t.id === tab) ?? TABS[0];
   const shown = rows.filter((r) => active.test(r.inDays));
   const dueNow = rows.filter((r) => r.inDays <= 0).length;
@@ -41,17 +47,17 @@ export default async function Notebook({ searchParams }: PageProps<'/notebook'>)
         </nav>
         <div className="card rows">
           {shown.length ? shown.map((r) => (
-            <div className="item" key={r.question_id}>
+            <Link className="item" key={r.question_id} href={`/review/${r.question_id}`}>
               <span className="tile w"><AreaIcon topicId={r.q.topic_id} /></span>
-              <span><span className="t">{problemTitle(r.question_id)}</span><span className="sub">{r.q.topics.area}{r.misses > 1 ? `, missed ${r.misses === 2 ? 'twice' : `${r.misses} times`}` : ''}</span></span>
+              <span><span className="t">{problemTitle(r.question_id, r.q.title)}</span><span className="sub">{r.q.topics?.area}{r.misses > 1 ? `, missed ${r.misses === 2 ? 'twice' : `${r.misses} times`}` : ''}</span></span>
               <StageDots interval={r.interval} />
-            </div>
+            </Link>
           )) : (
             <p className="empty">{rows.length || cleared ? 'Nothing in this group.' : 'No mistakes yet. Problems you miss will collect here.'}</p>
           )}
         </div>
         {dueNow > 0 && (
-          <form action={startRepeats}><button className="btn pri full"><Repeat {...ic} />Redo {dueNow} due {dueNow === 1 ? 'problem' : 'problems'}</button></form>
+          <form action={startRepeats}><Submit className="btn pri full" pendingText="Starting…"><Repeat {...ic} />Redo {dueNow} due {dueNow === 1 ? 'problem' : 'problems'}</Submit></form>
         )}
       </div></div>
     </main>

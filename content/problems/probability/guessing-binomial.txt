@@ -1,0 +1,15 @@
+topic: probability/counting-and-probability
+title: Guessing on a quiz
+answer: A
+hint: Ten independent tries, each right with probability 1/4. That is a binomial.
+
+A quiz has 10 multiple-choice items, each with 4 choices. A student guesses every item. What is the probability of getting exactly 3 right?
+
+A. 0.250    B. 0.002    C. 0.776    D. 0.300
+
+## Solution
+Binomial with $n = 10$, $p = 0.25$, $k = 3$.
+---
+$P(3) = C(10,3)(0.25)^3(0.75)^7 = 120(0.015625)(0.13348)$.
+---
+$P(3) = 0.250$.

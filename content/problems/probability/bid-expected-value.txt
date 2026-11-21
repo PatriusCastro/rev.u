@@ -1,0 +1,15 @@
+topic: probability/counting-and-probability
+title: Expected value of a bid
+answer: C
+hint: Each outcome times its probability, then add. The lost bid cost counts as negative.
+
+A contractor spends ₱30,000 preparing a bid. If the bid wins, which has a 40% chance, the net profit is ₱500,000. If it loses, the ₱30,000 is lost. What is the expected gain from bidding?
+
+A. ₱200,000    B. ₱188,000    C. ₱182,000    D. ₱170,000
+
+## Solution
+Win: $0.40 \times 500{,}000 = 200{,}000$.
+---
+Lose: $0.60 \times (-30{,}000) = -18{,}000$.
+---
+Expected gain $= 200{,}000 - 18{,}000 = ₱182{,}000$.

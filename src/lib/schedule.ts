@@ -1,13 +1,5 @@
-// Spaced repeat rule and the day arithmetic it depends on. Pure, so it is unit tested.
-
-export type Interval = 1 | 3 | 7;
-
-/** New interval after an answer, 'cleared', or null when the notebook does not change. */
-export function nextStage(current: Interval | null, correct: boolean, due: boolean): Interval | 'cleared' | null {
-  if (!correct) return 1;
-  if (current === null || !due) return null;
-  return current === 1 ? 3 : current === 3 ? 7 : 'cleared';
-}
+// Day arithmetic in the app's time zone. The repeat rule itself is the apply_repeat database function
+// (supabase/migrations), tested by scripts/repeat-check.ts.
 
 // shortcut: every user is on Philippine time; store a per-user time zone if reviewers abroad join.
 const TZ = 'Asia/Manila';

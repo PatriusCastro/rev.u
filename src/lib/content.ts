@@ -1,7 +1,18 @@
 // Parsers for the plain-text content files in content/. See content/README.md for the format.
 
 export type Choice = { key: string; text: string };
-export type Problem = { topic: string; answer: string; hint: string; figure?: string; body: string; choices: Choice[]; steps: string[] };
+export type Problem = { topic: string; title?: string; answer: string; hint: string; figure?: string; body: string; choices: Choice[]; steps: string[] };
+
+/** The rules every problem must pass, from a file or from the in-app editor. Throws the first problem found. */
+export function checkProblem(p: Problem): Problem {
+  if (!p.topic) throw new Error('missing "topic:"');
+  if (!p.body.trim()) throw new Error('missing the problem statement');
+  if (p.choices.filter((c) => c.text.trim()).length < 2) throw new Error('fewer than 2 choices');
+  if (!p.choices.some((c) => c.key === p.answer && c.text.trim())) throw new Error(`answer "${p.answer ?? ''}" is not one of the choices`);
+  if (!p.hint.trim()) throw new Error('missing "hint:"');
+  if (!p.steps.some((s) => s.trim())) throw new Error('the solution has no steps');
+  return p;
+}
 export type Lesson = { subject: string; area: string; name: string; minutes: number; order: number; lesson: string };
 
 function headerAndRest(src: string): [Record<string, string>, string] {
@@ -29,13 +40,7 @@ export function parseProblem(src: string): Problem {
   const body = statement.slice(0, at).trim();
   const choices = [...statement.slice(at).replace(/\s+/g, ' ').matchAll(/([A-E])\.\s+(.+?)(?=\s+[A-E]\.\s|$)/g)]
     .map((m) => ({ key: m[1], text: m[2].trim() }));
-  if (choices.length < 2) throw new Error('fewer than 2 choices');
-
-  if (!head.topic) throw new Error('missing "topic:"');
-  if (!head.hint) throw new Error('missing "hint:"');
-  if (!body) throw new Error('missing the problem statement');
-  if (!choices.some((c) => c.key === head.answer)) throw new Error(`answer "${head.answer ?? ''}" is not one of the choices`);
-  return { topic: head.topic, answer: head.answer, hint: head.hint, figure: head.figure, body, choices, steps };
+  return checkProblem({ topic: head.topic, title: head.title, answer: head.answer, hint: head.hint ?? '', figure: head.figure, body, choices, steps });
 }
 
 export function parseLesson(src: string): Lesson {

@@ -1,0 +1,13 @@
+topic: probability/counting-and-probability
+title: Site uniforms
+answer: C
+hint: One choice of each kind, all together: multiply.
+
+A site engineer has 4 shirts, 3 pairs of pants and 2 pairs of safety shoes. How many different outfits of one shirt, one pair of pants and one pair of shoes can be made?
+
+A. 9    B. 12    C. 24    D. 36
+
+## Solution
+Each outfit is one shirt, one pair of pants and one pair of shoes, chosen together, so multiply.
+---
+$4 \times 3 \times 2 = 24$ outfits.

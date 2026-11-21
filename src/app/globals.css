@@ -51,8 +51,12 @@ h1.title { margin: 0; font-size: 28px; font-weight: 700; line-height: 1.15; lett
 .btn.pri { background: var(--color-green); color: #fff; }
 .btn.inv { background: #fff; color: var(--color-green); }
 .btn.full { width: 100%; }
+.btn.sec { background: var(--color-surface); color: var(--color-green); border: 1px solid var(--color-line-strong); }
 .btn.txt { color: var(--color-green); padding: 0 4px; min-height: 44px; align-self: flex-start; }
 .btn:disabled { background: var(--color-line); color: var(--color-ink-2); cursor: default; }
+[aria-busy="true"] { cursor: progress; opacity: .7; }
+.btn.pri[aria-busy="true"] { background: var(--color-green); color: #fff; }
+.btn.inv[aria-busy="true"] { background: #fff; color: var(--color-green); }
 .btn.txt:disabled { background: none; }
 .btn svg { transition: transform .2s var(--ease); } .btn:hover .mv { transform: translateX(3px); }
 .card { background: var(--color-surface); border-radius: 20px; box-shadow: var(--shadow-card); }
@@ -67,7 +71,7 @@ h1.title { margin: 0; font-size: 28px; font-weight: 700; line-height: 1.15; lett
 .err { color: var(--color-red); font-size: 13px; }
 
 /* Navigation: floating bar on phone, rail on tablet, sidebar on laptop */
-.nav { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; margin: 0 12px max(12px, env(safe-area-inset-bottom)); padding: 6px; background: var(--color-surface); border-radius: 26px; box-shadow: var(--shadow-float); }
+.nav { display: grid; grid-template-columns: repeat(5, 1fr); gap: 2px; margin: 0 12px max(12px, env(safe-area-inset-bottom)); padding: 6px; background: var(--color-surface); border-radius: 26px; box-shadow: var(--shadow-float); }
 .nav a { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; min-height: 48px; border-radius: 20px; font-size: 11px; color: var(--color-ink-2); transition: background-color .2s, color .2s; }
 .nav a[aria-current="page"] { color: var(--color-green); font-weight: 600; background: var(--color-green-soft); }
 .nav .brand { display: none; }
@@ -178,6 +182,9 @@ h1.title { margin: 0; font-size: 28px; font-weight: 700; line-height: 1.15; lett
 /* Forms */
 .field { display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 600; color: var(--color-ink-2); }
 .field input, .field select { min-height: 48px; padding: 0 14px; border: 1px solid var(--color-line-strong); border-radius: 14px; background: var(--color-surface); font-size: 15px; font-weight: 400; color: var(--color-ink); }
+.field textarea { padding: 12px 14px; border: 1px solid var(--color-line-strong); border-radius: 14px; background: var(--color-surface); font-size: 15px; font-weight: 400; line-height: 1.5; color: var(--color-ink); resize: vertical; min-height: 96px; }
+.field .tip { font-weight: 400; }
+.field input[type="radio"] { min-height: 0; width: 22px; height: 22px; padding: 0; accent-color: var(--color-green); }
 .field input[type="file"] { padding: 10px 14px; min-width: 0; width: 100%; }
 .form { padding: 20px; display: flex; flex-direction: column; gap: 16px; }
 

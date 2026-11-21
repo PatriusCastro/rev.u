@@ -1,5 +1,6 @@
 import Link from 'next/link';
-import { Timer } from 'lucide-react';
+import { Timer, Users } from 'lucide-react';
+import { Submit } from '@/components/submit';
 import { session } from '@/lib/supabase';
 import { topicStats } from '@/lib/data';
 import { MIN_ANSWERS } from '@/lib/plan';
@@ -13,10 +14,13 @@ export default async function Subjects() {
 
   return (
     <main className="view">
-      <div className="vh"><div>
-        <h1 className="title">Subjects</h1>
-        <span className="sub">{started} of {topics.length} topics started</span>
-      </div></div>
+      <div className="vh">
+        <div>
+          <h1 className="title">Subjects</h1>
+          <span className="sub">{started} of {topics.length} topics started</span>
+        </div>
+        <Link className="btn txt" href="/classes"><Users {...ic} />Classes</Link>
+      </div>
       <div className="scroll"><div className="cards">
         {subjects.map((subject) => {
           const own = topics.filter((t) => t.subject_id === subject.id);
@@ -45,7 +49,7 @@ export default async function Subjects() {
               })}
               {own.length > 0 && (
                 <form className="foot" action={startMock.bind(null, subject.id)}>
-                  <button className="btn txt"><Timer {...ic} />Take a mock exam</button>
+                  <Submit className="btn txt" pendingText="Starting…"><Timer {...ic} />Take a mock exam</Submit>
                 </form>
               )}
             </section>

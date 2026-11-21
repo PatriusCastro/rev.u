@@ -1,0 +1,15 @@
+topic: trigonometry/sine-cosine-law
+title: Longer diagonal of a parallelogram
+answer: C
+hint: The longer diagonal is across from the obtuse angle of the parallelogram.
+
+A parallelogram has sides 10 cm and 6 cm, and one of its angles is 70°. Find the length of the longer diagonal.
+
+A. 9.74 cm    B. 11.66 cm    C. 13.31 cm    D. 16.00 cm
+
+## Solution
+Neighbouring angles of a parallelogram add to 180°, so the other angle is 110°. The longer diagonal is opposite the 110° angle.
+---
+Cosine law: $d^2 = 10^2 + 6^2 - 2(10)(6)\cos 110° = 136 - 120(-0.3420) = 177.04$.
+---
+$d = 13.31$ cm. (The shorter diagonal, opposite 70°, is 9.74 cm.)

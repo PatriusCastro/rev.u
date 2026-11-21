@@ -1,0 +1,15 @@
+topic: trigonometry/sine-cosine-law
+title: Tips of clock hands
+answer: A
+hint: At 4:00 the hands are 4 hours apart. Each hour on a clock face is 30°.
+
+The hour hand of a clock is 6 cm long and the minute hand is 9 cm long. How far apart are their tips at exactly 4:00?
+
+A. 13.08 cm    B. 7.94 cm    C. 15.00 cm    D. 10.82 cm
+
+## Solution
+At 4:00 the hands are $4 \times 30° = 120°$ apart.
+---
+Cosine law: $d^2 = 6^2 + 9^2 - 2(6)(9)\cos 120° = 117 - 108(-0.5) = 171$.
+---
+$d = \sqrt{171} = 13.08$ cm.

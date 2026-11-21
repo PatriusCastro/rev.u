@@ -1,19 +1,9 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { nextStage, addDays, daysBetween, dayOf } from '../src/lib/schedule.ts';
+import { addDays, daysBetween, dayOf } from '../src/lib/schedule.ts';
 import { rankTopics, dailyTarget, streak, weekDays } from '../src/lib/plan.ts';
 import { parseProblem } from '../src/lib/content.ts';
 import { inline, rich } from '../src/lib/math.ts';
-
-test('repeat interval rule', () => {
-  assert.equal(nextStage(null, false, false), 1, 'a miss enters the notebook at 1 day');
-  assert.equal(nextStage(null, true, false), null, 'a correct new problem stays out');
-  assert.equal(nextStage(1, true, true), 3);
-  assert.equal(nextStage(3, true, true), 7);
-  assert.equal(nextStage(7, true, true), 'cleared');
-  assert.equal(nextStage(7, false, true), 1, 'a miss at any point goes back to 1 day');
-  assert.equal(nextStage(3, true, false), null, 'right answer before it is due does not move it');
-});
 
 test('day arithmetic', () => {
   assert.equal(addDays('2026-12-31', 1), '2027-01-01');

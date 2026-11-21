@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
-import { ArrowRight, BookOpen, ChevronRight, Clock, Flame } from 'lucide-react';
+import { ArrowRight, BookOpen, ChevronRight, CircleCheck, Clock, Flame } from 'lucide-react';
+import { Submit } from '@/components/submit';
 import { session } from '@/lib/supabase';
 import { topicStats } from '@/lib/data';
 import { rankTopics, dailyTarget, streak, weekDays, MIN_ANSWERS } from '@/lib/plan';
@@ -45,6 +46,9 @@ export default async function Today() {
   const lesson = byId.get((ranked[1] ?? ranked[0])?.id ?? '');
   const total = dueCount ? 3 : 2;
   const offset = dueCount ? 1 : 0;
+  // Today's target met and nothing due: say so, and make further practice optional rather than the main action.
+  const done = !dueCount && doneToday > 0 && doneToday >= target;
+  const promote = !dueCount && !done;
 
   return (
     <main className="view">
@@ -67,25 +71,27 @@ export default async function Today() {
               {!cont && <div className="ages">{ages.map((n, i) => <div key={i}><b>{n}</b>{AGE_LABEL[[1, 3, 7][i]]}</div>)}</div>}
               {cont
                 ? <Link className="btn inv full" href={`/attempt/${open![0].id}`}>Continue repeats<ArrowRight {...ic} className="mv" /></Link>
-                : <form action={startRepeats}><button className="btn inv full">Start repeats<ArrowRight {...ic} className="mv" /></button></form>}
+                : <form action={startRepeats}><Submit className="btn inv full" pendingText="Starting…">Start repeats<ArrowRight {...ic} className="mv" /></Submit></form>}
             </section>
+          ) : done ? (
+            <div className="card item"><span className="tile"><CircleCheck {...ic} /></span><span><span className="t">Done for today</span><span className="sub">You worked {doneToday} {doneToday === 1 ? 'problem' : 'problems'}. Anything more is extra.</span></span><span /></div>
           ) : (
             <div className="card item"><span className="tile"><Clock {...ic} /></span><span><span className="t">No repeats due today</span><span className="sub">Problems you miss come back here on their day.</span></span><span /></div>
           )}
 
           <div className="grp">
-            <h2 className="label">{dueCount ? 'Then' : 'Your route today'}</h2>
+            <h2 className="label">{dueCount ? 'Then' : done ? 'If you want more' : 'Your route today'}</h2>
             {practise ? (
               <div className="route">
                 <div className="stop"><span className="node">{1 + offset}</span>
                   {/* With no repeats due, this stop becomes the screen's one main action. */}
-                  <form action={startPractice.bind(null, practise.id)} className={dueCount ? undefined : 'card'}>
-                    <button className={dueCount ? 'card item' : 'item'}>
+                  <form action={startPractice.bind(null, practise.id)} className={promote ? 'card' : undefined}>
+                    <Submit className={promote ? 'item' : 'card item'}>
                       <span className={'tile' + (ranked[0].answered >= MIN_ANSWERS && ranked[0].correct / ranked[0].answered < 0.5 ? ' w' : '')}><AreaIcon topicId={practise.id} /></span>
                       <span><span className="t">{practise.name}</span><span className="sub">Practise {Math.min(10, data.stats.get(practise.id)!.total)}, {ranked[0].answered < MIN_ANSWERS ? 'a topic you have barely started' : 'your weakest topic'}</span></span>
                       <ChevronRight {...ic} className="chev" />
-                    </button>
-                    {!dueCount && <div style={{ padding: '0 12px 12px' }}><button className="btn pri full">Start practice<ArrowRight {...ic} className="mv" /></button></div>}
+                    </Submit>
+                    {promote && <div style={{ padding: '0 12px 12px' }}><Submit className="btn pri full" pendingText="Starting…">Start practice<ArrowRight {...ic} className="mv" /></Submit></div>}
                   </form>
                 </div>
                 {lesson && (

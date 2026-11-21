@@ -1,0 +1,15 @@
+topic: trigonometry/sine-cosine-law
+title: Side from two angles
+answer: B
+hint: Find angle C first. Side c sits across from it.
+
+In triangle ABC, $A = 35°$, $B = 75°$ and $a = 20$ m. Find side c.
+
+A. 33.68 m    B. 32.77 m    C. 12.21 m    D. 30.00 m
+
+## Solution
+$C = 180° - 35° - 75° = 70°$.
+---
+Sine law: $\dfrac{c}{\sin 70°} = \dfrac{20}{\sin 35°}$.
+---
+$c = \dfrac{20(0.9397)}{0.5736} = 32.77$ m.

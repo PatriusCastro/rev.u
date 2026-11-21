@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { CalendarCheck, Layers, NotebookTabs, Folder } from 'lucide-react';
+import { CalendarCheck, Layers, NotebookTabs, Folder, PenLine } from 'lucide-react';
 import { ic } from './ui';
 
 const ITEMS = [
@@ -9,6 +9,7 @@ const ITEMS = [
   { href: '/subjects', label: 'Subjects', Icon: Layers },
   { href: '/notebook', label: 'Notebook', Icon: NotebookTabs },
   { href: '/library', label: 'Library', Icon: Folder },
+  { href: '/write', label: 'Write', Icon: PenLine },
 ];
 
 export function Nav() {

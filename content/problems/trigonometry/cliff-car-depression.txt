@@ -1,0 +1,15 @@
+topic: trigonometry/angles-of-elevation
+title: Car seen from a cliff
+answer: C
+hint: The angle of depression from the cliff equals the angle of elevation from the car. Height is opposite, distance is adjacent.
+
+From the top of a cliff 60 m high, the angle of depression to a car on the level road below is 25°. How far is the car from the foot of the cliff?
+
+A. 27.98 m    B. 141.97 m    C. 128.67 m    D. 66.20 m
+
+## Solution
+The angle of depression from the top equals the angle of elevation from the car, 25°.
+---
+The height 60 m is opposite the angle and the distance $d$ is adjacent, so $\tan 25° = \dfrac{60}{d}$.
+---
+$d = \dfrac{60}{\tan 25°} = \dfrac{60}{0.4663} = 128.67$ m.
