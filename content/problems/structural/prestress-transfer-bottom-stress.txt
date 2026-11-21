@@ -1,0 +1,17 @@
+topic: structural/prestressed
+title: Bottom fibre stress at transfer
+answer: A
+hint: At transfer only the beam's own weight acts. Add the axial, eccentric and self-weight terms at the bottom fibre.
+
+A pretensioned beam for a pedestrian overpass in Cebu is 300 mm wide and 600 mm deep and spans 9 m, simply supported. The initial prestress at transfer is 1200 kN with the strands 180 mm below the centroid, constant along the span. Concrete weighs 24 kN/m³. Take compression as negative. Find the bottom fibre stress at midspan at transfer.
+
+A. 16.24 MPa compression    B. 18.67 MPa compression    C. 2.90 MPa tension    D. 9.57 MPa compression
+
+## Solution
+$A = 300(600) = 180\,000$ mm², $I = \dfrac{300(600)^3}{12} = 5.4 \times 10^9$ mm⁴, $c = 300$ mm.
+---
+Self-weight $w = 24(0.3)(0.6) = 4.32$ kN/m, so $M = \dfrac{4.32(9)^2}{8} = 43.74$ kN·m.
+---
+$f_{bot} = -\dfrac{1\,200\,000}{180\,000} - \dfrac{1\,200\,000(180)(300)}{5.4 \times 10^9} + \dfrac{43.74 \times 10^6(300)}{5.4 \times 10^9}$
+---
+$f_{bot} = -6.67 - 12.00 + 2.43 = -16.24$ MPa, which is 16.24 MPa compression.

@@ -1,0 +1,15 @@
+topic: geotechnical/classification
+title: Shrinkage limit of a clay pat
+answer: C
+hint: Not all the water lost changed the volume. Take away the water whose loss shrank the pat.
+
+A saturated clay pat from Pampanga has a mass of 42.6 g and a volume of 24.0 cm³. After oven drying, its mass is 30.2 g and its volume is 17.5 cm³. Using $\rho_w = 1$ g/cm³ and $SL = \dfrac{(m_1 - m_2) - (V_1 - V_2)\rho_w}{m_2} \times 100\%$, find the shrinkage limit.
+
+A. 41.06%    B. 21.52%    C. 19.54%    D. 13.85%
+
+## Solution
+Water lost: $m_1 - m_2 = 42.6 - 30.2 = 12.4$ g
+---
+Water whose loss shrank the pat: $(V_1 - V_2)\rho_w = (24.0 - 17.5)(1) = 6.5$ g
+---
+$SL = \dfrac{12.4 - 6.5}{30.2} \times 100\% = 19.54\%$

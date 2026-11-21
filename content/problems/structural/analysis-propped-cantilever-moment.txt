@@ -1,0 +1,15 @@
+topic: structural/analysis
+title: Fixed-end moment of a propped cantilever
+answer: C
+hint: Find the roller reaction of a propped cantilever first, then take moments about the fixed end.
+
+A 5 m reinforced concrete beam is fixed into a wall at one end and rests on a roller support at the other. It carries a uniform load of 16 kN/m over its whole length. EI is constant. Find the magnitude of the moment at the fixed end.
+
+A. 28.13 kN·m    B. 33.33 kN·m    C. 50.00 kN·m    D. 66.67 kN·m
+
+## Solution
+For a propped cantilever with uniform load, the roller reaction is $R = \dfrac{3wL}{8} = \dfrac{3(16)(5)}{8} = 30$ kN.
+---
+Moment at the fixed end: $M = RL - \dfrac{wL^2}{2} = 30(5) - \dfrac{16(5)^2}{2} = 150 - 200 = -50$ kN·m.
+---
+This matches $\dfrac{wL^2}{8} = \dfrac{16(25)}{8} = 50$ kN·m, hogging.

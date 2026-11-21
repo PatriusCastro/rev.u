@@ -1,0 +1,17 @@
+topic: structural/steel
+title: Bolted angle in tension
+answer: A
+hint: Check both yielding of the gross area and rupture of the effective net area. The smaller one governs.
+
+A single angle used as a diagonal in a warehouse truss in Valenzuela has a gross area of 2900 mm² and a connected leg 12 mm thick. It is bolted to a gusset plate through one line of 22 mm bolts, so one hole lies on any cross-section. Take the hole as the bolt diameter plus 2 mm and the shear lag factor $U = 0.80$. The steel has $F_y = 248$ MPa and $F_u = 400$ MPa. Find the LRFD design tensile strength of the angle.
+
+A. 626.9 kN    B. 647.3 kN    C. 783.6 kN    D. 835.8 kN
+
+## Solution
+Yielding: $\phi P_n = 0.90(248)(2900) = 647{,}280$ N $= 647.3$ kN.
+---
+Net area with a 24 mm hole: $A_n = 2900 - 24(12) = 2612$ mm². Effective net area: $A_e = 0.80(2612) = 2089.6$ mm².
+---
+Rupture: $\phi P_n = 0.75(400)(2089.6) = 626{,}880$ N $= 626.9$ kN.
+---
+Rupture is smaller, so the design strength is 626.9 kN.

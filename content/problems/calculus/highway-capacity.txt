@@ -1,0 +1,15 @@
+topic: calculus/applications
+title: Capacity of a highway lane
+answer: A
+hint: Flow is density times speed. Write it as a function of density alone and find where it peaks.
+
+On one lane of a provincial highway, speed falls linearly with density: $v = 80\left(1 - \dfrac{k}{120}\right)$, with $v$ in km/h and $k$ in vehicles per km. What is the maximum flow the lane can carry?
+
+A. 2400 veh/h    B. 4800 veh/h    C. 9600 veh/h    D. 1200 veh/h
+
+## Solution
+Flow: $q = kv = 80k - \dfrac{80k^2}{120} = 80k - \dfrac{2k^2}{3}$.
+---
+$\dfrac{dq}{dk} = 80 - \dfrac{4k}{3} = 0$, so $k = 60$ veh/km and $v = 40$ km/h.
+---
+$q_{max} = 60 \times 40 = 2400$ veh/h.

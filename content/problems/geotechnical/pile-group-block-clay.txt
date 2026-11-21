@@ -1,0 +1,19 @@
+topic: geotechnical/slopes-piles
+title: Pile group in clay, block check
+answer: C
+hint: Compute both the sum of single piles and the block, then keep the smaller.
+
+A 3 × 3 group of 350 mm square piles at 1.0 m centre-to-centre spacing is driven 14 m into a uniform clay with $c_u = 50$ kPa. For a single pile use $Q_u = 9c_uA_p + \alpha c_u pL$ with $\alpha = 0.75$. For block failure use $Q_{block} = 9c_uB_gL_g + 2(B_g + L_g)c_uL$, where the block plan size is measured to the outer faces of the piles. Find the ultimate capacity of the group.
+
+A. 9065.1 kN    B. 6580.0 kN    C. 7111.1 kN    D. 7420.1 kN
+
+## Solution
+Single pile: $9(50)(0.35^2) + 0.75(50)(4 \times 0.35)(14) = 55.1 + 735.0 = 790.1$ kN.
+---
+Nine piles: $9(790.125) = 7111.1$ kN.
+---
+Block: $B_g = L_g = 2(1.0) + 0.35 = 2.35$ m.
+---
+$Q_{block} = 9(50)(2.35)^2 + 2(2.35 + 2.35)(50)(14) = 2485.1 + 6580.0 = 9065.1$ kN.
+---
+The smaller governs: $Q_g = 7111.1$ kN (individual pile failure).

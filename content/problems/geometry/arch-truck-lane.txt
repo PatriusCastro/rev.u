@@ -1,0 +1,15 @@
+topic: geometry/plane-solid-analytic
+title: Truck lane under a parabolic arch
+answer: B
+hint: Put the vertex at the top of the arch and fit $y = ax^2$ to one foot. Then find where the arch is 5 m above the road.
+
+A parabolic arch over a provincial road spans 20 m at ground level and rises 8 m at the centre. Trucks 5 m tall must pass under it. How wide, centred on the arch, is the strip of road where the arch is at least 5 m high?
+
+A. 6.12 m    B. 12.25 m    C. 7.50 m    D. 15.81 m
+
+## Solution
+Vertex at the top: $y = -ax^2$. A foot is at $x = 10$, $y = -8$, so $a = \dfrac{8}{100} = 0.08$.
+---
+5 m above the road is $y = -3$: $0.08x^2 = 3$, so $x^2 = 37.5$ and $x = 6.124$ m.
+---
+Width: $2(6.124) = 12.25$ m.

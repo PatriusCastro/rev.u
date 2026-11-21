@@ -1,0 +1,19 @@
+topic: geotechnical/slopes-piles
+title: Planar wedge failure of a cut slope
+answer: A
+hint: Find the wedge weight and the length of the slip plane first, then compare resisting and driving forces along the plane.
+
+A cut slope 8 m high has its face inclined at 60° to the horizontal. A trial slip plane passes through the toe at 35° to the horizontal. The soil has $\gamma = 18$ kN/m³, $c = 20$ kPa and $\phi = 20°$. Per metre length of slope, the wedge weight is $W = \tfrac{1}{2}\gamma H^2\dfrac{\sin(\beta-\theta)}{\sin\beta\sin\theta}$ and the plane length is $L = H/\sin\theta$. Find the factor of safety along this plane, $FS = \dfrac{cL + W\cos\theta\tan\phi}{W\sin\theta}$.
+
+A. 1.51    B. 0.52    C. 1.18    D. 0.95
+
+## Solution
+$W = \tfrac{1}{2}(18)(8^2)\dfrac{\sin 25°}{\sin 60°\sin 35°} = 576\dfrac{0.4226}{0.8660(0.5736)} = 490.06$ kN/m.
+---
+$L = \dfrac{8}{\sin 35°} = 13.95$ m.
+---
+Resisting: $cL + W\cos\theta\tan\phi = 20(13.95) + 490.06(0.8192)(0.3640) = 278.95 + 146.11 = 425.06$ kN/m.
+---
+Driving: $W\sin\theta = 490.06(0.5736) = 281.09$ kN/m.
+---
+$FS = \dfrac{425.06}{281.09} = 1.51$.

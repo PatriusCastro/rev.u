@@ -1,0 +1,17 @@
+topic: structural/statics-mechanics
+title: Deflection under two loads
+answer: D
+hint: Find the deflection from each load with its own formula, then add. Keep everything in N and mm.
+
+A simply supported steel beam spans 6 m. It carries a uniform load of 20 kN/m over the full span and a 50 kN point load at midspan. Take $E = 200$ GPa and $I = 80 \times 10^6$ mm⁴. Find the midspan deflection.
+
+A. 21.09 mm    B. 29.88 mm    C. 18.28 mm    D. 35.16 mm
+
+## Solution
+$EI = 200\,000(80 \times 10^6) = 1.6 \times 10^{13}$ N·mm². Note 20 kN/m $= 20$ N/mm.
+---
+Uniform load: $\dfrac{5wL^4}{384EI} = \dfrac{5(20)(6000)^4}{384(1.6 \times 10^{13})} = 21.09$ mm.
+---
+Point load: $\dfrac{PL^3}{48EI} = \dfrac{50\,000(6000)^3}{48(1.6 \times 10^{13})} = 14.06$ mm.
+---
+$\delta = 21.09 + 14.06 = 35.16$ mm.

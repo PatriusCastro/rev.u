@@ -1,0 +1,15 @@
+topic: surveying/measurements
+title: Probable error of a baseline
+answer: A
+hint: Find the mean and each residual first. The mean is more reliable than any single measurement.
+
+A baseline in Laguna is taped six times under the same conditions, giving 245.326, 245.318, 245.331, 245.322, 245.329 and 245.320 m. Find the probable error of the mean, using the factor 0.6745.
+
+A. ±1.42 mm    B. ±3.48 mm    C. ±2.11 mm    D. ±1.30 mm
+
+## Solution
+Mean $= 245.3243$ m.
+---
+Residuals in mm: $+1.7, -6.3, +6.7, -2.3, +4.7, -4.3$, so $\Sigma v^2 = 133.3$ mm².
+---
+$E_m = 0.6745\sqrt{\dfrac{133.3}{6(5)}} = 0.6745(2.108) = \pm 1.42$ mm.

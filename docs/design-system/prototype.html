@@ -1,0 +1,559 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>body { margin: 0; } [hidden] { display: none !important; } img { max-width: 100%; }</style>
+<title>Rev.U Daily Desk</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Bricolage+Grotesque:wght@500;700&family=Figtree:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: quiet left-aligned page around one live prototype. The prototype is a real responsive app: it re-lays itself by its own width (container queries), so the Phone, Tablet and Laptop buttons show true layouts. */
+:root {
+  --bg: #eef0ee; --surface: #ffffff; --fg: #171b1a; --muted: #56605c; --line: #cdd4d0; --accent: #0a5c8a; --note-bg: #fff2cc; --note-fg: #5e4300; --frame: #c2cbc6;
+  --display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --body: Barlow, "Segoe UI", system-ui, sans-serif;
+  /* Prototype palette stays fixed in both themes: it shows the proposed look. */
+  --a-bg: #f5f7f6; --a-card: #ffffff; --a-ink: #14201c; --a-2: #5b6964; --a-3: #93a09b; --a-line: #e3e9e6; --a-line2: #c3cdc8;
+  --a-green: #0b6e55; --a-green-2: #0a5a63; --a-green-soft: #e3f2ec; --a-on-green: #eef8f4;
+  --a-amber: #e9a100; --a-amber-bg: #fff1cc; --a-amber-ink: #7a5200; --a-red: #b3261e; --a-red-soft: #fdeceb;
+  --ease: cubic-bezier(.2, .8, .2, 1);
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #121514; --surface: #1a1f1e; --fg: #e6eae8; --muted: #a0aba6; --line: #2d3532; --accent: #7cc4ee; --note-bg: #3a2e0a; --note-fg: #ffdf94; --frame: #3a4440; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #121514; --surface: #1a1f1e; --fg: #e6eae8; --muted: #a0aba6; --line: #2d3532; --accent: #7cc4ee; --note-bg: #3a2e0a; --note-fg: #ffdf94; --frame: #3a4440; color-scheme: dark }
+
+body { background: var(--bg); color: var(--fg); font-family: var(--body); font-size: 17px; line-height: 1.55;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 40px 72px; }
+.wrap { max-width: 1080px; margin: 0 auto; display: flex; flex-direction: column; gap: 48px; }
+.text { max-width: 66ch; display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+h1, h2 { font-family: var(--display); margin: 0; line-height: 1.1; text-wrap: balance; }
+h1 { font-size: 2.6rem; font-weight: 700; letter-spacing: -.01em; } h2 { font-size: 1.6rem; font-weight: 700; }
+p, ul { margin: 0; } ul { padding-left: 1.2em; display: flex; flex-direction: column; gap: 8px; }
+a { color: var(--accent); } a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.lede { font-size: 1.15rem; color: var(--muted); }
+.notice { background: var(--note-bg); color: var(--note-fg); padding: 12px 16px; border-radius: 6px; max-width: 66ch; }
+.wrap > section { display: flex; flex-direction: column; gap: 20px; padding-top: 28px; border-top: 2px solid var(--fg); }
+.tbl { overflow-x: auto; } table { border-collapse: collapse; width: 100%; font-size: .97rem; }
+th, td { text-align: left; vertical-align: top; padding: 9px 12px; border-bottom: 1px solid var(--line); } th { font-weight: 600; }
+.switch { display: inline-flex; align-self: flex-start; gap: 2px; padding: 3px; border-radius: 12px; background: var(--line); }
+.switch button { font: inherit; font-size: .95rem; min-height: 40px; padding: 0 18px; border: 0; border-radius: 9px; background: none; color: var(--muted); cursor: pointer; }
+.switch button[aria-pressed="true"] { background: var(--surface); color: var(--fg); font-weight: 600; }
+@media (max-width: 800px) { h1 { font-size: 2rem; } }
+
+.ic { width: 20px; height: 20px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }
+
+/* Device frame */
+.device { container-type: inline-size; container-name: app; max-width: 100%; overflow: hidden; background: var(--a-bg); box-shadow: 0 0 0 1px var(--frame), 0 20px 40px -24px rgba(0, 0, 0, .4);
+  transition: width .45s var(--ease), height .45s var(--ease), border-radius .45s var(--ease); }
+.device[data-d="phone"] { width: 360px; height: 760px; border-radius: 40px; }
+.device[data-d="tablet"] { width: 768px; height: 820px; border-radius: 28px; }
+.device[data-d="laptop"] { width: 1048px; height: 700px; border-radius: 14px; }
+
+/* App shell */
+.pa, .pa * { box-sizing: border-box; }
+.pa { position: relative; height: 100%; display: grid; grid-template-rows: minmax(0, 1fr) auto; color: var(--a-ink); font: 400 15px/1.45 Figtree, "Segoe UI", system-ui, sans-serif;
+  background: linear-gradient(180deg, var(--a-green-soft) 0, var(--a-bg) 200px); }
+.device[data-d="phone"] .pa::before { content: ""; position: absolute; top: 10px; left: 50%; width: 84px; height: 24px; margin-left: -42px; border-radius: 99px; background: var(--a-ink); z-index: 3; }
+.pa button { font: inherit; color: inherit; cursor: pointer; border: 0; background: none; padding: 0; }
+.pa button:focus-visible { outline: 2px solid var(--a-green); outline-offset: 2px; }
+.pa .view { min-height: 0; display: flex; flex-direction: column; animation: rise .28s var(--ease); }
+.pa .vh { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 24px 20px 0; }
+.device[data-d="phone"] .pa .vh { padding-top: 50px; }
+.pa .scroll { flex: 1; min-height: 0; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 20px; }
+.pa h3 { margin: 0; font-size: 28px; font-weight: 700; line-height: 1.15; letter-spacing: -.02em; }
+.pa h4 { margin: 0; font-size: 13px; font-weight: 600; color: var(--a-2); }
+.pa .grp { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.pa .t { display: block; font-weight: 600; }
+.pa .sub { display: block; font-size: 13px; color: var(--a-2); }
+.pa .pill { display: inline-flex; align-items: center; gap: 4px; font-size: 13px; font-weight: 600; color: var(--a-amber-ink); background: var(--a-amber-bg); padding: 6px 12px 6px 10px; border-radius: 999px; white-space: nowrap; }
+.pa .pill .ic { width: 16px; height: 16px; }
+.pa .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 0 22px; border-radius: 999px; font-weight: 600; transition: transform .12s var(--ease), background-color .2s; }
+.pa .btn:active { transform: scale(.97); }
+.pa .btn.pri { background: var(--a-green); color: #ffffff; } .pa .btn.inv { background: #ffffff; color: var(--a-green); }
+.pa .btn.full { width: 100%; } .pa .btn.txt { color: var(--a-green); padding: 0 4px; min-height: 44px; }
+.pa .btn:disabled { background: var(--a-line); color: var(--a-2); cursor: default; }
+.pa .btn .ic { transition: transform .2s var(--ease); } .pa .btn:hover .ic.mv { transform: translateX(3px); }
+.pa .card { background: var(--a-card); border-radius: 20px; box-shadow: 0 1px 2px rgba(16, 35, 29, .04), 0 10px 24px -16px rgba(16, 35, 29, .18); }
+.pa .tile { width: 36px; height: 36px; border-radius: 10px; display: grid; place-items: center; background: var(--a-green-soft); color: var(--a-green); }
+.pa .tile.w { background: var(--a-red-soft); color: var(--a-red); }
+.pa .chev { color: var(--a-3); }
+.pa .item { display: grid; grid-template-columns: 36px minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 12px; }
+.pa .rows > .item { padding: 14px 16px; } .pa .rows > .item + .item { border-top: 1px solid var(--a-line); }
+
+/* Navigation: floating bar on phone, rail on tablet, sidebar on laptop */
+.pa .nav { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; margin: 0 12px 12px; padding: 6px; background: var(--a-card); border-radius: 26px; box-shadow: 0 1px 2px rgba(16, 35, 29, .05), 0 12px 28px -14px rgba(16, 35, 29, .28); }
+.pa .nav button { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; min-height: 48px; border-radius: 20px; font-size: 11px; color: var(--a-2); transition: background-color .2s, color .2s; }
+.pa .nav button.on { color: var(--a-green); font-weight: 600; background: var(--a-green-soft); }
+.pa .nav .brand { display: none; }
+.pa.solving .nav { display: none; }
+
+/* Today */
+.pa .cols { display: grid; gap: 20px; align-items: start; }
+.pa .hero { position: relative; color: #ffffff; border-radius: 24px; padding: 20px; display: flex; flex-direction: column; gap: 16px; box-shadow: 0 18px 28px -20px var(--a-green);
+  background: radial-gradient(circle at 100% 0, rgba(255, 255, 255, .14) 0 64px, transparent 65px), radial-gradient(circle at 100% 0, rgba(255, 255, 255, .08) 0 116px, transparent 117px), linear-gradient(135deg, var(--a-green), var(--a-green-2)); }
+.pa .hrow { display: flex; justify-content: space-between; align-items: center; gap: 8px; font-size: 13px; }
+.pa .hchip { background: rgba(255, 255, 255, .18); padding: 6px 12px; border-radius: 999px; font-weight: 600; }
+.pa .htime { display: inline-flex; align-items: center; gap: 5px; color: var(--a-on-green); } .pa .htime .ic { width: 16px; height: 16px; }
+.pa .htitle { display: block; font-size: 28px; font-weight: 700; line-height: 1.1; letter-spacing: -.02em; }
+.pa .hsub { display: block; margin-top: 6px; font-size: 14px; color: var(--a-on-green); }
+.pa .ages { display: grid; grid-template-columns: repeat(3, 1fr); padding: 14px 0; border-top: 1px solid rgba(255, 255, 255, .2); border-bottom: 1px solid rgba(255, 255, 255, .2); text-align: center; font-size: 12px; color: var(--a-on-green); }
+.pa .ages div + div { border-left: 1px solid rgba(255, 255, 255, .2); } .pa .ages b { display: block; font-size: 20px; font-weight: 700; line-height: 1.2; color: #ffffff; }
+.pa .route { position: relative; display: flex; flex-direction: column; gap: 12px; }
+.pa .route::before { content: ""; position: absolute; left: 9px; top: 32px; bottom: 32px; border-left: 1.5px solid var(--a-line2); }
+.pa .stop { display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 12px; align-items: center; }
+.pa .node { position: relative; width: 20px; height: 20px; border-radius: 50%; display: grid; place-items: center; font-size: 11px; font-weight: 600; color: var(--a-2); background: var(--a-bg); box-shadow: inset 0 0 0 1.5px var(--a-line2); }
+.pa .bento { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.pa .bento .card { padding: 14px 16px; display: flex; flex-direction: column; gap: 8px; }
+.pa .num { height: 48px; display: flex; align-items: center; font-size: 36px; font-weight: 700; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+.pa .ring { position: relative; width: 48px; height: 48px; flex: none; } .pa .ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+.pa .ring circle { fill: none; stroke-width: 5; stroke: var(--a-line); }
+.pa .ring .v { stroke: var(--a-green); stroke-linecap: round; stroke-dasharray: 132; stroke-dashoffset: var(--o); animation: draw .9s var(--ease) .15s backwards; }
+.pa .ring b { position: absolute; inset: 0; display: grid; place-items: center; font-weight: 600; font-size: 12px; font-variant-numeric: tabular-nums; }
+.pa .wk { padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+.pa .bars, .pa .days { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; }
+.pa .bars { align-items: end; height: 72px; } .pa .days { font-size: 11px; color: var(--a-2); text-align: center; }
+.pa .bars i { display: block; min-height: 4px; border-radius: 6px 6px 3px 3px; background: var(--a-green-soft); transform-origin: bottom; animation: grow .5s var(--ease) backwards; }
+.pa .bars .n { background: var(--a-green); }
+.pa .bars i:nth-child(2) { animation-delay: .04s; } .pa .bars i:nth-child(3) { animation-delay: .08s; } .pa .bars i:nth-child(4) { animation-delay: .12s; }
+.pa .bars i:nth-child(5) { animation-delay: .16s; } .pa .bars i:nth-child(6) { animation-delay: .2s; } .pa .bars i:nth-child(7) { animation-delay: .24s; }
+
+/* Problem */
+.pa .ib { width: 40px; height: 40px; flex: none; border-radius: 50%; display: grid; place-items: center; background: var(--a-card); box-shadow: 0 1px 2px rgba(16, 35, 29, .1); }
+.pa .mid { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px; }
+.pa .segs { display: flex; gap: 4px; } .pa .segs i { flex: 1; height: 4px; border-radius: 9px; background: var(--a-line2); }
+.pa .segs .d { background: var(--a-green); } .pa .segs .c { background: var(--a-amber); }
+.pa .solve { flex: 1; min-height: 0; position: relative; display: flex; overflow: hidden; }
+.pa .solve .scroll { padding-bottom: 88px; }
+.pa .q { font-size: 16px; line-height: 1.5; }
+.pa .figc { padding: 12px 16px; } .pa .figc .fig { max-width: 210px; margin: 0 auto; }
+.pa .opts { display: flex; flex-direction: column; gap: 8px; }
+.pa .opts button { display: grid; grid-template-columns: 24px minmax(0, 1fr) 20px; gap: 12px; align-items: center; text-align: left; min-height: 48px; padding: 0 14px; background: var(--a-card); border: 1px solid var(--a-line2); border-radius: 14px; transition: transform .12s var(--ease), border-color .2s, background-color .2s; }
+.pa .opts button:active { transform: scale(.98); }
+.pa .opts i { width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; font-style: normal; font-size: 12px; font-weight: 600; color: var(--a-2); background: var(--a-bg); transition: background-color .2s, color .2s; }
+.pa .opts .st { visibility: hidden; }
+.pa .opts .right { border-color: var(--a-green); background: var(--a-green-soft); color: var(--a-green); font-weight: 600; } .pa .opts .right i { background: var(--a-green); color: #ffffff; animation: pop .35s var(--ease); }
+.pa .opts .wrong { border-color: var(--a-red); background: var(--a-red-soft); color: var(--a-red); font-weight: 600; animation: shake .32s; } .pa .opts .wrong i { background: var(--a-red); color: #ffffff; }
+.pa .opts .right .st, .pa .opts .wrong .st { visibility: visible; }
+.pa .opts button:disabled { cursor: default; }
+.pa .hint { font-size: 14px; background: var(--a-amber-bg); color: var(--a-amber-ink); border-radius: 14px; padding: 12px 14px; animation: rise .25s var(--ease); }
+.pa .fb { display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 10px; align-items: center; border-radius: 14px; padding: 12px 14px; font-weight: 600; animation: rise .25s var(--ease); }
+.pa .fb.good { background: var(--a-green-soft); color: var(--a-green); } .pa .fb.bad { background: var(--a-red-soft); color: var(--a-red); }
+.pa .sched { padding: 14px 16px 12px; display: flex; flex-direction: column; gap: 12px; }
+.pa .trk { display: grid; grid-template-columns: repeat(4, 1fr); position: relative; font-size: 12px; text-align: center; color: var(--a-2); }
+.pa .trk::before { content: ""; position: absolute; left: 12.5%; right: 12.5%; top: 5px; border-top: 1.5px solid var(--a-line2); }
+.pa .trk span { position: relative; display: flex; flex-direction: column; align-items: center; gap: 6px; transition: color .3s; }
+.pa .trk span::before { content: ""; width: 12px; height: 12px; border-radius: 50%; background: var(--a-card); box-shadow: inset 0 0 0 1.5px var(--a-line2); transition: background-color .3s, box-shadow .3s; }
+.pa .trk .on { color: var(--a-ink); font-weight: 600; } .pa .trk .on::before { background: var(--a-amber); box-shadow: 0 0 0 4px var(--a-amber-bg); animation: pop .4s var(--ease); }
+.pa .steps { list-style: none; margin: 0; padding: 0; counter-reset: s; display: flex; flex-direction: column; gap: 12px; }
+.pa .steps li { counter-increment: s; display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 10px; animation: rise .3s var(--ease); }
+.pa .steps li::before { content: counter(s); width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; font-size: 12px; font-weight: 600; background: var(--a-green-soft); color: var(--a-green); }
+/* Scratch pad: bottom sheet on phone, side panel on wider screens */
+.pa .fab { position: absolute; right: 16px; bottom: 16px; z-index: 1; display: inline-flex; align-items: center; gap: 8px; min-height: 48px; padding: 0 18px; border-radius: 999px; background: var(--a-ink); color: #ffffff; font-weight: 600; box-shadow: 0 12px 24px -10px rgba(16, 35, 29, .6); transition: transform .12s var(--ease); }
+.pa .fab:active { transform: scale(.96); }
+.pa .pad { position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; height: 64%; display: flex; flex-direction: column; background: var(--a-card); border-radius: 24px 24px 0 0; box-shadow: 0 -12px 32px -12px rgba(16, 35, 29, .35); transform: translateY(105%); transition: transform .32s var(--ease); }
+.pa .pad.open { transform: none; }
+.pa .padbar { display: flex; align-items: center; gap: 2px; padding: 10px 12px; border-bottom: 1px solid var(--a-line); }
+.pa .padbar .t { flex: 1; padding-left: 6px; }
+.pa .tool { width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; color: var(--a-2); transition: background-color .2s, color .2s; }
+.pa .tool[aria-pressed="true"] { background: var(--a-green-soft); color: var(--a-green); }
+.pa .padc { flex: 1; min-height: 0; position: relative; background-image: linear-gradient(var(--a-line) 1px, transparent 1px), linear-gradient(90deg, var(--a-line) 1px, transparent 1px); background-size: 20px 20px; }
+.pa .padc canvas { position: absolute; inset: 0; width: 100%; height: 100%; touch-action: none; cursor: crosshair; color: var(--a-ink); }
+.pa .padc p { position: absolute; inset: 16px; margin: 0; font-size: 13px; color: var(--a-2); pointer-events: none; }
+/* Notebook, subjects, library */
+.pa .seg { display: grid; grid-template-columns: repeat(3, 1fr); padding: 3px; border-radius: 14px; background: var(--a-line); font-size: 13px; text-align: center; color: var(--a-2); }
+.pa .seg span { padding: 8px; border-radius: 11px; } .pa .seg .on { background: var(--a-card); color: var(--a-ink); font-weight: 600; box-shadow: 0 1px 2px rgba(16, 35, 29, .1); }
+.pa .stage { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; font-size: 12px; color: var(--a-2); }
+.pa .dots { display: flex; gap: 4px; } .pa .dots i { width: 8px; height: 8px; border-radius: 50%; background: var(--a-line2); } .pa .dots .f { background: var(--a-green); }
+.pa .narrow { display: flex; flex-direction: column; gap: 20px; width: 100%; max-width: 640px; }
+.pa .cards { display: grid; gap: 20px; align-items: start; }
+.pa .subj { display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 12px; align-items: center; padding: 16px; } .pa .subj .ring { width: 44px; height: 44px; }
+.pa .topic { display: grid; grid-template-columns: 20px minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 12px 16px; border-top: 1px solid var(--a-line); color: var(--a-2); }
+.pa .topic .t { color: var(--a-ink); font-weight: 500; } .pa .topic b { font-weight: 600; color: var(--a-ink); font-variant-numeric: tabular-nums; }
+.pa .bar { display: block; height: 4px; border-radius: 9px; background: var(--a-line); margin-top: 6px; overflow: hidden; }
+.pa .bar i { display: block; height: 100%; border-radius: 9px; background: var(--a-green); transform-origin: left; animation: fill .7s var(--ease) .1s backwards; }
+.pa .topic.w b { color: var(--a-red); } .pa .topic.w .bar i { background: var(--a-red); }
+.fig { width: 100%; height: auto; display: block; }
+
+@container app (min-width: 600px) {
+  .pa { grid-template-rows: minmax(0, 1fr); grid-template-columns: auto minmax(0, 1fr); }
+  .pa .view { grid-column: 2; grid-row: 1; }
+  .pa .nav, .pa.solving .nav { grid-column: 1; grid-row: 1; display: flex; flex-direction: column; justify-content: flex-start; gap: 6px; width: 84px; margin: 12px 0 12px 12px; padding: 8px; border-radius: 24px; }
+  .pa .nav button { min-height: 60px; flex: none; }
+  .pa .vh { padding: 28px 28px 0; } .pa .scroll { padding: 24px 28px; }
+  .pa .cols { grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 24px; }
+  .pa .cards { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+  .pa .solve { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .pa .solve .scroll { padding-bottom: 24px; }
+  .pa .pad, .pa .pad.open { position: static; height: auto; transform: none; transition: none; margin: 24px 24px 24px 0; border-radius: 24px; box-shadow: 0 1px 2px rgba(16, 35, 29, .04), 0 10px 24px -16px rgba(16, 35, 29, .18); overflow: hidden; }
+  .pa .fab, .pa .padclose { display: none; }
+}
+@container app (min-width: 960px) {
+  .pa .nav, .pa.solving .nav { width: 208px; padding: 12px; }
+  .pa .nav button { flex-direction: row; justify-content: flex-start; gap: 12px; min-height: 44px; padding: 0 14px; font-size: 14px; border-radius: 14px; }
+  .pa .nav .brand { display: block; padding: 8px 14px 12px; font-size: 18px; font-weight: 700; letter-spacing: -.01em; }
+  .pa .vh { padding: 32px 36px 0; } .pa .scroll { padding: 28px 36px; }
+  .pa .solve { grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); }
+}
+
+/* Scratch pad, full screen: covers the whole app at every width and keeps the problem text in a strip at the top */
+.pa .padq { display: none; padding: 10px 16px; font-size: 13px; line-height: 1.45; color: var(--a-2); background: var(--a-bg); border-bottom: 1px solid var(--a-line); }
+.pa.padfull .solve { position: static; overflow: visible; }
+.pa .pad.full { position: absolute; inset: 0; z-index: 5; height: auto; margin: 0; border-radius: 0; box-shadow: none; transform: none; transition: none; animation: rise .22s var(--ease); }
+.pa .pad.full .padq { display: flex; align-items: center; gap: 12px; }
+.pa .padq span { flex: 1; min-width: 0; }
+.pa .padq .fig { flex: none; width: 136px; padding: 4px 8px; border-radius: 10px; background: var(--a-card); color: var(--a-ink); }
+.pa .pad.full .padclose { display: none; }
+.device[data-d="phone"] .pa .pad.full .padbar { padding-top: 44px; }
+
+@keyframes rise { from { opacity: 0; transform: translateY(8px); } }
+@keyframes draw { from { stroke-dashoffset: 132; } }
+@keyframes grow { from { transform: scaleY(0); } }
+@keyframes fill { from { transform: scaleX(0); } }
+@keyframes pop { 50% { transform: scale(1.25); } }
+@keyframes shake { 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
+@media (prefers-reduced-motion: reduce) { .device, .pa *, .pa *::before { animation: none !important; transition: none !important; } }
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <symbol id="tower" viewBox="0 0 220 130"><g fill="none" stroke="currentColor" stroke-width="1.2"><path d="M10 112H210"/><path d="M190 112V14" stroke-width="2.4"/><path d="M20 112L190 14"/><path d="M133 112L190 14"/></g><g fill="currentColor" stroke="none" font-size="10"><text x="16" y="125">A</text><text x="129" y="125">B</text><text x="66" y="125">40 m</text><text x="42" y="108">30°</text><text x="145" y="108">60°</text><text x="196" y="66">h</text></g></symbol>
+  <symbol id="i-today" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M9 15l2 2 4-4"/></symbol>
+  <symbol id="i-subjects" viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5zM3 13l9 5 9-5"/></symbol>
+  <symbol id="i-notebook" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 3v18M3 7h3M3 12h3M3 17h3"/></symbol>
+  <symbol id="i-library" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></symbol>
+  <symbol id="i-repeat" viewBox="0 0 24 24"><path d="M17 2l4 4-4 4M3 11V9a3 3 0 0 1 3-3h15M7 22l-4-4 4-4M21 13v2a3 3 0 0 1-3 3H3"/></symbol>
+  <symbol id="i-flame" viewBox="0 0 24 24"><path d="M12 3c1 3 5 5 5 10a5 5 0 0 1-10 0c0-2 1-3 2-4 0 2 1 3 2 3 0-3-1-5 1-9z"/></symbol>
+  <symbol id="i-lesson" viewBox="0 0 24 24"><path d="M12 8v12M3 5h6a3 3 0 0 1 3 3v12a2 2 0 0 0-2-2H3zM21 5h-6a3 3 0 0 0-3 3v12a2 2 0 0 1 2-2h7z"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></symbol>
+  <symbol id="i-back" viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></symbol>
+  <symbol id="i-miss" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9 9l6 6M15 9l-6 6"/></symbol>
+  <symbol id="i-hint" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.5 1 2.5h6c0-1 .3-1.8 1-2.5A6 6 0 0 0 12 3z"/></symbol>
+  <symbol id="i-pen" viewBox="0 0 24 24"><path d="M4 20l4-1L19 8l-3-3L5 16zM14 7l3 3"/></symbol>
+  <symbol id="i-eraser" viewBox="0 0 24 24"><path d="M4 15l9-9 6 6-7 7H8zM9 19h11M9 10l6 6"/></symbol>
+  <symbol id="i-undo" viewBox="0 0 24 24"><path d="M8 6L3 11l5 5M3 11h11a5 5 0 0 1 0 10h-3"/></symbol>
+  <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/></symbol>
+  <symbol id="i-expand" viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></symbol>
+  <symbol id="i-shrink" viewBox="0 0 24 24"><path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+  <symbol id="i-file" viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6zM14 3v4h4"/></symbol>
+  <symbol id="i-up" viewBox="0 0 24 24"><path d="M12 16V4M7 9l5-5 5 5M4 20h16"/></symbol>
+  <symbol id="i-trig" viewBox="0 0 24 24"><path d="M4 19h16L4 5zM4 15h4v4"/></symbol>
+  <symbol id="i-algebra" viewBox="0 0 24 24"><path d="M17 5H7l6 7-6 7h10"/></symbol>
+  <symbol id="i-graph" viewBox="0 0 24 24"><path d="M5 3v16h16M8 15c3 0 4-8 10-9"/></symbol>
+  <symbol id="i-calc" viewBox="0 0 24 24"><path d="M8 20c5 0 3-16 8-16"/></symbol>
+</defs></svg>
+
+<div class="wrap">
+<header class="text">
+  <h1>Rev.U Daily Desk</h1>
+  <p class="lede">A working prototype of the chosen design. It responds to phone, tablet and laptop widths, it moves, and it has a scratch pad for solving while you answer.</p>
+  <p>Use the tabs inside the prototype to move between screens. Press Start repeats to open a problem, then draw on the scratch pad, pick an answer and reveal the solution. Numbers are sample data. The colours, type, spacing and components are recorded in <a href="README.md">README.md</a> and <a href="tokens.json">tokens.json</a> beside this file, and the plan is in <a href="../build-plan.md">build-plan.md</a>.</p>
+</header>
+
+<section>
+  <div class="text"><h2>Prototype</h2></div>
+  <div class="switch" role="group" aria-label="Screen size">
+    <button id="d-phone" data-size="phone" aria-pressed="true">Phone</button><button id="d-tablet" data-size="tablet" aria-pressed="false">Tablet</button><button id="d-laptop" data-size="laptop" aria-pressed="false">Laptop</button>
+  </div>
+  <p class="text" style="color:var(--muted);font-size:.95rem">The tablet and laptop sizes need a wide window. On a narrow screen the frame shrinks to fit and shows the phone layout.</p>
+
+  <div class="device" id="device" data-d="phone"><div class="pa" id="app">
+
+    <div class="view" id="v-today">
+      <div class="vh"><div><h3>Today</h3><span class="sub">Saturday, 21 November</span></div><span class="pill"><svg class="ic"><use href="#i-flame"/></svg>5 days</span></div>
+      <div class="scroll"><div class="cols">
+        <div class="grp" style="gap:20px">
+          <div class="hero">
+            <div class="hrow"><span class="hchip">Stop 1 of 3</span><span class="htime"><svg class="ic"><use href="#i-clock"/></svg>About 12 minutes</span></div>
+            <div><span class="htitle">6 repeats due</span><span class="hsub">Problems you missed before. Each one you get right moves a step closer to cleared.</span></div>
+            <div class="ages"><div><b>2</b>from yesterday</div><div><b>3</b>from 3 days ago</div><div><b>1</b>from 7 days ago</div></div>
+            <button class="btn inv full" id="start" data-go="problem">Start repeats<svg class="ic mv"><use href="#i-arrow"/></svg></button>
+          </div>
+          <div class="grp">
+            <h4>Then</h4>
+            <div class="route">
+              <div class="stop"><span class="node">2</span><div class="card item"><span class="tile w"><svg class="ic"><use href="#i-trig"/></svg></span><span><span class="t">Angles of elevation</span><span class="sub">Practise 10, your weakest topic</span></span><svg class="ic chev"><use href="#i-chev"/></svg></div></div>
+              <div class="stop"><span class="node">3</span><div class="card item"><span class="tile"><svg class="ic"><use href="#i-lesson"/></svg></span><span><span class="t">Sine and cosine law</span><span class="sub">Lesson, 8 minutes</span></span><svg class="ic chev"><use href="#i-chev"/></svg></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="grp" style="gap:20px">
+          <div class="bento">
+            <div class="card"><div class="ring"><svg viewBox="0 0 52 52"><circle cx="26" cy="26" r="21"/><circle class="v" style="--o:79" cx="26" cy="26" r="21"/></svg><b>40%</b></div><div><span class="t">12 of 30</span><span class="sub">problems today</span></div></div>
+            <div class="card"><div class="num">128</div><div><span class="t">days</span><span class="sub">to the exam</span></div></div>
+          </div>
+          <div class="card wk"><h4>Problems solved this week</h4>
+            <div class="bars" role="img" aria-label="Problems solved each day this week: 22, 30, 18, 30, 26, 12 so far today"><i style="height:73%"></i><i style="height:100%"></i><i style="height:60%"></i><i style="height:100%"></i><i style="height:87%"></i><i class="n" style="height:40%"></i><i style="height:0"></i></div>
+            <div class="days"><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span></div></div>
+        </div>
+      </div></div>
+    </div>
+
+    <div class="view" id="v-problem" hidden>
+      <div class="vh"><button class="ib" id="back" data-go="today" aria-label="Back to Today"><svg class="ic"><use href="#i-back"/></svg></button>
+        <div class="mid"><span class="t">Repeat 2 of 6</span><div class="segs" role="img" aria-label="Problem 2 of 6"><i class="d"></i><i class="c"></i><i></i><i></i><i></i><i></i></div></div>
+        <span class="pill"><svg class="ic"><use href="#i-repeat"/></svg>3 days ago</span></div>
+      <div class="solve">
+        <div class="scroll">
+          <div class="grp">
+            <div class="q">From point A, the angle of elevation of the top of a tower is 30°. From B, 40 m closer, it is 60°. Find the height of the tower.</div>
+            <div class="card figc"><svg class="fig" viewBox="0 0 220 130" role="img" aria-label="Tower sighted from points A and B"><use href="#tower"/></svg></div>
+          </div>
+          <div class="grp">
+            <div class="opts" id="opts">
+              <button id="opt-a"><i>A</i><span>20.00 m</span><svg class="ic st"><use href="#i-check"/></svg></button>
+              <button id="opt-b"><i>B</i><span>28.28 m</span><svg class="ic st"><use href="#i-check"/></svg></button>
+              <button id="opt-c" data-ok><i>C</i><span>34.64 m</span><svg class="ic st"><use href="#i-check"/></svg></button>
+              <button id="opt-d"><i>D</i><span>40.00 m</span><svg class="ic st"><use href="#i-check"/></svg></button>
+            </div>
+            <button class="btn txt" id="hint-btn" style="align-self:flex-start"><svg class="ic"><use href="#i-hint"/></svg>Show a hint</button>
+            <div class="hint" id="hint" hidden>Start with the right triangle at B. Write h in terms of the distance from B to the tower.</div>
+          </div>
+          <div class="fb" id="fb" hidden><svg class="ic"><use id="fb-ic" href="#i-check"/></svg><span id="fb-text"></span></div>
+          <div class="card sched"><h4>Repeat schedule</h4>
+            <div class="trk" id="trk"><span data-s="1">1 day</span><span data-s="3" class="on">3 days</span><span data-s="7">7 days</span><span data-s="c">Cleared</span></div></div>
+          <div class="grp" id="sol" hidden>
+            <h4>Solution</h4>
+            <ol class="steps" id="steps">
+              <li><span>Let x be the distance from B to the tower.</span></li>
+              <li hidden><span>From B: tan 60° = h / x, so h = √3·x.</span></li>
+              <li hidden><span>From A: tan 30° = h / (x + 40), so x + 40 = 3x and x = 20 m.</span></li>
+              <li hidden><span><b>h = 20√3 ≈ 34.64 m</b></span></li>
+            </ol>
+            <button class="btn pri full" id="reveal">Show next step</button>
+            <button class="btn txt" id="reset">Try again</button>
+          </div>
+        </div>
+        <button class="fab" id="fab"><svg class="ic"><use href="#i-pen"/></svg>Scratch pad</button>
+        <div class="pad" id="pad">
+          <div class="padbar"><span class="t">Scratch pad</span>
+            <button class="tool" id="t-pen" aria-pressed="true" aria-label="Pen"><svg class="ic"><use href="#i-pen"/></svg></button>
+            <button class="tool" id="t-eraser" aria-pressed="false" aria-label="Eraser"><svg class="ic"><use href="#i-eraser"/></svg></button>
+            <button class="tool" id="t-undo" aria-label="Undo last stroke"><svg class="ic"><use href="#i-undo"/></svg></button>
+            <button class="tool" id="t-clear" aria-label="Clear the pad"><svg class="ic"><use href="#i-trash"/></svg></button>
+            <button class="tool" id="t-full" aria-pressed="false" aria-label="Open full screen"><svg class="ic"><use href="#i-expand"/></svg></button>
+            <button class="tool padclose" id="t-close" aria-label="Close scratch pad"><svg class="ic"><use href="#i-x"/></svg></button>
+          </div>
+          <div class="padq"><span>From point A, the angle of elevation of the top of a tower is 30°. From B, 40 m closer, it is 60°. Find the height of the tower.</span><svg class="fig" viewBox="0 0 220 130" role="img" aria-label="Tower sighted from points A and B"><use href="#tower"/></svg></div>
+          <div class="padc"><p id="pad-tip">Work the problem here with a finger, stylus or mouse. Your working stays while you are on this problem.</p><canvas id="cv" aria-label="Scratch pad drawing area"></canvas></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="view" id="v-notebook" hidden>
+      <div class="vh"><div><h3>Notebook</h3><span class="sub">14 to clear, 9 cleared so far</span></div></div>
+      <div class="scroll"><div class="narrow">
+        <div class="seg"><span class="on">Due today 3</span><span>In 3 days 5</span><span>In 7 days 6</span></div>
+        <div class="card rows">
+          <div class="item"><span class="tile w"><svg class="ic"><use href="#i-trig"/></svg></span><span><span class="t">Tower from two points</span><span class="sub">Trigonometry, missed twice</span></span><span class="stage"><span class="dots"><i class="f"></i><i></i><i></i></span>1 day</span></div>
+          <div class="item"><span class="tile w"><svg class="ic"><use href="#i-graph"/></svg></span><span><span class="t">Tangent to a parabola</span><span class="sub">Analytic geometry</span></span><span class="stage"><span class="dots"><i class="f"></i><i class="f"></i><i></i></span>3 days</span></div>
+          <div class="item"><span class="tile w"><svg class="ic"><use href="#i-calc"/></svg></span><span><span class="t">Rate of a draining cone</span><span class="sub">Differential calculus</span></span><span class="stage"><span class="dots"><i class="f"></i><i class="f"></i><i class="f"></i></span>7 days</span></div>
+        </div>
+        <button class="btn pri full" id="redo" data-go="problem"><svg class="ic"><use href="#i-repeat"/></svg>Redo 3 due problems</button>
+      </div></div>
+    </div>
+
+    <div class="view" id="v-subjects" hidden>
+      <div class="vh"><div><h3>Subjects</h3><span class="sub">4 topics started</span></div></div>
+      <div class="scroll"><div class="cards">
+        <div class="card">
+          <div class="subj"><div class="ring"><svg viewBox="0 0 52 52"><circle cx="26" cy="26" r="21"/><circle class="v" style="--o:61" cx="26" cy="26" r="21"/></svg><b>54%</b></div><span><span class="t">Mathematics, Surveying and Transportation</span><span class="sub">4 of 5 math topics started</span></span></div>
+          <div class="topic"><svg class="ic"><use href="#i-algebra"/></svg><span><span class="t">Algebra</span><span class="bar"><i style="width:72%"></i></span></span><b>72%</b></div>
+          <div class="topic w"><svg class="ic"><use href="#i-trig"/></svg><span><span class="t">Trigonometry</span><span class="bar"><i style="width:48%"></i></span></span><b>48%</b></div>
+          <div class="topic"><svg class="ic"><use href="#i-graph"/></svg><span><span class="t">Analytic geometry</span><span class="bar"><i style="width:61%"></i></span></span><b>61%</b></div>
+          <div class="topic w"><svg class="ic"><use href="#i-calc"/></svg><span><span class="t">Differential calculus</span><span class="bar"><i style="width:35%"></i></span></span><b>35%</b></div>
+        </div>
+        <div class="card rows">
+          <div class="item"><span class="tile"><svg class="ic"><use href="#i-subjects"/></svg></span><span><span class="t">Hydraulics and Geotechnical</span><span class="sub">Not started</span></span><svg class="ic chev"><use href="#i-chev"/></svg></div>
+          <div class="item"><span class="tile"><svg class="ic"><use href="#i-subjects"/></svg></span><span><span class="t">Structural and Construction</span><span class="sub">Not started</span></span><svg class="ic chev"><use href="#i-chev"/></svg></div>
+        </div>
+      </div></div>
+    </div>
+
+    <div class="view" id="v-library" hidden>
+      <div class="vh"><div><h3>Library</h3><span class="sub">Your own PDFs, private to you</span></div></div>
+      <div class="scroll"><div class="narrow">
+        <div class="card rows">
+          <div class="item"><span class="tile"><svg class="ic"><use href="#i-file"/></svg></span><span><span class="t">Trigonometry handout</span><span class="sub">Trigonometry, 18 pages</span></span><svg class="ic chev"><use href="#i-chev"/></svg></div>
+          <div class="item"><span class="tile"><svg class="ic"><use href="#i-file"/></svg></span><span><span class="t">Calculus problem set 3</span><span class="sub">Differential calculus, 6 pages</span></span><svg class="ic chev"><use href="#i-chev"/></svg></div>
+        </div>
+        <span class="btn pri full"><svg class="ic"><use href="#i-up"/></svg>Upload a PDF</span>
+      </div></div>
+    </div>
+
+    <nav class="nav" aria-label="Main">
+      <span class="brand">Rev.U</span>
+      <button id="n-today" data-go="today" class="on"><svg class="ic"><use href="#i-today"/></svg>Today</button>
+      <button id="n-subjects" data-go="subjects"><svg class="ic"><use href="#i-subjects"/></svg>Subjects</button>
+      <button id="n-notebook" data-go="notebook"><svg class="ic"><use href="#i-notebook"/></svg>Notebook</button>
+      <button id="n-library" data-go="library"><svg class="ic"><use href="#i-library"/></svg>Library</button>
+    </nav>
+  </div></div>
+</section>
+
+<section>
+  <div class="text">
+    <h2>Today, reworked</h2>
+    <ul>
+      <li><strong>The repeats card comes first.</strong> It is the one thing to do, so it sits above the statistics, not below them.</li>
+      <li><strong>It says what the work is.</strong> The card shows how long the set should take and how old each repeat is, so a reviewer can decide to start before opening it.</li>
+      <li><strong>One full-width button.</strong> Start repeats is the only filled control on the screen and is easy to reach with a thumb.</li>
+      <li><strong>The rest of the route follows.</strong> Stops 2 and 3 sit directly under the card under a plain "Then".</li>
+      <li><strong>Statistics move to the side.</strong> Progress, days to the exam and the week's chart sit below on a phone and in a second column on wider screens.</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <div class="text">
+    <h2>Scratch pad</h2>
+    <p>A drawing surface for working a problem by hand, opened from the problem screen. It takes a finger, a stylus or a mouse, and has a pen, an eraser, undo and clear.</p>
+    <ul>
+      <li><strong>Phone:</strong> it slides up as a sheet over the lower part of the screen, leaving the problem visible above it.</li>
+      <li><strong>Tablet and laptop:</strong> it sits beside the problem, so the reviewer reads on the left and writes on the right.</li>
+      <li><strong>Full screen:</strong> a button in the pad's toolbar expands it to fill the whole app at any width. The problem text and its figure stay in a strip at the top, and the same button or the Escape key returns to the normal view. The working is kept when switching.</li>
+      <li><strong>Version 1 does not save the working.</strong> It stays while the reviewer is on that problem and is cleared on the next one. Saving it to the mistake notebook is a later upgrade if reviewers ask for it.</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <div class="text"><h2>How the layout responds</h2></div>
+  <div class="tbl"><table>
+    <thead><tr><th>Width</th><th>Typical device</th><th>Navigation</th><th>Content</th></tr></thead>
+    <tbody>
+      <tr><td>Under 600 px</td><td>Phone</td><td>Floating bar at the bottom</td><td>One column; scratch pad as a sheet</td></tr>
+      <tr><td>600 to 959 px</td><td>Tablet, small laptop window</td><td>Icon rail on the left</td><td>Two columns on Today and Subjects; scratch pad beside the problem</td></tr>
+      <tr><td>960 px and up</td><td>Laptop, tablet in landscape</td><td>Sidebar with full labels</td><td>Same two columns with wider margins and a larger scratch pad</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section>
+  <div class="text"><h2>Motion</h2><p>Every animation either answers an action or shows a number changing. All of it is switched off for people who ask their device to reduce motion.</p></div>
+  <div class="tbl"><table>
+    <thead><tr><th>Where</th><th>What moves</th><th>Duration</th><th>Why</th></tr></thead>
+    <tbody>
+      <tr><td>Changing screens</td><td>The new screen fades in and rises 8 px</td><td>280 ms</td><td>Shows that the screen changed</td></tr>
+      <tr><td>Progress rings, bars and the week chart</td><td>They fill from zero to their value</td><td>500 to 900 ms</td><td>Draws the eye to today's numbers once</td></tr>
+      <tr><td>Buttons and answer options</td><td>They shrink slightly while pressed</td><td>120 ms</td><td>Confirms the tap</td></tr>
+      <tr><td>A correct answer</td><td>The letter badge pops and turns green</td><td>350 ms</td><td>Rewards the answer</td></tr>
+      <tr><td>A wrong answer</td><td>The option shakes once</td><td>320 ms</td><td>Signals the miss without a sound</td></tr>
+      <tr><td>Repeat schedule</td><td>The marker moves to the new stop and pops</td><td>300 to 400 ms</td><td>Shows where the problem goes next</td></tr>
+      <tr><td>Hint, feedback and solution steps</td><td>Each fades in and rises</td><td>250 to 300 ms</td><td>Shows what was just added</td></tr>
+      <tr><td>Scratch pad on a phone</td><td>The sheet slides up from the bottom</td><td>320 ms</td><td>Shows where it came from and where it returns</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section>
+  <div class="text">
+    <h2>Dribbble references</h2>
+    <p class="notice">These were matched from each shot's title and description. I could not open the images, so check the visuals before relying on them.</p>
+    <ul>
+      <li><a href="https://dribbble.com/shots/15426592-Spaced-repetition-app">Spaced repetition app</a> by Igor Razvodovsky, described as a search for the right degree of simplicity.</li>
+      <li><a href="https://dribbble.com/shots/4908154-Flashcard-App">Flashcard App</a> by Rajesh Satyarthi, where a card keeps returning until you mark it known.</li>
+      <li><a href="https://dribbble.com/shots/25889270-Mobile-App-AI-Daily-Quiz">AI Daily Quiz</a> by Nixtio, built on short daily challenges with playful interaction.</li>
+      <li><a href="https://dribbble.com/shots/22491397-E-Learning-Learning-Path-and-Quiz-Mobile-App">Learning Path and Quiz</a> by Orely, a set path that ends in a quiz.</li>
+    </ul>
+  </div>
+</section>
+</div>
+
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var app = $('app'), device = $('device');
+
+  // Screens
+  function go(name) {
+    app.querySelectorAll('.view').forEach(function (v) { v.hidden = v.id !== 'v-' + name; });
+    app.querySelectorAll('.nav button').forEach(function (b) { b.classList.toggle('on', b.dataset.go === name); });
+    app.classList.toggle('solving', name === 'problem');
+    if (name === 'problem') size();
+  }
+  app.querySelectorAll('[data-go]').forEach(function (b) { b.addEventListener('click', function () { go(b.dataset.go); }); });
+
+  // Screen size
+  document.querySelectorAll('[data-size]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      device.dataset.d = b.dataset.size;
+      document.querySelectorAll('[data-size]').forEach(function (o) { o.setAttribute('aria-pressed', o === b ? 'true' : 'false'); });
+    });
+  });
+
+  // Answering
+  var opts = Array.prototype.slice.call(document.querySelectorAll('#opts button'));
+  var fb = $('fb'), sol = $('sol'), trk = $('trk'), hint = $('hint'), reveal = $('reveal');
+  function stage(s) { trk.querySelectorAll('span').forEach(function (el) { el.classList.toggle('on', el.dataset.s === s); }); }
+  function mark(o, id) { o.querySelector('use').setAttribute('href', id); }
+  opts.forEach(function (b) {
+    b.addEventListener('click', function () {
+      var ok = b.hasAttribute('data-ok');
+      opts.forEach(function (o) { o.disabled = true; if (o.hasAttribute('data-ok')) o.classList.add('right'); });
+      if (!ok) { b.classList.add('wrong'); mark(b, '#i-miss'); }
+      fb.className = 'fb ' + (ok ? 'good' : 'bad');
+      $('fb-ic').setAttribute('href', ok ? '#i-check' : '#i-miss');
+      $('fb-text').textContent = ok ? 'Correct. It comes back in 7 days.' : 'Not yet. It comes back tomorrow.';
+      fb.hidden = false; sol.hidden = false; stage(ok ? '7' : '1');
+    });
+  });
+  $('hint-btn').addEventListener('click', function () { hint.hidden = !hint.hidden; });
+  reveal.addEventListener('click', function () {
+    var next = document.querySelector('#steps li[hidden]');
+    if (next) next.hidden = false;
+    if (!document.querySelector('#steps li[hidden]')) { reveal.textContent = 'All steps shown'; reveal.disabled = true; }
+  });
+  $('reset').addEventListener('click', function () {
+    opts.forEach(function (o) { o.disabled = false; o.classList.remove('right', 'wrong'); mark(o, '#i-check'); });
+    fb.hidden = true; sol.hidden = true; hint.hidden = true; stage('3');
+    document.querySelectorAll('#steps li').forEach(function (li, i) { li.hidden = i > 0; });
+    reveal.disabled = false; reveal.textContent = 'Show next step';
+  });
+
+  // Scratch pad
+  var cv = $('cv'), ctx = cv.getContext('2d'), pad = $('pad'), strokes = [], cur = null, tool = 'pen';
+  function size() {
+    var r = cv.getBoundingClientRect(), d = window.devicePixelRatio || 1;
+    if (!r.width || !r.height) return;
+    cv.width = Math.round(r.width * d); cv.height = Math.round(r.height * d);
+    ctx.setTransform(d, 0, 0, d, 0, 0); draw();
+  }
+  function draw() {
+    ctx.clearRect(0, 0, cv.width, cv.height);
+    ctx.lineCap = 'round'; ctx.lineJoin = 'round'; ctx.strokeStyle = getComputedStyle(cv).color;
+    strokes.forEach(function (s) {
+      ctx.globalCompositeOperation = s.e ? 'destination-out' : 'source-over';
+      ctx.lineWidth = s.e ? 24 : 2.4; ctx.beginPath();
+      s.p.forEach(function (q, i) { if (i) ctx.lineTo(q[0], q[1]); else ctx.moveTo(q[0], q[1]); });
+      if (s.p.length === 1) ctx.lineTo(s.p[0][0] + .1, s.p[0][1]);
+      ctx.stroke();
+    });
+    ctx.globalCompositeOperation = 'source-over';
+    $('pad-tip').hidden = strokes.length > 0;
+  }
+  function pos(e) { var r = cv.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; }
+  cv.addEventListener('pointerdown', function (e) { cv.setPointerCapture(e.pointerId); cur = { e: tool === 'eraser', p: [pos(e)] }; strokes.push(cur); draw(); });
+  cv.addEventListener('pointermove', function (e) { if (cur) { cur.p.push(pos(e)); draw(); } });
+  ['pointerup', 'pointercancel'].forEach(function (n) { cv.addEventListener(n, function () { cur = null; }); });
+  function pick(t) { tool = t; $('t-pen').setAttribute('aria-pressed', t === 'pen'); $('t-eraser').setAttribute('aria-pressed', t === 'eraser'); }
+  $('t-pen').addEventListener('click', function () { pick('pen'); });
+  $('t-eraser').addEventListener('click', function () { pick('eraser'); });
+  $('t-undo').addEventListener('click', function () { strokes.pop(); draw(); });
+  $('t-clear').addEventListener('click', function () { strokes = []; draw(); });
+  $('fab').addEventListener('click', function () { pad.classList.add('open'); size(); });
+  $('t-close').addEventListener('click', function () { pad.classList.remove('open'); });
+  function full(on) {
+    pad.classList.toggle('full', on); app.classList.toggle('padfull', on);
+    var b = $('t-full'); b.setAttribute('aria-pressed', on); b.setAttribute('aria-label', on ? 'Exit full screen' : 'Open full screen');
+    b.querySelector('use').setAttribute('href', on ? '#i-shrink' : '#i-expand'); size();
+  }
+  $('t-full').addEventListener('click', function () { full(!pad.classList.contains('full')); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && pad.classList.contains('full')) full(false); });
+  $('back').addEventListener('click', function () { full(false); });
+  if (window.ResizeObserver) new ResizeObserver(size).observe(cv);
+})();
+</script>

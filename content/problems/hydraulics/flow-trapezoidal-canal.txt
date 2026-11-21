@@ -1,0 +1,17 @@
+topic: hydraulics/fluid-flow
+title: Discharge of an irrigation canal
+answer: D
+hint: The sloping sides add area and wetted length. Measure the wetted length along the slope.
+
+A concrete-lined irrigation canal in Nueva Ecija has a trapezoidal section with a 3 m bottom width and side slopes of 2 horizontal to 1 vertical. Water flows uniformly at a depth of 1.2 m. The bed slope is 0.0009 and Manning's $n$ is 0.015. Find the discharge.
+
+A. 11.45 m³/s    B. 7.19 m³/s    C. 5.49 m³/s    D. 10.93 m³/s
+
+## Solution
+Area: $A = (b + zy)y = (3 + 2 \times 1.2)(1.2) = 6.48$ m².
+---
+Wetted perimeter: $P = b + 2y\sqrt{1 + z^2} = 3 + 2(1.2)\sqrt{5} = 8.367$ m.
+---
+$R = \dfrac{6.48}{8.367} = 0.7745$ m, so $R^{2/3} = 0.8434$.
+---
+$Q = \dfrac{1}{0.015}(6.48)(0.8434)(0.0009)^{1/2} = 10.93$ m³/s.

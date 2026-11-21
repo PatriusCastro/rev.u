@@ -1,0 +1,17 @@
+topic: structural/prestressed
+title: Eccentricity for zero bottom tension
+answer: D
+hint: Set the bottom fibre stress to zero and solve for e. For a rectangle, I divided by A times c simplifies to a fraction of h.
+
+A rectangular prestressed beam is 300 mm wide and 700 mm deep. The effective prestress is 1100 kN and the maximum service moment at midspan is 320 kN·m. Take compression as negative. What eccentricity below the centroid makes the bottom fibre stress exactly zero at midspan?
+
+A. 57.6 mm    B. 407.6 mm    C. 290.9 mm    D. 174.2 mm
+
+## Solution
+Set $f_{bot} = -\dfrac{P}{A} - \dfrac{Pe\,c}{I} + \dfrac{Mc}{I} = 0$.
+---
+Divide by $Pc/I$: $e = \dfrac{M}{P} - \dfrac{I}{Ac}$, and for a rectangle $\dfrac{I}{Ac} = \dfrac{h}{6}$.
+---
+$\dfrac{M}{P} = \dfrac{320 \times 10^6}{1\,100\,000} = 290.9$ mm and $\dfrac{h}{6} = 116.7$ mm.
+---
+$e = 290.9 - 116.7 = 174.2$ mm.

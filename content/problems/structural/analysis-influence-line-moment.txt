@@ -1,0 +1,17 @@
+topic: structural/analysis
+title: Maximum midspan moment from live loads
+answer: B
+hint: The influence line for midspan moment is a triangle. Find its peak and its area.
+
+A simply supported footbridge girder spans 12 m. It carries a moving 40 kN point load and a uniform live load of 6 kN/m that may cover any part of the span. Using the influence line for the moment at midspan, find the maximum midspan moment from these live loads.
+
+A. 174 kN·m    B. 228 kN·m    C. 336 kN·m    D. 348 kN·m
+
+## Solution
+The influence line for midspan moment is a triangle with peak $\dfrac{L}{4} = \dfrac{12}{4} = 3$ m at midspan.
+---
+Point load at midspan: $40 \times 3 = 120$ kN·m.
+---
+Uniform load over the whole span: $6 \times \text{area} = 6 \times \dfrac{12(3)}{2} = 6 \times 18 = 108$ kN·m.
+---
+Maximum midspan moment: $120 + 108 = 228$ kN·m.

@@ -1,0 +1,15 @@
+topic: surveying/traverse-areas
+title: Cut volume by the prismoidal formula
+answer: D
+hint: The prismoidal formula weights the middle section four times as much as each end.
+
+On a provincial road project, two cut cross sections 40 m apart have areas of 18.0 m² and 96.0 m². The cross section measured halfway between them has an area of 49.3 m². Find the volume of cut by the prismoidal formula.
+
+A. 2,280.00 m³    B. 2,177.33 m³    C. 1,972.00 m³    D. 2,074.67 m³
+
+## Solution
+Prismoidal formula: $V = \dfrac{L}{6}(A_1 + 4A_m + A_2)$.
+---
+$V = \dfrac{40}{6}\left[18.0 + 4(49.3) + 96.0\right] = \dfrac{40}{6}(311.2) = 2074.67$ m³.
+---
+Check: average end area gives $\dfrac{40}{2}(18.0 + 96.0) = 2280.00$ m³, so the prismoidal correction is $2280.00 - 2074.67 = 205.33$ m³.

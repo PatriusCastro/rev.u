@@ -1,0 +1,17 @@
+topic: structural/prestressed
+title: Elastic shortening loss
+answer: C
+hint: You need the concrete stress at the level of the strands, so use e, not c, as the distance from the centroid. Self-weight acts as soon as the beam lifts.
+
+A pretensioned beam is 300 mm wide and 600 mm deep and spans 10 m, simply supported. Just after transfer the strand force is 1350 kN, with the strands 160 mm below the centroid along the span. Concrete weighs 24 kN/m³ and the modular ratio is $n = 7$. Find the loss of prestress in the strands from elastic shortening at midspan.
+
+A. 97.3 MPa    B. 52.5 MPa    C. 86.1 MPa    D. 115.5 MPa
+
+## Solution
+$A = 180\,000$ mm², $I = 5.4 \times 10^9$ mm⁴. Self-weight $= 24(0.3)(0.6) = 4.32$ kN/m and $M = \dfrac{4.32(10)^2}{8} = 54$ kN·m.
+---
+$f_{cgs} = -\dfrac{P}{A} - \dfrac{Pe^2}{I} + \dfrac{Me}{I} = -7.50 - \dfrac{1\,350\,000(160)^2}{5.4 \times 10^9} + \dfrac{54 \times 10^6(160)}{5.4 \times 10^9}$
+---
+$f_{cgs} = -7.50 - 6.40 + 1.60 = -12.30$ MPa (compression).
+---
+Loss $= n\,|f_{cgs}| = 7(12.30) = 86.1$ MPa.

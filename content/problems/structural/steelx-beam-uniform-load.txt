@@ -1,0 +1,15 @@
+topic: structural/steel
+title: Uniform load on a compact beam
+answer: B
+hint: Find the design moment of the section, then set it equal to the maximum moment of a simple span under uniform load.
+
+A floor beam in a Makati office building is simply supported over 8.0 m. It is compact and its compression flange is fully braced. Its plastic section modulus is $Z_x = 1.65 \times 10^6$ mm³ and $F_y = 345$ MPa. Find the largest factored uniform load $w_u$ the beam can carry in flexure, with $\phi = 0.90$.
+
+A. 71.16 kN/m    B. 64.04 kN/m    C. 80.05 kN/m    D. 96.06 kN/m
+
+## Solution
+$M_p = F_yZ_x = 345(1.65 \times 10^6) = 569.3$ kN·m.
+---
+$\phi M_n = 0.90(569.3) = 512.3$ kN·m.
+---
+$\dfrac{w_uL^2}{8} = 512.3$, so $w_u = \dfrac{8(512.3)}{8.0^2} = 64.04$ kN/m.

@@ -1,0 +1,19 @@
+topic: hydraulics/dams-hydrology
+title: Sliding with drains cutting uplift
+answer: A
+hint: Drains lower the uplift intensity at the heel. Scale the full uplift by the percentage given.
+
+A gravity dam in Bulacan is 18 m high, 3 m wide at the crest and 13 m wide at the base, with a vertical upstream face. The reservoir is 17 m deep and there is no tailwater. Foundation drains reduce the uplift at the heel to 50% of the full hydrostatic pressure, and the uplift varies linearly to zero at the toe. Concrete weighs 23.5 kN/m³, water 9.81 kN/m³, and the coefficient of friction is 0.70. Find the factor of safety against sliding, per metre length.
+
+A. 1.40    B. 1.14    C. 1.67    D. 1.27
+
+## Solution
+$W_1 = 23.5(3)(18) = 1269$ kN, $W_2 = \tfrac{1}{2}(23.5)(10)(18) = 2115$ kN, so $\Sigma W = 3384$ kN.
+---
+$P = \tfrac{1}{2}(9.81)(17)^2 = 1417.55$ kN.
+---
+Heel intensity $0.5(9.81)(17) = 83.39$ kPa, so $U = \tfrac{1}{2}(83.39)(13) = 542.00$ kN.
+---
+$R_y = 3384 - 542.00 = 2842.00$ kN.
+---
+$FS_s = \dfrac{0.70(2842.00)}{1417.55} = 1.40$.

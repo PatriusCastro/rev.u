@@ -1,0 +1,15 @@
+topic: surveying/measurements
+title: Elevation by inclined stadia
+answer: C
+hint: The vertical distance on an inclined sight uses both the sine and the cosine of the angle. Then add the instrument height and take away the middle hair reading.
+
+A transit with stadia constant $K = 100$ and $C = 0$ is set up over a station of elevation 4.25 m, with the telescope axis 1.45 m above the station. Sighting a rod at an angle of elevation of 15°00′, the upper and lower stadia hairs read 4.175 m and 2.025 m and the middle hair reads 3.10 m. Find the elevation of the rod point.
+
+A. 58.25 m    B. 59.65 m    C. 56.35 m    D. 110.10 m
+
+## Solution
+Intercept $s = 4.175 - 2.025 = 2.15$ m, so $Ks = 215$ m.
+---
+$V = \tfrac{1}{2}Ks\sin 2\theta = \tfrac{1}{2}(215)\sin 30° = 53.75$ m. (Horizontal distance $H = 215\cos^2 15° = 200.60$ m.)
+---
+Elevation $= 4.25 + 1.45 + 53.75 - 3.10 = 56.35$ m.

@@ -1,0 +1,17 @@
+topic: geotechnical/slopes-piles
+title: Converse–Labarre group capacity
+answer: A
+hint: Find the angle whose tangent is diameter over spacing, in degrees.
+
+A pile cap supports 12 piles arranged in 3 rows of 4 piles each. The piles are 400 mm in diameter at 1.2 m centre-to-centre spacing both ways, and each has an ultimate capacity of 450 kN. Using the Converse–Labarre formula $E = 1 - \theta\dfrac{(n-1)m + (m-1)n}{90mn}$ with $\theta = \tan^{-1}(d/s)$ in degrees, $m$ = number of rows and $n$ = piles per row, find the ultimate capacity of the group.
+
+A. 3833.0 kN    B. 4616.5 kN    C. 3740.9 kN    D. 5400.0 kN
+
+## Solution
+$\theta = \tan^{-1}\dfrac{0.4}{1.2} = 18.435°$.
+---
+$(n-1)m + (m-1)n = 3(3) + 2(4) = 17$.
+---
+$E = 1 - \dfrac{18.435(17)}{90(3)(4)} = 1 - 0.2902 = 0.7098$.
+---
+$Q_g = 0.7098(12)(450) = 3833.0$ kN.

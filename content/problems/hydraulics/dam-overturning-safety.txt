@@ -1,0 +1,21 @@
+topic: hydraulics/dams-hydrology
+title: Overturning check about the toe
+answer: D
+hint: Take every moment about the toe. Find where each force acts before multiplying.
+
+A concrete gravity dam is 20 m high, 4 m wide at the top and 15 m wide at the base, with a vertical upstream face. Water stands 18 m deep on the upstream side and there is no tailwater. Uplift varies linearly from full hydrostatic pressure at the heel to zero at the toe. Take concrete as 23.5 kN/m³ and water as 9.81 kN/m³. Find the factor of safety against overturning, per metre length of dam.
+
+A. 2.69    B. 1.58    C. 1.04    D. 1.91
+
+## Solution
+Rectangle: $W_1 = 23.5(4)(20) = 1880$ kN, arm from toe $15 - 2 = 13$ m.
+---
+Triangle: $W_2 = \tfrac{1}{2}(23.5)(11)(20) = 2585$ kN, arm from toe $\tfrac{2}{3}(11) = 7.333$ m.
+---
+$\Sigma M_R = 1880(13) + 2585(7.333) = 43\,396.7$ kN·m.
+---
+Thrust: $P = \tfrac{1}{2}(9.81)(18)^2 = 1589.22$ kN at $18/3 = 6$ m. Uplift: $U = \tfrac{1}{2}(9.81)(18)(15) = 1324.35$ kN at $\tfrac{2}{3}(15) = 10$ m from the toe.
+---
+$\Sigma M_O = 1589.22(6) + 1324.35(10) = 22\,778.8$ kN·m.
+---
+$FS_o = \dfrac{43\,396.7}{22\,778.8} = 1.91$.

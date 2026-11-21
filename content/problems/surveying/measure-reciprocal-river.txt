@@ -1,0 +1,17 @@
+topic: surveying/measurements
+title: Leveling across a river
+answer: A
+hint: Each setup gives its own apparent difference. The collimation and curvature errors are opposite in the two setups.
+
+Points A and B are on opposite banks of the Marikina River. With the level set up close to A, the rod reading on A is 1.426 m and on B is 2.874 m. With the level then set up close to B, the rod reading on A is 0.968 m and on B is 2.352 m. What is the true difference in elevation between A and B?
+
+A. 1.416 m    B. 1.448 m    C. 1.384 m    D. 2.832 m
+
+## Solution
+Setup near A: $d_1 = 2.874 - 1.426 = 1.448$ m.
+---
+Setup near B: $d_2 = 2.352 - 0.968 = 1.384$ m.
+---
+True difference $= \dfrac{1.448 + 1.384}{2} = 1.416$ m, with B lower than A.
+---
+The error of the far reading is $\dfrac{1.448 - 1.384}{2} = 0.032$ m.

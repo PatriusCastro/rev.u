@@ -1,0 +1,241 @@
+'use server';
+import { redirect } from 'next/navigation';
+import { db, session } from '@/lib/supabase';
+import { revalidatePath } from 'next/cache';
+import { dayOf } from '@/lib/schedule';
+import { inline } from '@/lib/math';
+import { checkProblem } from '@/lib/content';
+
+const back = (path: string, msg: string) => redirect(`${path}?msg=${encodeURIComponent(msg)}`);
+
+// Sign in and setup
+
+export async function signIn(form: FormData) {
+  const supabase = await db();
+  const { error } = await supabase.auth.signInWithPassword({ email: String(form.get('email')), password: String(form.get('password')) });
+  if (error) back('/login', error.code === 'invalid_credentials' ? 'That email and password do not match. Check them, or create an account.' : error.message);
+  redirect('/');
+}
+
+export async function signUp(form: FormData) {
+  const supabase = await db();
+  const { data, error } = await supabase.auth.signUp({ email: String(form.get('email')), password: String(form.get('password')) });
+  if (error) back('/login', error.message);
+  if (!data.session) back('/login', 'Check your email for a link to confirm your account.');
+  redirect('/setup');
+}
+
+export async function signOut() {
+  const supabase = await db();
+  await supabase.auth.signOut();
+  redirect('/login');
+}
+
+export async function saveExamDate(form: FormData) {
+  const { supabase, user } = await session();
+  const date = String(form.get('exam_date'));
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(date) || date <= dayOf()) back('/setup', 'Pick a date after today.');
+  const { error } = await supabase.from('profiles').upsert({ id: user.id, exam_date: date });
+  if (error) back('/setup', error.message);
+  redirect('/');
+}
+
+// Starting a set
+
+async function startAttempt(mode: 'practice' | 'repeat' | 'mock', questionIds: string[], extra: object = {}) {
+  const { supabase } = await session();
+  if (!questionIds.length) back('/', 'Nothing to work on there yet.');
+  const { data, error } = await supabase.from('attempts').insert({ mode, question_ids: questionIds, ...extra }).select('id').single();
+  if (error) throw new Error(error.message);
+  redirect(`/attempt/${data.id}`);
+}
+
+const shuffle = <T,>(a: T[]) => a.map((v) => [Math.random(), v] as const).sort((x, y) => x[0] - y[0]).map(([, v]) => v);
+
+export async function startPractice(topicId: string) {
+  const { supabase } = await session();
+  const [{ data: qs }, { data: done }] = await Promise.all([
+    supabase.from('questions').select('id').eq('topic_id', topicId),
+    supabase.from('answers').select('question_id, correct, questions!inner(topic_id)').eq('questions.topic_id', topicId),
+  ]);
+  const right = new Set((done ?? []).filter((a) => a.correct).map((a) => a.question_id));
+  const seen = new Set((done ?? []).map((a) => a.question_id));
+  const ids = (qs ?? []).map((q) => q.id as string);
+  // Unseen first, then ones never answered right, then the rest; 10 per set.
+  const rank = (id: string) => (!seen.has(id) ? 0 : !right.has(id) ? 1 : 2);
+  await startAttempt('practice', shuffle(ids).sort((a, b) => rank(a) - rank(b)).slice(0, 10));
+}
+
+export async function startRepeats() {
+  const { supabase } = await session();
+  const { data } = await supabase.from('repeats').select('question_id').is('cleared_at', null).lte('due', dayOf()).order('due');
+  await startAttempt('repeat', (data ?? []).map((r) => r.question_id));
+}
+
+export async function startMock(subjectId: string) {
+  const { supabase } = await session();
+  const [{ data: subject }, { data: qs }] = await Promise.all([
+    supabase.from('subjects').select('mock_items, mock_minutes').eq('id', subjectId).single(),
+    supabase.from('questions').select('id, topics!inner(subject_id)').eq('topics.subject_id', subjectId),
+  ]);
+  if (!subject) back('/subjects', 'Unknown subject.');
+  const ids = shuffle((qs ?? []).map((q) => q.id as string)).slice(0, subject!.mock_items);
+  // Fewer problems than a full mock gets a proportional time limit.
+  const minutes = Math.max(1, Math.ceil((subject!.mock_minutes * ids.length) / subject!.mock_items));
+  await startAttempt('mock', ids, { subject_id: subjectId, minutes });
+}
+
+// Answering: one database call each (submit_answer, finish_attempt), so an answer and its notebook update
+// succeed or fail together.
+
+export type AnswerResult =
+  | { correct: boolean; answer: string; steps: string[]; stage: string | null; message: string }
+  | { saved: true }
+  | { error: string; over?: boolean };
+
+export async function submitAnswer(attemptId: string, questionId: string, choice: string): Promise<AnswerResult> {
+  const { supabase } = await session();
+  const { data, error } = await supabase.rpc('submit_answer', { p_attempt: attemptId, p_question: questionId, p_choice: choice });
+  if (error) return { error: 'Your answer could not be saved. Check your connection and try again.' };
+  if (data.error || data.saved) return data;
+  // An empty choice is "Show me how": a miss, so it comes back like any other.
+  const message = choice === '' ? 'Here is how it is solved. It comes back tomorrow.'
+    : !data.correct ? 'Not yet. It comes back tomorrow.'
+    : data.stage === 'cleared' ? 'Correct. It is cleared from your notebook.'
+    : data.moved ? `Correct. It comes back in ${data.stage} days.`
+    : 'Correct.';
+  return { correct: data.correct, answer: data.answer, steps: (data.steps as string[]).map(inline), stage: data.stage, message };
+}
+
+export async function finishAttempt(attemptId: string) {
+  const { supabase } = await session();
+  await supabase.rpc('finish_attempt', { p_attempt: attemptId });
+}
+// Library
+
+export async function recordDocument(path: string, title: string, topicId: string): Promise<{ error?: string }> {
+  const { supabase, user } = await session();
+  const [folder, name] = path.split('/');
+  if (folder !== user.id || !name) return { error: 'Upload path is not yours.' };
+  // Trust the stored object, not the browser: it must exist and be a PDF under the bucket limits.
+  const { data: list } = await supabase.storage.from('library').list(folder, { search: name });
+  const obj = list?.find((o) => o.name === name);
+  if (!obj) return { error: 'The upload did not finish. Try again.' };
+  if (obj.metadata?.mimetype !== 'application/pdf') {
+    await supabase.storage.from('library').remove([path]);
+    return { error: 'Only PDF files can be added.' };
+  }
+  const { error } = await supabase.from('documents').insert({ path, title: title.trim().slice(0, 120) || name, topic_id: topicId || null, size: obj.metadata.size });
+  return error ? { error: error.message } : {};
+}
+
+export async function deleteDocument(id: string) {
+  const { supabase } = await session();
+  const { data: doc } = await supabase.from('documents').select('path').eq('id', id).single();
+  if (doc) {
+    await supabase.storage.from('library').remove([doc.path]);
+    await supabase.from('documents').delete().eq('id', id);
+  }
+  redirect('/library');
+}
+
+// Writing content. Anyone can write; row rules make it private to the author unless placed in a class they own.
+
+export type ProblemInput = { id?: string; topic_id: string; class_id: string; title: string; body: string; choices: { key: string; text: string }[]; answer: string; hint: string; steps: string[] };
+export type TopicInput = { id?: string; subject_id: string; class_id: string; area: string; name: string; minutes: number; lesson: string };
+type Saved = { error: string } | { id: string };
+
+const newId = () => 'u/' + crypto.randomUUID().replace(/-/g, '').slice(0, 12);
+const tooLong = (fields: [string, string, number][]) => fields.find(([, v, max]) => v.length > max)?.[0];
+const rowError = (code?: string, message?: string) =>
+  code === '42501' ? 'You can only add content to your own classes, under a built-in topic or your own topic with the same audience.' : message ?? 'Could not save.';
+
+export async function saveProblem(input: ProblemInput): Promise<Saved> {
+  const { supabase, user } = await session();
+  const choices = input.choices.map((c) => ({ key: c.key, text: c.text.trim() })).filter((c) => c.text);
+  const steps = input.steps.map((s) => s.trim()).filter(Boolean);
+  try {
+    checkProblem({ topic: input.topic_id, title: input.title, answer: input.answer, hint: input.hint, body: input.body, choices, steps });
+  } catch (e) {
+    return { error: 'Not saved: ' + (e as Error).message.replace(/"(\w+):"/, '$1') + '.' };
+  }
+  const long = tooLong([['Problem', input.body, 4000], ['Hint', input.hint, 1000], ['Title', input.title, 120], ...steps.map((s, i): [string, string, number] => [`Step ${i + 1}`, s, 2000]), ...choices.map((c): [string, string, number] => [`Choice ${c.key}`, c.text, 300])]);
+  if (long) return { error: `${long} is too long.` };
+  if (steps.length > 20) return { error: 'Use 20 steps or fewer.' };
+  const row = { topic_id: input.topic_id, class_id: input.class_id || null, title: input.title.trim() || null, body: input.body.trim(), choices, answer: input.answer, hint: input.hint.trim(), steps, owner_id: user.id };
+  const { error } = input.id
+    ? await supabase.from('questions').update(row).eq('id', input.id).eq('owner_id', user.id)
+    : await supabase.from('questions').insert({ id: (input.id = newId()), ...row });
+  if (error) return { error: rowError(error.code, error.message) };
+  revalidatePath('/write');
+  return { id: input.id };
+}
+
+export async function saveTopic(input: TopicInput): Promise<Saved> {
+  const { supabase, user } = await session();
+  if (!input.name.trim() || !input.area.trim() || !input.lesson.trim()) return { error: 'Not saved: give the lesson an area, a name and some text.' };
+  const long = tooLong([['Name', input.name, 120], ['Area', input.area, 60], ['Lesson', input.lesson, 20000]]);
+  if (long) return { error: `${long} is too long.` };
+  const row = { subject_id: input.subject_id, class_id: input.class_id || null, area: input.area.trim(), name: input.name.trim(), minutes: Math.min(120, Math.max(1, Math.round(input.minutes) || 8)), lesson: input.lesson.trim(), sort: 1000, owner_id: user.id };
+  const { error } = input.id
+    ? await supabase.from('topics').update(row).eq('id', input.id).eq('owner_id', user.id)
+    : await supabase.from('topics').insert({ id: (input.id = newId()), ...row });
+  if (error) return { error: rowError(error.code, error.message) };
+  revalidatePath('/write');
+  return { id: input.id };
+}
+
+export async function deleteContent(kind: 'questions' | 'topics', id: string) {
+  const { supabase, user } = await session();
+  // Deleting a lesson also deletes its problems, and everyone's answers and repeats for them.
+  await supabase.from(kind).delete().eq('id', id).eq('owner_id', user.id);
+  redirect('/write');
+}
+
+// Classes
+
+export async function createClass(form: FormData) {
+  const { supabase } = await session();
+  const name = String(form.get('name') ?? '').trim();
+  if (!name || name.length > 80) back('/classes', 'Give the class a name of up to 80 characters.');
+  const { error } = await supabase.from('classes').insert({ name });
+  if (error) back('/classes', error.message);
+  redirect('/classes');
+}
+
+export async function joinClass(form: FormData) {
+  const { supabase } = await session();
+  const { data, error } = await supabase.rpc('join_class', { p_code: String(form.get('code') ?? '') });
+  if (error || !data) back('/classes', 'No class has that code. Check it with your instructor.');
+  back('/classes', `You joined ${data}. Its lessons and problems now appear in Subjects.`);
+}
+
+export async function leaveClass(classId: string) {
+  const { supabase, user } = await session();
+  await supabase.from('class_members').delete().eq('class_id', classId).eq('user_id', user.id);
+  redirect('/classes');
+}
+
+export async function deleteClass(classId: string) {
+  const { supabase, user } = await session();
+  // Its lessons and problems stay, private to their author.
+  await supabase.from('classes').delete().eq('id', classId).eq('owner_id', user.id);
+  redirect('/classes');
+}
+
+// Reports
+
+export async function reportProblem(questionId: string, note: string): Promise<{ error?: string }> {
+  const { supabase } = await session();
+  const text = note.trim();
+  if (!text) return { error: 'Say what looks wrong.' };
+  if (text.length > 500) return { error: 'Keep it under 500 characters.' };
+  const { error } = await supabase.from('flags').insert({ question_id: questionId, note: text });
+  return error ? { error: 'Could not send the report. Try again.' } : {};
+}
+
+export async function resolveReport(flagId: string) {
+  const { supabase } = await session();
+  await supabase.from('flags').update({ resolved_at: new Date().toISOString() }).eq('id', flagId);
+  redirect('/write');
+}

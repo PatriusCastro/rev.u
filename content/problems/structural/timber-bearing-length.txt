@@ -1,0 +1,13 @@
+topic: structural/timber
+title: Bearing length at a wall support
+answer: D
+hint: The beam presses on its support across the grain. Use the dressed width.
+
+A tanguile girder, nominal 100 mm wide and dressed 90 mm wide, rests on a concrete wall. Its end reaction is 42 kN. Allowable compression parallel to grain is 9.5 MPa and perpendicular to grain is 2.4 MPa. Find the minimum bearing length.
+
+A. 175.0 mm    B. 97.2 mm    C. 49.1 mm    D. 194.4 mm
+
+## Solution
+Bearing on the support is perpendicular to the grain, so use $F_{c\perp} = 2.4$ MPa.
+---
+Required length $= \dfrac{R}{F_{c\perp} b} = \dfrac{42\,000}{2.4(90)} = 194.4$ mm.

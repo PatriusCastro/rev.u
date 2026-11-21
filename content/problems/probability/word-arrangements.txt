@@ -1,0 +1,13 @@
+topic: probability/counting-and-probability
+title: Arranging the letters of LEVEL
+answer: B
+hint: Some letters repeat. Divide by the factorial of each repeat count.
+
+How many different arrangements can be made from all the letters of the word LEVEL?
+
+A. 120    B. 30    C. 60    D. 20
+
+## Solution
+LEVEL has 5 letters: L twice, E twice and V once.
+---
+$\dfrac{5!}{2!\,2!} = \dfrac{120}{4} = 30$ arrangements.

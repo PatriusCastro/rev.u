@@ -1,0 +1,13 @@
+topic: structural/design-construction
+title: Minimum tension steel for a beam
+answer: B
+hint: The minimum steel uses the effective depth, not the total depth.
+
+A rectangular beam is 250 mm wide and 480 mm deep overall, with an effective depth of 420 mm. The steel has $f_y = 345$ MPa and the concrete has $f'_c = 21$ MPa. Per NSCP 2015, use $A_{s,\min} = \dfrac{1.4}{f_y}\,b\,d$ for this beam. Find the minimum area of tension steel.
+
+A. 487.0 mm²    B. 426.1 mm²    C. 348.7 mm²    D. 216.0 mm²
+
+## Solution
+$A_{s,\min} = \dfrac{1.4}{f_y}\,b\,d$ with $b = 250$ mm and $d = 420$ mm.
+---
+$A_{s,\min} = \dfrac{1.4}{345}(250)(420) = 426.1$ mm².

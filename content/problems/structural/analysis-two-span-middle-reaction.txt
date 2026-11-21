@@ -1,0 +1,15 @@
+topic: structural/analysis
+title: Middle support of a two-span beam
+answer: C
+hint: The middle support of a continuous beam takes more than its tributary share.
+
+A continuous floor beam in a school building rests on three simple supports, giving two equal spans of 5 m each. It carries a uniform load of 24 kN/m over both spans. EI is constant. Find the reaction at the middle support.
+
+A. 45 kN    B. 120 kN    C. 150 kN    D. 180 kN
+
+## Solution
+For two equal spans with uniform load on both, the moment over the middle support is $\dfrac{wL^2}{8} = \dfrac{24(5)^2}{8} = 75$ kN·m, hogging.
+---
+End reaction, taking moments of span 1 about the middle support: $R_1(5) = \dfrac{24(5)^2}{2} - 75 = 225$, so $R_1 = 45$ kN $= 0.375wL$.
+---
+Middle reaction: $R_2 = 2wL - 2R_1 = 240 - 90 = 150$ kN $= 1.25wL$.

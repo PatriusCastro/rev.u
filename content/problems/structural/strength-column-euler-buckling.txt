@@ -1,0 +1,15 @@
+topic: structural/statics-mechanics
+title: Buckling load of a fixed-pinned column
+answer: B
+hint: The end conditions set the effective length. Look up K for one fixed end and one pinned end.
+
+A steel column 5 m long is fixed at its base and pinned at its top. Its smaller moment of inertia is $25 \times 10^6$ mm⁴. Take $E = 200$ GPa. Find the Euler critical buckling load.
+
+A. 1974 kN    B. 4028 kN    C. 7896 kN    D. 493 kN
+
+## Solution
+Fixed and pinned: $K = 0.7$, so $KL = 0.7(5000) = 3500$ mm.
+---
+$P_{cr} = \dfrac{\pi^2 EI}{(KL)^2} = \dfrac{\pi^2(200\,000)(25 \times 10^6)}{3500^2}$.
+---
+$P_{cr} = 4.028 \times 10^6$ N $= 4028$ kN.

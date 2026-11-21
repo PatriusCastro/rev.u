@@ -1,0 +1,19 @@
+topic: hydraulics/hydrodynamics
+title: Water spilled from an accelerating truck tank
+answer: B
+hint: Find the rear depth first. Water above the rear wall's top goes over, and the surface stays a flat sloping plane.
+
+An open rectangular tank on a water delivery truck in Bulacan is 4 m long, 2 m wide and 1.8 m deep. It holds water 1.4 m deep. The truck speeds up along the tank's length at a constant 3 m/s². Treat the water surface as a flat plane once it settles. How much water spills? Use $g = 9.81$ m/s².
+
+A. 0.847 m³    B. 1.693 m³    C. 4.893 m³    D. 6.586 m³
+
+## Solution
+Surface slope: $\tan\theta = \dfrac{a}{g} = \dfrac{3}{9.81} = 0.3058$.
+---
+Without spilling, the rear rises $\dfrac{L}{2}\tan\theta = 2(0.3058) = 0.612$ m, so the rear depth would be $1.4 + 0.612 = 2.012$ m. That is above the 1.8 m wall, so water spills.
+---
+After spilling, the surface passes through the top of the rear wall. Front depth: $1.8 - 4(0.3058) = 0.577$ m, still above the floor.
+---
+Water left: $2 \times 4 \times \dfrac{1.8 + 0.577}{2} = 9.507$ m³. Water at the start: $2 \times 4 \times 1.4 = 11.2$ m³.
+---
+Spilled: $11.2 - 9.507 = 1.693$ m³.

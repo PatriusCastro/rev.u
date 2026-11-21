@@ -1,0 +1,17 @@
+topic: hydraulics/fluid-flow
+title: Two pipes joined by a reducer
+answer: B
+hint: In series the same flow passes through both pipes. Find each pipe's own velocity.
+
+A pipeline carries 50 L/s of water. It starts as a 300 mm pipe, 400 m long, with $f = 0.02$, then a reducer joins it to a 200 mm pipe, 300 m long, with $f = 0.025$. Neglecting minor losses, find the total friction head loss. Use $g = 9.81$ m/s².
+
+A. 4.84 m    B. 5.52 m    C. 1.19 m    D. 11.30 m
+
+## Solution
+Velocities: $V_1 = \dfrac{0.05}{\pi(0.3)^2/4} = 0.707$ m/s and $V_2 = \dfrac{0.05}{\pi(0.2)^2/4} = 1.592$ m/s.
+---
+$h_{f1} = 0.02\left(\dfrac{400}{0.3}\right)\dfrac{0.707^2}{2(9.81)} = 0.68$ m.
+---
+$h_{f2} = 0.025\left(\dfrac{300}{0.2}\right)\dfrac{1.592^2}{2(9.81)} = 4.84$ m.
+---
+Total: $h_f = 0.68 + 4.84 = 5.52$ m.

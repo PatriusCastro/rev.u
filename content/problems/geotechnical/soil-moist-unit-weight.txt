@@ -1,0 +1,15 @@
+topic: geotechnical/soil-properties
+title: Moist unit weight of a partly saturated clay
+answer: B
+hint: Get the void ratio first from the link between saturation, void ratio, water content and specific gravity.
+
+A clay sample from a road cut in Pampanga has a water content of 24%, a specific gravity of solids of 2.68 and a degree of saturation of 85%. Using $\gamma_w = 9.81$ kN/m³, find its moist unit weight.
+
+A. 14.97 kN/m³    B. 18.56 kN/m³    C. 19.19 kN/m³    D. 19.84 kN/m³
+
+## Solution
+$e = \dfrac{wG_s}{S} = \dfrac{0.24(2.68)}{0.85} = 0.757$
+---
+$\gamma = \dfrac{(G_s + Se)\gamma_w}{1+e} = \dfrac{(2.68 + 0.85 \times 0.757)(9.81)}{1.757}$
+---
+$\gamma = 18.56$ kN/m³.

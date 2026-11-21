@@ -1,0 +1,15 @@
+topic: geotechnical/foundations
+title: Stress below a footing by the 2:1 method
+answer: B
+hint: The loaded area grows by $z/2$ on each side, so each side length grows by $z$.
+
+A 2.5 m by 2.5 m footing carries a total load of 900 kN. Using the 2:1 method, find the average vertical stress increase 3 m below the base of the footing.
+
+A. 56.25 kPa    B. 29.75 kPa    C. 144.00 kPa    D. 12.46 kPa
+
+## Solution
+At $z = 3$ m each side becomes $2.5 + 3 = 5.5$ m.
+---
+$\Delta\sigma = \dfrac{900}{(5.5)(5.5)} = \dfrac{900}{30.25}$.
+---
+$\Delta\sigma = 29.75$ kPa.

@@ -1,0 +1,15 @@
+topic: surveying/traverse-areas
+title: Back bearing from a south azimuth
+answer: C
+hint: Change the azimuth to one measured from north before reducing it to a bearing.
+
+In a field book, the azimuth of line AB is recorded as 203°20′, measured clockwise from south. What is the bearing of line BA?
+
+A. N 23°20′ E    B. S 66°40′ W    C. S 23°20′ W    D. N 66°40′ E
+
+## Solution
+Azimuth from north $= 203°20′ - 180° = 23°20′$.
+---
+An azimuth of 23°20′ from north is in the NE quadrant, so AB bears N 23°20′ E.
+---
+The back bearing swaps both letters: BA bears S 23°20′ W.

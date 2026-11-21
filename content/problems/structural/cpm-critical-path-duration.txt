@@ -1,0 +1,15 @@
+topic: structural/design-construction
+title: Project duration by the critical path
+answer: C
+hint: List every chain of activities from the first to the last. The project takes as long as the longest chain.
+
+A small guardhouse is built with five activities. Site clearing (A) takes 3 days and starts the project. Masonry walls (B) take 5 days and can start once A is done. Footing and column work (C) takes 4 days and can also start once A is done. Roof framing (D) takes 6 days and can start once C is done. Finishing (E) takes 2 days and can start only when both B and D are done. What is the shortest time to finish the project?
+
+A. 10 days    B. 13 days    C. 15 days    D. 20 days
+
+## Solution
+Path A–B–E: $3 + 5 + 2 = 10$ days.
+---
+Path A–C–D–E: $3 + 4 + 6 + 2 = 15$ days.
+---
+The longest path, A–C–D–E, is critical, so the project takes 15 days.

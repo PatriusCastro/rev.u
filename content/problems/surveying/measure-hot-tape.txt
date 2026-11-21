@@ -1,0 +1,15 @@
+topic: surveying/measurements
+title: Taping on a hot afternoon
+answer: A
+hint: Only temperature differs from standard here. Work with how far the field temperature is from the standard temperature.
+
+A steel tape is correct at 20°C. A survey crew in Pampanga uses it to measure a property line on an afternoon when the tape temperature is 34°C, and the recorded length is 425.36 m. Pull and support are the same as at standardization. Use $\alpha = 0.0000116$/°C. What correction must be applied to the recorded length?
+
+A. +0.069 m    B. −0.069 m    C. +0.168 m    D. +0.005 m
+
+## Solution
+Only temperature differs from standard, so only the temperature correction applies.
+---
+$C_t = \alpha L (T - T_s) = 0.0000116(425.36)(34 - 20) = 0.0691$ m.
+---
+The tape expands, so it reads too little: the correction is $+0.069$ m. Corrected length $= 425.43$ m.

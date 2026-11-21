@@ -1,0 +1,15 @@
+topic: hydraulics/dams-hydrology
+title: Pumping from a water-table aquifer
+answer: D
+hint: In a water-table aquifer the saturated thickness changes with radius, so the heads appear squared.
+
+A well in an unconfined sand aquifer in Pampanga fully penetrates to the impervious base. During steady pumping, the water table is 18.5 m above the base in an observation well 12 m away and 20.2 m above the base in a second observation well 40 m away. The hydraulic conductivity is $3.5 \times 10^{-4}$ m/s. Find the pumping rate.
+
+A. 120.2 L/s    B. 138.3 L/s    C. 2.64 L/s    D. 60.1 L/s
+
+## Solution
+$h_2^2 - h_1^2 = 20.2^2 - 18.5^2 = 65.79$ m².
+---
+$\ln(r_2/r_1) = \ln(40/12) = 1.2040$.
+---
+$Q = \dfrac{\pi(3.5 \times 10^{-4})(65.79)}{1.2040} = 0.0601$ m³/s $= 60.1$ L/s.

@@ -1,0 +1,9 @@
+{
+  "_note": "Weights and mock sizes are unconfirmed starting values. Check them against the PRC exam program before the pilot.",
+  "exam": { "id": "ce", "name": "Civil Engineering" },
+  "subjects": [
+    { "id": "math", "name": "Mathematics, Surveying and Transportation Engineering", "weight": 35, "mock_items": 20, "mock_minutes": 40 },
+    { "id": "hgeo", "name": "Hydraulics and Geotechnical Engineering", "weight": 30, "mock_items": 20, "mock_minutes": 40 },
+    { "id": "struct", "name": "Structural Engineering and Construction", "weight": 35, "mock_items": 20, "mock_minutes": 40 }
+  ]
+}

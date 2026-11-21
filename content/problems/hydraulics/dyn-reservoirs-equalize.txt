@@ -1,0 +1,15 @@
+topic: hydraulics/hydrodynamics
+title: Two tanks levelling out
+answer: D
+hint: Both water surfaces move, so the head difference falls faster than in a single tank. Use an equivalent area.
+
+Two vertical-sided tanks have plan areas of 40 m² and 25 m². They are joined near their floors by a short pipe that acts as a submerged orifice with area 0.02 m² and $C_d = 0.65$. At the start, the water in the larger tank stands 3 m higher than in the smaller one. How long until the levels are equal? Use $g = 9.81$ m/s².
+
+A. 463 s    B. 2406 s    C. 1504 s    D. 926 s
+
+## Solution
+Equivalent area: $A_e = \dfrac{A_1A_2}{A_1 + A_2} = \dfrac{40(25)}{65} = 15.385$ m².
+---
+$t = \dfrac{2A_e\sqrt{H}}{C_d\,a\sqrt{2g}} = \dfrac{2(15.385)\sqrt{3}}{0.65(0.02)\sqrt{2(9.81)}}$
+---
+$t = \dfrac{53.29}{0.05758} = 926$ s.

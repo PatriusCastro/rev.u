@@ -1,0 +1,15 @@
+topic: surveying/traverse-areas
+title: Precision of a closed traverse
+answer: A
+hint: The two closing errors are at right angles to each other.
+
+A closed traverse around a subdivision in Laguna has a perimeter of 1,248.5 m. The sum of the latitudes is +0.38 m and the sum of the departures is −0.29 m. What is the relative precision?
+
+A. 1 in 2,612    B. 1 in 3,286    C. 1 in 1,863    D. 1 in 5,464
+
+## Solution
+Linear error of closure: $\text{LEC} = \sqrt{0.38^2 + (-0.29)^2} = \sqrt{0.2285} = 0.478$ m.
+---
+Relative precision $= \dfrac{\text{LEC}}{P} = \dfrac{0.478}{1248.5} = \dfrac{1}{2612}$.
+---
+The traverse closes to 1 in 2,612.

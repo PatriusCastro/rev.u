@@ -1,0 +1,17 @@
+topic: calculus/applications
+title: Banca pulled to the pier
+answer: A
+hint: The rope, the pier height and the boat's distance form a right triangle. Differentiate it before putting in numbers.
+
+A banca is pulled toward a pier by a rope tied to its bow. The rope runs through a ring on the pier 4 m above the bow, and a man pulls the rope in at 1.2 m/s. How fast is the banca moving toward the pier when 5 m of rope is out?
+
+A. 2.00 m/s    B. 1.20 m/s    C. 0.72 m/s    D. 1.60 m/s
+
+## Solution
+Let $x$ be the horizontal distance to the pier and $L$ the rope length: $x^2 + 4^2 = L^2$.
+---
+Differentiate: $2x\dfrac{dx}{dt} = 2L\dfrac{dL}{dt}$, so $\dfrac{dx}{dt} = \dfrac{L}{x}\dfrac{dL}{dt}$.
+---
+When $L = 5$, $x = \sqrt{25 - 16} = 3$ m.
+---
+$\dfrac{dx}{dt} = \dfrac{5}{3}(-1.2) = -2.00$ m/s. The banca approaches at 2.00 m/s.

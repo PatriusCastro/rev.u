@@ -1,0 +1,15 @@
+topic: hydraulics/hydrodynamics
+title: Jet on a fixed flat plate
+answer: A
+hint: The plate stops all the jet's momentum in its original direction.
+
+A fire hose nozzle sends a horizontal water jet 60 mm in diameter at 22 m/s. The jet hits a fixed flat plate held at right angles to it, and the water leaves along the plate face. Find the force of the jet on the plate. Neglect friction and gravity on the jet.
+
+A. 1.368 kN    B. 0.684 kN    C. 2.737 kN    D. 5.474 kN
+
+## Solution
+Jet area: $A = \dfrac{\pi(0.06)^2}{4} = 0.002827$ m².
+---
+Flow: $Q = Av = 0.002827(22) = 0.06220$ m³/s.
+---
+The water loses all its speed along the jet direction: $F = \rho Q v = 1000(0.06220)(22) = 1368$ N $= 1.368$ kN.

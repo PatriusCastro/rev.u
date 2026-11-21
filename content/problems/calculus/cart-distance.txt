@@ -1,0 +1,15 @@
+topic: calculus/applications
+title: Distance of a test cart
+answer: A
+hint: The cart reverses wherever its velocity is zero. Integrate each piece separately and add their sizes.
+
+A test cart moves along a straight track with velocity $v = t^2 - 6t + 8$ m/s, where $t$ is in seconds. What total distance does it travel from $t = 0$ to $t = 5$ s?
+
+A. 9.33 m    B. 6.67 m    C. 4.00 m    D. 10.67 m
+
+## Solution
+$v = (t - 2)(t - 4)$, so the cart stops and turns at $t = 2$ and $t = 4$ s.
+---
+With $s(t) = \dfrac{t^3}{3} - 3t^2 + 8t$: $s(0) = 0$, $s(2) = 6.67$, $s(4) = 5.33$, $s(5) = 6.67$.
+---
+Distance $= |6.67 - 0| + |5.33 - 6.67| + |6.67 - 5.33| = 6.67 + 1.33 + 1.33 = 9.33$ m.

@@ -1,0 +1,15 @@
+topic: transportation/traffic
+title: Accident rate at an intersection
+answer: B
+hint: Add the entering volumes of all approaches, then count the total vehicles that entered over the whole study period.
+
+A four-leg intersection in Cebu City has entering ADTs of 8200, 6500, 4300 and 3000 veh/day on its approaches. Over 3 years, 33 accidents were recorded there. Find the accident rate per million entering vehicles, using $R = \dfrac{A \times 10^6}{365\,T\,V}$.
+
+A. 4.11    B. 1.37    C. 2.74    D. 0.457
+
+## Solution
+Total entering volume: $V = 8200 + 6500 + 4300 + 3000 = 22{,}000$ veh/day.
+---
+Vehicles entering in 3 years: $365(3)(22{,}000) = 24.09 \times 10^6$.
+---
+$R = \dfrac{33 \times 10^6}{24.09 \times 10^6} = 1.37$ accidents per million entering vehicles.

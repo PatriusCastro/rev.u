@@ -1,0 +1,15 @@
+topic: surveying/measurements
+title: Measuring with a long tape
+answer: C
+hint: A tape that is longer than its marks fits fewer times into the line. Does that make the recorded length too big or too small?
+
+A 50 m tape is checked against a baseline and found to be 50.012 m long. With this tape a road centerline is recorded as 362.48 m. How much must be added to the recorded length to get the true length? (A negative value means subtract.)
+
+A. −0.087 m    B. +0.145 m    C. +0.087 m    D. +0.012 m
+
+## Solution
+True length $= 362.48 \times \dfrac{50.012}{50} = 362.567$ m.
+---
+Correction $= 362.567 - 362.48 = +0.087$ m.
+---
+Check: the error is 0.012 m per tape length and the line is $362.48/50 = 7.25$ tape lengths, so $7.25 \times 0.012 = 0.087$ m.

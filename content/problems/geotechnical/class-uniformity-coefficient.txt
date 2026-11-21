@@ -1,0 +1,13 @@
+topic: geotechnical/classification
+title: Uniformity of a river sand
+answer: C
+hint: The uniformity coefficient uses only two of the three sizes, and the effective size is one of them.
+
+A sieve analysis of sand quarried from the Pampanga River gives $D_{10} = 0.12$ mm, $D_{30} = 0.45$ mm and $D_{60} = 1.30$ mm. Find the uniformity coefficient $C_u = D_{60}/D_{10}$.
+
+A. 2.89    B. 1.30    C. 10.83    D. 3.75
+
+## Solution
+The effective size is $D_{10} = 0.12$ mm.
+---
+$C_u = \dfrac{D_{60}}{D_{10}} = \dfrac{1.30}{0.12} = 10.83$

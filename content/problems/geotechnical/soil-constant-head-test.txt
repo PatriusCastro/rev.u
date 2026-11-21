@@ -1,0 +1,15 @@
+topic: geotechnical/soil-properties
+title: Constant-head permeability test
+answer: A
+hint: Keep every quantity in centimetres and seconds. The head drives flow across the sample length.
+
+A sand specimen 75 mm in diameter and 150 mm long is tested in a constant-head permeameter. The head difference across the specimen is held at 600 mm, and 420 cm³ of water is collected in 3 minutes. Find the coefficient of permeability.
+
+A. 1.320 × 10⁻² cm/s    B. 2.113 × 10⁻¹ cm/s    C. 3.301 × 10⁻³ cm/s    D. 7.922 × 10⁻¹ cm/s
+
+## Solution
+$A = \dfrac{\pi(7.5)^2}{4} = 44.18$ cm², $L = 15$ cm, $h = 60$ cm, $t = 180$ s.
+---
+$k = \dfrac{QL}{Aht} = \dfrac{420(15)}{44.18(60)(180)}$
+---
+$k = 1.320 \times 10^{-2}$ cm/s.

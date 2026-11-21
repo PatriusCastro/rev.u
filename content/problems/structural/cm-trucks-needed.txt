@@ -1,0 +1,17 @@
+topic: structural/construction-management
+title: Trucks to keep a backhoe busy
+answer: B
+hint: Find the backhoe's real output per hour first, then what one truck can carry away per hour.
+
+A backhoe at a road-widening job in Batangas has a 1.5 m³ bucket, a fill factor of 0.90 and a cycle time of 24 s. It works 45 minutes in each hour. Its output is bucket × fill factor × cycles per hour × efficiency. Dump trucks carry 10 m³ each and need 25 minutes for a round trip. How many trucks are needed so the backhoe never waits?
+
+A. 6 trucks    B. 7 trucks    C. 8 trucks    D. 9 trucks
+
+## Solution
+Cycles per hour $= 3600/24 = 150$, efficiency $= 45/60 = 0.75$.
+---
+Backhoe output: $1.5(0.90)(150)(0.75) = 151.9$ m³/h.
+---
+One truck: $10 \times \dfrac{60}{25} = 24$ m³/h.
+---
+Trucks $= \dfrac{151.9}{24} = 6.33$, rounded up to 7 trucks.

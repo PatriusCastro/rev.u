@@ -1,0 +1,15 @@
+topic: transportation/traffic
+title: Flexible pavement over a weak subgrade
+answer: C
+hint: Work out the bracket first, and watch the sign of the tyre-pressure term.
+
+A flexible pavement in Bulacan sits on a subgrade with a CBR of 5%. The design wheel load is 40 kN and the tyre pressure is 0.7 MPa. Find the total pavement thickness above the subgrade using $t = \sqrt{P\left(\dfrac{17.8}{CBR} - \dfrac{1}{\pi p}\right)}$, with $P$ in N, $p$ in MPa, CBR in percent and $t$ in mm.
+
+A. 377 mm    B. 401 mm    C. 352 mm    D. 171 mm
+
+## Solution
+$\dfrac{17.8}{5} = 3.560$ and $\dfrac{1}{\pi(0.7)} = 0.4547$.
+---
+$t^2 = 40{,}000(3.560 - 0.4547) = 40{,}000(3.1053) = 124{,}210$ mm².
+---
+$t = \sqrt{124{,}210} = 352$ mm.

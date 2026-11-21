@@ -1,0 +1,15 @@
+topic: transportation/traffic
+title: Design ESAL for a truck route
+answer: D
+hint: Multiply each axle group's daily count by its load equivalency factor before adding, then scale up to the design period.
+
+The design lane of a truck route in Batangas carries these axles each day: 400 single axles of 80 kN (load equivalency factor 1.0), 150 single axles of 100 kN (factor 2.4) and 120 tandem axles of 160 kN (factor 1.4). Assume no traffic growth. Find the total ESAL over a 20-year design period.
+
+A. 4.89 million    B. 0.339 million    C. 13.5 million    D. 6.77 million
+
+## Solution
+Daily ESAL: $400(1.0) + 150(2.4) + 120(1.4) = 400 + 360 + 168 = 928$.
+---
+Over 20 years: $928 \times 365 \times 20 = 6{,}774{,}400$.
+---
+Total $\approx 6.77$ million ESAL.

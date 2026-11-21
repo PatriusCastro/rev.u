@@ -1,0 +1,14 @@
+topic: trigonometry/sine-cosine-law
+answer: A
+hint: You have two sides and the angle between them. The area formula uses the sine of that angle.
+
+Two sides of a triangular lot are 12 m and 15 m, and the angle between them is 35°. Find the area of the lot.
+
+A. 51.62 m²    B. 73.73 m²    C. 90.00 m²    D. 103.24 m²
+
+## Solution
+With two sides and the included angle, $\text{Area} = \tfrac{1}{2}ab\sin C$.
+---
+$\text{Area} = \tfrac{1}{2}(12)(15)\sin 35° = 90(0.5736)$.
+---
+$\text{Area} \approx 51.62$ m².

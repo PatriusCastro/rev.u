@@ -1,0 +1,15 @@
+topic: calculus/applications
+title: Open box from a GI sheet
+answer: B
+hint: Write the volume in terms of the cut size $x$, then set its derivative to zero. Keep $x$ under 20 cm.
+
+A tinsmith makes an open box from a 60 cm by 40 cm galvanized iron sheet by cutting equal squares from the four corners and folding up the sides. What is the largest volume the box can have?
+
+A. 7500 cm³    B. 8450 cm³    C. 8000 cm³    D. 8296 cm³
+
+## Solution
+With squares of side $x$ cut out: $V = x(60 - 2x)(40 - 2x) = 4x^3 - 200x^2 + 2400x$.
+---
+$\dfrac{dV}{dx} = 12x^2 - 400x + 2400 = 0$, so $x = \dfrac{400 - \sqrt{44\,800}}{24} = 7.85$ cm. The other root, 25.5 cm, is too large for the 40 cm side.
+---
+$V = 7.85(44.31)(24.31) \approx 8450$ cm³.

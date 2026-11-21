@@ -1,0 +1,15 @@
+topic: hydraulics/hydrostatics
+title: Diver's absolute pressure
+answer: C
+hint: Seawater is heavier than fresh water, and the question asks for absolute pressure.
+
+A diver inspecting a pier off Cebu works 18 m below the sea surface. Seawater has specific gravity 1.03 and the atmospheric pressure is 101.3 kPa. Find the absolute pressure on the diver. Use $\gamma_w = 9.81$ kN/m³.
+
+A. 181.88 kPa    B. 277.88 kPa    C. 283.18 kPa    D. 119.84 kPa
+
+## Solution
+Unit weight of seawater: $1.03 \times 9.81 = 10.104$ kN/m³.
+---
+Gauge pressure: $10.104 \times 18 = 181.88$ kPa.
+---
+Absolute pressure: $101.3 + 181.88 = 283.18$ kPa.

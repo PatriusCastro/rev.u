@@ -1,0 +1,17 @@
+topic: differential-equations/basics
+title: Integrating factor
+answer: A
+hint: The integrating factor is $e^{\int 2\,dx}$. Integrate the right side by parts.
+
+Solve $\dfrac{dy}{dx} + 2y = 4x$ with $y(0) = 1$. What is $y(1)$?
+
+A. 1.271    B. 1.135    C. 2.729    D. 1.000
+
+## Solution
+Integrating factor: $\mu = e^{2x}$.
+---
+$ye^{2x} = \int 4xe^{2x}\,dx = (2x - 1)e^{2x} + C$, so $y = 2x - 1 + Ce^{-2x}$.
+---
+$y(0) = 1$ gives $-1 + C = 1$, so $C = 2$.
+---
+$y(1) = 1 + 2e^{-2} = 1.271$.

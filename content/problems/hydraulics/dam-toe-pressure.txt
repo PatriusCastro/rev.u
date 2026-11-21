@@ -1,0 +1,21 @@
+topic: hydraulics/dams-hydrology
+title: Foundation pressure at the toe
+answer: A
+hint: Find the eccentricity first. The toe gets the larger of the two pressures.
+
+A concrete gravity dam is 15 m high, 3 m wide at the top and 11 m wide at the base, with a vertical upstream face. The reservoir is 14 m deep with no tailwater. Uplift varies linearly from full hydrostatic pressure at the heel to zero at the toe. Concrete weighs 23.5 kN/m³ and water 9.81 kN/m³. Find the foundation pressure at the toe, per metre length.
+
+A. 248.7 kPa    B. 171.2 kPa    C. 155.6 kPa    D. 62.6 kPa
+
+## Solution
+$W_1 = 23.5(3)(15) = 1057.5$ kN at 9.5 m from the toe; $W_2 = \tfrac{1}{2}(23.5)(8)(15) = 1410$ kN at $\tfrac{2}{3}(8) = 5.333$ m.
+---
+$P = \tfrac{1}{2}(9.81)(14)^2 = 961.38$ kN at 4.667 m; $U = \tfrac{1}{2}(9.81)(14)(11) = 755.37$ kN at 7.333 m.
+---
+$\Sigma M_R = 1057.5(9.5) + 1410(5.333) = 17\,566.3$; $\Sigma M_O = 961.38(4.667) + 755.37(7.333) = 10\,025.8$ kN·m.
+---
+$R_y = 2467.5 - 755.37 = 1712.13$ kN, $\bar{x} = \dfrac{17\,566.3 - 10\,025.8}{1712.13} = 4.404$ m.
+---
+$e = 5.5 - 4.404 = 1.096$ m.
+---
+$q_{toe} = \dfrac{1712.13}{11}\left(1 + \dfrac{6(1.096)}{11}\right) = 155.65(1.598) = 248.7$ kPa.

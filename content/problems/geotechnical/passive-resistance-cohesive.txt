@@ -1,0 +1,17 @@
+topic: geotechnical/foundations
+title: Passive resistance in a c-φ soil
+answer: A
+hint: Cohesion adds a rectangular block to the passive pressure. Check its coefficient.
+
+The soil in front of an anchor wall is 3 m deep, with $\gamma = 17.5$ kN/m³, $c = 10$ kPa and $\phi = 25°$. The surface is level and the wall is smooth. Using Rankine's theory, find the total passive resistance per metre of wall.
+
+A. 288.2 kN/m    B. 194.0 kN/m    C. 241.1 kN/m    D. 341.9 kN/m
+
+## Solution
+$K_p = \tan^2(45° + 12.5°) = 2.464$, so $\sqrt{K_p} = 1.570$.
+---
+Friction part: $\tfrac{1}{2}K_p\gamma H^2 = \tfrac{1}{2}(2.464)(17.5)(9) = 194.03$ kN/m.
+---
+Cohesion part: $2c\sqrt{K_p}H = 2(10)(1.570)(3) = 94.18$ kN/m.
+---
+$P_p = 194.03 + 94.18 = 288.2$ kN/m.

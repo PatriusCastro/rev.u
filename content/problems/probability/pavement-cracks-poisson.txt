@@ -1,0 +1,13 @@
+topic: probability/counting-and-probability
+title: No cracks in 50 m of pavement
+answer: B
+hint: The rate is given per 100 m. Scale it to 50 m before using the Poisson formula.
+
+Cracks in a pavement occur at random at an average of 2 per 100 m. What is the probability that a 50 m stretch has no cracks?
+
+A. 0.135    B. 0.368    C. 0.632    D. 0.184
+
+## Solution
+For 50 m, the average is $\lambda = 2 \times \dfrac{50}{100} = 1$.
+---
+$P(0) = \dfrac{1^0 e^{-1}}{0!} = e^{-1} = 0.368$.

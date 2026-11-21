@@ -1,0 +1,13 @@
+topic: structural/steel
+title: Bearing at bolt holes
+answer: C
+hint: Bearing uses the bolt diameter, the thickness of the plate and Fu of the plate.
+
+A 10 mm connection plate is fastened with four 22 mm bolts. The plate has $F_y = 248$ MPa and $F_u = 400$ MPa. Edge distances and spacing are large enough that bearing is limited by $R_n = 2.4\,d\,t\,F_u$ per bolt, with $\phi = 0.75$ and $d$ the bolt diameter. Find the design bearing strength of the four holes.
+
+A. 844.8 kN    B. 691.2 kN    C. 633.6 kN    D. 392.8 kN
+
+## Solution
+Per bolt: $R_n = 2.4(22)(10)(400) = 211{,}200$ N.
+---
+Four bolts: $\phi R_n = 0.75(4)(211{,}200) = 633{,}600$ N $= 633.6$ kN.

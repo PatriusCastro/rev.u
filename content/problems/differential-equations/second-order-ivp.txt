@@ -1,0 +1,15 @@
+topic: differential-equations/basics
+title: Second-order initial value problem
+answer: B
+hint: Factor the characteristic equation, then use both starting conditions to find the two constants.
+
+Solve $y'' - 5y' + 6y = 0$ with $y(0) = 1$ and $y'(0) = 4$.
+
+A. $y = 2e^{2x} - e^{3x}$    B. $y = -e^{2x} + 2e^{3x}$    C. $y = -e^{-2x} + 2e^{-3x}$    D. $y = 3e^{2x} - 2e^{3x}$
+
+## Solution
+$r^2 - 5r + 6 = (r - 2)(r - 3) = 0$, so $y = C_1e^{2x} + C_2e^{3x}$.
+---
+$y(0) = 1$: $C_1 + C_2 = 1$. $y'(0) = 4$: $2C_1 + 3C_2 = 4$.
+---
+So $C_2 = 2$ and $C_1 = -1$: $y = -e^{2x} + 2e^{3x}$.

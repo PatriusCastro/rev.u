@@ -1,0 +1,15 @@
+topic: transportation/traffic
+title: Peak hour factor on an approach
+answer: B
+hint: The hourly volume is the sum of the four counts. Compare it with four times one of the counts.
+
+The 15-minute counts on an approach to a Quezon City intersection during the morning peak hour are 410, 465, 520 and 445 vehicles. Find the peak hour factor.
+
+A. 0.283    B. 0.885    C. 1.122    D. 0.989
+
+## Solution
+Hourly volume: $V = 410 + 465 + 520 + 445 = 1840$ veh.
+---
+Highest 15-minute count: 520 veh.
+---
+$PHF = \dfrac{1840}{4(520)} = 0.885$.

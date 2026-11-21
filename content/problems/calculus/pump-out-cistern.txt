@@ -1,0 +1,15 @@
+topic: calculus/applications
+title: Emptying a cistern
+answer: D
+hint: A slice of water at height $y$ above the bottom must rise to the outlet, not just to the rim.
+
+A vertical cylindrical cistern has a radius of 1.5 m and a depth of 4 m, and is full of water. All the water is pumped out through a pipe whose outlet is 1 m above the top of the cistern. How much work is needed? Use 1000 kg/m³ for water and $g = 9.81$ m/s².
+
+A. 554.7 kJ    B. 1386.9 kJ    C. 277.4 kJ    D. 832.1 kJ
+
+## Solution
+A slice at height $y$ from the bottom has weight $9810\,\pi(1.5)^2\,dy$ N and is lifted $5 - y$ m.
+---
+$W = 9810\pi(2.25)\displaystyle\int_0^4 (5 - y)\,dy = 9810\pi(2.25)\left[5y - \dfrac{y^2}{2}\right]_0^4 = 9810\pi(2.25)(12)$.
+---
+$W = 832{,}114$ J $\approx 832.1$ kJ.

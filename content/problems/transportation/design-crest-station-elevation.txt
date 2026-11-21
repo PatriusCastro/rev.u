@@ -1,0 +1,17 @@
+topic: transportation/highway-design
+title: Elevation of a station on a crest curve
+answer: B
+hint: Find the tangent elevation at the station, then the vertical offset from the tangent. On a crest the curve lies below the tangent.
+
+A symmetrical parabolic crest curve 240 m long joins a +4% grade to a −2% grade on a mountain road in Benguet. The PVI is at station 12+500.00, elevation 85.000 m. Find the elevation of the curve at station 12+440.00.
+
+A. 82.600 m    B. 82.150 m    C. 83.050 m    D. 81.700 m
+
+## Solution
+The PVC is at 12+380.00, elevation $85.000 - 0.04(120) = 80.200$ m. The station is $x = 60$ m from the PVC.
+---
+Tangent elevation: $80.200 + 0.04(60) = 82.600$ m.
+---
+Offset: $\dfrac{g_2 - g_1}{2L}x^2 = \dfrac{-0.06}{480}(60)^2 = -0.450$ m.
+---
+Elevation $= 82.600 - 0.450 = 82.150$ m.

@@ -1,0 +1,15 @@
+topic: structural/analysis
+title: Determinacy of a plane truss
+answer: B
+hint: Count the unknowns (members plus reactions) and compare with two equations per joint.
+
+A plane roof truss has 9 joints and 16 members. It is supported by a pin at one end and a roller at the other. Its members are arranged so that no part can move as a mechanism. Classify the truss.
+
+A. Stable and statically determinate    B. Statically indeterminate to the first degree    C. Statically indeterminate to the second degree    D. Unstable
+
+## Solution
+Unknowns: $b + r = 16 + 3 = 19$ (the pin gives 2 reactions, the roller 1).
+---
+Equations: $2j = 2(9) = 18$.
+---
+$b + r - 2j = 19 - 18 = 1$, and the layout is stable, so the truss is indeterminate to the first degree.

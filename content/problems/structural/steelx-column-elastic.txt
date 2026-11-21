@@ -1,0 +1,15 @@
+topic: structural/steel
+title: Design strength of a slender strut
+answer: A
+hint: This strut is long. Check which side of the 4.71√(E/Fy) limit KL/r falls on.
+
+A steel strut in a bracing system has $A_g = 4200$ mm², least radius of gyration $r = 40$ mm and effective length $KL = 6.4$ m. The steel has $F_y = 248$ MPa and $E = 200$ GPa. Find the LRFD design compressive strength with $\phi_c = 0.90$.
+
+A. 255.6 kN    B. 243.9 kN    C. 291.5 kN    D. 284.0 kN
+
+## Solution
+$KL/r = 6400/40 = 160$. Limit: $4.71\sqrt{200{,}000/248} = 133.8$. Since $160 > 133.8$, buckling is elastic.
+---
+$F_e = \dfrac{\pi^2(200{,}000)}{160^2} = 77.1$ MPa, so $F_{cr} = 0.877(77.1) = 67.6$ MPa.
+---
+$\phi_cP_n = 0.90(67.6)(4200) = 255{,}600$ N $= 255.6$ kN.

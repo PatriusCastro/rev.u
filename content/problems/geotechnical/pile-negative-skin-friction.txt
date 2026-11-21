@@ -1,0 +1,15 @@
+topic: geotechnical/slopes-piles
+title: Downdrag from a settling fill
+answer: D
+hint: The friction grows linearly with depth in the fill, so integrate a triangle.
+
+A 400 mm diameter pile passes through a newly placed clay fill 3 m thick at a reclamation site in Manila Bay, then into dense sand. The fill has $\gamma_f = 17$ kN/m³ and is settling relative to the pile. Take $K = 0.5$ and $\delta = 20°$. Using $Q_n = \dfrac{pK\gamma_f H_f^2\tan\delta}{2}$, find the downdrag force on the pile.
+
+A. 34.99 kN    B. 5.83 kN    C. 16.44 kN    D. 17.49 kN
+
+## Solution
+$p = \pi(0.4) = 1.2566$ m.
+---
+$Q_n = \dfrac{1.2566(0.5)(17)(3^2)\tan 20°}{2} = \dfrac{1.2566(0.5)(17)(9)(0.3640)}{2}$.
+---
+$Q_n = 17.49$ kN, acting downward and adding to the pile load.

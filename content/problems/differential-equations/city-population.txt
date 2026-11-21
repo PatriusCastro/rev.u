@@ -1,0 +1,15 @@
+topic: differential-equations/basics
+title: Population of a growing city
+answer: B
+hint: Under exponential growth the population is multiplied by the same factor every 5 years.
+
+A city in Mindanao had 1.2 million people in 2015 and 1.5 million in 2020. If the population grows at a rate proportional to its size, what will it be in 2030?
+
+A. 2.10 million    B. 2.34 million    C. 1.88 million    D. 2.93 million
+
+## Solution
+$N = N_0e^{kt}$. In 5 years the factor is $e^{5k} = \dfrac{1.5}{1.2} = 1.25$.
+---
+2030 is 15 years after 2015, which is three 5-year steps.
+---
+$N = 1.2(1.25)^3 = 2.34$ million.

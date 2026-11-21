@@ -1,0 +1,15 @@
+topic: probability/counting-and-probability
+title: Committee with two engineers
+answer: A
+hint: A committee has no order. Choose the engineers and the architect separately, then multiply.
+
+A committee of 3 is chosen from 7 engineers and 5 architects. In how many ways can it have exactly 2 engineers?
+
+A. 105    B. 210    C. 35    D. 175
+
+## Solution
+Choose 2 of the 7 engineers: $C(7,2) = 21$.
+---
+Choose 1 of the 5 architects: $C(5,1) = 5$.
+---
+$21 \times 5 = 105$ ways.

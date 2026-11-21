@@ -1,0 +1,17 @@
+topic: differential-equations/basics
+title: A separable equation
+answer: D
+hint: Divide both sides by $y$ before integrating.
+
+Solve $\dfrac{dy}{dx} = 3x^2y$ with $y(0) = 2$. What is $y(1)$?
+
+A. 3.000    B. 40.171    C. 7.389    D. 5.437
+
+## Solution
+Separate: $\dfrac{dy}{y} = 3x^2\,dx$.
+---
+Integrate: $\ln y = x^3 + C$, so $y = Ce^{x^3}$.
+---
+$y(0) = 2$ gives $C = 2$, so $y = 2e^{x^3}$.
+---
+$y(1) = 2e = 5.437$.

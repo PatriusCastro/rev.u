@@ -1,0 +1,15 @@
+topic: geometry/plane-solid-analytic
+title: Concrete planter volume
+answer: C
+hint: The planter is a cone with its tip cut off. Do not just average the top and bottom areas.
+
+A concrete planter is a frustum of a right circular cone. Its top radius is 0.6 m, its bottom radius is 0.4 m and its height is 1.2 m. What is its volume?
+
+A. 0.980 m³    B. 0.942 m³    C. 0.955 m³    D. 2.865 m³
+
+## Solution
+$V = \dfrac{\pi h}{3}(R^2 + Rr + r^2)$ with $R = 0.6$, $r = 0.4$, $h = 1.2$.
+---
+$R^2 + Rr + r^2 = 0.36 + 0.24 + 0.16 = 0.76$.
+---
+$V = \pi(0.4)(0.76) = 0.955$ m³.

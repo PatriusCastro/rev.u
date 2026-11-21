@@ -1,0 +1,15 @@
+topic: hydraulics/hydrodynamics
+title: Water hammer from a fast valve closure
+answer: C
+hint: Find the velocity that the valve destroys first.
+
+A 300 mm steel pipeline carries 0.12 m³/s of water to a town reservoir in Batangas. A valve at the downstream end closes in less than $2L/c$, so treat the closure as instant. The pressure wave speed in the pipe is 1200 m/s. Find the rise in pressure at the valve.
+
+A. 1.019 MPa    B. 4.074 MPa    C. 2.037 MPa    D. 0.509 MPa
+
+## Solution
+Velocity: $v = \dfrac{0.12}{\pi(0.3)^2/4} = \dfrac{0.12}{0.07069} = 1.698$ m/s.
+---
+$\Delta p = \rho c v = 1000(1200)(1.698) = 2\,037\,000$ Pa.
+---
+$\Delta p = 2.037$ MPa.

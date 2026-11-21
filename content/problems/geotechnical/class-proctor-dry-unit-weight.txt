@@ -1,0 +1,15 @@
+topic: geotechnical/classification
+title: Dry unit weight from a Proctor trial
+answer: C
+hint: The mould holds wet soil. Remove the water before converting to a unit weight.
+
+In a standard Proctor test on embankment soil for a Cavite project, the 944 cm³ mould holds 1.895 kg of wet soil. The water content of that trial is 12.4%. Using $g = 9.81$ m/s², find the dry unit weight.
+
+A. 19.69 kN/m³    B. 16.54 kN/m³    C. 17.52 kN/m³    D. 22.13 kN/m³
+
+## Solution
+Wet density: $\rho = \dfrac{1895\ \text{g}}{944\ \text{cm}^3} = 2.007$ g/cm³
+---
+Dry density: $\rho_d = \dfrac{\rho}{1 + w} = \dfrac{2.007}{1.124} = 1.786$ g/cm³ $= 1786$ kg/m³
+---
+$\gamma_d = 1786(9.81)/1000 = 17.52$ kN/m³

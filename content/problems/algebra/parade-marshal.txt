@@ -1,0 +1,15 @@
+topic: algebra/word-problems
+title: Marshal along a parade column
+answer: C
+hint: Going to the front, the marshal gains on the column; coming back, the two close in on each other.
+
+A town fiesta parade 1 km long moves along the road at a steady 4 km/h. A marshal on a motorcycle rides from the rear to the front and straight back to the rear at 12 km/h. How many minutes does the round trip take?
+
+A. 10.00 min    B. 7.50 min    C. 11.25 min    D. 15.00 min
+
+## Solution
+Rear to front, relative speed $12 - 4 = 8$ km/h: $t_1 = \dfrac{1}{8}$ h.
+---
+Front to rear, relative speed $12 + 4 = 16$ km/h: $t_2 = \dfrac{1}{16}$ h.
+---
+$t = \dfrac{1}{8} + \dfrac{1}{16} = \dfrac{3}{16}$ h $= 11.25$ min.

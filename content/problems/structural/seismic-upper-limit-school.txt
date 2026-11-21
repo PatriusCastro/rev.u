@@ -1,0 +1,19 @@
+topic: structural/seismic
+title: Base shear of a two-storey school
+answer: C
+hint: A short building has a short period. Check whether the formula value goes past the cap.
+
+A 2-storey school building in Zone 4 ($Z = 0.4$) on soil profile SD is a concrete moment frame with its roof 7.0 m above the base. Its seismic weight is $W = 3200$ kN. Use $C_a = 0.44$, $C_v = 0.64$, $N_v = 1.0$, $I = 1.25$, $R = 8.5$ and $C_t = 0.0731$. Per NSCP 2015, $V = \dfrac{C_v I W}{R T}$, with $V \le \dfrac{2.5 C_a I W}{R}$, $V \ge 0.11 C_a I W$ and $V \ge \dfrac{0.8 Z N_v I W}{R}$. Find the design base shear.
+
+A. 957.4 kN    B. 414.1 kN    C. 517.6 kN    D. 193.6 kN
+
+## Solution
+$T = 0.0731(7.0)^{3/4} = 0.315$ s.
+---
+Formula: $V = \dfrac{0.64(1.25)(3200)}{8.5(0.315)} = 957.4$ kN.
+---
+Upper limit: $\dfrac{2.5(0.44)(1.25)(3200)}{8.5} = 517.6$ kN. The formula value is higher, so the upper limit governs.
+---
+Lower limits: $0.11(0.44)(1.25)(3200) = 193.6$ kN and $\dfrac{0.8(0.4)(1.0)(1.25)(3200)}{8.5} = 150.6$ kN. Both are below 517.6 kN.
+---
+$V = 517.6$ kN.

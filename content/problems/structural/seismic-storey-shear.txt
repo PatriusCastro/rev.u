@@ -1,0 +1,17 @@
+topic: structural/seismic
+title: Shear in the second storey
+answer: B
+hint: A storey carries the forces of every level above it.
+
+A 4-storey concrete moment frame has a design base shear $V = 800$ kN. Its levels (weight, height above base) are: level 1, 2000 kN at 4.0 m; level 2, 1900 kN at 7.5 m; level 3, 1900 kN at 11.0 m; roof (level 4), 1400 kN at 14.5 m. Use $T = 0.0731 h_n^{3/4}$ and, per NSCP 2015, $F_t = 0.07TV$ only when $T > 0.7$ s. Find the storey shear in the second storey, the storey between level 1 and level 2.
+
+A. 519.5 kN    B. 699.1 kN    C. 800.0 kN    D. 179.7 kN
+
+## Solution
+$T = 0.0731(14.5)^{3/4} = 0.543$ s $\le 0.7$ s, so $F_t = 0$.
+---
+$\sum w_i h_i = 2000(4.0) + 1900(7.5) + 1900(11.0) + 1400(14.5) = 63\,450$ kN·m.
+---
+Level 1 force: $F_1 = \dfrac{800(2000)(4.0)}{63\,450} = 100.9$ kN.
+---
+The second storey carries the forces at levels 2, 3 and 4, which is everything except $F_1$: $V_2 = 800 - 100.9 = 699.1$ kN.

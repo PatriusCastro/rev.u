@@ -1,0 +1,13 @@
+topic: structural/timber
+title: Number of bolts in a truss splice
+answer: A
+hint: Divide the load by the value per bolt, then think about which way to round.
+
+A tension splice in the bottom chord of a coco lumber roof truss must carry 64 kN. Each bolt in the splice, with its side plates, is good for 7.4 kN as given for this connection. How many bolts are needed?
+
+A. 9    B. 8    C. 5    D. 10
+
+## Solution
+$n = \dfrac{64}{7.4} = 8.65$.
+---
+Round up to a whole bolt: $n = 9$. Eight bolts carry only $8(7.4) = 59.2$ kN.

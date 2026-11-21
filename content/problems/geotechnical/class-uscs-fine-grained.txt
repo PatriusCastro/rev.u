@@ -1,0 +1,17 @@
+topic: geotechnical/classification
+title: USCS symbol of a fine-grained soil
+answer: D
+hint: First decide fine or coarse from the fines. Then compare the soil's PI with the A-line PI at its liquid limit.
+
+A soil from a borrow pit in Bulacan has 58% passing the 0.075 mm sieve, a liquid limit of 46% and a plastic limit of 25%. Use these USCS rules: fine grained if 50% or more passes 0.075 mm; L if $LL < 50$, H if $LL \ge 50$; clay (C) if PI plots above the A-line $PI = 0.73(LL - 20)$, silt (M) if below. What is the group symbol?
+
+A. ML    B. CH    C. MH    D. CL
+
+## Solution
+58% passes 0.075 mm, so the soil is fine grained.
+---
+$PI = 46 - 25 = 21$
+---
+A-line at $LL = 46$: $PI = 0.73(46 - 20) = 18.98$. The soil's PI of 21 is above it, so it is a clay.
+---
+$LL = 46 < 50$, so low plasticity: CL.

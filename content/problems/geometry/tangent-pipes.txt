@@ -1,0 +1,15 @@
+topic: geometry/plane-solid-analytic
+title: Three pipes touching
+answer: C
+hint: Each side of the triangle joins two centres. How far apart are the centres of two touching circles?
+
+Three round pipes with radii 3 cm, 5 cm and 7 cm are laid side by side so that each pipe touches the other two from outside. What is the area of the triangle formed by joining their centres?
+
+A. 6.50 cm²    B. 40.00 cm²    C. 39.69 cm²    D. 79.37 cm²
+
+## Solution
+The sides are sums of radii: $3+5 = 8$, $3+7 = 10$ and $5+7 = 12$ cm.
+---
+$s = \dfrac{8+10+12}{2} = 15$.
+---
+Heron: $A = \sqrt{15(7)(5)(3)} = \sqrt{1575} = 39.69$ cm².

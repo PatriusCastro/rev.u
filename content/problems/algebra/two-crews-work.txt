@@ -1,0 +1,17 @@
+topic: algebra/word-problems
+title: Two crews finish a slab
+answer: A
+hint: Find how much of the job crew A finishes alone first, then use the combined rate on what is left.
+
+Crew A can finish a floor slab alone in 12 days; crew B can finish it alone in 18 days. Crew A works alone for 3 days, then crew B joins and they finish together. How many days does the whole job take?
+
+A. 8.4 days    B. 7.2 days    C. 5.4 days    D. 9.0 days
+
+## Solution
+In 3 days crew A does $\dfrac{3}{12} = \dfrac{1}{4}$ of the job, leaving $\dfrac{3}{4}$.
+---
+Combined rate: $\dfrac{1}{12} + \dfrac{1}{18} = \dfrac{5}{36}$ job per day.
+---
+Time together: $\dfrac{3}{4} \div \dfrac{5}{36} = 5.4$ days.
+---
+Total: $3 + 5.4 = 8.4$ days.

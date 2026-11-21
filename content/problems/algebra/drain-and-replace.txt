@@ -1,0 +1,15 @@
+topic: algebra/word-problems
+title: Drain and replace a solution
+answer: C
+hint: Track the litres of pure alcohol. Draining removes some at 30%; refilling adds pure alcohol.
+
+A 60 L tank holds a 30% alcohol solution. How many litres must be drained and replaced with pure alcohol so the tank holds a 50% solution?
+
+A. 12.00 L    B. 24.00 L    C. 17.14 L    D. 20.00 L
+
+## Solution
+Let $x$ litres be drained and replaced. Alcohol left: $0.30(60 - x)$. Alcohol added: $x$.
+---
+$0.30(60 - x) + x = 0.50(60)$, so $18 + 0.70x = 30$.
+---
+$x = \dfrac{12}{0.70} = 17.14$ L.

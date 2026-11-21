@@ -1,0 +1,15 @@
+topic: structural/construction-management
+title: Book value of an excavator
+answer: C
+hint: Take the salvage value off the cost before spreading it over the life.
+
+An excavator costs ₱4,500,000. It will be used for 8 years and then sold for ₱500,000. Using straight-line depreciation, $d = \dfrac{C - S}{n}$, what is its book value at the end of year 5?
+
+A. ₱1,687,500    B. ₱2,500,000    C. ₱2,000,000    D. ₱3,000,000
+
+## Solution
+$d = \dfrac{4{,}500{,}000 - 500{,}000}{8} = 500{,}000$ per year.
+---
+After 5 years the total depreciation is $5(500{,}000) = 2{,}500{,}000$.
+---
+Book value $= 4{,}500{,}000 - 2{,}500{,}000 =$ ₱2,000,000.

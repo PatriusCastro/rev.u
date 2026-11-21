@@ -1,0 +1,13 @@
+topic: geotechnical/slopes-piles
+title: Critical height of a vertical cut
+answer: D
+hint: The critical height depends only on cohesion and unit weight.
+
+A contractor in Quezon City plans an unbraced vertical excavation in a stiff clay with $c = 28$ kPa, $\phi = 0$ and $\gamma = 17.8$ kN/m³. Using $H_{cr} = \dfrac{4c}{\gamma}$, find the critical height of the cut.
+
+A. 3.15 m    B. 4.72 m    C. 4.19 m    D. 6.29 m
+
+## Solution
+$H_{cr} = \dfrac{4c}{\gamma} = \dfrac{4(28)}{17.8}$.
+---
+$H_{cr} = 6.29$ m.

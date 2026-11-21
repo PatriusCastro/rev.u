@@ -1,0 +1,15 @@
+topic: geotechnical/foundations
+title: Friction angle from two direct shear tests
+answer: D
+hint: The soil has cohesion, so the failure line does not pass through the origin. Use both points.
+
+Two direct shear tests are run on a silty clay from Laguna. At a normal stress of 100 kPa the sample fails at a shear stress of 92 kPa. At a normal stress of 250 kPa it fails at 165 kPa. Find the angle of internal friction.
+
+A. 42.61°    B. 33.42°    C. 29.12°    D. 25.95°
+
+## Solution
+Mohr–Coulomb: $\tau = c + \sigma\tan\phi$. Subtract the two tests.
+---
+$\tan\phi = \dfrac{165 - 92}{250 - 100} = \dfrac{73}{150} = 0.4867$.
+---
+$\phi = \tan^{-1}(0.4867) = 25.95°$. (Cohesion: $c = 92 - 100(0.4867) = 43.33$ kPa.)

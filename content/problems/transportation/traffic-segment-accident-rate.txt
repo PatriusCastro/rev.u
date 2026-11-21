@@ -1,0 +1,13 @@
+topic: transportation/traffic
+title: Accident rate on a highway segment
+answer: D
+hint: A segment rate is per vehicle-kilometre, so the length belongs in the denominator once.
+
+A 12.5 km stretch of a national highway in Pampanga carries an AADT of 15,000 vehicles. In one year it had 46 accidents. Find the accident rate per 100 million vehicle-km, using $R = \dfrac{A \times 10^8}{365\,T\,V L}$.
+
+A. 134.4    B. 840.2    C. 5.38    D. 67.2
+
+## Solution
+Vehicle-km in one year: $365(1)(15{,}000)(12.5) = 68.44 \times 10^6$ veh-km.
+---
+$R = \dfrac{46 \times 10^8}{68.44 \times 10^6} = 67.2$ accidents per 100 million veh-km.

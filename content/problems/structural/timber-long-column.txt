@@ -1,0 +1,17 @@
+topic: structural/timber
+title: Capacity of a long timber post
+answer: A
+hint: Compute the slenderness with the dressed dimension, then compare it with K to pick the right formula.
+
+A square guijo post has a nominal size of 150 mm × 150 mm and a dressed size of 140 mm × 140 mm. Its effective length is 4.2 m. $F_c = 9.5$ MPa and $E = 9000$ MPa. Use $K = 0.671\sqrt{E/F_c}$; when $K < L_e/d \le 50$ the column is long and $F_c' = \dfrac{0.3E}{(L_e/d)^2}$. Find the safe axial load.
+
+A. 58.8 kN    B. 186.2 kN    C. 77.5 kN    D. 67.5 kN
+
+## Solution
+$\dfrac{L_e}{d} = \dfrac{4200}{140} = 30$, and $K = 0.671\sqrt{\dfrac{9000}{9.5}} = 20.65$.
+---
+$20.65 < 30 \le 50$, so the column is long.
+---
+$F_c' = \dfrac{0.3(9000)}{30^2} = 3.0$ MPa.
+---
+$P = F_c' A = 3.0(140)(140) = 58\,800$ N $= 58.8$ kN.

@@ -1,0 +1,15 @@
+topic: structural/construction-management
+title: Chance of meeting a PERT deadline
+answer: C
+hint: Add the expected times and the variances along the path, not the standard deviations.
+
+A barangay health center has three critical activities done one after another. Their optimistic, most likely and pessimistic times are: foundation 4, 7 and 16 days; superstructure 9, 12 and 21 days; roofing 1, 4 and 7 days. Use $t_e = \dfrac{a + 4m + b}{6}$ and $\sigma^2 = \left(\dfrac{b - a}{6}\right)^2$. The normal table gives an area of 0.8413 to the left of $z = 1.00$. What is the probability that these activities finish within 28 days?
+
+A. 15.87%    B. 34.13%    C. 84.13%    D. 50.00%
+
+## Solution
+Expected times: $\dfrac{4 + 28 + 16}{6} = 8$, $\dfrac{9 + 48 + 21}{6} = 13$, $\dfrac{1 + 16 + 7}{6} = 4$. The path takes $8 + 13 + 4 = 25$ days.
+---
+Variances: $\left(\dfrac{12}{6}\right)^2 = 4$, $\left(\dfrac{12}{6}\right)^2 = 4$, $\left(\dfrac{6}{6}\right)^2 = 1$. Sum $= 9$, so $\sigma = 3$ days.
+---
+$z = \dfrac{28 - 25}{3} = 1.00$, so the probability is 0.8413 = 84.13%.

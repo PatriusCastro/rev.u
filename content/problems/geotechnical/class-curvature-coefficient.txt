@@ -1,0 +1,15 @@
+topic: geotechnical/classification
+title: Coefficient of curvature of a gravelly sand
+answer: A
+hint: Only one of the three sizes is squared, and it goes on top.
+
+A base course material for a road in Tarlac has $D_{10} = 0.20$ mm, $D_{30} = 0.62$ mm and $D_{60} = 1.40$ mm. Find the coefficient of curvature $C_c = \dfrac{D_{30}^2}{D_{60}D_{10}}$.
+
+A. 1.37    B. 2.21    C. 0.73    D. 7.00
+
+## Solution
+$D_{30}^2 = 0.62^2 = 0.3844$ mm²
+---
+$D_{60}D_{10} = 1.40(0.20) = 0.28$ mm²
+---
+$C_c = \dfrac{0.3844}{0.28} = 1.37$

@@ -1,0 +1,15 @@
+topic: hydraulics/dams-hydrology
+title: Thiessen average over a basin
+answer: D
+hint: Each gauge counts in proportion to its polygon area, not equally.
+
+Four rain gauges serve a 125 km² river basin in Bukidnon. During one storm they recorded 82 mm, 105 mm, 64 mm and 120 mm. Their Thiessen polygon areas inside the basin are 18 km², 52 km², 41 km² and 14 km², in the same order. Find the average rainfall over the basin by the Thiessen method.
+
+A. 92.75 mm    B. 87.53 mm    C. 84.50 mm    D. 89.92 mm
+
+## Solution
+$\Sigma P_iA_i = 82(18) + 105(52) + 64(41) + 120(14) = 1476 + 5460 + 2624 + 1680 = 11\,240$ mm·km².
+---
+$\bar{P} = \dfrac{11\,240}{125} = 89.92$ mm.
+---
+For comparison, the arithmetic mean is $\dfrac{82 + 105 + 64 + 120}{4} = 92.75$ mm.

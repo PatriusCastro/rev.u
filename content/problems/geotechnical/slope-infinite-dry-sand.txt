@@ -1,0 +1,13 @@
+topic: geotechnical/slopes-piles
+title: Infinite slope in dry sand
+answer: B
+hint: For a dry cohesionless slope the depth of the slip plane drops out.
+
+A long embankment of dry sand along a provincial road in Pampanga is graded at 24° to the horizontal. The sand has $c = 0$ and $\phi = 34°$. Treating it as an infinite slope, find the factor of safety against sliding.
+
+A. 0.660    B. 1.515    C. 1.375    D. 1.658
+
+## Solution
+Dry cohesionless infinite slope: $FS = \dfrac{\tan\phi}{\tan\beta}$.
+---
+$FS = \dfrac{\tan 34°}{\tan 24°} = \dfrac{0.6745}{0.4452} = 1.515$.

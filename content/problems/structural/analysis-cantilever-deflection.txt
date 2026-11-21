@@ -1,0 +1,17 @@
+topic: structural/analysis
+title: Tip deflection of a cantilever
+answer: B
+hint: Find the tip deflection from each load separately and add. Keep EI in kN·m².
+
+A 3 m steel cantilever supporting a balcony carries a uniform load of 6 kN/m over its whole length and a 25 kN point load at the free end. E = 200 GPa and I = 80 × 10⁶ mm⁴. Find the deflection at the free end.
+
+A. 14.06 mm    B. 17.86 mm    C. 15.40 mm    D. 24.19 mm
+
+## Solution
+$EI = (200 \times 10^6 \text{ kPa})(80 \times 10^{-6} \text{ m}^4) = 16\,000$ kN·m².
+---
+Point load: $\dfrac{PL^3}{3EI} = \dfrac{25(3)^3}{3(16\,000)} = 0.01406$ m.
+---
+Uniform load: $\dfrac{wL^4}{8EI} = \dfrac{6(3)^4}{8(16\,000)} = 0.00380$ m.
+---
+Total: $0.01406 + 0.00380 = 0.01786$ m $= 17.86$ mm.

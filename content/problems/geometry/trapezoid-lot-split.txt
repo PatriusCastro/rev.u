@@ -1,0 +1,15 @@
+topic: geometry/plane-solid-analytic
+title: Splitting a trapezoid lot
+answer: D
+hint: The fence and each base form two smaller trapezoids of equal area. The answer is not the average of the bases.
+
+A lot is shaped like a trapezoid with parallel sides 10 m and 22 m. Two siblings will divide it with a fence parallel to those sides so that both parts have the same area. How long is the fence?
+
+A. 16.00 m    B. 14.83 m    C. 12.00 m    D. 17.09 m
+
+## Solution
+Extend the legs to meet. Similar triangles have areas in proportion to the square of their bases, so the area between two parallel lines is proportional to the difference of the squares.
+---
+Equal areas: $x^2 - 10^2 = 22^2 - x^2$, so $x^2 = \dfrac{100 + 484}{2} = 292$.
+---
+$x = \sqrt{292} = 17.09$ m.

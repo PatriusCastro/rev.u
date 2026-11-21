@@ -1,0 +1,13 @@
+topic: structural/design-construction
+title: Yield capacity of a steel tension bar
+answer: B
+hint: Only yielding of the gross section is asked. Find the gross area and apply the LRFD resistance factor.
+
+A flat steel bar 200 mm wide and 12 mm thick is used as a tension tie in a roof truss. The steel is A36 with $F_y = 248$ MPa. Per NSCP 2015 (LRFD), the design strength for yielding of the gross section is $\phi P_n = 0.90 F_y A_g$. Find this design strength.
+
+A. 595.2 kN    B. 535.7 kN    C. 720.0 kN    D. 356.4 kN
+
+## Solution
+$A_g = 200(12) = 2400$ mm².
+---
+$\phi P_n = 0.90(248)(2400) = 535{,}680$ N $= 535.7$ kN.

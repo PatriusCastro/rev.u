@@ -1,0 +1,17 @@
+topic: structural/steel
+title: Design strength of a stocky column
+answer: D
+hint: Compare KL/r with 4.71√(E/Fy) to choose the right formula for Fcr.
+
+A steel column in a Cebu parking building has $A_g = 9500$ mm² and least radius of gyration $r = 65$ mm. Its effective length is $KL = 5.2$ m. The steel has $F_y = 345$ MPa and $E = 200$ GPa. Find the LRFD design compressive strength $\phi_cP_n$ with $\phi_c = 0.90$.
+
+A. 2052 kN    B. 2313 kN    C. 2950 kN    D. 1847 kN
+
+## Solution
+$KL/r = 5200/65 = 80.0$. Limit: $4.71\sqrt{200{,}000/345} = 113.4$. Since $80.0 \le 113.4$, the column is inelastic.
+---
+$F_e = \dfrac{\pi^2(200{,}000)}{80.0^2} = 308.4$ MPa.
+---
+$F_{cr} = 0.658^{345/308.4}(345) = 216.0$ MPa.
+---
+$\phi_cP_n = 0.90(216.0)(9500) = 1{,}847{,}000$ N $= 1847$ kN.

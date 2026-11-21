@@ -1,0 +1,17 @@
+topic: calculus/applications
+title: Norman window with 6 m of trim
+answer: D
+hint: Let the semicircle's radius be $r$, so the rectangle is $2r$ wide. Use the perimeter to remove the rectangle's height.
+
+A window is a rectangle topped by a semicircle whose diameter is the rectangle's width. The outside perimeter of the window, including the curved part, is 6 m. What is the largest area of glass it can have?
+
+A. 2.14 m²    B. 1.68 m²    C. 2.25 m²    D. 2.52 m²
+
+## Solution
+Let $r$ be the radius and $h$ the rectangle's height. Perimeter: $2r + 2h + \pi r = 6$, so $h = \dfrac{6 - 2r - \pi r}{2}$.
+---
+Area: $A = 2rh + \dfrac{\pi r^2}{2} = 6r - 2r^2 - \dfrac{\pi r^2}{2}$.
+---
+$\dfrac{dA}{dr} = 6 - 4r - \pi r = 0$, so $r = \dfrac{6}{4 + \pi} = 0.840$ m, and then $h = r$.
+---
+$A = 6(0.840) - \left(2 + \dfrac{\pi}{2}\right)(0.840)^2 = 2.52$ m².

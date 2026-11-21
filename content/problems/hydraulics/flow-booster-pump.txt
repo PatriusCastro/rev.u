@@ -1,0 +1,15 @@
+topic: hydraulics/fluid-flow
+title: Booster pump for a rooftop tank
+answer: C
+hint: The pump must supply the lift plus the pipe losses, and a pump with losses draws more power than it delivers.
+
+A condominium in Cebu pumps 50 L/s of water from a ground cistern to a rooftop tank. The water surface in the tank is 30 m above the water surface in the cistern, and the head loss in the piping is 4 m. Both surfaces are open to the air. The pump is 75% efficient. Find the power the pump draws. Use $\gamma = 9.81$ kN/m³.
+
+A. 16.68 kW    B. 19.62 kW    C. 22.24 kW    D. 12.51 kW
+
+## Solution
+Energy equation between the two water surfaces (pressure and velocity heads are zero): $h_p = 30 + 4 = 34$ m.
+---
+Power delivered to the water: $\gamma Q h_p = 9.81(0.05)(34) = 16.68$ kW.
+---
+Power drawn: $P = \dfrac{16.68}{0.75} = 22.24$ kW.

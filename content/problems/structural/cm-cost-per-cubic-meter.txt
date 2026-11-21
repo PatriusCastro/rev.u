@@ -1,0 +1,15 @@
+topic: structural/construction-management
+title: Unit cost of dozing
+answer: D
+hint: Divide the hourly cost by what the dozer actually moves in an hour, not its rated output.
+
+A bulldozer clearing a subdivision site in Cavite is rated at 80 m³/h but works at 75% efficiency. Its owning and operating cost is ₱3,150 per hour and the operator is paid ₱450 per hour. What is the cost per cubic meter moved?
+
+A. ₱45.00    B. ₱52.50    C. ₱80.00    D. ₱60.00
+
+## Solution
+Actual output: $80(0.75) = 60$ m³/h.
+---
+Hourly cost: $3150 + 450 = 3600$ pesos per hour.
+---
+Unit cost $= \dfrac{3600}{60} =$ ₱60.00 per m³.

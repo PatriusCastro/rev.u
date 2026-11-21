@@ -1,0 +1,15 @@
+topic: structural/statics-mechanics
+title: Shear stress in a pump shaft
+answer: A
+hint: Turn rpm into revolutions per second before finding the torque.
+
+A solid steel shaft 60 mm in diameter drives an irrigation pump. It transmits 75 kW at 300 rpm. Find the maximum shear stress in the shaft.
+
+A. 56.3 MPa    B. 112.6 MPa    C. 353.7 MPa    D. 28.1 MPa
+
+## Solution
+$f = \dfrac{300}{60} = 5$ rev/s.
+---
+$T = \dfrac{P}{2\pi f} = \dfrac{75\,000}{2\pi(5)} = 2387$ N·m $= 2.387 \times 10^6$ N·mm.
+---
+$\tau = \dfrac{16T}{\pi d^3} = \dfrac{16(2.387 \times 10^6)}{\pi(60)^3} = 56.3$ MPa.

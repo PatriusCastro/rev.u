@@ -1,0 +1,15 @@
+topic: algebra/word-problems
+title: Wind on a Manila to Davao flight
+answer: D
+hint: With the wind the ground speed is plane plus wind; against it, plane minus wind.
+
+A plane flies 1,200 km from Manila to Davao with a steady tailwind in 2 hours. On the return trip, against the same wind, it takes 2.5 hours. What is the speed of the wind?
+
+A. 540 km/h    B. 120 km/h    C. 30 km/h    D. 60 km/h
+
+## Solution
+With the wind: $p + w = \dfrac{1200}{2} = 600$ km/h.
+---
+Against the wind: $p - w = \dfrac{1200}{2.5} = 480$ km/h.
+---
+Subtract: $2w = 120$, so $w = 60$ km/h.

@@ -1,0 +1,15 @@
+topic: hydraulics/hydrodynamics
+title: Jet on a single moving plate
+answer: D
+hint: A single plate moving away catches water only at the relative speed.
+
+A horizontal water jet 50 mm in diameter leaves a nozzle at 30 m/s. It hits a single flat plate held at right angles to the jet. The plate moves away from the nozzle, along the jet, at a steady 12 m/s. Find the force of the jet on the plate. Neglect friction.
+
+A. 1767 N    B. 1060 N    C. 424 N    D. 636 N
+
+## Solution
+Jet area: $A = \dfrac{\pi(0.05)^2}{4} = 0.001963$ m².
+---
+Relative speed: $v - u = 30 - 12 = 18$ m/s. A single plate only receives water at $Q' = A(v - u)$.
+---
+$F = \rho A(v - u)^2 = 1000(0.001963)(18)^2 = 636$ N.

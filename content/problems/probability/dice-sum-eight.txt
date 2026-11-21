@@ -1,0 +1,15 @@
+topic: probability/counting-and-probability
+title: Two dice that add to 8
+answer: D
+hint: Two dice give 36 equally likely pairs. List the pairs that add to 8.
+
+Two fair dice are rolled. What is the probability that the numbers add to 8?
+
+A. 1/6    B. 1/9    C. 7/36    D. 5/36
+
+## Solution
+There are $6 \times 6 = 36$ equally likely pairs.
+---
+Pairs adding to 8: (2,6), (3,5), (4,4), (5,3), (6,2). That is 5 pairs.
+---
+$P = \dfrac{5}{36}$.

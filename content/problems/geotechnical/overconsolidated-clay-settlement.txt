@@ -1,0 +1,15 @@
+topic: geotechnical/foundations
+title: Overconsolidated clay under a fill
+answer: B
+hint: Compare the final stress with the preconsolidation pressure. Each part of the stress path has its own index.
+
+A 5 m clay layer has, at its middle, a present effective stress of 80 kPa and a preconsolidation pressure of 120 kPa. Its void ratio is 0.90, compression index $C_c = 0.30$ and swell index $C_s = 0.05$. A road embankment adds 90 kPa at the middle of the layer. Find the primary consolidation settlement.
+
+A. 258.4 mm    B. 142.6 mm    C. 43.1 mm    D. 281.6 mm
+
+## Solution
+Final stress: $80 + 90 = 170$ kPa, which is above $\sigma'_c = 120$ kPa. Use $C_s$ up to 120 kPa and $C_c$ beyond.
+---
+$\dfrac{H}{1+e_0} = \dfrac{5}{1.90} = 2.632$ m.
+---
+$S = 2.632\left[0.05\log\dfrac{120}{80} + 0.30\log\dfrac{170}{120}\right] = 2.632(0.00880 + 0.04538) = 0.1426$ m $= 142.6$ mm.

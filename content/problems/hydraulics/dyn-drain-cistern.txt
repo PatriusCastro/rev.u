@@ -1,0 +1,15 @@
+topic: hydraulics/hydrodynamics
+title: Time to drain a cistern
+answer: A
+hint: The head falls as the tank drains, so the time depends on the square root of the starting head.
+
+A vertical cylindrical rainwater cistern in Iloilo is 2.5 m in diameter. The water stands 3.2 m above a 60 mm orifice in the floor, with $C_d = 0.61$. The cistern is open to the air and nothing flows in. How long does it take to empty? Use $g = 9.81$ m/s².
+
+A. 38.3 min    B. 19.2 min    C. 68.5 min    D. 23.4 min
+
+## Solution
+Tank area: $A = \dfrac{\pi(2.5)^2}{4} = 4.909$ m². Orifice area: $a = \dfrac{\pi(0.06)^2}{4} = 0.002827$ m².
+---
+$t = \dfrac{2A\sqrt{h}}{C_d\,a\sqrt{2g}} = \dfrac{2(4.909)\sqrt{3.2}}{0.61(0.002827)\sqrt{2(9.81)}}$
+---
+$t = \dfrac{17.562}{0.007640} = 2299$ s $= 38.3$ min.

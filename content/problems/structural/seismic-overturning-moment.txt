@@ -1,0 +1,17 @@
+topic: structural/seismic
+title: Overturning moment at the base
+answer: C
+hint: Find each level's force first, then take moments about the base.
+
+A 3-storey concrete moment frame has a design base shear $V = 600$ kN. Its levels (weight, height above base) are: level 1, 1500 kN at 3.6 m; level 2, 1500 kN at 7.2 m; roof, 1000 kN at 10.8 m. Use $T = 0.0731 h_n^{3/4}$ and, per NSCP 2015, $F_t = 0.07TV$ only when $T > 0.7$ s. Find the overturning moment at the base.
+
+A. 6480 kN·m    B. 4320 kN·m    C. 4752 kN·m    D. 4050 kN·m
+
+## Solution
+$T = 0.0731(10.8)^{3/4} = 0.435$ s $\le 0.7$ s, so $F_t = 0$.
+---
+$\sum w_i h_i = 1500(3.6) + 1500(7.2) + 1000(10.8) = 27\,000$ kN·m.
+---
+$F_1 = \dfrac{600(5400)}{27\,000} = 120$ kN, $F_2 = \dfrac{600(10\,800)}{27\,000} = 240$ kN, $F_3 = \dfrac{600(10\,800)}{27\,000} = 240$ kN.
+---
+$M = 120(3.6) + 240(7.2) + 240(10.8) = 432 + 1728 + 2592 = 4752$ kN·m.

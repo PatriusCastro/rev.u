@@ -1,0 +1,15 @@
+topic: structural/seismic
+title: Minimum base shear near an active fault
+answer: B
+hint: Zone 4 has two lower limits. Work out both and keep the larger one.
+
+A 4-storey building in Zone 4 ($Z = 0.4$) sits close to an active fault, so its near-source factors are $N_a = 1.2$ and $N_v = 1.6$, giving $C_a = 0.528$ and $C_v = 1.024$. Its seismic weight is $W = 5000$ kN, with $I = 1.0$ and $R = 5.5$. Per NSCP 2015, $V \ge 0.11 C_a I W$ and, in Zone 4, $V \ge \dfrac{0.8 Z N_v I W}{R}$. What is the smallest design base shear the code allows for this building?
+
+A. 290.4 kN    B. 465.5 kN    C. 1200.0 kN    D. 2560.0 kN
+
+## Solution
+First lower limit: $0.11(0.528)(1.0)(5000) = 290.4$ kN.
+---
+Zone 4 lower limit: $\dfrac{0.8(0.4)(1.6)(1.0)(5000)}{5.5} = 465.5$ kN.
+---
+The larger one governs, so $V$ may not be less than 465.5 kN.

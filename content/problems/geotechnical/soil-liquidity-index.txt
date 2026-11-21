@@ -1,0 +1,13 @@
+topic: geotechnical/soil-properties
+title: Liquidity index of a natural clay
+answer: D
+hint: The liquidity index compares how far the natural water content sits above the plastic limit with the whole plastic range.
+
+A clay from a rice field in Nueva Ecija has a liquid limit of 54% and a plastic limit of 29%. Its natural water content is 40%. Find the liquidity index.
+
+A. 0.56    B. 0.20    C. 1.60    D. 0.44
+
+## Solution
+$PI = LL - PL = 54 - 29 = 25$
+---
+$LI = \dfrac{w - PL}{PI} = \dfrac{40 - 29}{25} = 0.44$

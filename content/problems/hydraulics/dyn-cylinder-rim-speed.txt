@@ -1,0 +1,17 @@
+topic: hydraulics/hydrodynamics
+title: Speed that brings water to the rim
+answer: A
+hint: With no spill, the water at the wall rises by half the paraboloid height.
+
+An open vertical cylinder 0.8 m in diameter and 1.5 m tall holds water 1.1 m deep. It is spun about its vertical axis. At what speed does the water just reach the rim? Use $g = 9.81$ m/s².
+
+A. 94.58 rpm    B. 66.88 rpm    C. 47.29 rpm    D. 129.51 rpm
+
+## Solution
+The water may rise $1.5 - 1.1 = 0.4$ m at the wall. With no spill, this is $h/2$, so the paraboloid height is $h = 0.8$ m.
+---
+The vertex sits $1.1 - 0.4 = 0.7$ m above the floor, so the bottom stays covered.
+---
+$h = \dfrac{\omega^2 r^2}{2g}$: $\omega = \dfrac{\sqrt{2(9.81)(0.8)}}{0.4} = 9.905$ rad/s.
+---
+$N = \dfrac{60\omega}{2\pi} = 94.58$ rpm.

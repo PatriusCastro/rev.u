@@ -1,0 +1,15 @@
+topic: hydraulics/fluid-flow
+title: Hazen–Williams loss in a supply line
+answer: D
+hint: Check that every exponent in the Hazen–Williams formula is the one for SI units, and use the C value given.
+
+A 250 mm cast-iron supply line, 1200 m long, carries 60 L/s. Its Hazen–Williams coefficient is $C = 120$. Using the SI form $h_f = \dfrac{10.67\,L\,Q^{1.852}}{C^{1.852}D^{4.87}}$, find the head loss.
+
+A. 2.74 m    B. 10.10 m    C. 11.82 m    D. 8.43 m
+
+## Solution
+$Q^{1.852} = 0.06^{1.852} = 0.005459$ and $C^{1.852} = 120^{1.852} = 7090$.
+---
+$D^{4.87} = 0.25^{4.87} = 0.001169$.
+---
+$h_f = \dfrac{10.67(1200)(0.005459)}{7090(0.001169)} = 8.43$ m.

@@ -1,0 +1,17 @@
+topic: surveying/traverse-areas
+title: Area by double meridian distance
+answer: A
+hint: The DMD of each course after the first is the previous DMD, plus the previous departure, plus its own departure.
+
+A balanced closed traverse ABCD has these latitudes and departures, in metres (north and east positive): AB, Lat +48.20, Dep +62.40; BC, Lat −35.70, Dep +28.10; CD, Lat −40.30, Dep −51.60; DA, Lat +27.80, Dep −38.90. Find the area enclosed using the DMD method.
+
+A. 3,292.13 m²    B. 6,584.25 m²    C. 1,646.06 m²    D. 895.42 m²
+
+## Solution
+DMD: AB $= 62.40$. BC $= 62.40 + 62.40 + 28.10 = 152.90$. CD $= 152.90 + 28.10 - 51.60 = 129.40$. DA $= 129.40 - 51.60 - 38.90 = 38.90$.
+---
+Check: the last DMD equals the last departure with its sign changed, 38.90.
+---
+Double areas: $62.40(48.20) + 152.90(-35.70) + 129.40(-40.30) + 38.90(27.80) = 3007.68 - 5458.53 - 5214.82 + 1081.42 = -6584.25$.
+---
+$A = \dfrac{6584.25}{2} = 3292.13$ m².

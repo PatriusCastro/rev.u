@@ -1,0 +1,17 @@
+topic: structural/seismic
+title: Roof force of a five-storey frame
+answer: C
+hint: Take $F_t$ out of $V$ before you distribute, then add it back at the roof.
+
+A 5-storey steel moment frame has a design base shear $V = 1350$ kN. Its levels (weight, height above base) are: level 1, 2100 kN at 4.2 m; level 2, 2100 kN at 7.8 m; level 3, 2100 kN at 11.4 m; level 4, 2100 kN at 15.0 m; roof, 1500 kN at 18.6 m. Use $T = 0.0853 h_n^{3/4}$ and, per NSCP 2015, $F_t = 0.07TV \le 0.25V$ when $T > 0.7$ s. Find the total lateral force at the roof.
+
+A. 328.5 kN    B. 419.2 kN    C. 400.7 kN    D. 347.0 kN
+
+## Solution
+$T = 0.0853(18.6)^{3/4} = 0.764$ s $> 0.7$ s, so $F_t = 0.07(0.764)(1350) = 72.2$ kN. This is below $0.25V = 337.5$ kN.
+---
+$\sum w_i h_i = 2100(4.2 + 7.8 + 11.4 + 15.0) + 1500(18.6) = 108\,540$ kN·m.
+---
+$F_{roof} = \dfrac{(1350 - 72.2)(1500)(18.6)}{108\,540} = 328.5$ kN.
+---
+Total at the roof: $328.5 + 72.2 = 400.7$ kN.

@@ -1,0 +1,15 @@
+topic: structural/seismic
+title: Period of a concrete moment frame
+answer: B
+hint: Pick the $C_t$ that matches the structural system, and watch the exponent on the height.
+
+A 4-storey office building in Cebu uses a reinforced concrete moment-resisting frame. Its roof is 14.4 m above the base. Using NSCP 2015 Method A, $T = C_t h_n^{3/4}$, with $C_t = 0.0853$ for steel moment frames, $0.0731$ for concrete moment frames and $0.0488$ for other buildings ($h_n$ in m), find the fundamental period.
+
+A. 0.631 s    B. 0.540 s    C. 0.361 s    D. 0.433 s
+
+## Solution
+A concrete moment frame takes $C_t = 0.0731$.
+---
+$h_n^{3/4} = 14.4^{0.75} = 7.392$.
+---
+$T = 0.0731(7.392) = 0.540$ s.

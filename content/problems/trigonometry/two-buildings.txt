@@ -1,0 +1,16 @@
+topic: trigonometry/angles-of-elevation
+answer: B
+hint: Use the angle of depression to the foot to find the distance between the buildings first.
+
+From the top of a building 30 m tall, the angle of elevation of the top of a taller building is 25°, and the angle of depression of its foot is 40°. How tall is the taller building?
+
+A. 35.75 m    B. 46.67 m    C. 51.28 m    D. 64.30 m
+
+## Solution
+Let $d$ be the horizontal distance between the buildings. Looking down 40° to the foot: $\tan 40° = 30 / d$.
+---
+$d = 30 / \tan 40° = 30 / 0.8391 \approx 35.75$ m.
+---
+Looking up 25°, the part of the taller building above 30 m is $d \tan 25° = 35.75(0.4663) \approx 16.67$ m.
+---
+Height $= 30 + 16.67 = 46.67$ m.

@@ -1,0 +1,15 @@
+topic: structural/prestressed
+title: Lower kern of an I-girder
+answer: A
+hint: Find the radius of gyration squared first. The lower kern point is found by dividing by the distance to the opposite (top) fibre.
+
+A precast I-girder has a gross area of 180 000 mm² and a moment of inertia of $1.2 \times 10^{10}$ mm⁴ about its centroid. The centroid is 380 mm below the top fibre and 420 mm above the bottom fibre. How far below the centroid is the lower kern point?
+
+A. 175.4 mm    B. 158.7 mm    C. 258.2 mm    D. 334.2 mm
+
+## Solution
+$r^2 = \dfrac{I}{A} = \dfrac{1.2 \times 10^{10}}{180\,000} = 66\,667$ mm².
+---
+A force at the lower kern makes the top fibre stress zero, so $k_b = \dfrac{r^2}{c_t}$.
+---
+$k_b = \dfrac{66\,667}{380} = 175.4$ mm.

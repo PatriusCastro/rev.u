@@ -1,0 +1,15 @@
+topic: probability/counting-and-probability
+title: Which supplier sent the bad bar
+answer: B
+hint: Find what share of all bars are defective and from Y, out of all defective bars.
+
+Supplier X provides 70% of a project's steel bars and supplier Y provides 30%. Of X's bars, 1% are defective; of Y's, 4% are. A bar picked at random is defective. What is the probability it came from Y?
+
+A. 0.300    B. 0.632    C. 0.368    D. 0.040
+
+## Solution
+Defective and from X: $0.70 \times 0.01 = 0.007$. Defective and from Y: $0.30 \times 0.04 = 0.012$.
+---
+All defective: $0.007 + 0.012 = 0.019$.
+---
+$P(Y \mid \text{defective}) = \dfrac{0.012}{0.019} = 0.632$.

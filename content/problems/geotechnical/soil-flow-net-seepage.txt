@@ -1,0 +1,15 @@
+topic: geotechnical/soil-properties
+title: Seepage under a sheet pile from a flow net
+answer: A
+hint: Flow channels go on top of the fraction. The flow net gives seepage per metre of wall, so finish with the wall length.
+
+A sheet pile cofferdam wall is 120 m long. The water level on the river side is 9.5 m above the level inside the excavation. A flow net drawn for the soil beneath the wall has 4 flow channels and 14 equipotential drops. The soil has a coefficient of permeability of $3.2 \times 10^{-6}$ m/s. Find the total seepage under the wall in cubic metres per day.
+
+A. 90.05 m³/day    B. 1103.16 m³/day    C. 22.51 m³/day    D. 0.75 m³/day
+
+## Solution
+$q = kH\dfrac{N_f}{N_d} = (3.2 \times 10^{-6})(9.5)\dfrac{4}{14} = 8.686 \times 10^{-6}$ m³/s per metre
+---
+Per day: $8.686 \times 10^{-6}(86{,}400) = 0.7505$ m³/day per metre.
+---
+For 120 m: $0.7505(120) = 90.05$ m³/day.

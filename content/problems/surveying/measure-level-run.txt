@@ -1,0 +1,15 @@
+topic: surveying/measurements
+title: A three-setup level run
+answer: B
+hint: A backsight raises the line of sight above the point; a foresight brings you down to the next point.
+
+A level run starts at a benchmark near the Manila Bay shoreline with elevation 3.450 m. At the first setup the backsight on the benchmark is 1.825 m and the foresight on turning point 1 is 2.340 m. At the second setup the backsight on turning point 1 is 0.962 m and the foresight on turning point 2 is 1.587 m. At the third setup the backsight on turning point 2 is 2.116 m and the foresight on point P is 0.748 m. Find the elevation of P.
+
+A. 3.222 m    B. 3.678 m    C. 2.310 m    D. 4.818 m
+
+## Solution
+$\Sigma \text{BS} = 1.825 + 0.962 + 2.116 = 4.903$ m.
+---
+$\Sigma \text{FS} = 2.340 + 1.587 + 0.748 = 4.675$ m.
+---
+Elevation of P $= 3.450 + 4.903 - 4.675 = 3.678$ m.

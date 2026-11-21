@@ -1,0 +1,40 @@
+{
+  "name": "revu",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "test": "node --test --experimental-strip-types --no-warnings tests/*.test.ts",
+    "check:content": "node --experimental-strip-types --no-warnings scripts/import.ts --check",
+    "import": "node --env-file-if-exists=.env.local --experimental-strip-types --no-warnings scripts/import.ts",
+    "check:rls": "node --env-file-if-exists=.env.local --experimental-strip-types --no-warnings scripts/rls-check.ts",
+    "test:e2e": "node tests/e2e/uat.mjs && node tests/e2e/features.mjs",
+    "check:repeats": "node --env-file-if-exists=.env.local --experimental-strip-types --no-warnings scripts/repeat-check.ts"
+  },
+  "dependencies": {
+    "@supabase/ssr": "^0.12.7",
+    "@supabase/supabase-js": "^2.119.2",
+    "katex": "^0.19.1",
+    "lucide-react": "^1.77.0",
+    "next": "16.4.6",
+    "react": "19.3.0",
+    "react-dom": "19.3.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/turbopack": "4.3.3",
+    "@types/katex": "^0.16.8",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "axe-core": "^4.14.1",
+    "eslint": "^9",
+    "eslint-config-next": "16.4.6",
+    "playwright-core": "^1.65.1",
+    "supabase": "^3.2.0",
+    "tailwindcss": "4.3.3",
+    "typescript": "^5"
+  }
+}
