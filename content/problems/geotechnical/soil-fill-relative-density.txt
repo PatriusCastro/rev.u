@@ -1,0 +1,15 @@
+topic: geotechnical/soil-properties
+title: Relative density of a compacted sand fill
+answer: A
+hint: Strip the water out of the field unit weight before you find the void ratio.
+
+A sand fill behind a seawall in Cebu is tested in place. Its moist unit weight is 19.2 kN/m³ at a water content of 16%. The specific gravity of solids is 2.66. Laboratory tests on the same sand give a maximum void ratio of 0.86 and a minimum void ratio of 0.48. Using $\gamma_w = 9.81$ kN/m³, find the relative density of the fill.
+
+A. 74.59%    B. 25.41%    C. 63.69%    D. 32.96%
+
+## Solution
+$\gamma_d = \dfrac{\gamma}{1+w} = \dfrac{19.2}{1.16} = 16.55$ kN/m³
+---
+$e = \dfrac{G_s\gamma_w}{\gamma_d} - 1 = \dfrac{2.66(9.81)}{16.55} - 1 = 0.577$
+---
+$D_r = \dfrac{e_{max} - e}{e_{max} - e_{min}} = \dfrac{0.86 - 0.577}{0.86 - 0.48} = 0.7459 = 74.59\%$.

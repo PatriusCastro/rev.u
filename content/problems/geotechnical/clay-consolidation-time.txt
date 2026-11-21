@@ -1,0 +1,15 @@
+topic: geotechnical/foundations
+title: Time for 90% consolidation
+answer: C
+hint: Sand lies on both faces of the clay. Decide how far water must travel.
+
+A 5 m clay layer lies between two layers of dense sand. Its coefficient of consolidation is $c_v = 1.8$ m²/year. How long will the clay take to reach 90% average consolidation? Use $T_v = 0.848$ for $U = 90\%$.
+
+A. 11.78 years    B. 0.68 years    C. 2.94 years    D. 1.18 years
+
+## Solution
+Double drainage: $H_{dr} = 5/2 = 2.5$ m.
+---
+$t = \dfrac{T_v H_{dr}^2}{c_v} = \dfrac{0.848(2.5)^2}{1.8}$.
+---
+$t = \dfrac{5.30}{1.8} = 2.94$ years.

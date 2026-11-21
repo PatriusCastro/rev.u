@@ -1,0 +1,17 @@
+topic: hydraulics/fluid-flow
+title: Jet from a tank-side orifice
+answer: C
+hint: The discharge coefficient combines two effects: the jet narrows and the jet slows.
+
+A sharp-edged circular orifice, 75 mm in diameter, is cut in the vertical side of a large open tank. The water level is held 3 m above the centre of the orifice. The coefficient of contraction is 0.62 and the coefficient of velocity is 0.98. Find the discharge. Use $g = 9.81$ m/s².
+
+A. 33.22 L/s    B. 21.01 L/s    C. 20.59 L/s    D. 14.56 L/s
+
+## Solution
+Orifice area: $A = \dfrac{\pi(0.075)^2}{4} = 0.004418$ m².
+---
+Ideal jet speed: $\sqrt{2gh} = \sqrt{2(9.81)(3)} = 7.672$ m/s.
+---
+$C_d = C_cC_v = 0.62(0.98) = 0.6076$.
+---
+$Q = 0.6076(0.004418)(7.672) = 0.02059$ m³/s $= 20.59$ L/s.

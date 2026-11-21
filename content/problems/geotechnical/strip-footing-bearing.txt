@@ -1,0 +1,15 @@
+topic: geotechnical/foundations
+title: Ultimate bearing capacity of a wall footing
+answer: B
+hint: A strip footing has three terms. The overburden at the footing base counts too.
+
+A wall footing 1.8 m wide rests 1.2 m below the ground surface. The soil has $\gamma = 18$ kN/m³, $c = 15$ kPa and $\phi = 28°$. The water table is deep. Using Terzaghi's equation with $N_c = 31.61$, $N_q = 17.81$ and $N_\gamma = 13.70$, find the ultimate bearing capacity.
+
+A. 696.1 kPa    B. 1080.8 kPa    C. 1178.6 kPa    D. 1302.7 kPa
+
+## Solution
+$q = \gamma D_f = 18(1.2) = 21.6$ kPa.
+---
+$q_u = cN_c + qN_q + 0.5\gamma BN_\gamma = 15(31.61) + 21.6(17.81) + 0.5(18)(1.8)(13.70)$.
+---
+$q_u = 474.15 + 384.70 + 221.94 = 1080.8$ kPa.

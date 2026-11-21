@@ -1,0 +1,15 @@
+topic: structural/design-construction
+title: Cement bags for isolated footings
+answer: D
+hint: Find the concrete volume of one footing, multiply by the number of footings, then use the bags per cubic metre. You cannot buy part of a bag.
+
+A two-storey house in Batangas has 12 identical isolated footings, each 1.8 m by 1.8 m in plan and 0.45 m thick. The footings use a Class A mix, taken as 9.0 bags of 40 kg cement per cubic metre of concrete. How many bags of cement are needed?
+
+A. 132 bags    B. 14 bags    C. 175 bags    D. 158 bags
+
+## Solution
+Volume of one footing: $1.8(1.8)(0.45) = 1.458$ m³.
+---
+Total volume: $12(1.458) = 17.496$ m³.
+---
+Cement: $17.496(9.0) = 157.5$ bags, so order 158 bags.

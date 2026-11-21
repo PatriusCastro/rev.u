@@ -1,0 +1,15 @@
+topic: hydraulics/fluid-flow
+title: Contracted weir at a dam outlet
+answer: A
+hint: Each end contraction shortens the effective crest length. Count how many ends the weir has inside the channel.
+
+A sharp-crested rectangular weir with a 2.5 m crest sits in a wider channel, so the nappe is contracted at both ends. The head over the crest is 0.35 m. Using the Francis formula $Q = 1.84\,L'H^{3/2}$ (SI) with $L' = L - 0.1nH$, and neglecting approach velocity, find the discharge.
+
+A. 0.926 m³/s    B. 0.952 m³/s    C. 0.939 m³/s    D. 1.565 m³/s
+
+## Solution
+Two end contractions: $L' = 2.5 - 0.1(2)(0.35) = 2.43$ m.
+---
+$H^{3/2} = 0.35^{1.5} = 0.2071$.
+---
+$Q = 1.84(2.43)(0.2071) = 0.926$ m³/s.

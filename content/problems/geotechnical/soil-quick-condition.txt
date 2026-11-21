@@ -1,0 +1,13 @@
+topic: geotechnical/soil-properties
+title: Head that causes a quick condition
+answer: C
+hint: Find the gradient at which the effective stress drops to zero, then turn it into a head across the layer.
+
+Water flows upward through a sand layer 1.8 m thick at the bottom of an excavation for a pumping station. The sand has a specific gravity of solids of 2.65 and a void ratio of 0.58. What head difference across the layer will bring the sand to a quick condition?
+
+A. 1.04 m    B. 3.02 m    C. 1.88 m    D. 5.12 m
+
+## Solution
+$i_{cr} = \dfrac{G_s - 1}{1+e} = \dfrac{2.65 - 1}{1.58} = 1.044$
+---
+$h = i_{cr}L = 1.044(1.8) = 1.88$ m.

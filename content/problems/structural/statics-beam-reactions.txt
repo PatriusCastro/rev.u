@@ -1,0 +1,15 @@
+topic: structural/statics-mechanics
+title: Reactions of a loaded floor beam
+answer: C
+hint: Replace the uniform load by one resultant at midspan, then take moments about the right support.
+
+A simply supported floor beam spans 8 m between a pin at the left end A and a roller at the right end B. It carries a uniform load of 10 kN/m over the full span (self-weight included) and a 40 kN point load 2 m from A. Find the reaction at A.
+
+A. 50 kN    B. 60 kN    C. 70 kN    D. 110 kN
+
+## Solution
+Uniform load resultant: $10 \times 8 = 80$ kN at 4 m from A.
+---
+$\sum M_A = 0$: $8R_B = 40(2) + 80(4) = 400$, so $R_B = 50$ kN.
+---
+$\sum F_y = 0$: $R_A = 40 + 80 - 50 = 70$ kN.

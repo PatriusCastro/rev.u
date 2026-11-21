@@ -1,0 +1,15 @@
+topic: structural/statics-mechanics
+title: Stretch of a steel hanger rod
+answer: D
+hint: Work in N and mm. The area uses the radius, not the diameter.
+
+A solid round steel hanger rod 25 mm in diameter and 3 m long supports a tension of 80 kN. Take $E = 200$ GPa. How much does the rod stretch?
+
+A. 0.61 mm    B. 1.92 mm    C. 4.89 mm    D. 2.44 mm
+
+## Solution
+$A = \dfrac{\pi(25)^2}{4} = 490.9$ mm².
+---
+$\delta = \dfrac{PL}{AE} = \dfrac{80\,000(3000)}{490.9(200\,000)}$.
+---
+$\delta = 2.44$ mm.

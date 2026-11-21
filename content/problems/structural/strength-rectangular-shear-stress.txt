@@ -1,0 +1,15 @@
+topic: structural/statics-mechanics
+title: Peak shear stress in a rectangular beam
+answer: B
+hint: Shear stress is not uniform over the depth. The peak at the neutral axis is larger than the average.
+
+A rectangular concrete beam section is 200 mm wide and 400 mm deep. At a support the vertical shear is 120 kN. Treat the section as homogeneous and uncracked. Find the maximum shear stress.
+
+A. 1.50 MPa    B. 2.25 MPa    C. 3.00 MPa    D. 4.50 MPa
+
+## Solution
+$A = 200 \times 400 = 80\,000$ mm².
+---
+For a rectangle, $\tau_{max} = \dfrac{3V}{2A} = \dfrac{1.5(120\,000)}{80\,000}$.
+---
+$\tau_{max} = 2.25$ MPa, at the neutral axis.

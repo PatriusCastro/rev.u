@@ -1,0 +1,15 @@
+topic: hydraulics/hydrostatics
+title: Differential manometer between pipes at different levels
+answer: D
+hint: Walk from A to B through the tube. The water columns in the two legs are not the same height, because B sits higher.
+
+Two water pipes A and B are joined by a mercury differential manometer. Pipe B is 0.60 m higher than pipe A. The mercury in the leg connected to A stands 150 mm lower than in the leg connected to B, and water fills the rest of both legs. Find $p_A - p_B$. Mercury has specific gravity 13.6; use $\gamma_w = 9.81$ kN/m³.
+
+A. 18.54 kPa    B. 12.65 kPa    C. 25.90 kPa    D. 24.43 kPa
+
+## Solution
+Let the mercury surface in A's leg be $x$ below A. Then the mercury in B's leg is $x - 0.15$ below A, or $x - 0.15 + 0.60$ below B.
+---
+Walk from A to B: $p_A + 9.81x - 13.6(9.81)(0.15) - 9.81(x + 0.45) = p_B$.
+---
+$p_A - p_B = 0.15(13.6)(9.81) + 9.81(0.45) = 20.01 + 4.41 = 24.43$ kPa.

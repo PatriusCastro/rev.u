@@ -1,0 +1,15 @@
+topic: structural/statics-mechanics
+title: Bending stress in a timber joist
+answer: C
+hint: The depth is the dimension in the direction of the load. It is the one that gets cubed.
+
+A rectangular timber joist is 150 mm wide and 300 mm deep and is bent about its strong axis by a moment of 45 kN·m. Find the maximum bending stress.
+
+A. 40 MPa    B. 10 MPa    C. 20 MPa    D. 5 MPa
+
+## Solution
+$I = \dfrac{bh^3}{12} = \dfrac{150(300)^3}{12} = 337.5 \times 10^6$ mm⁴, and $c = 150$ mm.
+---
+$\sigma = \dfrac{Mc}{I} = \dfrac{45 \times 10^6 (150)}{337.5 \times 10^6}$.
+---
+$\sigma = 20$ MPa.

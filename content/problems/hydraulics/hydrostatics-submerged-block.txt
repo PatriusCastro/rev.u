@@ -1,0 +1,15 @@
+topic: hydraulics/hydrostatics
+title: Lowering a concrete block into the sea
+answer: D
+hint: The cable carries the block's weight less the buoyant force. Use the seawater's unit weight.
+
+A crane lowers a solid concrete block, 0.4 m by 0.5 m by 0.6 m, into the sea at a port in Subic. Concrete weighs 23.5 kN/m³ and seawater weighs 10.1 kN/m³. Find the cable tension when the block hangs fully submerged and at rest.
+
+A. 1.64 kN    B. 4.03 kN    C. 2.82 kN    D. 1.61 kN
+
+## Solution
+Volume: $0.4 \times 0.5 \times 0.6 = 0.12$ m³.
+---
+Weight: $23.5(0.12) = 2.82$ kN. Buoyant force: $10.1(0.12) = 1.212$ kN.
+---
+$T = 2.82 - 1.212 = 1.61$ kN.

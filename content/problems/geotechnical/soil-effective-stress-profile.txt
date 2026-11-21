@@ -1,0 +1,15 @@
+topic: geotechnical/soil-properties
+title: Effective stress at the bottom of a clay layer
+answer: D
+hint: Total stress uses the unit weight that fits each layer's condition. Pore pressure starts at the water table.
+
+A site in Marikina has 6 m of sand over 4 m of clay. The water table is 3 m below the ground surface. The sand above the water table weighs 17.2 kN/m³ and the sand below it has a saturated unit weight of 19.6 kN/m³. The clay has a saturated unit weight of 18.4 kN/m³. Using $\gamma_w = 9.81$ kN/m³, find the effective stress at the bottom of the clay, 10 m below the surface.
+
+A. 85.90 kPa    B. 122.53 kPa    C. 184.00 kPa    D. 115.33 kPa
+
+## Solution
+$\sigma = 17.2(3) + 19.6(3) + 18.4(4) = 51.6 + 58.8 + 73.6 = 184.00$ kPa
+---
+The point is $10 - 3 = 7$ m below the water table: $u = 9.81(7) = 68.67$ kPa.
+---
+$\sigma' = 184.00 - 68.67 = 115.33$ kPa.

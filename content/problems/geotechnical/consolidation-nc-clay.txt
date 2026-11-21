@@ -1,0 +1,15 @@
+topic: geotechnical/foundations
+title: Settlement of a soft clay in Pampanga
+answer: A
+hint: Find the effective stress at the middle of the clay. The clay is below the water table.
+
+A site in Pampanga has 3 m of dry sand ($\gamma = 17.5$ kN/m³) over a 4 m layer of normally consolidated clay. The water table is at the top of the clay. The clay has $\gamma_{sat} = 18.6$ kN/m³, $e_0 = 1.10$ and $C_c = 0.36$. A new warehouse raises the vertical stress at the middle of the clay by 45 kPa. Find the primary consolidation settlement. Use $\gamma_w = 9.81$ kN/m³.
+
+A. 147.7 mm    B. 121.1 mm    C. 282.0 mm    D. 340.1 mm
+
+## Solution
+At mid-clay: $\sigma'_0 = 3(17.5) + 2(18.6 - 9.81) = 52.5 + 17.58 = 70.08$ kPa.
+---
+$\sigma'_f = 70.08 + 45 = 115.08$ kPa.
+---
+$S = \dfrac{0.36(4)}{1 + 1.10}\log\dfrac{115.08}{70.08} = 0.6857(0.2154) = 0.1477$ m $= 147.7$ mm.

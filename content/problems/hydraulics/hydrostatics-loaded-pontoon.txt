@@ -1,0 +1,15 @@
+topic: hydraulics/hydrostatics
+title: Draft of a loaded timber pontoon
+answer: B
+hint: The displaced water must carry both the timber and the load.
+
+A solid timber pontoon is 3 m long, 2 m wide and 0.8 m deep, and the timber has specific gravity 0.65. It floats level in fresh water on Laguna de Bay while carrying a 6 kN load placed at its centre. Find the depth of the pontoon below the water surface. Use $\gamma_w = 9.81$ kN/m³.
+
+A. 0.52 m    B. 0.62 m    C. 0.18 m    D. 0.10 m
+
+## Solution
+Weight of timber: $0.65(9.81)(3 \times 2 \times 0.8) = 30.61$ kN, so the total weight is $36.61$ kN.
+---
+Buoyancy equals weight: $9.81(3 \times 2)D = 36.61$.
+---
+$D = 0.62$ m.

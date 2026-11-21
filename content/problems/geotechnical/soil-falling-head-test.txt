@@ -1,0 +1,15 @@
+topic: geotechnical/soil-properties
+title: Falling-head permeability test
+answer: C
+hint: Two different areas appear: the standpipe and the sample. The head ratio goes inside a natural log.
+
+A silty clay sample 100 mm in diameter and 120 mm long is tested in a falling-head permeameter. The standpipe has an inside diameter of 10 mm. The head in the standpipe drops from 900 mm to 450 mm in 6 minutes and 40 seconds. Find the coefficient of permeability.
+
+A. 9.031 × 10⁻⁵ cm/s    B. 2.079 × 10⁻² cm/s    C. 2.079 × 10⁻⁴ cm/s    D. 2.079 × 10⁻³ cm/s
+
+## Solution
+Standpipe area $a = \dfrac{\pi(1.0)^2}{4}$ cm², sample area $A = \dfrac{\pi(10)^2}{4}$ cm², so $\dfrac{a}{A} = 0.01$. $L = 12$ cm, $t = 400$ s.
+---
+$k = \dfrac{aL}{At}\ln\dfrac{h_1}{h_2} = 0.01 \cdot \dfrac{12}{400}\ln\dfrac{90}{45}$
+---
+$k = 0.0003(0.6931) = 2.079 \times 10^{-4}$ cm/s.

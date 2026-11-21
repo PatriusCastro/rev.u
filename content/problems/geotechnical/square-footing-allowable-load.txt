@@ -1,0 +1,17 @@
+topic: geotechnical/foundations
+title: Allowable column load on a square footing
+answer: C
+hint: Use the square footing form of Terzaghi's equation, divide by the factor of safety, then multiply by the area.
+
+A column in a Cebu mall sits on a 2 m by 2 m square footing founded 1.5 m deep in sand with $\gamma = 18.5$ kN/m³, $c = 0$ and $\phi = 32°$. The water table is deep. Use Terzaghi's factors $N_q = 28.52$ and $N_\gamma = 26.87$ and a factor of safety of 3 on the gross ultimate capacity. Find the allowable column load.
+
+A. 396.4 kN    B. 1718.0 kN    C. 1585.5 kN    D. 4756.4 kN
+
+## Solution
+$q = 18.5(1.5) = 27.75$ kPa. With $c = 0$, $q_u = qN_q + 0.4\gamma BN_\gamma$.
+---
+$q_u = 27.75(28.52) + 0.4(18.5)(2)(26.87) = 791.43 + 397.68 = 1189.11$ kPa.
+---
+$q_a = 1189.11/3 = 396.37$ kPa.
+---
+$Q_a = 396.37(2)(2) = 1585.5$ kN.

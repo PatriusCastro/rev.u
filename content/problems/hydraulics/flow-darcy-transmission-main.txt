@@ -1,0 +1,15 @@
+topic: hydraulics/fluid-flow
+title: Friction loss in a transmission main
+answer: A
+hint: Find the velocity first, or use the form of Darcy–Weisbach written in terms of $Q$ and $D$.
+
+A 300 mm steel main, 800 m long, carries 120 L/s of water to a barangay reservoir. The Darcy friction factor is $f = 0.02$. Find the head loss due to friction. Use $g = 9.81$ m/s².
+
+A. 7.83 m    B. 15.67 m    C. 4.62 m    D. 31.34 m
+
+## Solution
+$A = \dfrac{\pi(0.3)^2}{4} = 0.07069$ m², so $V = \dfrac{0.12}{0.07069} = 1.698$ m/s.
+---
+$h_f = f\dfrac{L}{D}\dfrac{V^2}{2g} = 0.02\left(\dfrac{800}{0.3}\right)\dfrac{1.698^2}{2(9.81)}$.
+---
+$h_f = 7.83$ m.

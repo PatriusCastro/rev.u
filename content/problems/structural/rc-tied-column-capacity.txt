@@ -1,0 +1,15 @@
+topic: structural/design-construction
+title: Axial capacity of a short tied column
+answer: A
+hint: Subtract the steel area from the gross area for the concrete term, and keep both the φ factor and the 0.80 factor for tied columns.
+
+A short square tied column is 400 mm by 400 mm and carries eight 20 mm diameter bars. Use $f'_c = 28$ MPa and $f_y = 414$ MPa. Per NSCP 2015, the design axial strength of a short tied column is $\phi P_n = 0.65(0.80)\left[0.85f'_c(A_g - A_{st}) + f_y A_{st}\right]$. Find $\phi P_n$.
+
+A. 2490 kN    B. 3113 kN    C. 3831 kN    D. 2521 kN
+
+## Solution
+$A_{st} = 8\cdot\dfrac{\pi(20)^2}{4} = 2513.3$ mm² and $A_g = 400(400) = 160{,}000$ mm².
+---
+$0.85(28)(160{,}000 - 2513.3) + 414(2513.3) = 3{,}748{,}184 + 1{,}040{,}495 = 4{,}788{,}680$ N.
+---
+$\phi P_n = 0.65(0.80)(4{,}788{,}680) = 2{,}490{,}114$ N $\approx 2490$ kN.

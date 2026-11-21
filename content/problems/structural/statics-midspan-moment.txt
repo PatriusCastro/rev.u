@@ -1,0 +1,17 @@
+topic: structural/statics-mechanics
+title: Maximum moment in a lintel beam
+answer: B
+hint: Both loads give their largest moment at the same point. Use the standard formula for each and add.
+
+A simply supported lintel beam over a 6 m opening carries a uniform load of 12 kN/m over its whole length and a 30 kN point load at midspan. Find the maximum bending moment.
+
+A. 76.5 kN·m    B. 99.0 kN·m    C. 144.0 kN·m    D. 153.0 kN·m
+
+## Solution
+Both maximums occur at midspan, so they add.
+---
+Uniform load: $\dfrac{wL^2}{8} = \dfrac{12(6)^2}{8} = 54$ kN·m.
+---
+Point load: $\dfrac{PL}{4} = \dfrac{30(6)}{4} = 45$ kN·m.
+---
+$M_{max} = 54 + 45 = 99$ kN·m.

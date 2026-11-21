@@ -1,0 +1,17 @@
+topic: hydraulics/fluid-flow
+title: Best rectangular drainage channel
+answer: B
+hint: For the most efficient rectangular section, write the width and the hydraulic radius in terms of the depth alone.
+
+A rectangular concrete drainage channel ($n = 0.013$) on a slope of 0.0016 must carry 4 m³/s. It is to have the most efficient rectangular section. Find the required bottom width.
+
+A. 1.01 m    B. 2.02 m    C. 1.45 m    D. 2.90 m
+
+## Solution
+Most efficient rectangle: $b = 2y$, so $A = 2y^2$, $P = 4y$ and $R = \dfrac{y}{2}$.
+---
+Manning: $4 = \dfrac{1}{0.013}(2y^2)\left(\dfrac{y}{2}\right)^{2/3}(0.0016)^{1/2}$.
+---
+This gives $2^{1/3}\,y^{8/3} = \dfrac{4(0.013)}{0.04} = 1.3$, so $y^{8/3} = 1.0318$ and $y = 1.012$ m.
+---
+Width: $b = 2y = 2.02$ m.

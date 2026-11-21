@@ -1,0 +1,15 @@
+topic: structural/statics-mechanics
+title: Bottom chord of a carport truss
+answer: A
+hint: Find the support reactions by symmetry, then balance the joint at one support.
+
+A small carport truss is a single triangle. Its horizontal bottom chord is 6 m long, supported by a pin at the left end and a roller at the right end. The apex is 4 m directly above the middle of the bottom chord, and two straight rafters join the apex to the supports. A vertical load of 60 kN acts at the apex. Ignore the self-weight of the members. Find the force in the bottom chord.
+
+A. 22.5 kN tension    B. 37.5 kN tension    C. 40.0 kN tension    D. 30.0 kN compression
+
+## Solution
+By symmetry each reaction is $30$ kN upward. Each rafter runs 3 m across and 4 m up, so it is 5 m long.
+---
+Joint at the left support, vertical: $F_r\left(\dfrac{4}{5}\right) = 30$, so the rafter force is $F_r = 37.5$ kN (compression).
+---
+Horizontal: the chord balances the rafter's horizontal part, $F_c = 37.5\left(\dfrac{3}{5}\right) = 22.5$ kN, pulling away from the joint, so tension.

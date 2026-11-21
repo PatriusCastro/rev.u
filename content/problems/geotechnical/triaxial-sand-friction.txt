@@ -1,0 +1,15 @@
+topic: geotechnical/foundations
+title: Drained triaxial test on clean sand
+answer: A
+hint: The deviator stress is not the major principal stress. Add the cell pressure first.
+
+A consolidated-drained triaxial test is run on a clean sand ($c = 0$). The cell pressure is 80 kPa and the deviator stress at failure is 200 kPa. Find the angle of internal friction.
+
+A. 33.75°    B. 25.38°    C. 29.05°    D. 45.58°
+
+## Solution
+$\sigma_3 = 80$ kPa and $\sigma_1 = 80 + 200 = 280$ kPa.
+---
+$\sin\phi = \dfrac{\sigma_1 - \sigma_3}{\sigma_1 + \sigma_3} = \dfrac{200}{360} = 0.5556$.
+---
+$\phi = \sin^{-1}(0.5556) = 33.75°$.

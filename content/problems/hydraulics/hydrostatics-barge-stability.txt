@@ -1,0 +1,15 @@
+topic: hydraulics/hydrostatics
+title: Metacentric height of a barge
+answer: C
+hint: The centre of buoyancy is at half the draft. The barge rolls about its long axis, so think about which dimension gets cubed.
+
+A rectangular barge 10 m long and 4 m wide floats in fresh water with a draft of 1.2 m. Its centre of gravity is 1.5 m above the bottom. Find the metacentric height for rolling about the long axis.
+
+A. 6.04 m    B. 2.01 m    C. 0.21 m    D. 0.81 m
+
+## Solution
+The centre of buoyancy is $1.2/2 = 0.6$ m above the bottom, so $BG = 1.5 - 0.6 = 0.9$ m.
+---
+$BM = \dfrac{I}{V} = \dfrac{10(4^3)/12}{10(4)(1.2)} = \dfrac{53.33}{48} = 1.111$ m.
+---
+$GM = 1.111 - 0.9 = 0.21$ m. It is positive, so the barge is stable.

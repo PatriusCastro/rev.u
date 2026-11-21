@@ -1,0 +1,15 @@
+topic: hydraulics/hydrostatics
+title: Force on an irrigation sluice gate
+answer: A
+hint: Use the pressure at the centroid of the gate, not at its top or bottom edge.
+
+A vertical rectangular sluice gate in an irrigation canal in Nueva Ecija is 1.5 m wide and 2.0 m high. Its top edge is 1.2 m below the water surface, with water on one side only. Find the total water force on the gate. Use $\gamma_w = 9.81$ kN/m³.
+
+A. 64.75 kN    B. 94.18 kN    C. 35.32 kN    D. 43.16 kN
+
+## Solution
+Depth of the centroid: $\bar{h} = 1.2 + 1.0 = 2.2$ m.
+---
+Area: $1.5 \times 2.0 = 3.0$ m².
+---
+$F = 9.81(2.2)(3.0) = 64.75$ kN.

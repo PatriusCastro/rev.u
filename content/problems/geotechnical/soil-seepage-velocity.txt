@@ -1,0 +1,17 @@
+topic: geotechnical/soil-properties
+title: Seepage velocity from a canal
+answer: B
+hint: Darcy's law gives the velocity over the whole cross-section. Water only moves through the open part of it.
+
+Water seeps from an irrigation canal to a drainage ditch through a sand layer. The water levels differ by 4.2 m and the flow path through the sand is 60 m long. The sand has a coefficient of permeability of 0.042 cm/s and a porosity of 0.36. Find the seepage velocity in metres per day.
+
+A. 2.54 m/day    B. 7.06 m/day    C. 4.52 m/day    D. 0.91 m/day
+
+## Solution
+$i = \dfrac{\Delta h}{L} = \dfrac{4.2}{60} = 0.070$
+---
+$v = ki = (0.042 \times 10^{-2})(0.070) = 2.94 \times 10^{-5}$ m/s
+---
+$v_s = \dfrac{v}{n} = \dfrac{2.94 \times 10^{-5}}{0.36} = 8.17 \times 10^{-5}$ m/s
+---
+$v_s = 8.17 \times 10^{-5}(86{,}400) = 7.06$ m/day.

@@ -1,0 +1,15 @@
+topic: hydraulics/hydrostatics
+title: Unit weight of drum oil
+answer: A
+hint: Take away the drum's own mass first. Unit weight is weight per volume, not mass per volume.
+
+A steel drum at a Batangas depot holds 0.21 m³ of cooking oil when full. The full drum has a mass of 205 kg and the empty drum a mass of 18 kg. Find the unit weight of the oil. Use $g = 9.81$ m/s².
+
+A. 8.74 kN/m³    B. 9.58 kN/m³    C. 0.89 kN/m³    D. 85.70 kN/m³
+
+## Solution
+Mass of oil: $205 - 18 = 187$ kg.
+---
+Weight of oil: $187 \times 9.81 = 1834.5$ N.
+---
+$\gamma = \dfrac{1834.5}{0.21} = 8736$ N/m³ $= 8.74$ kN/m³.

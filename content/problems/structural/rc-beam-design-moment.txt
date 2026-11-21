@@ -1,0 +1,17 @@
+topic: structural/design-construction
+title: Design moment of a singly reinforced beam
+answer: A
+hint: Find the depth of the Whitney block first, then check that the section is tension-controlled before using φ.
+
+A rectangular girder for a two-storey school building in Iloilo is 300 mm wide with an effective depth of 500 mm. It is reinforced for tension only with $A_s = 1500$ mm². Use $f'_c = 28$ MPa, $f_y = 414$ MPa and $\beta_1 = 0.85$. Per NSCP 2015, take $\phi = 0.90$ if the section is tension-controlled ($c/d \le 0.375$). Find the design moment strength $\phi M_n$.
+
+A. 255.1 kN·m    B. 283.5 kN·m    C. 230.8 kN·m    D. 258.8 kN·m
+
+## Solution
+$a = \dfrac{A_s f_y}{0.85 f'_c b} = \dfrac{1500(414)}{0.85(28)(300)} = 86.97$ mm.
+---
+$c = \dfrac{a}{\beta_1} = \dfrac{86.97}{0.85} = 102.3$ mm, and $c/d = 0.205 \le 0.375$, so the section is tension-controlled and $\phi = 0.90$.
+---
+$M_n = A_s f_y\left(d - \dfrac{a}{2}\right) = 1500(414)(500 - 43.49) = 283.5 \times 10^6$ N·mm $= 283.5$ kN·m.
+---
+$\phi M_n = 0.90(283.5) = 255.1$ kN·m.

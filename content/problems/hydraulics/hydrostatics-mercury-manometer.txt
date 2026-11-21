@@ -1,0 +1,15 @@
+topic: hydraulics/hydrostatics
+title: Open mercury manometer on a water main
+answer: B
+hint: Walk from the pipe to the open end. Add $\gamma h$ going down, subtract going up.
+
+A U-tube manometer is attached to a water main. From the centre of the pipe, water fills the left leg down to the mercury surface 0.40 m below the pipe centre. In the right leg, which is open to the air, the mercury stands 0.25 m higher than in the left leg. Find the gauge pressure at the pipe centre. Mercury has specific gravity 13.6; use $\gamma_w = 9.81$ kN/m³.
+
+A. 37.28 kPa    B. 29.43 kPa    C. 33.35 kPa    D. 30.90 kPa
+
+## Solution
+From the pipe go down 0.40 m of water, then up 0.25 m of mercury to the open end: $p_A + 9.81(0.40) - 13.6(9.81)(0.25) = 0$.
+---
+$p_A = 33.354 - 3.924$.
+---
+$p_A = 29.43$ kPa.

@@ -1,0 +1,15 @@
+topic: geotechnical/soil-properties
+title: Degree of saturation of a soil core
+answer: C
+hint: Find the water content from the dry mass, then the void ratio from the dry density.
+
+A soil core with a volume of 950 cm³ has a mass of 1805 g. After oven drying, its mass is 1560 g. The specific gravity of solids is 2.70 and the density of water is 1 g/cm³. Find the degree of saturation of the core.
+
+A. 56.89%    B. 39.17%    C. 65.82%    D. 25.79%
+
+## Solution
+$w = \dfrac{1805 - 1560}{1560} = 0.1571$
+---
+Dry density $\rho_d = \dfrac{1560}{950} = 1.642$ g/cm³, so $e = \dfrac{G_s\rho_w}{\rho_d} - 1 = \dfrac{2.70}{1.642} - 1 = 0.644$.
+---
+$S = \dfrac{wG_s}{e} = \dfrac{0.1571(2.70)}{0.644} = 0.658 = 65.82\%$.

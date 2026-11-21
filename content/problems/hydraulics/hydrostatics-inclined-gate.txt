@@ -1,0 +1,15 @@
+topic: hydraulics/hydrostatics
+title: Centre of pressure on an inclined gate
+answer: B
+hint: Measure distances along the slope, starting where the gate's plane meets the water surface.
+
+A rectangular gate 2 m wide and 3 m long (measured along the slope) lies in the face of a dam inclined at 60° to the horizontal. Its top edge is 1.5 m below the water surface. How far down the slope from the top edge of the gate is the centre of pressure? Use $\gamma_w = 9.81$ kN/m³.
+
+A. 1.50 m    B. 1.73 m    C. 2.00 m    D. 1.77 m
+
+## Solution
+Slant distance from the surface line to the top edge: $\dfrac{1.5}{\sin 60°} = 1.732$ m, so to the centroid $\bar{y} = 1.732 + 1.5 = 3.232$ m.
+---
+$I_g = \dfrac{2(3^3)}{12} = 4.5$ m⁴ and $A = 6$ m², so $e = \dfrac{4.5}{6(3.232)} = 0.232$ m.
+---
+From the top edge: $1.5 + 0.232 = 1.73$ m.

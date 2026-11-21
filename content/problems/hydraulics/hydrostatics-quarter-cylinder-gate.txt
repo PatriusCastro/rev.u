@@ -1,0 +1,15 @@
+topic: hydraulics/hydrostatics
+title: Quarter-cylinder gate
+answer: C
+hint: Find the horizontal and vertical parts separately. The vertical part is the weight of the water directly above the curved face.
+
+A gate is a quarter of a circular cylinder with radius 2 m and length 4 m. Water fills the quarter-circle space above its curved face: the top of the curve is at the water surface, and the face sweeps 2 m down and 2 m across. Find the resultant water force on the gate. Use $\gamma_w = 9.81$ kN/m³.
+
+A. 123.28 kN    B. 201.76 kN    C. 146.14 kN    D. 175.49 kN
+
+## Solution
+Horizontal: the vertical projection is 2 m high by 4 m long with its centroid 1 m deep. $F_H = 9.81(1)(2 \times 4) = 78.48$ kN.
+---
+Vertical: the water above the face is a quarter circle times the length. $F_V = 9.81\left(\dfrac{\pi (2^2)}{4}\right)(4) = 123.28$ kN.
+---
+$F = \sqrt{78.48^2 + 123.28^2} = 146.14$ kN.

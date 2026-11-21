@@ -1,0 +1,17 @@
+topic: geotechnical/foundations
+title: Active thrust with a surcharge
+answer: D
+hint: Split the pressure diagram into a rectangle from the surcharge and a triangle from the soil. Each acts at a different height.
+
+A 6 m vertical, smooth retaining wall holds back dry sand with a level surface. The sand has $\gamma = 18$ kN/m³, $c = 0$ and $\phi = 30°$. A uniform surcharge of 20 kPa from a parking area acts on the backfill. Using Rankine's theory, find the total active thrust per metre of wall and its height above the base.
+
+A. 108.0 kN/m at 2.00 m    B. 148.0 kN/m at 2.00 m    C. 148.0 kN/m at 3.00 m    D. 148.0 kN/m at 2.27 m
+
+## Solution
+$K_a = \tan^2(45° - 15°) = \tfrac{1}{3}$.
+---
+Surcharge: $P_1 = K_a qH = \tfrac{1}{3}(20)(6) = 40$ kN/m at 3 m. Soil: $P_2 = \tfrac{1}{2}K_a\gamma H^2 = \tfrac{1}{2}\left(\tfrac{1}{3}\right)(18)(36) = 108$ kN/m at 2 m.
+---
+$P_a = 40 + 108 = 148$ kN/m.
+---
+$\bar{y} = \dfrac{40(3) + 108(2)}{148} = \dfrac{336}{148} = 2.27$ m above the base.

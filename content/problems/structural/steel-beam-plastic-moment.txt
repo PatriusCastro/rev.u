@@ -1,0 +1,13 @@
+topic: structural/design-construction
+title: Design moment of a compact steel beam
+answer: C
+hint: A compact, fully braced beam reaches its plastic moment. Use the plastic section modulus, not the elastic one.
+
+A wide-flange steel beam for a mezzanine floor is compact and has its compression flange braced continuously. Its plastic section modulus is $Z_x = 1.52 \times 10^6$ mm³ and its elastic section modulus is $S_x = 1.34 \times 10^6$ mm³. The steel has $F_y = 345$ MPa. Per NSCP 2015 (LRFD), $M_n = M_p = F_y Z_x$ and $\phi_b = 0.90$. Find the design flexural strength $\phi_b M_n$.
+
+A. 524.4 kN·m    B. 416.1 kN·m    C. 472.0 kN·m    D. 339.3 kN·m
+
+## Solution
+$M_p = F_y Z_x = 345(1.52 \times 10^6) = 524.4 \times 10^6$ N·mm $= 524.4$ kN·m.
+---
+$\phi_b M_n = 0.90(524.4) = 472.0$ kN·m.

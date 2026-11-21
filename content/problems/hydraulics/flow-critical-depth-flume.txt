@@ -1,0 +1,15 @@
+topic: hydraulics/fluid-flow
+title: Minimum specific energy in a flume
+answer: B
+hint: Work per metre of width first. At critical flow the velocity head is half the depth.
+
+A rectangular flume 4 m wide carries 10 m³/s of water. Find the minimum specific energy the flow can have. Use $g = 9.81$ m/s².
+
+A. 0.86 m    B. 1.29 m    C. 1.72 m    D. 3.25 m
+
+## Solution
+Unit discharge: $q = \dfrac{10}{4} = 2.5$ m³/s per m.
+---
+Critical depth: $y_c = \left(\dfrac{2.5^2}{9.81}\right)^{1/3} = 0.860$ m.
+---
+$E_{min} = \tfrac{3}{2}y_c = 1.29$ m. Check: $V_c = 2.5/0.860 = 2.905$ m/s and $0.860 + \dfrac{2.905^2}{2(9.81)} = 1.29$ m.
