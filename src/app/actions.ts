@@ -1,5 +1,6 @@
 'use server';
 import { redirect } from 'next/navigation';
+import { cookies } from 'next/headers';
 import { db, session } from '@/lib/supabase';
 import { revalidatePath } from 'next/cache';
 import { dayOf } from '@/lib/schedule';
@@ -10,25 +11,102 @@ const back = (path: string, msg: string) => redirect(`${path}?msg=${encodeURICom
 
 // Sign in and setup
 
-export async function signIn(form: FormData) {
+export type AuthState = { email: string; error?: string; sent?: boolean };
+const MIN_PASSWORD = 8;
+const SHORT_PASSWORD = `Use a longer password: at least ${MIN_PASSWORD} characters.`;
+const AUTH_ERRORS: Record<string, string> = {
+  invalid_credentials: 'That email and password do not match. Check them, or create an account.',
+  user_already_exists: 'An account with this email already exists. Sign in instead.',
+  email_exists: 'An account with this email already exists. Sign in instead.',
+  email_not_confirmed: 'Confirm your email first: open the link we sent you.',
+  weak_password: SHORT_PASSWORD,
+  same_password: 'That is your current password. Choose a new one.',
+  otp_expired: 'That code is wrong or has expired. Check the email, or send a new code.',
+  over_request_rate_limit: 'Too many tries. Wait a minute, then try again.',
+  over_email_send_rate_limit: 'Too many emails sent. Wait a minute, then try again.',
+};
+const authError = (code?: string, message?: string) => (code && AUTH_ERRORS[code]) ?? message ?? 'Something went wrong. Try again.';
+const validEmail = (email: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+// Remembered so the sign-in form is filled in next time, including after signing out. Read by /login.
+async function rememberEmail(email: string) {
+  (await cookies()).set('revu_email', email, { httpOnly: true, sameSite: 'lax', maxAge: 60 * 60 * 24 * 365, path: '/' });
+}
+
+// Return the form's state instead of redirecting on errors, so the email stays filled in.
+function readAuthForm(form: FormData) {
+  const email = String(form.get('email') ?? '').trim();
+  const password = String(form.get('password') ?? '');
+  const error = !validEmail(email) ? 'Enter a valid email address.' : !password ? 'Enter your password.' : undefined;
+  return { email, password, error };
+}
+
+export async function signIn(_: AuthState, form: FormData): Promise<AuthState> {
+  const { email, password, error: bad } = readAuthForm(form);
+  if (bad) return { email, error: bad };
   const supabase = await db();
-  const { error } = await supabase.auth.signInWithPassword({ email: String(form.get('email')), password: String(form.get('password')) });
-  if (error) back('/login', error.code === 'invalid_credentials' ? 'That email and password do not match. Check them, or create an account.' : error.message);
+  const { error } = await supabase.auth.signInWithPassword({ email, password });
+  if (error) return { email, error: authError(error.code, error.message) };
+  await rememberEmail(email);
   redirect('/');
 }
 
-export async function signUp(form: FormData) {
+export async function signUp(_: AuthState, form: FormData): Promise<AuthState> {
+  const { email, password, error: bad } = readAuthForm(form);
+  if (bad) return { email, error: bad };
+  // Checked here too: the browser's minLength is only a hint, and the auth server allows shorter.
+  if (password.length < MIN_PASSWORD) return { email, error: SHORT_PASSWORD };
   const supabase = await db();
-  const { data, error } = await supabase.auth.signUp({ email: String(form.get('email')), password: String(form.get('password')) });
-  if (error) back('/login', error.message);
-  if (!data.session) back('/login', 'Check your email for a link to confirm your account.');
+  const { data, error } = await supabase.auth.signUp({ email, password });
+  if (error) return { email, error: authError(error.code, error.message) };
+  if (!data.session) return { email, sent: true };
+  await rememberEmail(email);
   redirect('/setup');
+}
+
+/** Sign in, or create an account, with a 6-digit code sent by email. The form's button says which step. */
+export async function emailCode(_: AuthState, form: FormData): Promise<AuthState> {
+  const email = String(form.get('email') ?? '').trim();
+  if (!validEmail(email)) return { email, error: 'Enter a valid email address.' };
+  const supabase = await db();
+  if (form.get('intent') === 'send') {
+    const { error } = await supabase.auth.signInWithOtp({ email, options: { shouldCreateUser: true } });
+    if (error) return { email, error: authError(error.code, error.message) };
+    return { email, sent: true };
+  }
+  const token = String(form.get('code') ?? '').replace(/\D/g, '');
+  if (token.length !== 6) return { email, sent: true, error: 'Enter the 6-digit code from the email.' };
+  const { error } = await supabase.auth.verifyOtp({ email, token, type: 'email' });
+  if (error) return { email, sent: true, error: authError(error.code, error.message) };
+  await rememberEmail(email);
+  redirect('/'); // Today sends new accounts on to the exam date.
+}
+
+/** Always reports success, so the form does not reveal which emails have accounts. */
+export async function sendReset(_: AuthState, form: FormData): Promise<AuthState> {
+  const email = String(form.get('email') ?? '').trim();
+  if (!validEmail(email)) return { email, error: 'Enter a valid email address.' };
+  const supabase = await db();
+  const { error } = await supabase.auth.resetPasswordForEmail(email);
+  if (error?.code?.startsWith('over_')) return { email, error: authError(error.code) };
+  return { email, sent: true };
+}
+
+/** After the reset link: the link signed the user in, so this only sets the new password. */
+export async function setPassword(_: AuthState, form: FormData): Promise<AuthState> {
+  const { supabase } = await session();
+  const password = String(form.get('password') ?? '');
+  if (password.length < MIN_PASSWORD) return { email: '', error: SHORT_PASSWORD };
+  const { error } = await supabase.auth.updateUser({ password });
+  if (error) return { email: '', error: authError(error.code, error.message) };
+  redirect('/');
 }
 
 export async function signOut() {
   const supabase = await db();
-  await supabase.auth.signOut();
-  redirect('/login');
+  // This device only: signing out on a shared computer should not end the session on the user's phone.
+  await supabase.auth.signOut({ scope: 'local' });
+  redirect('/login?msg=signed_out');
 }
 
 export async function saveExamDate(form: FormData) {

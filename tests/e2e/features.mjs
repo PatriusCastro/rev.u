@@ -12,9 +12,9 @@ async function newUser(tag) {
   const page = await (await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2 })).newPage();
   page.errors = []; page.on('pageerror', (e) => page.errors.push(String(e)));
   page.on('dialog', (d) => { page.lastDialog = d.message(); d.accept(); });
-  await page.goto(BASE + '/login');
+  await page.goto(BASE + '/login?mode=signup');
   await page.fill('input[name=email]', `${tag}-${Date.now()}@revu.test`); await page.fill('input[name=password]', 'feature-pass-1');
-  await page.click('text=Create an account'); await page.waitForURL('**/setup');
+  await page.click('button:has-text("Create account")'); await page.waitForURL('**/setup');
   await page.fill('input[name=exam_date]', '2027-03-01'); await page.click('text=Save exam date'); await page.waitForURL(BASE + '/');
   return page;
 }

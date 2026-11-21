@@ -35,7 +35,7 @@ export default async function Today() {
   const top = Math.max(1, target, ...counts);
   const run = streak(new Set(perDay.keys()), today, addDays);
   const weekTotal = counts.reduce((a, b) => a + b, 0);
-  const examDay = new Intl.DateTimeFormat('en-PH', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' }).format(new Date(profile.exam_date));
+  const examDay = new Intl.DateTimeFormat('en-PH', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' }).format(new Date(profile.exam_date));
 
   // Repeats card: a started set continues, otherwise a new set starts.
   const cont = open?.[0] && open[0].question_ids.length - (open[0].answers as unknown as { count: number }[])[0].count;
@@ -61,7 +61,7 @@ export default async function Today() {
         </div>
         <div className="acts">
           {run > 0 && <span className="pill"><Flame {...ic} />{run} {run === 1 ? 'day' : 'days'}</span>}
-          <form action={signOut}><button className="ib" aria-label="Sign out" title="Sign out"><LogOut {...ic} /></button></form>
+          <form className="signout" action={signOut}><Submit className="ib" aria-label="Sign out" title="Sign out"><LogOut {...ic} /></Submit></form>
         </div>
       </div>
       <div className="scroll"><div className="cols">

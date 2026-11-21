@@ -24,5 +24,5 @@ export async function session() {
   const supabase = await db();
   const { data } = await supabase.auth.getClaims();
   if (!data?.claims?.sub) redirect('/login');
-  return { supabase, user: { id: data.claims.sub } };
+  return { supabase, user: { id: data.claims.sub, email: data.claims.email } };
 }

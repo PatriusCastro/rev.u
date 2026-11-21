@@ -51,18 +51,25 @@ const email = `uat-${Date.now()}@revu.test`, pw = 'uat-password-1';
 await step('signed-out visitor is sent to sign in', async () => { await go('/subjects'); expect(page.url().endsWith('/login'), 'not redirected: ' + page.url()); });
 await step('wrong password shows a clear message', async () => {
   await page.fill('input[name=email]', 'nobody@revu.test'); await page.fill('input[name=password]', 'wrong-password');
-  await page.click('button:has-text("Sign in")'); await page.waitForURL(/msg=/);
-  const msg = await page.textContent('[role=status]'); note('info', 'Sign in', `Wrong password message reads: "${msg}"`);
+  await page.click('button:has-text("Sign in")'); await page.waitForSelector('p.alert');
+  const msg = await page.textContent('p.alert'); note('info', 'Sign in', `Wrong password message reads: "${msg}"`);
+  expect(await page.inputValue('input[name=email]') === 'nobody@revu.test', 'email was cleared after the error');
 });
 await step('short password is blocked before sending', async () => {
+  await page.click('nav.seg a:has-text("Create account")'); await page.waitForURL(/mode=signup/);
   await page.fill('input[name=email]', email); await page.fill('input[name=password]', 'short');
-  await page.click('button:has-text("Create an account")');
+  await page.click('button:has-text("Create account")');
   expect(page.url().includes('/login'), 'left the login page');
   expect(await page.evaluate(() => !document.querySelector('input[name=password]').checkValidity()), 'browser validation did not catch it');
 });
+await step('the server refuses a short password too', async () => {
+  await page.evaluate(() => document.querySelector('input[name=password]').removeAttribute('minlength'));
+  await page.click('button:has-text("Create account")'); await page.waitForSelector('p.alert');
+  expect((await page.textContent('p.alert')).includes('at least 8'), 'no message about length');
+});
 await audit('login-phone'); await shot('01-login');
 await step('sign up goes to exam date', async () => {
-  await page.fill('input[name=password]', pw); await page.click('button:has-text("Create an account")'); await page.waitForURL('**/setup');
+  await page.fill('input[name=password]', pw); await page.click('button:has-text("Create account")'); await page.waitForURL('**/setup');
 });
 await step('a past exam date is refused', async () => {
   await page.evaluate(() => document.querySelector('input[name=exam_date]').removeAttribute('min'));

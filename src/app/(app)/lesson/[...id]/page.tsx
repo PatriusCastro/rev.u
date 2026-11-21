@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { ArrowRight, ChevronLeft, Pencil, Plus } from 'lucide-react';
+import { ArrowRight, ChevronLeft, ChevronRight, Pencil, Plus } from 'lucide-react';
 import { Submit } from '@/components/submit';
 import { session } from '@/lib/supabase';
 import { rich } from '@/lib/math';
@@ -26,13 +26,19 @@ export default async function Lesson({ params }: PageProps<'/lesson/[...id]'>) {
       <div className="scroll"><div className="narrow">
         <h1 className="title">{topic.name}</h1>
         <article className="prose" dangerouslySetInnerHTML={{ __html: rich(topic.lesson) }} />
+        <div className="card rows">
+          <Link className="item" href={`/write/problem?topic=${encodeURIComponent(id)}`}>
+            <span className="tile"><Plus {...ic} /></span>
+            <span><span className="t">Write a problem for this topic</span><span className="sub">Add your own practice problem to {topic.name}</span></span>
+            <ChevronRight {...ic} className="chev" />
+          </Link>
+        </div>
         {count ? (
           // Sticks to the bottom while reading, so practice is one tap away at any point in the lesson.
           <form className="dock" action={startPractice.bind(null, id)}>
             <Submit className="btn pri full" pendingText="Starting…">Practise {Math.min(10, count)} problems<ArrowRight {...ic} className="mv" /></Submit>
           </form>
         ) : <p className="sub">Problems for this topic are on the way.</p>}
-        <Link className="btn txt" href={`/write/problem?topic=${encodeURIComponent(id)}`}><Plus {...ic} />Write a problem for this topic</Link>
       </div></div>
     </main>
   );
