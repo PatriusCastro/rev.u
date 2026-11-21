@@ -1,0 +1,14 @@
+topic: trigonometry/sine-cosine-law
+answer: C
+hint: You know side a and the angle opposite it. That pair unlocks the sine law.
+
+In triangle ABC, $A = 40°$, $B = 60°$ and $a = 10$ cm. Find side $b$.
+
+A. 7.42 cm    B. 11.70 cm    C. 13.47 cm    D. 15.32 cm
+
+## Solution
+Side $a$ and angle $A$ are a known opposite pair, so use the sine law: $\dfrac{b}{\sin B} = \dfrac{a}{\sin A}$.
+---
+$b = \dfrac{10 \sin 60°}{\sin 40°} = \dfrac{10(0.8660)}{0.6428}$.
+---
+$b \approx 13.47$ cm.

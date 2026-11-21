@@ -1,0 +1,14 @@
+topic: trigonometry/sine-cosine-law
+answer: D
+hint: The largest angle is opposite the longest side. Rearrange the cosine law for that angle.
+
+The sides of a triangle are 7 m, 8 m and 9 m. Find its largest angle.
+
+A. 48.19°    B. 58.41°    C. 64.62°    D. 73.40°
+
+## Solution
+The largest angle $C$ is opposite the longest side, $c = 9$ m.
+---
+$\cos C = \dfrac{a^2 + b^2 - c^2}{2ab} = \dfrac{49 + 64 - 81}{2(7)(8)} = \dfrac{32}{112} = 0.2857$.
+---
+$C = \cos^{-1}(0.2857) \approx 73.40°$.

@@ -1,0 +1,17 @@
+topic: trigonometry/angles-of-elevation
+answer: C
+hint: Start with the right triangle at B. Write h in terms of the distance from B to the tower.
+figure: tower.svg
+
+From point A, the angle of elevation of the top of a tower is 30°. From point B, 40 m closer to the tower, it is 60°. Find the height of the tower.
+
+A. 20.00 m    B. 28.28 m    C. 34.64 m    D. 40.00 m
+
+## Solution
+Let $x$ be the distance from B to the tower and $h$ its height.
+---
+From B: $\tan 60° = h / x$, so $h = \sqrt{3}\,x$.
+---
+From A: $\tan 30° = h / (x + 40)$, so $x + 40 = \sqrt{3}\,h = 3x$ and $x = 20$ m.
+---
+$h = 20\sqrt{3} \approx 34.64$ m.

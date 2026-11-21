@@ -1,0 +1,14 @@
+topic: trigonometry/sine-cosine-law
+answer: B
+hint: Two sides and the angle between them: that is the cosine law.
+
+Two sides of a triangle are 8 m and 5 m, and the angle between them is 60°. Find the third side.
+
+A. 6.00 m    B. 7.00 m    C. 9.43 m    D. 11.36 m
+
+## Solution
+Two sides and the included angle are known, so use $c^2 = a^2 + b^2 - 2ab\cos C$.
+---
+$c^2 = 8^2 + 5^2 - 2(8)(5)\cos 60° = 64 + 25 - 40 = 49$.
+---
+$c = 7.00$ m.

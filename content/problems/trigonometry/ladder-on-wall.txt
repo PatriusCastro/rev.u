@@ -1,0 +1,14 @@
+topic: trigonometry/angles-of-elevation
+answer: B
+hint: The ladder is the hypotenuse. Which ratio links the hypotenuse to the side opposite 60°?
+
+A ladder 6 m long leans against a vertical wall and makes an angle of 60° with the level ground. How high up the wall does the top of the ladder reach?
+
+A. 3.00 m    B. 5.20 m    C. 6.93 m    D. 10.39 m
+
+## Solution
+The ladder is the hypotenuse, 6 m. The height $h$ on the wall is opposite the 60° angle.
+---
+$\sin 60° = h / 6$, so $h = 6 \sin 60°$.
+---
+$h = 6(0.8660) \approx 5.20$ m.

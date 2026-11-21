@@ -1,0 +1,16 @@
+topic: trigonometry/sine-cosine-law
+answer: A
+hint: Find the angle between the two bearings first. Measure both from north.
+
+Two ships leave a port at the same time. One sails at 20 km/h on a bearing of N 30° E, and the other at 25 km/h on a bearing of S 45° E. How far apart are they after 2 hours?
+
+A. 71.66 km    B. 64.03 km    C. 55.36 km    D. 90.00 km
+
+## Solution
+After 2 hours the ships are 40 km and 50 km from the port.
+---
+Measured from north, N 30° E is 30° and S 45° E is $180° - 45° = 135°$, so the angle between their paths is $105°$.
+---
+$d^2 = 40^2 + 50^2 - 2(40)(50)\cos 105° = 4100 - 4000(-0.2588) = 5135.3$.
+---
+$d \approx 71.66$ km.

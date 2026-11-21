@@ -1,0 +1,14 @@
+topic: trigonometry/angles-of-elevation
+answer: A
+hint: The shadow is the side next to the sun's angle, and the pole is the side across from it.
+
+A vertical flagpole casts a shadow 12 m long on level ground when the angle of elevation of the sun is 52°. How tall is the flagpole?
+
+A. 15.36 m    B. 9.46 m    C. 7.39 m    D. 19.49 m
+
+## Solution
+The shadow (12 m) is adjacent to the 52° angle and the height $h$ is opposite it.
+---
+$\tan 52° = h / 12$, so $h = 12 \tan 52°$.
+---
+$h = 12(1.2799) \approx 15.36$ m.

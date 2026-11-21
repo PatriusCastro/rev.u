@@ -1,0 +1,14 @@
+topic: trigonometry/angles-of-elevation
+answer: C
+hint: The angle of depression from the top equals the angle of elevation from the boat.
+
+From the top of a lighthouse 50 m above sea level, the angle of depression of a boat is 20°. How far is the boat from the foot of the lighthouse?
+
+A. 18.20 m    B. 53.21 m    C. 137.37 m    D. 146.19 m
+
+## Solution
+The angle of elevation from the boat to the top is also 20°, because the two horizontals are parallel.
+---
+The height 50 m is opposite 20° and the distance $d$ is adjacent, so $\tan 20° = 50 / d$.
+---
+$d = 50 / \tan 20° = 50 / 0.3640 \approx 137.37$ m.
