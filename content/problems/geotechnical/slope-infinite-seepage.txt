@@ -1,0 +1,15 @@
+topic: geotechnical/slopes-piles
+title: Infinite slope with parallel seepage
+answer: C
+hint: Seepage cuts the normal effective stress but not the driving weight.
+
+A hillside in Benguet slopes at 20°. During the rainy season the ground water rises to the surface and seeps parallel to the slope. The soil has $c = 0$, $\phi = 32°$ and $\gamma_{sat} = 19.5$ kN/m³. Using $FS = \dfrac{\gamma'}{\gamma_{sat}}\cdot\dfrac{\tan\phi}{\tan\beta}$ with $\gamma_w = 9.81$ kN/m³, find the factor of safety.
+
+A. 1.717    B. 0.770    C. 0.853    D. 0.289
+
+## Solution
+$\gamma' = 19.5 - 9.81 = 9.69$ kN/m³, so $\dfrac{\gamma'}{\gamma_{sat}} = \dfrac{9.69}{19.5} = 0.4969$.
+---
+$\dfrac{\tan 32°}{\tan 20°} = \dfrac{0.6249}{0.3640} = 1.7168$.
+---
+$FS = 0.4969(1.7168) = 0.853$. The slope is unstable under full seepage.

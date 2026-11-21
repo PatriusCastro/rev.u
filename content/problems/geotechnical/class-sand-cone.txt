@@ -1,0 +1,17 @@
+topic: geotechnical/classification
+title: Field dry density by sand cone
+answer: A
+hint: Not all of the sand that left the jar went into the hole.
+
+A sand cone test is run on a compacted subbase in Pangasinan. The calibrated sand has a density of 1520 kg/m³, and the cone alone holds 0.512 kg of it. The jar loses 1.684 kg of sand during the test. The moist soil dug from the hole has a mass of 1.452 kg and a water content of 11.2%. Find the field dry density.
+
+A. 1693 kg/m³    B. 1883 kg/m³    C. 1179 kg/m³    D. 1311 kg/m³
+
+## Solution
+Sand in the hole: $1.684 - 0.512 = 1.172$ kg
+---
+Hole volume: $V = \dfrac{1.172}{1520} = 7.711 \times 10^{-4}$ m³
+---
+Moist density: $\rho = \dfrac{1.452}{7.711 \times 10^{-4}} = 1883$ kg/m³
+---
+Dry density: $\rho_d = \dfrac{1883}{1.112} = 1693$ kg/m³

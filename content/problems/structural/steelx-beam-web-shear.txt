@@ -1,0 +1,13 @@
+topic: structural/steel
+title: Web shear of a rolled beam
+answer: C
+hint: Shear of a rolled I-shape web uses the full depth times the web thickness.
+
+A rolled wide-flange beam has overall depth $d = 450$ mm, web thickness $t_w = 9.5$ mm and flange thickness 14.5 mm. The steel has $F_y = 345$ MPa. Find the LRFD design shear strength $\phi V_n = \phi(0.6F_y\,d\,t_w)$, with $\phi = 1.0$ for this web.
+
+A. 796.4 kN    B. 827.9 kN    C. 884.9 kN    D. 590.0 kN
+
+## Solution
+Web area: $A_w = d\,t_w = 450(9.5) = 4275$ mm².
+---
+$\phi V_n = 1.0(0.6)(345)(4275) = 884{,}900$ N $= 884.9$ kN.

@@ -1,0 +1,15 @@
+topic: structural/construction-management
+title: Weight of column bars
+answer: A
+hint: The weight per meter uses the bar diameter in millimeters, squared.
+
+Six columns of a two-storey house each have eight 16 mm main bars, 3.6 m long. Use a bar weight of $\dfrac{d^2}{162}$ kg/m with $d$ in mm, and ignore laps and hooks. What is the total weight of the main bars?
+
+A. 273.1 kg    B. 68.3 kg    C. 45.5 kg    D. 455.1 kg
+
+## Solution
+Weight per meter: $\dfrac{16^2}{162} = 1.580$ kg/m.
+---
+Total length: $6 \times 8 \times 3.6 = 172.8$ m.
+---
+Weight $= 172.8(1.580) = 273.1$ kg.

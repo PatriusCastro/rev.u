@@ -1,0 +1,17 @@
+topic: hydraulics/hydrodynamics
+title: Force on a 90° pipe bend
+answer: B
+hint: In each direction, add the pressure force and the momentum flux. Then combine the two components.
+
+A horizontal 90° bend in a 300 mm water main carries 0.25 m³/s. The gauge pressure is 120 kPa at both ends of the bend. Neglect head loss and the weight of the water. Find the resultant force the water exerts on the bend.
+
+A. 12.00 kN    B. 13.25 kN    C. 9.37 kN    D. 18.73 kN
+
+## Solution
+Area: $A = \dfrac{\pi(0.3)^2}{4} = 0.07069$ m². Velocity: $v = \dfrac{0.25}{0.07069} = 3.537$ m/s.
+---
+Pressure force at each end: $pA = 120\,000(0.07069) = 8482$ N. Momentum flux: $\rho Qv = 1000(0.25)(3.537) = 884$ N.
+---
+Along the inlet direction, the bend must take $8482 + 884 = 9366$ N. Along the outlet direction, the same $9366$ N.
+---
+Resultant: $R = \sqrt{9366^2 + 9366^2} = 9366\sqrt{2} = 13\,246$ N $= 13.25$ kN.

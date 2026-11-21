@@ -1,0 +1,15 @@
+topic: geotechnical/classification
+title: Zero-air-voids dry unit weight
+answer: B
+hint: At zero air voids the soil is saturated, so the void ratio equals $wG_s$.
+
+A clayey sand from Batangas has $G_s = 2.68$. Using $\gamma_w = 9.81$ kN/m³ and $\gamma_{zav} = \dfrac{G_s\gamma_w}{1 + wG_s}$, find the zero-air-voids dry unit weight at a water content of 16%.
+
+A. 21.34 kN/m³    B. 18.40 kN/m³    C. 22.66 kN/m³    D. 24.81 kN/m³
+
+## Solution
+$G_s\gamma_w = 2.68(9.81) = 26.29$ kN/m³
+---
+$1 + wG_s = 1 + 0.16(2.68) = 1.429$
+---
+$\gamma_{zav} = \dfrac{26.29}{1.429} = 18.40$ kN/m³

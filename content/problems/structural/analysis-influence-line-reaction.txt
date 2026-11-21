@@ -1,0 +1,17 @@
+topic: structural/analysis
+title: Maximum reaction from a moving load
+answer: A
+hint: Put the point load where the influence line for the reaction is highest, and the uniform load wherever its ordinates are positive.
+
+A simply supported bridge girder spans 10 m. It carries a moving 50 kN point load and a uniform live load of 8 kN/m that may cover any part of the span. Using the influence line for the left reaction, find the maximum left reaction from these live loads.
+
+A. 90 kN    B. 65 kN    C. 70 kN    D. 130 kN
+
+## Solution
+The influence line for the left reaction runs from 1 at the left support to 0 at the right support.
+---
+Point load at the left support: $50 \times 1 = 50$ kN.
+---
+Uniform load over the whole span: $8 \times \text{area} = 8 \times \dfrac{1(10)}{2} = 40$ kN.
+---
+Maximum left reaction: $50 + 40 = 90$ kN.

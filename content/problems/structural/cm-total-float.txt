@@ -1,0 +1,13 @@
+topic: structural/construction-management
+title: Total float of an activity
+answer: A
+hint: Float is the gap between the latest and earliest times the activity can start.
+
+In a townhouse schedule, interior plastering takes 6 days. Its earliest start is the end of day 14, and it must be finished no later than the end of day 26 to keep the project on time. Total float is $TF = LF - ES - d$. What is the total float of plastering?
+
+A. 6 days    B. 12 days    C. 18 days    D. 20 days
+
+## Solution
+Latest start: $LS = LF - d = 26 - 6 = 20$.
+---
+$TF = LS - ES = 20 - 14 = 6$ days.

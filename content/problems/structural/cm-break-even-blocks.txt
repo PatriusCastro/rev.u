@@ -1,0 +1,13 @@
+topic: structural/construction-management
+title: Break-even for a block plant
+answer: A
+hint: Each block sold covers part of the fixed cost by the amount its price exceeds its variable cost.
+
+A small hollow block plant in Pampanga has fixed costs of ₱360,000 a month. Each block sells for ₱18.00 and costs ₱10.50 in materials and labor to make. Use $Q = \dfrac{\text{fixed cost}}{\text{price} - \text{variable cost}}$. How many blocks a month must it sell to break even?
+
+A. 48,000 blocks    B. 20,000 blocks    C. 34,286 blocks    D. 12,632 blocks
+
+## Solution
+Margin per block: $18.00 - 10.50 = 7.50$ pesos.
+---
+$Q = \dfrac{360{,}000}{7.50} = 48{,}000$ blocks.

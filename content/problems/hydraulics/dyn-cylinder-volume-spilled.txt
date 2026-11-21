@@ -1,0 +1,19 @@
+topic: hydraulics/hydrodynamics
+title: Water spilled from a spinning cylinder
+answer: C
+hint: Once water spills, the paraboloid's rim sits at the top of the wall. The paraboloid takes half the volume of its cylinder.
+
+An open vertical cylinder 1.0 m in diameter and 2.0 m tall holds water 1.5 m deep. It is spun about its vertical axis at 100 rpm. How much water spills? Use $g = 9.81$ m/s².
+
+A. 548.7 L    B. 704.8 L    C. 156.0 L    D. 352.4 L
+
+## Solution
+$\omega = \dfrac{2\pi(100)}{60} = 10.472$ rad/s.
+---
+Paraboloid height: $h = \dfrac{(10.472)^2(0.5)^2}{2(9.81)} = 1.397$ m.
+---
+Without spilling, the wall level would be $1.5 + \dfrac{1.397}{2} = 2.199$ m, above the 2.0 m rim, so water spills. The vertex is at $2.0 - 1.397 = 0.603$ m, so the bottom stays covered.
+---
+Water left: $\pi(0.5)^2(2.0) - \tfrac{1}{2}\pi(0.5)^2(1.397) = 1.5708 - 0.5487 = 1.0221$ m³.
+---
+Water at the start: $\pi(0.5)^2(1.5) = 1.1781$ m³. Spilled: $1.1781 - 1.0221 = 0.1560$ m³ $= 156.0$ L.

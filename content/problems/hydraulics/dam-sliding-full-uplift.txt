@@ -1,0 +1,19 @@
+topic: hydraulics/dams-hydrology
+title: Sliding check with full uplift
+answer: B
+hint: Uplift pushes the dam up, so it reduces the normal force that friction works with.
+
+A concrete gravity dam on a river in Isabela is 16 m high, 3 m wide at the top and 12 m wide at the base. Its upstream face is vertical. The reservoir stands 15 m deep against the upstream face, with no water on the downstream side. Uplift varies linearly from full hydrostatic pressure at the heel to zero at the toe. Concrete weighs 23.5 kN/m³, water 9.81 kN/m³ and the coefficient of friction between dam and foundation is 0.65. Find the factor of safety against sliding, per metre length of dam.
+
+A. 1.66    B. 1.14    C. 1.00    D. 0.62
+
+## Solution
+Weights: $W_1 = 23.5(3)(16) = 1128$ kN and $W_2 = \tfrac{1}{2}(23.5)(9)(16) = 1692$ kN, so $\Sigma W = 2820$ kN.
+---
+Water thrust: $P = \tfrac{1}{2}(9.81)(15)^2 = 1103.63$ kN.
+---
+Uplift: $U = \tfrac{1}{2}(9.81)(15)(12) = 882.90$ kN.
+---
+$R_y = 2820 - 882.90 = 1937.10$ kN.
+---
+$FS_s = \dfrac{0.65(1937.10)}{1103.63} = 1.14$.

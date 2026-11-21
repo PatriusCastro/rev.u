@@ -1,0 +1,13 @@
+topic: hydraulics/dams-hydrology
+title: Peak runoff from a subdivision
+answer: C
+hint: With mixed surfaces, weight each runoff coefficient by its area before using the formula.
+
+A 45-hectare subdivision in Laguna drains to one outfall. Thirty hectares are roofs and pavement with a runoff coefficient of 0.85, and the other 15 hectares are lawns and open space with a coefficient of 0.25. The design rainfall intensity for the time of concentration is 90 mm/h. Using the rational method in the form $Q = CiA/360$ ($Q$ in m³/s, $i$ in mm/h, $A$ in hectares), find the peak runoff.
+
+A. 9.56 m³/s    B. 6.19 m³/s    C. 7.31 m³/s    D. 0.73 m³/s
+
+## Solution
+Weighted coefficient: $C = \dfrac{30(0.85) + 15(0.25)}{45} = \dfrac{29.25}{45} = 0.65$.
+---
+$Q = \dfrac{0.65(90)(45)}{360} = 7.31$ m³/s.

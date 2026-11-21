@@ -1,0 +1,13 @@
+topic: structural/analysis
+title: End moment of a fixed beam with a point load
+answer: D
+hint: Both ends are fixed and the load is at the centre. Use the fixed-end moment for that case.
+
+A steel beam spans 7.2 m between two columns and both ends are rigidly fixed. A 90 kN equipment load acts at midspan. Ignore the self-weight of the beam. EI is constant. Find the fixed-end moment.
+
+A. 54.0 kN·m    B. 121.5 kN·m    C. 162.0 kN·m    D. 81.0 kN·m
+
+## Solution
+For a fixed–fixed beam with a point load at midspan, each end moment is $\dfrac{PL}{8}$.
+---
+$M = \dfrac{90(7.2)}{8} = 81.0$ kN·m, hogging at both ends.

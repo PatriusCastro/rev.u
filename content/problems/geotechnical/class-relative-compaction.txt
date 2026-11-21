@@ -1,0 +1,13 @@
+topic: geotechnical/classification
+title: Relative compaction of a fill layer
+answer: D
+hint: The Proctor maximum is a dry value, so compare it with a dry field value.
+
+A compacted fill for a warehouse pad in Laguna has a field moist unit weight of 19.8 kN/m³ at a water content of 14%. The laboratory maximum dry unit weight is 18.6 kN/m³. Find the relative compaction, $RC = \gamma_{d,field}/\gamma_{d,max} \times 100\%$.
+
+A. 106.5%    B. 99.1%    C. 82.4%    D. 93.4%
+
+## Solution
+Field dry unit weight: $\gamma_d = \dfrac{19.8}{1 + 0.14} = 17.37$ kN/m³
+---
+$RC = \dfrac{17.37}{18.6} \times 100\% = 93.4\%$

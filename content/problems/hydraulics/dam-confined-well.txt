@@ -1,0 +1,15 @@
+topic: hydraulics/dams-hydrology
+title: Conductivity from a pumping test
+answer: B
+hint: Rearrange the confined-well equation for k. Watch the logarithm base.
+
+A pumping test is run on a well that fully penetrates a confined aquifer 15 m thick. At a steady 40 L/s, the piezometric heads above the aquifer bottom are 32.4 m in an observation well 10 m away and 33.6 m in another 50 m away. Find the hydraulic conductivity in m/day.
+
+A. 98.4 m/day    B. 49.2 m/day    C. 22.4 m/day    D. 21.4 m/day
+
+## Solution
+$Q = \dfrac{2\pi kb(h_2 - h_1)}{\ln(r_2/r_1)}$, so $k = \dfrac{Q\ln(r_2/r_1)}{2\pi b(h_2 - h_1)}$.
+---
+$k = \dfrac{0.04\ln 5}{2\pi(15)(1.2)} = \dfrac{0.06438}{113.10} = 5.692 \times 10^{-4}$ m/s.
+---
+$k = 5.692 \times 10^{-4}(86\,400) = 49.2$ m/day.

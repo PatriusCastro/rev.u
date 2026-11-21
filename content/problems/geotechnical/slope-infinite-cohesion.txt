@@ -1,0 +1,17 @@
+topic: geotechnical/slopes-piles
+title: Infinite slope with cohesion
+answer: A
+hint: Add a cohesion term to the friction term. The cohesion term uses the depth of the slip plane.
+
+A long cut slope at 28° is underlain by a firm layer 5 m below the surface, and the slip plane is expected along that interface. The soil above has $\gamma = 18.5$ kN/m³, $c = 12$ kPa and $\phi = 22°$, with no water. Using $FS = \dfrac{c}{\gamma H\cos^2\beta\tan\beta} + \dfrac{\tan\phi}{\tan\beta}$, find the factor of safety.
+
+A. 1.073    B. 0.760    C. 1.004    D. 1.867
+
+## Solution
+$\gamma H\cos^2\beta\tan\beta = 18.5(5)\cos^2 28°\tan 28° = 38.34$ kPa.
+---
+Cohesion term: $\dfrac{12}{38.34} = 0.313$.
+---
+Friction term: $\dfrac{\tan 22°}{\tan 28°} = \dfrac{0.4040}{0.5317} = 0.760$.
+---
+$FS = 0.313 + 0.760 = 1.073$.

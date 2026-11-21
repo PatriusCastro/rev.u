@@ -1,0 +1,15 @@
+topic: geotechnical/classification
+title: AASHTO group index of a subgrade
+answer: A
+hint: Both terms count. Watch which percent-passing offset goes with which bracket.
+
+A subgrade soil along a farm-to-market road in Isabela has 62% passing the 0.075 mm sieve, a liquid limit of 45% and a plasticity index of 18. Using $GI = (F - 35)[0.2 + 0.005(LL - 40)] + 0.01(F - 15)(PI - 10)$, find the group index rounded to the nearest whole number.
+
+A. 10    B. 6    C. 4    D. 8
+
+## Solution
+First term: $(62 - 35)[0.2 + 0.005(45 - 40)] = 27(0.225) = 6.075$
+---
+Second term: $0.01(62 - 15)(18 - 10) = 0.01(47)(8) = 3.76$
+---
+$GI = 6.075 + 3.76 = 9.84 \approx 10$

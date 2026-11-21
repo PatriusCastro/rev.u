@@ -1,0 +1,15 @@
+topic: structural/construction-management
+title: Present worth of lease payments
+answer: D
+hint: Each payment is made at year end, so discount the whole series back to today.
+
+A firm in Davao will pay ₱120,000 at the end of each year for 6 years to lease a compactor. Money is worth 10% per year. Use $P = A\,\dfrac{(1+i)^n - 1}{i(1+i)^n}$. What single amount today is equal to these payments?
+
+A. ₱720,000    B. ₱925,873    C. ₱574,894    D. ₱522,631
+
+## Solution
+$(1.10)^6 = 1.771561$.
+---
+Factor: $\dfrac{1.771561 - 1}{0.10(1.771561)} = \dfrac{0.771561}{0.1771561} = 4.35526$.
+---
+$P = 120{,}000(4.35526) =$ ₱522,631.

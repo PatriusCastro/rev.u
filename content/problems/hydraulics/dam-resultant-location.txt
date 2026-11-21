@@ -1,0 +1,21 @@
+topic: hydraulics/dams-hydrology
+title: Where the resultant cuts the base
+answer: C
+hint: Net moment about the toe divided by the net vertical force gives the distance from the toe.
+
+A concrete gravity dam is 14 m high, 2.5 m wide at the top and 10 m wide at the base, with a vertical upstream face. It holds back 13 m of water with no tailwater. Uplift varies linearly from full hydrostatic pressure at the heel to zero at the toe. Use 23.5 kN/m³ for concrete and 9.81 kN/m³ for water. How far from the toe does the resultant cut the base, per metre length of dam?
+
+A. 6.11 m    B. 4.75 m    C. 3.89 m    D. 1.11 m
+
+## Solution
+$W_1 = 23.5(2.5)(14) = 822.5$ kN at $10 - 1.25 = 8.75$ m from the toe; $W_2 = \tfrac{1}{2}(23.5)(7.5)(14) = 1233.75$ kN at $\tfrac{2}{3}(7.5) = 5$ m.
+---
+$\Sigma M_R = 822.5(8.75) + 1233.75(5) = 13\,365.6$ kN·m.
+---
+$P = \tfrac{1}{2}(9.81)(13)^2 = 828.95$ kN at 4.333 m; $U = \tfrac{1}{2}(9.81)(13)(10) = 637.65$ kN at 6.667 m.
+---
+$\Sigma M_O = 828.95(4.333) + 637.65(6.667) = 7843.1$ kN·m.
+---
+$R_y = 822.5 + 1233.75 - 637.65 = 1418.60$ kN.
+---
+$\bar{x} = \dfrac{13\,365.6 - 7843.1}{1418.60} = 3.89$ m from the toe. The middle third runs from 3.33 m to 6.67 m, so the resultant is inside it.

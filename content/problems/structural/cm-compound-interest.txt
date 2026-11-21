@@ -1,0 +1,15 @@
+topic: structural/construction-management
+title: Loan for a mixer
+answer: B
+hint: The interest earns interest each year, so raise the growth factor to the number of years.
+
+A contractor borrows ₱500,000 to buy a concrete mixer at 8% interest compounded annually. Use $F = P(1 + i)^n$. How much does the contractor owe at the end of 5 years if nothing is paid before then?
+
+A. ₱700,000    B. ₱734,664    C. ₱793,437    D. ₱680,245
+
+## Solution
+$(1.08)^5 = 1.46933$.
+---
+$F = 500{,}000(1.46933) =$ ₱734,664.
+---
+Simple interest would give only $500{,}000(1 + 0.08 \times 5) =$ ₱700,000.

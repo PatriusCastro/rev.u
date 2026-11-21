@@ -1,0 +1,15 @@
+topic: structural/analysis
+title: Midspan moment of a fixed beam
+answer: A
+hint: The midspan moment is the simple-beam moment minus the end moment.
+
+A fixed–fixed beam spans 8 m and carries a uniform load of 18 kN/m over its whole length. EI is constant. Find the bending moment at midspan.
+
+A. 48 kN·m    B. 72 kN·m    C. 96 kN·m    D. 144 kN·m
+
+## Solution
+End moments: $\dfrac{wL^2}{12} = \dfrac{18(8)^2}{12} = 96$ kN·m, hogging.
+---
+Simple-beam moment at midspan: $\dfrac{wL^2}{8} = \dfrac{18(64)}{8} = 144$ kN·m.
+---
+Midspan moment: $144 - 96 = 48$ kN·m, sagging. This is $\dfrac{wL^2}{24}$.

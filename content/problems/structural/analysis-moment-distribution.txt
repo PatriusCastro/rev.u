@@ -1,0 +1,19 @@
+topic: structural/analysis
+title: Moment distribution for a two-span beam
+answer: D
+hint: Find the distribution factors at the middle support from 4EI/L, then carry half to each far end.
+
+A beam ABC is fixed at A and C and rests on a simple support at B. Span AB is 6 m and carries a uniform load of 20 kN/m. Span BC is 4 m and carries no load. EI is constant. Use stiffness $4EI/L$ and a carry-over factor of ½. Find the magnitude of the moment at A after one cycle of moment distribution.
+
+A. 60 kN·m    B. 78 kN·m    C. 84 kN·m    D. 72 kN·m
+
+## Solution
+Fixed-end moments on AB: $\dfrac{wL^2}{12} = \dfrac{20(6)^2}{12} = 60$ kN·m. Take $M_{AB} = -60$ and $M_{BA} = +60$. BC has none.
+---
+Stiffness at B: $K_{BA} = \dfrac{4EI}{6}$, $K_{BC} = \dfrac{4EI}{4}$. Distribution factors: $DF_{BA} = \dfrac{1/6}{1/6 + 1/4} = 0.4$, $DF_{BC} = 0.6$.
+---
+The unbalanced moment at B is $+60$. Distribute $-60$: $-24$ to BA and $-36$ to BC. So $M_{BA} = 36$ and $M_{BC} = -36$.
+---
+Carry half to A: $\dfrac{-24}{2} = -12$. $M_{AB} = -60 - 12 = -72$ kN·m.
+---
+The moment at A is 72 kN·m, hogging. Both far ends are fixed, so this one cycle is exact.

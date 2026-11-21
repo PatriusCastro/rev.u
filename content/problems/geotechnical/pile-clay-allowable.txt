@@ -1,0 +1,17 @@
+topic: geotechnical/slopes-piles
+title: Allowable load on a pile in clay
+answer: B
+hint: Add end bearing and skin friction, then divide by the factor of safety.
+
+A 400 mm square precast concrete pile is driven 15 m into a uniform clay with $c_u = 60$ kPa for a wharf in Batangas. Take end bearing as $9c_uA_p$ and skin friction as $\alpha c_u pL$ with $\alpha = 0.70$. Using a factor of safety of 3, find the allowable load on the pile.
+
+A. 336.0 kN    B. 364.8 kN    C. 508.8 kN    D. 1094.4 kN
+
+## Solution
+$A_p = 0.4^2 = 0.16$ m², $p = 4(0.4) = 1.6$ m.
+---
+$Q_p = 9(60)(0.16) = 86.4$ kN.
+---
+$Q_s = 0.70(60)(1.6)(15) = 1008$ kN.
+---
+$Q_a = \dfrac{86.4 + 1008}{3} = \dfrac{1094.4}{3} = 364.8$ kN.

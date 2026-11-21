@@ -1,0 +1,15 @@
+topic: structural/steel
+title: Bolts in double shear
+answer: B
+hint: A splice with plates on both sides puts each bolt through two shear planes.
+
+A tension member is spliced with a cover plate on each side, so each bolt passes through two shear planes. Six 20 mm high-strength bolts are used on one side of the splice, with threads included in the shear planes, $F_{nv} = 372$ MPa. Find the LRFD design shear strength of the bolt group using $\phi R_n = 0.75F_{nv}A_b$ per shear plane.
+
+A. 525.9 kN    B. 1051.8 kN    C. 1402.4 kN    D. 1272.7 kN
+
+## Solution
+$A_b = \dfrac{\pi(20)^2}{4} = 314.16$ mm².
+---
+Per bolt per plane: $0.75(372)(314.16) = 87{,}650$ N.
+---
+Six bolts, two planes each: $12(87{,}650) = 1{,}051{,}800$ N $= 1051.8$ kN.

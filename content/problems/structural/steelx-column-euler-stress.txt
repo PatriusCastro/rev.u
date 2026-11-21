@@ -1,0 +1,15 @@
+topic: structural/steel
+title: Governing slenderness of a braced column
+answer: C
+hint: Find KL/r about each axis using the unbraced length for that axis. The larger ratio governs.
+
+A wide-flange column is 7.0 m tall and pinned at both ends ($K = 1.0$). Wall girts brace its weak axis at mid-height, so the weak-axis unbraced length is 3.5 m. The radii of gyration are $r_x = 130$ mm and $r_y = 50$ mm, and $E = 200$ GPa. Find the elastic buckling stress $F_e = \dfrac{\pi^2E}{(KL/r)^2}$ for the governing axis.
+
+A. 680.8 MPa    B. 353.3 MPa    C. 402.8 MPa    D. 100.7 MPa
+
+## Solution
+Strong axis: $KL/r_x = 7000/130 = 53.85$.
+---
+Weak axis: $KL/r_y = 3500/50 = 70.00$. This is larger, so it governs.
+---
+$F_e = \dfrac{\pi^2(200{,}000)}{70.00^2} = 402.8$ MPa.

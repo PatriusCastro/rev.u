@@ -1,0 +1,17 @@
+topic: structural/steel
+title: Block shear of a bolted plate
+answer: B
+hint: Work out both bracketed terms of the block shear formula. The rupture term may not exceed the yield cap.
+
+A 10 mm tension plate is bolted with two parallel lines of bolts, 100 mm apart. Each line has 3 bolts with 22 mm holes, at 80 mm pitch and 40 mm end distance. A block can tear out along the two bolt lines and across between them. For this block, $A_{gv} = 4000$ mm², $A_{nv} = 2900$ mm² and $A_{nt} = 780$ mm². The steel has $F_y = 248$ MPa and $F_u = 400$ MPa, and $U_{bs} = 1.0$. Using $\phi R_n = 0.75[0.6F_uA_{nv} + U_{bs}F_uA_{nt}] \le 0.75[0.6F_yA_{gv} + U_{bs}F_uA_{nt}]$, find the design block shear strength.
+
+A. 756.0 kN    B. 680.4 kN    C. 907.2 kN    D. 954.0 kN
+
+## Solution
+Rupture term: $0.6(400)(2900) + 1.0(400)(780) = 696{,}000 + 312{,}000 = 1{,}008{,}000$ N.
+---
+Yield cap: $0.6(248)(4000) + 1.0(400)(780) = 595{,}200 + 312{,}000 = 907{,}200$ N.
+---
+The cap is smaller, so $R_n = 907.2$ kN.
+---
+$\phi R_n = 0.75(907.2) = 680.4$ kN.

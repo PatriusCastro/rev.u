@@ -1,0 +1,13 @@
+topic: structural/steel
+title: Capacity of side fillet welds
+answer: D
+hint: The weld resists shear on its throat, not on its leg size.
+
+A flat bar is welded to a gusset plate with an 8 mm fillet weld along each of its two sides. Each weld is 150 mm long. The electrode has $F_{EXX} = 482$ MPa. Using $\phi R_n = 0.75(0.60F_{EXX})(0.707w)L$, find the design strength of the welds.
+
+A. 520.6 kN    B. 490.7 kN    C. 184.0 kN    D. 368.0 kN
+
+## Solution
+Throat: $0.707(8) = 5.656$ mm. Total length: $L = 2(150) = 300$ mm.
+---
+$\phi R_n = 0.75(0.60)(482)(5.656)(300) = 368{,}000$ N $= 368.0$ kN.

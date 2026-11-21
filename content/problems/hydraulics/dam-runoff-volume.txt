@@ -1,0 +1,15 @@
+topic: hydraulics/dams-hydrology
+title: Runoff volume into a reservoir
+answer: A
+hint: Only the rainfall excess runs off. Convert the depth to metres and the area to square metres.
+
+A storm drops 65 mm of rain over a 2.8 km² catchment that feeds a small reservoir in Iloilo. Infiltration and other losses during the storm total 23 mm. Assuming all of the rainfall excess reaches the reservoir, find the runoff volume.
+
+A. 117 600 m³    B. 182 000 m³    C. 64 400 m³    D. 11 760 m³
+
+## Solution
+Rainfall excess: $65 - 23 = 42$ mm $= 0.042$ m.
+---
+Area: $2.8$ km² $= 2.8 \times 10^6$ m².
+---
+$V = 0.042(2.8 \times 10^6) = 117\,600$ m³.

@@ -1,0 +1,17 @@
+topic: structural/analysis
+title: Absolute maximum moment from a truck
+answer: C
+hint: Find where the resultant of the two axles acts, then let midspan split the gap between it and the heavier axle.
+
+A two-axle truck crosses a simply supported bridge span of 10 m. The rear axle carries 120 kN and the front axle 80 kN, spaced 5 m apart. Find the absolute maximum bending moment in the span. Use the rule: the maximum moment occurs under the heavier axle when midspan bisects the distance between that axle and the resultant of the axles.
+
+A. 300 kN·m    B. 180 kN·m    C. 320 kN·m    D. 500 kN·m
+
+## Solution
+Resultant: $R = 120 + 80 = 200$ kN, located $d = \dfrac{80(5)}{200} = 2$ m from the 120 kN axle.
+---
+Place the 120 kN axle $\dfrac{d}{2} = 1$ m to one side of midspan, 4 m from the left support. The resultant is then 1 m to the other side, 6 m from the left support. The 80 kN axle is at 9 m, still on the span.
+---
+Left reaction: $R_L = \dfrac{200(10 - 6)}{10} = 80$ kN.
+---
+Moment under the 120 kN axle: $M = 80(4) = 320$ kN·m.

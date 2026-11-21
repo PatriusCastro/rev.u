@@ -1,0 +1,17 @@
+topic: geotechnical/classification
+title: Well or poorly graded sand
+answer: B
+hint: Check both coefficients. Passing one test is not enough.
+
+A clean beach sand from La Union has 3% fines, and more than half of its coarse fraction passes the 4.75 mm sieve. The gradation curve gives $D_{10} = 0.15$ mm, $D_{30} = 0.30$ mm and $D_{60} = 0.90$ mm. Under USCS, a sand is well graded when $C_u = D_{60}/D_{10} \ge 6$ and $1 \le C_c \le 3$, where $C_c = D_{30}^2/(D_{60}D_{10})$. Otherwise it is poorly graded. What is its group symbol?
+
+A. SW    B. SP    C. GP    D. SM
+
+## Solution
+Fines are under 5% and most of the coarse fraction passes 4.75 mm, so it is a clean sand: SW or SP.
+---
+$C_u = \dfrac{0.90}{0.15} = 6.0$, which meets $C_u \ge 6$.
+---
+$C_c = \dfrac{0.30^2}{0.90(0.15)} = \dfrac{0.09}{0.135} = 0.67$, which is below 1.
+---
+$C_c$ fails, so the sand is poorly graded: SP.

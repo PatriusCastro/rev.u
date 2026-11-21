@@ -1,0 +1,15 @@
+topic: structural/construction-management
+title: Formwork for columns
+answer: C
+hint: The forms wrap all four faces of each column. The top and bottom are not formed.
+
+A warehouse has 12 columns, each 0.40 m by 0.50 m in section, with a formed height of 3.0 m. Formwork area for one column is its perimeter times its height. What total formwork contact area is needed?
+
+A. 32.4 m²    B. 69.6 m²    C. 64.8 m²    D. 7.2 m²
+
+## Solution
+Perimeter: $2(0.40 + 0.50) = 1.80$ m.
+---
+One column: $1.80 \times 3.0 = 5.40$ m².
+---
+Total: $12 \times 5.40 = 64.8$ m².

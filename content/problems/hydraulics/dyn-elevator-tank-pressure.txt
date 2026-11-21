@@ -1,0 +1,15 @@
+topic: hydraulics/hydrodynamics
+title: Pressure in a tank going up a hoist
+answer: D
+hint: Upward acceleration adds to the effect of gravity.
+
+An open tank holding water 2.4 m deep is raised by a construction hoist at a building site in Cebu. The hoist accelerates upward at a constant 3 m/s². Find the gauge pressure at the bottom of the tank. Use $\gamma = 9.81$ kN/m³ and $g = 9.81$ m/s².
+
+A. 16.34 kPa    B. 23.54 kPa    C. 7.20 kPa    D. 30.74 kPa
+
+## Solution
+For upward acceleration, $p = \gamma h\left(1 + \dfrac{a}{g}\right)$.
+---
+$p = 9.81(2.4)\left(1 + \dfrac{3}{9.81}\right) = 23.544 + 7.200$.
+---
+$p = 30.74$ kPa.
