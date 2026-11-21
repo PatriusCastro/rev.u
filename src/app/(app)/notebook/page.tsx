@@ -14,7 +14,7 @@ const TABS = [
 ];
 
 export default async function Notebook({ searchParams }: PageProps<'/notebook'>) {
-  const { tab = 'today' } = await searchParams;
+  const { tab } = await searchParams;
   const { supabase } = await session();
   const [{ data: open }, { count: cleared }] = await Promise.all([
     supabase.from('repeats').select('question_id, interval, due, misses, questions(topic_id, title, topics(area))').is('cleared_at', null).order('due'),
@@ -27,7 +27,8 @@ export default async function Notebook({ searchParams }: PageProps<'/notebook'>)
     const q = r.questions as unknown as Q | null;
     return q ? [{ ...r, q, inDays: daysBetween(today, r.due) }] : [];
   });
-  const active = TABS.find((t) => t.id === tab) ?? TABS[0];
+  // With no tab chosen, open the first group that has something in it.
+  const active = TABS.find((t) => t.id === tab) ?? TABS.find((t) => rows.some((r) => t.test(r.inDays))) ?? TABS[0];
   const shown = rows.filter((r) => active.test(r.inDays));
   const dueNow = rows.filter((r) => r.inDays <= 0).length;
 
@@ -41,7 +42,7 @@ export default async function Notebook({ searchParams }: PageProps<'/notebook'>)
         <nav className="seg" aria-label="When they are due">
           {TABS.map((t) => (
             <Link key={t.id} href={`/notebook?tab=${t.id}`} aria-current={t.id === active.id ? 'page' : undefined}>
-              {t.label} {rows.filter((r) => t.test(r.inDays)).length}
+              <span>{t.label} <span className="cnt">{rows.filter((r) => t.test(r.inDays)).length}</span></span>
             </Link>
           ))}
         </nav>
@@ -53,7 +54,7 @@ export default async function Notebook({ searchParams }: PageProps<'/notebook'>)
               <StageDots interval={r.interval} />
             </Link>
           )) : (
-            <p className="empty">{rows.length || cleared ? 'Nothing in this group.' : 'No mistakes yet. Problems you miss will collect here.'}</p>
+            <p className="empty">{rows.length || cleared ? 'Nothing in this group. Check the other tabs.' : 'No mistakes yet. Problems you miss will collect here.'}</p>
           )}
         </div>
         {dueNow > 0 && (

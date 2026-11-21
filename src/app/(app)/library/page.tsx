@@ -20,7 +20,7 @@ export default async function Library() {
         <h1 className="title">Library</h1>
         <span className="sub">Your own PDFs, private to you. {mb(used)} of 200 MB used.</span>
       </div></div>
-      <div className="scroll"><div className="narrow">
+      <div className="scroll"><div className="split">
         <div className="card rows">
           {docs?.length ? docs.map((d) => (
             <Link className="item" key={d.id} href={`/library/${d.id}`}>
