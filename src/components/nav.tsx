@@ -1,9 +1,8 @@
 'use client';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { CalendarCheck, Layers, NotebookTabs, Folder, PenLine, LogOut } from 'lucide-react';
-import { signOut } from '@/app/actions';
-import { Submit } from './submit';
+import { CalendarCheck, Layers, NotebookTabs, Folder, PenLine } from 'lucide-react';
+import { SignOut } from './sign-out';
 import { Logo, ic } from './ui';
 
 const ITEMS = [
@@ -24,7 +23,7 @@ export function Nav() {
       {ITEMS.map(({ href, label, Icon }) => (
         <Link key={href} href={href} aria-current={active(href) ? 'page' : undefined}><Icon {...ic} />{label}</Link>
       ))}
-      <form className="out" action={signOut}><Submit pendingText="Signing out…"><LogOut {...ic} />Sign out</Submit></form>
+      <div className="out"><SignOut variant="row" /></div>
     </nav>
   );
 }

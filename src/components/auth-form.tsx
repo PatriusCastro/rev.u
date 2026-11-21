@@ -32,6 +32,7 @@ const EmailField = ({ value, autoFocus }: { value: string; autoFocus?: boolean }
   </label>
 );
 
+
 const Primary = ({ pending, label, busy, name, value }: { pending: boolean; label: string; busy: string; name?: string; value?: string }) => (
   <button className="btn pri full" disabled={pending} aria-busy={pending} name={name} value={value}>
     {pending ? busy : label}{!pending && <ArrowRight {...ic} className="mv" />}

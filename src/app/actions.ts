@@ -2,6 +2,7 @@
 import { redirect } from 'next/navigation';
 import { cookies } from 'next/headers';
 import { db, session } from '@/lib/supabase';
+import { revoke, savedAccounts, writeSaved } from '@/lib/saved';
 import { revalidatePath } from 'next/cache';
 import { dayOf } from '@/lib/schedule';
 import { inline } from '@/lib/math';
@@ -102,11 +103,47 @@ export async function setPassword(_: AuthState, form: FormData): Promise<AuthSta
   redirect('/');
 }
 
-export async function signOut() {
+/** Sign out of this device. With "save" ticked the session is kept for one-tap sign-in instead of ended. */
+export async function signOut(form: FormData) {
   const supabase = await db();
+  if (form.get('save') === 'on') {
+    const { data: { session: s } } = await supabase.auth.getSession();
+    if (s?.refresh_token && s.user.email) {
+      const list = await savedAccounts();
+      const old = list.find((a) => a.email === s.user.email);
+      if (old && old.token !== s.refresh_token) await revoke(old.token);
+      await writeSaved([{ email: s.user.email, token: s.refresh_token }, ...list.filter((a) => a.email !== s.user.email)]);
+      // Drop this browser's session cookies without ending the session on the server, so one tap can resume it.
+      const store = await cookies();
+      store.getAll().filter((c) => c.name.startsWith('sb-') && c.name.includes('-auth-token')).forEach((c) => store.delete(c.name));
+      redirect('/login?msg=saved');
+    }
+  }
   // This device only: signing out on a shared computer should not end the session on the user's phone.
   await supabase.auth.signOut({ scope: 'local' });
   redirect('/login?msg=signed_out');
+}
+
+/** One-tap sign-in with an account saved on this browser. */
+export async function continueAs(email: string) {
+  const list = await savedAccounts();
+  const account = list.find((a) => a.email === email);
+  await writeSaved(list.filter((a) => a.email !== email)); // in use now; signing out with "save" saves it again
+  await rememberEmail(email);
+  if (account) {
+    const { error } = await (await db()).auth.refreshSession({ refresh_token: account.token });
+    if (!error) redirect('/');
+  }
+  redirect('/login?add=1&msg=saved_expired');
+}
+
+/** Remove a saved account from this browser and end its session. */
+export async function forgetAccount(email: string) {
+  const list = await savedAccounts();
+  const account = list.find((a) => a.email === email);
+  await writeSaved(list.filter((a) => a.email !== email));
+  if (account) await revoke(account.token);
+  redirect('/login');
 }
 
 export async function saveExamDate(form: FormData) {

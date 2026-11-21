@@ -41,7 +41,7 @@ async function audit(label) {
     return res.violations.map((v) => ({ id: v.id, impact: v.impact, n: v.nodes.length, help: v.help, target: v.nodes[0]?.target?.join(' ') }));
   });
   const overflow = await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth + 1);
-  const smallTaps = await page.evaluate(() => [...document.querySelectorAll('a, button, input, select')].filter((el) => { const b = el.getBoundingClientRect(); return b.width && b.height && (b.height < 44 || b.width < 44) && getComputedStyle(el).visibility !== 'hidden'; }).map((el) => `${el.tagName.toLowerCase()} "${(el.textContent || el.getAttribute('aria-label') || el.name || '').trim().slice(0, 30)}" ${Math.round(el.getBoundingClientRect().width)}x${Math.round(el.getBoundingClientRect().height)}`));
+  const smallTaps = await page.evaluate(() => [...document.querySelectorAll('a, button, input, select')].filter((el) => { const b = (/^(checkbox|radio)$/.test(el.type) && el.closest('label') || el).getBoundingClientRect(); /* a label toggles its box, so it is the tap area */ return b.width && b.height && (b.height < 44 || b.width < 44) && getComputedStyle(el).visibility !== 'hidden'; }).map((el) => `${el.tagName.toLowerCase()} "${(el.textContent || el.getAttribute('aria-label') || el.name || '').trim().slice(0, 30)}" ${Math.round(el.getBoundingClientRect().width)}x${Math.round(el.getBoundingClientRect().height)}`));
   audits[label] = { axe: r, overflow, smallTaps };
 }
 
@@ -84,7 +84,7 @@ await step('a valid exam date opens Today', async () => {
 timings.today = await go('/'); await shot('02-today-new'); await audit('today-new-phone');
 await step('new user Today: no repeats, practice is the main action', async () => {
   expect(await page.isVisible('text=No repeats due today'), 'missing empty repeats card');
-  expect(await page.locator('.btn.pri').count() === 1, `${await page.locator('.btn.pri').count()} primary buttons`);
+  expect(await page.locator('.btn.pri:visible').count() === 1, `${await page.locator('.btn.pri:visible').count()} primary buttons`);
 });
 
 // 2. Lesson then practice from it

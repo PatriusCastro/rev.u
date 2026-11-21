@@ -1,12 +1,13 @@
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
-import { ArrowRight, BookOpen, ChevronRight, CircleCheck, Clock, Flame, LogOut, Pencil } from 'lucide-react';
+import { ArrowRight, BookOpen, ChevronRight, CircleCheck, Clock, Flame, Pencil } from 'lucide-react';
 import { Submit } from '@/components/submit';
 import { session } from '@/lib/supabase';
 import { topicStats } from '@/lib/data';
 import { rankTopics, dailyTarget, streak, weekDays, MIN_ANSWERS } from '@/lib/plan';
 import { dayOf, addDays, daysBetween } from '@/lib/schedule';
-import { signOut, startPractice, startRepeats } from '@/app/actions';
+import { startPractice, startRepeats } from '@/app/actions';
+import { SignOut } from '@/components/sign-out';
 import { AreaIcon, Ring, ic } from '@/components/ui';
 
 const MINUTES_PER_PROBLEM = 2;
@@ -61,7 +62,7 @@ export default async function Today() {
         </div>
         <div className="acts">
           {run > 0 && <span className="pill"><Flame {...ic} />{run} {run === 1 ? 'day' : 'days'}</span>}
-          <form className="signout" action={signOut}><Submit className="ib" aria-label="Sign out" title="Sign out"><LogOut {...ic} /></Submit></form>
+          <span className="signout"><SignOut variant="icon" /></span>
         </div>
       </div>
       <div className="scroll"><div className="cols">
