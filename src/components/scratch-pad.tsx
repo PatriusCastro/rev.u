@@ -45,7 +45,11 @@ export function ScratchPad({ problemHtml, figure }: { problemHtml: string; figur
     };
     const ro = new ResizeObserver(size);
     ro.observe(cv);
-    return () => ro.disconnect();
+    // iPad Safari starts text selection and the magnifier from touches; pointer events still fire after this.
+    // Native listener because React's touch listeners are passive and cannot preventDefault.
+    const stop = (e: TouchEvent) => e.preventDefault();
+    cv.addEventListener('touchstart', stop, { passive: false });
+    return () => { ro.disconnect(); cv.removeEventListener('touchstart', stop); };
   }, [draw]);
 
   useEffect(() => {
